@@ -1,0 +1,112 @@
+##################################################
+# 🔹 VISUAL STUDIO / .NET - CONFIGURACIÓN GENERAL
+##################################################
+
+# Carpeta de configuración de Visual Studio
+.vs/
+
+# Archivos de usuario (config local del IDE)
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+##################################################
+# 🔹 COMPILACIÓN / BUILD (BASURA AUTOMÁTICA)
+##################################################
+
+# Carpeta de compilación
+bin/
+obj/
+
+# Arquitecturas específicas
+x86/
+x64/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+
+# Archivos generados
+*.exe
+*.dll
+*.pdb
+*.cache
+*.ilk
+*.log
+
+##################################################
+# 🔹 ARCHIVOS TEMPORALES
+##################################################
+
+# Archivos temporales del sistema
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+##################################################
+# 🔹 CACHE Y CONFIGURACIONES LOCALES
+##################################################
+
+# Cache de Visual Studio
+*.vspscc
+*.vssscc
+*.cachefile
+
+# Otros caches
+*.dbmdl
+*.opendb
+*.VC.db
+
+##################################################
+# 🔹 PUBLICACIONES / DEPLOY
+##################################################
+
+# Carpetas de publicación
+publish/
+*.publishproj
+
+##################################################
+# 🔹 NUGET (DEPENDENCIAS)
+##################################################
+
+# Paquetes descargados (se restauran solos)
+packages/
+
+# Lock files opcionales (puedes ignorarlos o no)
+# packages.lock.json
+
+##################################################
+# 🔹 LOGS
+##################################################
+
+*.log
+
+##################################################
+# 🔹 TEST RESULTS
+##################################################
+
+TestResults/
+
+##################################################
+# 🔹 OTROS ARCHIVOS INNECESARIOS
+##################################################
+
+# Archivos de sistema
+Thumbs.db
+Desktop.ini
+
+# Mac (por si acaso)
+.DS_Store
+
+##################################################
+# ESTO SI SE SUBE
+##################################################
+
+# ✔ .sln (solución)
+# ✔ Carpeta del proyecto
+# ✔ .csproj
+# ✔ Código fuente (.cs)
+# ✔ Recursos (.resx)
+# ✔ README.md
+# ✔ .gitignore

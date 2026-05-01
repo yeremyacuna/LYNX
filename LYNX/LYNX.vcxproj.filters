@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d00cd0db-019a-4242-b53d-e09ab977934d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{c0c63a7e-e149-41ab-ace7-9206c985a0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProjectFiles">
+      <UniqueIdentifier>{99fb4f2d-4bc8-4ac2-bcee-cf312ddbd6ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{697b1ae0-1ecd-4832-89f0-92c8ac5586a2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
