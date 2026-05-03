@@ -13,7 +13,6 @@ public:
 	}
 
 	T dato;
-
 	Nodo<T>* siguiente;
 
 private:

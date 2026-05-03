@@ -1,19 +1,19 @@
 #pragma once
 #include "Nodo.h"
-using namespace std;
+
 
 template <typename T>
-class ListaE
+class EList
 {
 private:
     Nodo<T>* cabeza;
 
 public:
-    ListaE() {
+    EList() {
         cabeza = nullptr;
     }
 
-    ~ListaE() {}
+    ~EList() {}
 
     void Insertar(T dato)
     {
