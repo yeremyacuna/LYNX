@@ -19,4 +19,10 @@
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Nodo.h" />
+    <ClInclude Include="ListaE.h" />
+    <ClInclude Include="Stack.h" />
+    <ClInclude Include="Queue.h" />
+  </ItemGroup>
 </Project>
