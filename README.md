@@ -3,7 +3,7 @@
 ###### Authors
 ### Yeremy [@yeremyacuna](https://github.com/yeremyacuna)
 ### Melissa @usuario
-### Salvador @usuario
+### Salvador [@Salvarcc](https://github.com/Salvarcc)
 
 ###### Files
 - [main.cpp](LYXN/main.cpp)
