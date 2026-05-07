@@ -15,11 +15,13 @@ public:
 		this->fin = nullptr;
 		sz = 0;
 	}
+
 	void push(T v);
 	void pop();
 	T front();
 	bool empty();
 	int size();
+
 };
 
 template<class T>

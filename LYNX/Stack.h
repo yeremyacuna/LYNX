@@ -12,11 +12,13 @@ public:
 		tope = nullptr;
 		sz = 0;
 	}
+	
 	void push(T dato);
 	void pop();
 	T top();
 	bool empty();
 	int size();
+
 };
 
 template<class T>
