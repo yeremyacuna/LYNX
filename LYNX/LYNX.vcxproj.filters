@@ -15,14 +15,29 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Nodo.h" />
     <ClInclude Include="ListaE.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="src\LinkedDoubleList.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Queue.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Stack.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Node.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LinkedList.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

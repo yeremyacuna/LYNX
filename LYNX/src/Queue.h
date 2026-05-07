@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Nodo.h"
+#include "Node.h"
 #include <iostream>
 
 template<class T>
 class queue {
 private:
-	Nodo<T>* inicio;
-	Nodo<T>* fin;
+	Node<T>* inicio;
+	Node<T>* fin;
 	int sz;
 public:
 	queue() {
@@ -31,7 +31,7 @@ bool queue<T>::empty() {
 
 template<class T>
 void queue<T>::push(T v) {
-	Nodo<T>* nodo = new Nodo<T>(v);
+	Node<T>* nodo = new Node<T>(v);
 	if (empty()) {
 		inicio = nodo;
 		fin = inicio;

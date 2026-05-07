@@ -1,31 +1,31 @@
 #pragma once
-#include "Nodo.h"
+#include "Node.h"
 
 
 template <typename T>
-class EList
+class LinkedDoubleList
 {
 private:
-    Nodo<T>* cabeza;
+    Node<T>* cabeza;
 
 public:
-    EList() {
+    LinkedDoubleList() {
         cabeza = nullptr;
     }
 
-    ~EList() {}
+    ~LinkedDoubleList() {}
 
     void Insertar(T dato)
     {
      
-        Nodo<T>* nuevo = new Nodo<T>(dato);
+        Node<T>* nuevo = new Node<T>(dato);
 
         if (cabeza == nullptr) {
             cabeza = nuevo;
             return;
         }
 
-        Nodo<T>* actual = cabeza;
+        Node<T>* actual = cabeza;
 
         while (actual->siguiente != nullptr) {
             actual = actual->siguiente;
@@ -34,4 +34,3 @@ public:
         actual->siguiente = nuevo;
     }
 };
-

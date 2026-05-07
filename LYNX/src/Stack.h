@@ -1,11 +1,11 @@
 #pragma once
-#include "Nodo.h"
+#include "Node.h"
 
 template<class T>
 class stack
 {
 private:
-	Nodo<T>* tope;
+	Node<T>* tope;
 	int sz;
 public:
 	stack() {
@@ -24,11 +24,11 @@ public:
 template<class T>
 void stack<T>::push(T dato) {
 	if (empty()) {
-		tope = new Nodo<T>(dato);
+		tope = new Node<T>(dato);
 	}
 	else
 	{
-		tope = new Nodo<T>(dato, tope);
+		tope = new Node<T>(dato, tope);
 	}
 	sz++;
 }
