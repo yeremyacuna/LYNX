@@ -12,15 +12,32 @@ using namespace System;
 int main()
 {
 	Random f;
-	int opcion, dni = 0, dni2 = 0, tipo=0;
-	string contra = "", name = "", origen = "", destino = "", contra2 = "", name2 = "";
-	char op;
-	bool activo = false, creada=false;
+	//Pasajero
+	int opcion, dni = 0, tipo=0;
+	string contra = "", name = "", origen = "", destino = "";
+	bool activo = false, creada = false;
+
+	//Conductor
+	int dni2 = 0;
+	float rating = f.Next(0,26)/5, ganacias=0, recokm=0;
+	string contra2 = "", name2 = "";
+	bool creada2 = false, estado=false;
+
+	//Conductor viaje
+	float km = 0, precio = 0,estrellas=10;
+	string nombre = "", partida = "", llegada = "";
+
+	//Vehiculo
+	string placa = "", marca="", color="", modelo="";
+	int ano = 0;
+
+
 	do {
+		//Menu principal
 		system("cls");
 		cout << "LYNX\n";
 		cout << "1. Soy pasajero\n";
-		cout << "2. Soy coductor\n";
+		cout << "2. Soy conductor\n";
 		cout << "3. Panel BackOffice\n";
 		cout << "4. Salir\n";
 		cout << "\nIngrese opcion: ";cin >> opcion;
@@ -30,6 +47,7 @@ int main()
 		switch (opcion) {
 		case 1:
 			do {
+				//Menu del pasajero
 				system("cls");
 				cout << "Lynx > Modo Usuario\n---------------------\n";
 				cout << "[1] - Iniciar Sesion\n";
@@ -41,18 +59,21 @@ int main()
 				case 1:
 					if (creada) {
 						do {
+							//inicio de sesion (verificacion de cuenta existente
 							system("cls");
-							cout << "Lynx > Modo Usuario\n---------------------";
-							cout << "\nDNI : ";cin >> dni2;
+							cout << "Lynx > Modo Usuario\n---------------------\n";
+							cout << "En caso no se coloquen bien los datos se volvera a generar el formulario.\n";
+							cout << "DNI : ";cin >> dni2;
 							cin.ignore();
 							cout << "Nombre Completo : ";getline(cin, name2);
 							cout << "Contrasena : ";cin >> contra2;
-							cout << "En caso no se coloquen bien los datos se volvera a generar el formulario.";
-						} while (dni2 ==dni || contra2 == contra || name2 == name);
+							
+						} while (!(dni2 ==dni && contra2 == contra && name2 == name));
 
 						cout << "Sesion iniciada. Bienvenido, " << name << "\n";
 						system("pause");
 						do {
+							//menu del pasajero con sus opciones
 							system("cls");
 							cout << "Lynx > Modo Usuario\n---------------------\n";
 							cout << "[1] - Solicitar un viaje\n";
@@ -66,6 +87,7 @@ int main()
 							switch (opcion) {
 							case 1:
 								do {
+									//Aqui el usuario crea un viaje con sus respectivos datos (pueden ser mas)
 									system("cls");
 									cout << "Lynx > Modo Usuario > Solicitar Viaje\n---------------------\n";
 									cout << "Origen: ";cin >> origen;
@@ -74,6 +96,7 @@ int main()
 								} while (origen == "" || destino == "" || tipo < 1 || tipo > 3);
 
 								do {
+									//Ver el resumen para confirmar o no
 									system("cls");
 									cout << "Lynx > Modo Usuario > Confirmar Viaje\n---------------------\n";
 									cout << "Origen: " << origen;
@@ -103,6 +126,7 @@ int main()
 							case 2:
 								if (activo) {
 									do {
+										//Ver el ultimo viaje hecho aceptado (contando como activo)
 										system("cls");
 										cout << "Lynx > Modo Usuario > Viaje activo\n---------------------\n";
 										cout << "ID Viaje: " << "TRP-" << f.Next(10000, 99999);
@@ -218,6 +242,154 @@ int main()
 			opcion = 6;
 			break;
 		case 2:
+			do {
+				//Menu del conductor
+				system("cls");
+				cout << "Lynx > Modo Conductor\n---------------------\n";
+				cout << "[1] - Iniciar Sesion\n";
+				cout << "[2] - Registrarme como conductor\n";
+				cout << "---------------------------\n[0] - Volver al menu principal \n";
+				cin >> opcion;
+
+				switch (opcion) {
+				case 1:
+					if (creada2) {
+						do {
+							//inicio de sesion (verificacion de cuenta existente)
+							system("cls");
+							cout << "Lynx > Modo Conductor\n---------------------\n";
+							cout << "En caso no se coloquen bien los datos se volvera a generar el formulario.\n";
+							cout << "DNI : ";cin >> dni2;
+							cin.ignore();
+							cout << "Nombre Completo : ";getline(cin, name2);
+							cout << "Contrasena : ";cin >> contra2;
+							
+						} while (!(dni2 == dni && contra2 == contra && name2 == name));
+
+						cout << "Sesion iniciada. Bienvenido, " << name2 << "\n";
+						system("pause");
+						do {
+							//menu del conductor con sus opciones
+							system("cls");
+							cout << "Lynx > Panel Conductor\n";
+							cout << name2 << "   Placa: " << placa << "\n";
+							cout << "Estado: ";if (estado) { cout << "Disponible  "; }
+							else { cout << "No Disponible  "; }cout<< "Rating: " << rating << "\n";
+							cout << "---------------------\n";
+							cout << "[1] - Registrar viaje\n";
+							cout << "[2] - Ver carreras hechas\n";
+							cout << "[3] - Alternar disponibilidad\n";
+							cout << "[4] - Ver mis ganancias\n";
+							cout << "[5] - Gestionar vehiculo\n";
+							cout << "[6] - Ver perfil y estadisticas\n";
+							cout << "---------------------------\n[0] - Cerrar sesion \n";
+							cin >> opcion;
+
+							switch (opcion) {
+							case 1:
+								do {
+									//Aqui el conductor registra un viaje con sus respectivos datos (pueden ser mas)
+									system("cls");
+									cout << "Lynx > Panel Conductor > Registrar viaje\n---------------------\n";
+									cin.ignore();
+									cout << "pasajero: ";getline(cin,nombre);
+									cout << "Partida: ";cin >> partida;
+									cout << "llegada: ";cin >> llegada;
+									cout << "km: ";cin >> km;
+									cout << "precio: S/";cin >> precio;
+									cout << "estrellas: ";cin >> estrellas;
+								} while (nombre == "" || partida == "" || llegada == "" || km < 0.1 || precio < 0.1 || estrellas < 0 || estrellas>5);
+								ganacias += precio;
+								opcion = 7;
+
+								break;
+
+							case 2:
+								//Aqui podria ver todas las carreras que ha registrado el conductor
+								opcion = 7;
+								break;
+
+							case 3:
+								estado = !estado;
+								opcion = 7;
+								break;
+
+							case 4:
+								do {
+									system("cls");
+									cout << "Lynx > Panel Conductor > Ganancias\n---------------------\n";
+									cout << "Viajes: \n"//cantidad de viajes
+										;
+									cout << "Ganancias brutas: S/" << ganacias;
+									cout << "Comision LYNX (10%): S/" << ganacias * 0.10;
+									cout << "Ganancias netas: S/" << ganacias * 0.90;
+									//Puede haber mas datos
+									cout << "[0] - Volver"; cin >> opcion;
+								} while (opcion != 0);
+								opcion = 7;
+								break;
+
+							case 5:
+								do {
+									system("cls");
+									cout << "Lynx > Panel Conductor > Mi Vehiculo\n---------------------\n";
+									cout << "Placa: " << placa;
+									cout << "Marca: " << marca;
+									cout << "Modelo: " << modelo;
+									cout << "Color: " << color;
+									cout << "Anio: " << ano;
+									cout << "Km recorridos: " << recokm;
+									
+									//Puede haber mas datos
+									cout << "[0] - Volver"; cin >> opcion;
+								} while (opcion != 0);
+								opcion = 7;
+								break;
+							case 0:
+								break;
+							}
+						} while (opcion > 5 || opcion < 0);
+					}
+					else {
+						system("cls");
+						cout << "No existe ninguna cuenta\n";
+						system("pause");
+					}
+					opcion = 6;
+					break;
+				case 2:
+					do {
+						system("cls");
+						cout << "Lynx > Modo Conductor >> registro\n---------------------";
+						cout << "\nDNI : ";cin >> dni;
+						cin.ignore();
+						cout << "Nombre Completo : ";getline(cin, name);
+						cout << "Contrasena : ";cin >> contra;
+					} while (dni == 0 || contra == "" || name == "");
+
+					do {
+						system("cls");
+						cout << "Lynx > Modo Conductor >> registro vehiculo\n---------------------\n";
+						cout << "placa : ";cin >> placa;
+						cout << "marca : ";cin >> marca;
+						cout << "modelo : ";cin >> modelo;
+						cout << "color : ";cin >> color;
+						cout << "anio : ";cin >> ano;
+					} while (placa=="" || marca == "" || modelo == "" || color=="" || ano>2000);
+
+					creada2 = true;
+
+					system("cls");
+					cout << "Cuenta creada.\n";
+					system("pause");
+					opcion = 6;
+					break;
+				case 0:
+					break;
+				}
+			} while (opcion > 2 || opcion < 0);
+
+			opcion = 6;
 			break;
 		case 3:
 			break;
