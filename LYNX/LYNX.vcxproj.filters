@@ -33,6 +33,21 @@
     <ClInclude Include="src\MainMenu.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Driver.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Passenger.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Trip.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\User.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vehicle.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
