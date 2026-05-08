@@ -15,21 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\LinkedDoubleList.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Queue.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Stack.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Node.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\LinkedList.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\MainMenu.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -48,12 +33,26 @@
     <ClInclude Include="src\Vehicle.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="include\LinkedDoubleList.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LinkedList.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Node.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Queue.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Stack.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">

@@ -34,30 +34,6 @@ public:
         }
     }
 
-    /*
-    // Inserta e indica posicion del valor
-    void insertar(T value) {
-        Node<T>* nuevoNodo = new Node<T>(value);
-
-        if (head == nullptr)
-        {
-            head = nuevoNodo;
-        }
-        else {
-            Node<T>* actual = head;
-            while (actual->next != nullptr)
-            {
-                actual = actual->next;
-            }
-
-            actual->next = nuevoNodo;
-        }
-
-        cout << "Insertado con exito en la posicion [" << size << "]" << endl;
-        size++;
-    }
-    */
-
     bool isEmpty() { return size == 0; }    // si es vacio
     int  getSize() { return size; }         // get tamaño
 
@@ -99,7 +75,7 @@ public:
     {
         if (index < 0 || index > size)
         {
-            cout << "Error, index incorrecto o fuera de rango";
+            cout << "Error, index incorrecto o fuera de rango\n";
             return;
         }
 
@@ -201,7 +177,7 @@ public:
 
 
 
-    // =====================
+    // ===================== others function falta
     T get(int index) const {
         if (!isValidIndex(index)) {
             cout << "[LinkedList] get(" << index << ") out of range. size=" << size_ << "\n";
@@ -217,12 +193,12 @@ public:
         return head_->data;
     }
 
-    T back() const {
+    T back() {
         if (isEmpty()) { cout << "[LinkedList] back() — empty\n"; return T{}; }
         return tail_->data;
     }
 
-    int search(T value) const {
+    int search(T value) {
         Node<T>* current = head_;
         int index = 0;
         while (current != nullptr) {
@@ -233,9 +209,9 @@ public:
         return -1;
     }
 
-    bool contains(T value) const { return search(value) != -1; }
+    bool contains(T value) { return search(value) != -1; }
 
-    int count(T value) const {
+    int count(T value) {
         Node<T>* current = head_;
         int n = 0;
         while (current != nullptr) {
@@ -271,7 +247,7 @@ public:
         size_ = 0;
     }
 
-    void print() const {
+    void print() {
         if (isEmpty()) { cout << "[ empty ]\n"; return; }
         Node<T>* current = head_;
         cout << "[ ";
@@ -283,7 +259,7 @@ public:
         cout << " -> nullptr ]\n";
     }
 
-    void printInfo() const {
+    void printInfo() {
         cout << "size=" << size_;
         if (!isEmpty())
             cout << " | head=" << head_->data << " | tail=" << tail_->data;

@@ -3,10 +3,6 @@
 #include <conio.h>
 #include <cstdio>
 #include <string>
-#include "LinkedList.h"
-#include "LinkedDoubleList.h"
-#include "Queue.h"
-#include "Stack.h"
 
 using namespace System;
 using namespace std;
