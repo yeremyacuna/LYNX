@@ -38,7 +38,7 @@ void queue<T>::push(T v) {
 	}
 	else {
 
-		fin->siguiente = nodo;
+		fin->next = nodo;
 		fin = nodo;
 	}
 	nodo = nullptr;
@@ -51,14 +51,14 @@ void queue<T>::pop() {
 		return;
 	}
 
-	T dato = inicio->dato;
+	T dato = inicio->data;
 
 	if (inicio == fin) {
 		inicio = nullptr;
 		fin = nullptr;
 	}
 	else {
-		inicio = inicio->siguiente;
+		inicio = inicio->next;
 	}
 	sz--;
 }

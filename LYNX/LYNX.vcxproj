@@ -111,12 +111,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Driver.h" />
     <ClInclude Include="src\LinkedDoubleList.h" />
     <ClInclude Include="src\LinkedList.h" />
     <ClInclude Include="src\MainMenu.h" />
     <ClInclude Include="src\Node.h" />
+    <ClInclude Include="src\Passenger.h" />
     <ClInclude Include="src\Queue.h" />
     <ClInclude Include="src\Stack.h" />
+    <ClInclude Include="src\Trip.h" />
+    <ClInclude Include="src\User.h" />
+    <ClInclude Include="src\Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />

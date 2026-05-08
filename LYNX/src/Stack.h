@@ -42,8 +42,8 @@ void stack<T>::pop()
 	}
 	else
 	{
-		T elemento = (T)(tope->dato);
-		tope = (Nodo<T>*) tope->siguiente;
+		T elemento = (T)(tope->data);
+		tope = (Nodo<T>*) tope->next;
 	}
 	sz--;
 }
@@ -57,7 +57,7 @@ T stack<T>::top()
 	}
 	else
 	{
-		T elemento = (T)(tope->dato);
+		T elemento = (T)(tope->data);
 		return elemento;
 	}
 }
