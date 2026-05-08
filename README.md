@@ -6,12 +6,12 @@
 ### Salvador [@Salvarcc](https://github.com/Salvarcc)
 
 ###### Files
-- [main.cpp](LYXN/main.cpp)
-- [Node.h](LYNX/Node.h)
-- [LinkedList.h](LYNX/LinkedList.h)
-- [LinkedDoubleList.h](LYNX/LinkedDoubleList.h)
-- [Queue.h](LYNX/Queue.h)
-- [Stack.h](LYNX/Stack.h)
+- [main.cpp](LYXN/src/main.cpp)
+- [Node.h](LYNX/src/Node.h)
+- [LinkedList.h](LYNX/src/LinkedList.h)
+- [LinkedDoubleList.h](LYNX/src/LinkedDoubleList.h)
+- [Queue.h](LYNX/src/Queue.h)
+- [Stack.h](LYNX/src/Stack.h)
 
 ###### Icon
 ![LYNX.](/LYNX/resources/LYNX_image.png "LYNX.")
