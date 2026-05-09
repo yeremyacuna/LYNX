@@ -33,14 +33,16 @@ public:
 
     ~Passenger() {}
 
-    string getPassengerId() { return passengerId; }
+    string getPassengerId() const { return passengerId; }
    
-    float  getRating() { return rating; }
-    int    getTotalTrips() { return totalTrips; }
-    float  getTotalSpent() { return totalSpent; }
+    float  getRating() const  { return rating; }
+    int    getTotalTrips() const { return totalTrips; }
+    float  getTotalSpent() const { return totalSpent; }
 
     void setRating(float r) { rating = r; }
     void setTotalTrips(int t) { totalTrips = t; }
+    void setPassengerId(string pID) { passengerId = pID;  }
+    void setTotalSpent(float tSpent) { totalSpent = tSpent; }
 
     // c/viaje completado suma el precio pagado
     void addTrip(float precio) {
@@ -69,7 +71,7 @@ public:
         return (float)estrellas;
     }
 
-    string toString() override {
+    string toString() const override {
         return "ID: " + passengerId +
             " | Nombre: " + name +
             " | DNI: " + dni +

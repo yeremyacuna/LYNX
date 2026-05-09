@@ -43,7 +43,7 @@ public:
     void setYear(int _year) { year = _year; }
     
 
-    string toString() {
+    string toString() const {
         return plate + " | " + brand + " " + model + " | " + color + " | " + std::to_string(year);
     }
 

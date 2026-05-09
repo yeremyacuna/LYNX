@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include <functional>
 
-using std::cout; using std::cin; using std::function;
+using std::cout; using std::cin; using std::function; using std::vector;
 
 template <typename T>
 class DNode {
@@ -49,7 +50,7 @@ public:
     }
 
     bool isEmpty() const { return size == 0; }    // si es vacio
-    int  getSize() { return size; }         // get tamaño
+    int getSize() const { return size; }        // get tamaño
 
     // pushFront: inserta valor al inicio
     void pushFront(T value)  // complejidad O(1)
@@ -187,10 +188,6 @@ public:
         size--;
     }
 
-
-
-
-    // ===================== others function falta
     T get(int index) const {
         if (!validIndex(index)) {
             cout << "[LinkedDoubleList] get(" << index << ") out of range. size=" << size << "\n";
@@ -211,6 +208,18 @@ public:
         return tail->data;
     }
 
+    vector<T> linkedDoubleListToVector(LinkedDoubleList<T>& list)
+    {
+        vector<T> totalList;
+
+        for (int i = 0; i < list.getSize(); i++)
+        {
+            totalList.push_back(list.get(i));
+        }
+        return totalList;
+    }
+    
+    //others
     int search(T value) {
         DNode<T>* current = head;
         int index = 0;
@@ -287,12 +296,22 @@ public:
         }
     }
 
-   // LAMBDAS
+
+
+
+
+
+
+
+
+
+   /// LAMBDAS
    
    /* LAMBDA 1: actualiza todos los elementos que cumplan el criterio aplicando una transformacion
    Ej: activos.updateIf([](Trip t){ return t.getTripId()=="TRP-10001"; },
                           [](Trip& t){ t.setStatus("completado"); });
-   Puede servir para cambiar estado de un viaje activo sin tener que buscarlo manualmente*/
+   Puede servir para cambiar estado de un viaje activo sin tener que buscarlo manualmente */
+    
     void updateIf(function<bool(T)> criterio, function<void(T&)> transformar) {
         auto aplicar = [](DNode<T>* nodo, function<bool(T)> crit, function<void(T&)> transf) {
             while (nodo != nullptr) {
@@ -305,6 +324,7 @@ public:
 
     // LAMBDA 2: cuenta cuantos elementos cumplen un criterio
     // Ej: int activos = lista.countIf([](Trip t){ return t.getStatus()=="en_curso"; });
+
     int countIf(function<bool(T)> criterio) {
         auto contar = [](DNode<T>* nodo, function<bool(T)> fn) -> int {
             int n = 0;

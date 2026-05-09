@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include "src/Driver.h"
+#include "src/Passenger.h"
     
 using std::string; using std::vector; using std::cout; using std::cin; using std::stringstream; using std::getline;
 
@@ -65,7 +66,277 @@ private:
     }
 
 public:
+    FileManager() {
+        separador = '|';
+        rutaDrivers = "assets/drivers.txt";
+        rutaPassengers = "assets/passengers.txt";
+        rutaTrips = "assets/trips.txt";
+    }
 
+   
+    FileManager(char _separador)  // constructor si quiero usar otro separador
+    {
+        separador = _separador;
+        rutaDrivers = "assets/drivers.txt";
+        rutaPassengers = "assets/passengers.txt";
+        rutaTrips = "assets/trips.txt";
+    }
+
+    ~FileManager()
+    {
+
+    }
+
+    //  Formato de cada linea en drivers.txt:
+    //  driverId|name|dni|password|rating|isAvailable|totalTrips|totalEarnings|plate|brand|model|color|year
+
+    bool guardarDriversTXT(const vector<Driver>& listaDeDrivers) // Guardar a nuevo conductor registrado
+    {
+        // Abriendo el archivo o creando si no existe:
+        std::ofstream MyFile(rutaDrivers);      // MyFile: como esta con ofstream, sirve para escribir
+
+        if (!MyFile.is_open()) {
+            std::cout << "[ERROR] No se pudo abrir el archivo: " << rutaDrivers << "\n";
+            return false;
+        }
+
+        for (int i = 0; i < (int)listaDeDrivers.size(); i++) {
+            const Driver& d = listaDeDrivers[i];
+
+            MyFile << d.getDriverId() << separador
+                << d.getName() << separador
+                << d.getDni() << separador
+                << d.getPassword() << separador
+                << d.getRating() << separador
+                << boolAString(d.getIsAvailable()) << separador
+                << d.getTotalTrips() << separador
+                << d.getTotalEarnings() << separador
+                << d.getVehicle().getPlate() << separador
+                << d.getVehicle().getBrand() << separador
+                << d.getVehicle().getModel() << separador
+                << d.getVehicle().getColor() << separador
+                << d.getVehicle().getYear()
+                << "\n";
+        }
+
+        MyFile.close();
+        std::cout << "Drivers guardados correctamente: " << rutaDrivers << "\n";
+        return true;
+    }
+
+    vector<Driver> leerDriversTXT() {
+
+        vector<Driver> listaDeDrivers;
+        std::ifstream MyFile(rutaDrivers);   // MyFile: como esta con ifstream, sirve para leer
+
+        if (!MyFile.is_open()) {
+
+            std::ofstream crearArchivo(rutaDrivers); // crea si no existe o no lo abre o no lee
+            crearArchivo.close();   // crea y cierra
+
+            MyFile.open(rutaDrivers);
+
+            std::cout << "[ALERTA] El archivo se acaba de crear: " << rutaDrivers << "\n";
+            return listaDeDrivers;
+        }
+
+        std::string linea;
+        while (std::getline(MyFile, linea))
+        {
+            if (linea.empty())
+                continue;
+
+            vector<string> p = dividirLinea(linea);
+
+            if ((int)p.size() < 13) // 13 por la cantidad de atributos
+            {
+                std::cout << "[PELIGRO] Linea incompleta, se omite.\n";
+                continue;
+            }
+
+            Vehicle v; // Armar Vehicle con los campos 9 al 13 (arr[8-12])
+            v.setPlate(p[8]);
+            v.setBrand(p[9]);
+            v.setModel(p[10]);
+            v.setColor(p[11]);
+            v.setYear(std::stoi(p[12]));
+
+            Driver d;  // Armar Driver con los campos 1 al 8 (arr[0-7])
+            d.setDriverId(p[0]);
+            d.setName(p[1]);
+            d.setDni(p[2]);
+            d.setPassword(p[3]);
+            d.setRating(std::stof(p[4]));
+            d.setAvailable(stringABool(p[5]));
+            d.setTotalTrips(std::stoi(p[6]));
+            d.setTotalEarnings(std::stof(p[7]));
+            d.setVehicle(v);
+
+            listaDeDrivers.push_back(d);
+        }
+
+        MyFile.close();
+        std::cout << "[OK] " << listaDeDrivers.size() << " drivers leidos de: " << rutaDrivers << "\n";
+        return listaDeDrivers;
+    }
+
+
+    //  Formato de cada linea en passengers.txt:
+    //  passengerId|name|dni|password|rating|totalTrips|totalSpent
+
+    bool guardarPassengersTXT(const vector<Passenger>& listaDePassengers) 
+    {
+        // Abriendo el archivo o creando si no existe :
+        std::ofstream MyFile(rutaPassengers);      // MyFile: como esta con ofstream, sirve para escribir
+
+        if (!MyFile.is_open()) {
+            std::cout << "[ERROR] No se pudo abrir el archivo: " << rutaPassengers << "\n";
+            return false;
+        }
+
+        for (int i = 0; i < (int)listaDePassengers.size(); i++) {
+            const Passenger& p = listaDePassengers[i];
+
+            MyFile << p.getPassengerId() << separador
+                << p.getName() << separador
+                << p.getDni() << separador
+                << p.getPassword() << separador
+                << p.getRating() << separador
+                << p.getTotalTrips() << separador
+                << p.getTotalSpent()
+                << "\n";
+        }
+
+        MyFile.close();
+        std::cout << "[OK] Passengers guardados en: " << rutaPassengers << "\n";
+        return true;
+    }
+
+
+    vector<Passenger> leerPassengersTXT() {
+        vector<Passenger> listaDePassengers;
+        std::ifstream MyFile(rutaPassengers);
+
+        if (!MyFile.is_open()) {
+            std::ofstream crearArchivo(rutaPassengers); // crea si no existe o no lo abre o no lee
+            crearArchivo.close();   // crea y cierra
+
+            MyFile.open(rutaPassengers);
+
+            std::cout << "[ALERTA] El archivo se acaba de crear: " << rutaPassengers << "\n";
+            return listaDePassengers;
+        }
+
+        std::string linea;
+        while (std::getline(MyFile, linea)) {
+
+            if (linea.empty()) continue;
+
+            vector<string> p = dividirLinea(linea);
+
+            if ((int)p.size() < 7) {
+                std::cout << "[PELIGRO] Linea incompleta, se omite.\n";
+                continue;
+            }
+
+            Passenger pas;  // ARMAR PASASENGER
+            pas.setPassengerId(p[0]);
+            pas.setName(p[1]);
+            pas.setDni(p[2]);
+            pas.setPassword(p[3]);
+            pas.setRating(std::stof(p[4]));
+            pas.setTotalTrips(std::stoi(p[5]));
+            pas.setTotalSpent(std::stof(p[6]));
+
+            listaDePassengers.push_back(pas);
+        }
+
+        MyFile.close();
+        std::cout << "[OK] " << listaDePassengers.size() << " passengers leidos de: " << rutaPassengers << "\n";
+        return listaDePassengers;
+    }
+
+
+    //  Formato de cada linea en trips.txt:
+    //  tripId|origin|destination|price|tipe|status|driverName|passengerDni|date
+
+    bool guardarTripsTXT(const vector<Trip>& listaDeTrips) 
+    {
+        // Abriendo el archivo o creando si no existe :
+        std::ofstream MyFile(rutaTrips);      // MyFile: como esta con ofstream, sirve para escribir
+
+        if (!MyFile.is_open()) {
+            std::cout << "[ERROR] No se pudo abrir el archivo: " << rutaTrips << "\n";
+            return false;
+        }
+
+        for (int i = 0; i < (int)listaDeTrips.size(); i++) {
+            const Trip& t = listaDeTrips[i];
+
+            MyFile << t.getTripId() << separador
+                << t.getOrigin() << separador
+                << t.getDestination() << separador
+                << t.getPrice() << separador
+                << t.getTipe() << separador
+                << t.getStatus() << separador
+                << t.getDriverName() << separador
+                << t.getPassengerDni() << separador
+                << t.getDate()
+                << "\n";
+        }
+
+        MyFile.close();
+        std::cout << "[OK] Trips guardados en: " << rutaTrips << "\n";
+        return true;
+    }
+
+
+    vector<Trip> leerTripsTXT() {
+        vector<Trip> listaDeTrips;
+        std::ifstream MyFile(rutaTrips);
+
+        if (!MyFile.is_open()) {
+            std::ofstream crearArchivo(rutaTrips); // crea si no existe o no lo abre o no lee
+            crearArchivo.close();   // crea y cierra
+
+            MyFile.open(rutaTrips);
+
+            std::cout << "[ALERTA] El archivo se acaba de crear: " << rutaTrips << "\n";
+            return listaDeTrips;
+        }
+
+        std::string linea;
+        while (std::getline(MyFile, linea)) {
+
+            if (linea.empty()) continue;
+
+            vector<std::string> p = dividirLinea(linea);
+
+            if ((int)p.size() < 9) {
+                std::cout << "[PELIGRO] Linea incompleta, se omite.\n";
+                continue;
+            }
+
+            Trip t;
+            t.setTripId(p[0]);
+            t.setOrigin(p[1]);
+            t.setDestination(p[2]) ;
+            t.setPrice(std::stof(p[3])) ;
+            t.setTipe(std::stoi(p[4])) ;
+            t.setStatus(p[5]) ;
+            t.setDriverName(p[6]) ;
+            t.setPassengerDni(p[7]) ;
+            t.setDate(p[8]);
+
+            listaDeTrips.push_back(t);
+        }
+
+        MyFile.close();
+        std::cout << "[OK] " << listaDeTrips.size() << " trips leidos de: " << rutaTrips << "\n";
+        return listaDeTrips;
+    }
+    
+    /*
     // ==========================================================
     //  STRUCTS PARA BINARIO
     //  El binario necesita tamanos fijos en memoria.
@@ -112,268 +383,7 @@ public:
         char  status[15];
         char  date[15];
     };
-    */
-
-    FileManager() {
-        separador = '|';
-        rutaDrivers = "LYNX/assets/drivers.txt";
-        rutaPassengers = "data/passengers.txt";
-        rutaTrips = "data/trips.txt";
-    }
-
    
-    FileManager(char _separador)  // constructor si quiero usar otro separador
-    {
-        separador = _separador;
-        rutaDrivers = "LYNX/assets/drivers.txt";
-        rutaPassengers = "data/passengers.txt";
-        rutaTrips = "data/trips.txt";
-    }
-
-    ~FileManager()
-    {
-
-    }
-
-    //  Formato de cada linea en drivers.txt:
-    //  driverId|name|dni|password|rating|isAvailable|totalTrips|totalEarnings|plate|brand|model|color|year
-
-    bool guardarDriversTXT(const vector<Driver>& listaDeDrivers) // Guardar a nuevo conductor registrado
-    {
-        std::ofstream MyFile(rutaDrivers);      // MyFile: como esta con ofstream, sirve para escribir
-
-        if (!MyFile.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir el archivo: " << rutaDrivers << "\n";
-            return false;
-        }
-
-        for (int i = 0; i < (int)listaDeDrivers.size(); i++) {
-            const Driver& d = listaDeDrivers[i];
-
-            MyFile << d.getDriverId() << separador
-                << d.getName() << separador
-                << d.getDni() << separador
-                << d.getPassword() << separador
-                << d.getRating() << separador
-                << boolAString(d.getIsAvailable()) << separador
-                << d.getTotalTrips() << separador
-                << d.getTotalEarnings() << separador
-                << d.getVehicle().getPlate() << separador
-                << d.getVehicle().getBrand() << separador
-                << d.getVehicle().getModel() << separador
-                << d.getVehicle().getColor() << separador
-                << d.getVehicle().getYear()
-                << "\n";
-        }
-
-        MyFile.close();
-        std::cout << "Drivers guardados correctamente: " << rutaDrivers << "\n";
-        return true;
-    }
-
-    vector<Driver> leerDriversTXT() {
-
-        vector<Driver> listaDeDrivers;
-        std::ifstream MyFile(rutaDrivers);   // MyFile: como esta con ifstream, sirve para leer
-
-        if (!MyFile.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << rutaDrivers << "\n";
-            return listaDeDrivers;
-        }
-
-        std::string linea;
-        while (std::getline(MyFile, linea))
-        {
-            if (linea.empty())
-                continue;
-
-            vector<string> p = dividirLinea(linea);
-
-            if ((int)p.size() < 13) // 13 por la cantidad de atributos
-            {
-                std::cout << "[PELIGRO] Linea incompleta, se omite.\n";
-                continue;
-            }
-
-            Vehicle v; // Armar Vehicle con los campos 9 al 13 (arr[8-12])
-            v.setPlate(p[8]);
-            v.setBrand(p[9]);
-            v.setModel(p[10]);
-            v.setColor(p[11]);
-            v.setYear(std::stoi(p[12]));
-
-            Driver d;  // Armar Driver con los campos 1 al 8 (arr[0-7])
-            d.setDriverId(p[0]);
-            d.setName(p[1]);
-            d.setDni(p[2]);
-            d.setPassword(p[3]);
-            d.setRating(std::stof(p[4]));
-            d.setAvailable(stringABool(p[5]));
-            d.setTotalTrips(std::stoi(p[6]));
-            d.setTotalEarnings(std::stof(p[7]));
-            d.setVehicle(v);
-
-            listaDeDrivers.push_back(d);
-        }
-
-        MyFile.close();
-        std::cout << "[OK] " << listaDeDrivers.size() << " drivers leidos de: " << rutaDrivers << "\n";
-        return listaDeDrivers;
-    }
-
-    /*
-    // ==========================================================
-    //  TXT  -  PASSENGER
-    // ==========================================================
-
-    // ----------------------------------------------------------
-    //  Formato de cada linea en passengers.txt:
-    //  passengerId|name|dni|password|rating|totalTrips|totalSpent
-    // ----------------------------------------------------------
-
-    bool guardarPassengersTXT(std::vector<Passenger> lista, std::string archivo) {
-        std::ofstream file(archivo);
-
-        if (!file.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << archivo << "\n";
-            return false;
-        }
-
-        for (int i = 0; i < (int)lista.size(); i++) {
-            Passenger p = lista[i];
-
-            file << p.getPassengerId() << separador
-                << p.getName() << separador
-                << p.getDni() << separador
-                << p.getPassword() << separador
-                << p.getRating() << separador
-                << p.getTotalTrips() << separador
-                << p.getTotalSpent()
-                << "\n";
-        }
-
-        file.close();
-        std::cout << "[OK] Passengers guardados en: " << archivo << "\n";
-        return true;
-    }
-
-
-    std::vector<Passenger> leerPassengersTXT(std::string archivo) {
-        std::vector<Passenger> lista;
-        std::ifstream file(archivo);
-
-        if (!file.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << archivo << "\n";
-            return lista;
-        }
-
-        std::string linea;
-        while (std::getline(file, linea)) {
-
-            if (linea.empty()) continue;
-
-            std::vector<std::string> p = dividirLinea(linea);
-
-            if ((int)p.size() < 7) {
-                std::cout << "[WARN] Linea incompleta, se omite.\n";
-                continue;
-            }
-
-            Passenger pas;
-            pas.setPassengerId(p[0]);
-            pas.setName(p[1]);
-            pas.setDni(p[2]);
-            pas.setPassword(p[3]);
-            pas.setRating(std::stof(p[4]));
-            pas.setTotalTrips(std::stoi(p[5]));
-            pas.setTotalSpent(std::stof(p[6]));
-
-            lista.push_back(pas);
-        }
-
-        file.close();
-        std::cout << "[OK] " << lista.size() << " passengers leidos de: " << archivo << "\n";
-        return lista;
-    }
-
-
-    // ==========================================================
-    //  TXT  -  TRIP
-    // ==========================================================
-
-    // ----------------------------------------------------------
-    //  Formato de cada linea en trips.txt:
-    //  tripId|passengerId|driverId|origin|destination|price|status|date
-    // ----------------------------------------------------------
-
-    bool guardarTripsTXT(std::vector<Trip> lista, std::string archivo) {
-        std::ofstream file(archivo);
-
-        if (!file.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << archivo << "\n";
-            return false;
-        }
-
-        for (int i = 0; i < (int)lista.size(); i++) {
-            Trip t = lista[i];
-
-            file << t.getTripId() << separador
-                << t.getPassengerId() << separador
-                << t.getDriverId() << separador
-                << t.getOrigin() << separador
-                << t.getDestination() << separador
-                << t.getPrice() << separador
-                << t.getStatus() << separador
-                << t.getDate()
-                << "\n";
-        }
-
-        file.close();
-        std::cout << "[OK] Trips guardados en: " << archivo << "\n";
-        return true;
-    }
-
-
-    std::vector<Trip> leerTripsTXT(std::string archivo) {
-        std::vector<Trip> lista;
-        std::ifstream file(archivo);
-
-        if (!file.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << archivo << "\n";
-            return lista;
-        }
-
-        std::string linea;
-        while (std::getline(file, linea)) {
-
-            if (linea.empty()) continue;
-
-            std::vector<std::string> p = dividirLinea(linea);
-
-            if ((int)p.size() < 8) {
-                std::cout << "[WARN] Linea incompleta, se omite.\n";
-                continue;
-            }
-
-            Trip t;
-            t.setTripId(p[0]);
-            t.setPassengerId(p[1]);
-            t.setDriverId(p[2]);
-            t.setOrigin(p[3]);
-            t.setDestination(p[4]);
-            t.setPrice(std::stof(p[5]));
-            t.setStatus(p[6]);
-            t.setDate(p[7]);
-
-            lista.push_back(t);
-        }
-
-        file.close();
-        std::cout << "[OK] " << lista.size() << " trips leidos de: " << archivo << "\n";
-        return lista;
-    }
-    */
-    /*
     // ==========================================================
     //  BINARIO  -  DRIVER
     // ==========================================================

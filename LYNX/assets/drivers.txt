@@ -1,0 +1,15 @@
+DRV-4567|Pedro Quispe|45678901|pass123|5|1|0|0|B3K-447|Toyota|Corolla|Plata|2022
+DRV-5019|Rosa Condori|50193847|rosa456|5|1|0|0|A1P-885|Honda|Civic|Negro|2021
+DRV-3820|Luis Mamani|38201947|luis789|5|1|0|0|C7M-219|Hyundai|Tucson|Blanco|2023
+DRV-4567|Pedro Quispe|45678901|pass123|5|1|0|0|B3K-447|Toyota|Corolla|Plata|2022
+DRV-5019|Rosa Condori|50193847|rosa456|5|1|0|0|A1P-885|Honda|Civic|Negro|2021
+DRV-3820|Luis Mamani|38201947|luis789|5|1|0|0|C7M-219|Hyundai|Tucson|Blanco|2023
+DRV-4567|Pedro Quispe|45678901|pass123|5|1|0|0|B3K-447|Toyota|Corolla|Plata|2022
+DRV-5019|Rosa Condori|50193847|rosa456|5|1|0|0|A1P-885|Honda|Civic|Negro|2021
+DRV-3820|Luis Mamani|38201947|luis789|5|1|0|0|C7M-219|Hyundai|Tucson|Blanco|2023
+DRV-4567|Pedro Quispe|45678901|pass123|5|1|0|0|B3K-447|Toyota|Corolla|Plata|2022
+DRV-5019|Rosa Condori|50193847|rosa456|5|1|0|0|A1P-885|Honda|Civic|Negro|2021
+DRV-3820|Luis Mamani|38201947|luis789|5|1|0|0|C7M-219|Hyundai|Tucson|Blanco|2023
+DRV-4567|Pedro Quispe|45678901|pass123|5|1|0|0|B3K-447|Toyota|Corolla|Plata|2022
+DRV-5019|Salvador Rivera|50193847|rosa456|5|1|0|0|A1P-885|Honda|Civic|Negro|2021
+DRV-3820|Luis Mamani|38201947|luis789|5|1|0|0|C7M-219|Hyundai|Tucson|Blanco|2023
