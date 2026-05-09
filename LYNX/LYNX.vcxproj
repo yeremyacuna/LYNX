@@ -116,10 +116,15 @@
     <ClInclude Include="include\Node.h" />
     <ClInclude Include="include\Queue.h" />
     <ClInclude Include="include\Stack.h" />
+    <ClInclude Include="src\AdministratorMenu.h" />
+    <ClInclude Include="src\AuthManager.h" />
     <ClInclude Include="src\Driver.h" />
+    <ClInclude Include="src\DriverMenu.h" />
     <ClInclude Include="src\MainMenu.h" />
     <ClInclude Include="src\Passenger.h" />
+    <ClInclude Include="src\PassengerMenu.h" />
     <ClInclude Include="src\Trip.h" />
+    <ClInclude Include="src\TripManager.h" />
     <ClInclude Include="src\User.h" />
     <ClInclude Include="src\Vehicle.h" />
   </ItemGroup>

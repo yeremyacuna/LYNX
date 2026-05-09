@@ -286,4 +286,31 @@ public:
             current = current->prev;
         }
     }
+
+   // LAMBDAS
+   
+   /* LAMBDA 1: actualiza todos los elementos que cumplan el criterio aplicando una transformacion
+   Ej: activos.updateIf([](Trip t){ return t.getTripId()=="TRP-10001"; },
+                          [](Trip& t){ t.setStatus("completado"); });
+   Puede servir para cambiar estado de un viaje activo sin tener que buscarlo manualmente*/
+    void updateIf(function<bool(T)> criterio, function<void(T&)> transformar) {
+        auto aplicar = [](DNode<T>* nodo, function<bool(T)> crit, function<void(T&)> transf) {
+            while (nodo != nullptr) {
+                if (crit(nodo->data)) transf(nodo->data);
+                nodo = nodo->next;
+            }
+            };
+        aplicar(head, criterio, transformar);
+    }
+
+    // LAMBDA 2: cuenta cuantos elementos cumplen un criterio
+    // Ej: int activos = lista.countIf([](Trip t){ return t.getStatus()=="en_curso"; });
+    int countIf(function<bool(T)> criterio) {
+        auto contar = [](DNode<T>* nodo, function<bool(T)> fn) -> int {
+            int n = 0;
+            while (nodo != nullptr) { if (fn(nodo->data)) n++; nodo = nodo->next; }
+            return n;
+            };
+        return contar(head, criterio);
+    }
 };
