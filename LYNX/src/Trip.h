@@ -45,15 +45,15 @@ public:
         date = _date;
     }
 
-    string getTripId() { return tripId; }
-    string getOrigin() { return origin; }
-    string getDestination() { return destination; }
-    float  getPrice() { return price; }
-    string getStatus() { return status; }
-    string getDate() { return date; }
-    string getDriverName() { return driverName; }
-    string getPassengerDni() { return passengerDni; }
-    int getTipe() { return tipe; }
+    string getTripId() const { return tripId; }
+    string getOrigin() const { return origin; }
+    string getDestination() const { return destination; }
+    float  getPrice() const { return price; }
+    string getStatus() const { return status; }
+    string getDate() const { return date; }
+    string getDriverName()  const { return driverName; }
+    string getPassengerDni() const { return passengerDni; }
+    int getTipe() const { return tipe; }
 
     void setStatus(string s) { status = s; }
     void setPrice(float p) { price = p; }

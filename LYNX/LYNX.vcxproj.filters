@@ -14,7 +14,7 @@
       <UniqueIdentifier>{697b1ae0-1ecd-4832-89f0-92c8ac5586a2}</UniqueIdentifier>
     </Filter>
     <Filter Include="assets">
-      <UniqueIdentifier>{9b55f143-4b47-466b-943b-5aa76dd50155}</UniqueIdentifier>
+      <UniqueIdentifier>{ac209418-ac51-4322-bfb2-113623f6ad97}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,11 +54,27 @@
     <ClInclude Include="FileManager.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="src\AdministratorMenu.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AuthManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DriverMenu.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PassengerMenu.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TripManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="pruebaYeremy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">

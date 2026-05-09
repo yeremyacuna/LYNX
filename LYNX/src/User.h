@@ -41,7 +41,7 @@ public:
     }
     // datos del usuario como texto
     
-    virtual string toString() {
+    virtual string toString() const {
         return "Nombre: " + name + " | DNI: " + dni;
     }
 

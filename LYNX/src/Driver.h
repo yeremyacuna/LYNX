@@ -4,7 +4,9 @@
 #include <iostream>
 #include <string>
 
-using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
+
+using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string; 
+using std::ostream;
 
 class Driver : public User {
 private:
@@ -79,7 +81,7 @@ public:
         return (float)estrellas;
     }
 
-    string toString() override {
+    string toString() const override {
         string estado = isAvailable ? "Disponible" : "En viaje";
         return "ID: " + driverId +
             " | Nombre: " + name +
@@ -139,4 +141,16 @@ public:
     }
 
     string getCodigo() { return driverId; }
+
+    bool operator==(const Driver& other) const  // Recibe otro conductor (other) por referencia. No hace copia del objeto  más eficiente.
+    {
+        return driverId == other.driverId;  // Entonces operator sera comparar los id
+    }
+
+    friend ostream& operator<<(ostream& os, const Driver& d) // friend para acceder a atributos privados
+    {
+        os << d.toString();
+        return os;
+    }
+
 };

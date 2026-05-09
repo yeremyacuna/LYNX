@@ -5,7 +5,6 @@
 #include "Driver.h"
 #include "Passenger.h"
 #include "Trip.h"
-#include "../include/LinkedList.h"
 #include "../include/Queue.h"
 #include "../include/Stack.h"
 #include "../include/LinkedDoubleList.h"
@@ -567,10 +566,6 @@ void Menu::tripHistory(int& option, Trip trips[], int s, string title) {
 void Menu::LYNX() {
 	Console::SetWindowSize(120, 30);
 
-	LinkedList<int> passengers = LinkedList<int>();
-	LinkedList<int> drivers = LinkedList<int>();
-	LinkedList<int> tripsP = LinkedList<int>();
-	LinkedList<int> tripsD = LinkedList<int>();
 
 	Passenger passenger = Passenger();
 	Driver driver = Driver();
