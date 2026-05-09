@@ -60,12 +60,6 @@
     <ClInclude Include="src\AuthManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\DriverMenu.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\PassengerMenu.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\TripManager.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -74,7 +68,9 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="pruebaYeremy.cpp" />
+    <ClCompile Include="pruebaYeremy.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">
@@ -88,5 +84,10 @@
     <Image Include="resources\LYNX_image.png">
       <Filter>resources</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\drivers.txt">
+      <Filter>assets</Filter>
+    </Text>
   </ItemGroup>
 </Project>
