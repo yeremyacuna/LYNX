@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 
+using namespace System;
 using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
 class User {

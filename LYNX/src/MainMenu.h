@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <conio.h>
 #include "Driver.h"
 #include "Passenger.h"
 #include "Trip.h"
@@ -54,7 +55,7 @@ Menu::~Menu()
 }
 
 void Menu::lynx() {
-	Console::ForegroundColor = ConsoleColor::Blue;
+	Console::ForegroundColor = ConsoleColor::Magenta;
 	Console::SetCursorPosition(45,5);std::cout << (char)219 << (char)219 << "     " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << " " << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
 	Console::SetCursorPosition(45, 6);std::cout << (char)219 << (char)219 << "      " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
 	Console::SetCursorPosition(45, 7);std::cout << (char)219 << (char)219 << "       " << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << "\n";
