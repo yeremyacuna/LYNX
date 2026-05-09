@@ -6,7 +6,7 @@
 ### Salvador [@Salvarcc](https://github.com/Salvarcc)
 
 ###### Files
-- [main.cpp](LYXN/src/main.cpp)
+- [main.cpp](LYNX/src/main.cpp)
 - [Node.h](LYNX/include/Node.h)
 - [LinkedList.h](LYNX/include/LinkedList.h)
 - [LinkedDoubleList.h](LYNX/include/LinkedDoubleList.h)
