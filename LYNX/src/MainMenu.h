@@ -18,7 +18,7 @@ public:
 	Menu();
 	~Menu();
 
-
+	void lynx();
 	void principal(int& opcion);
 	void principal2(int& opcion);
 	void passengerMenu(int& opcion);
@@ -46,6 +46,17 @@ Menu::Menu()
 
 Menu::~Menu()
 {
+}
+
+void Menu::lynx() {
+	Console::ForegroundColor = ConsoleColor::Blue;
+    std::cout << (char)219 << (char)219 << "     " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << " "<<(char)219 << (char)219 << (char)219 <<"   "<< (char)219 << (char)219  <<" "<< (char)219 << (char)219 << "   "<< (char)219 << (char)219 <<"\n";
+	std::cout << (char)219 << (char)219 << "      " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
+	std::cout << (char)219 << (char)219 << "       " << (char)219 << (char)219 <<  (char)219 << (char)219 << "   " << (char)219 << (char)219  << " "<<(char)219 << (char)219 <<" " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << "\n";
+	std::cout << (char)219 << (char)219 << "        " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 <<  "\n";
+	std::cout << (char)219 << (char)219<< (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
+
+	Console::ForegroundColor = ConsoleColor::White;
 }
 
 void Menu::principal(int& opcion) {
@@ -76,6 +87,7 @@ void Seleccion(int keycode, int& inicio, int min, int max) {
 
 void Menu::principal2(int& opcion) {
 	std::system("cls");
+	
 	opcion = 1;
 	int o;
 	bool terminado = false;
@@ -87,7 +99,8 @@ void Menu::principal2(int& opcion) {
 		switch (opcion) {
 		case 1:
 			std::system("cls");
-			cout << "LYNX\n";
+			lynx();
+			
 			Console::ForegroundColor = ConsoleColor::Yellow;
 			cout << "1. Soy pasajero <<\n";
 			Console::ForegroundColor = ConsoleColor::White;
@@ -101,7 +114,8 @@ void Menu::principal2(int& opcion) {
 			break;
 		case 2:
 			std::system("cls");
-			cout << "LYNX\n";
+			lynx();
+			
 			
 			cout << "1. Soy pasajero\n";
 			Console::ForegroundColor = ConsoleColor::Yellow;
@@ -117,7 +131,7 @@ void Menu::principal2(int& opcion) {
 
 		case 3:
 			std::system("cls");
-			cout << "LYNX\n";
+			lynx();
 			
 			cout << "1. Soy pasajero\n";
 			
@@ -133,7 +147,7 @@ void Menu::principal2(int& opcion) {
 			break;
 		case 4:
 			std::system("cls");
-			cout << "LYNX\n";
+			lynx();
 
 			cout << "1. Soy pasajero\n";
 
@@ -197,8 +211,6 @@ void Menu::passengerSignIn(string& DNI, string& name, string& password) {
 	cout << "Nombre Completo : "; std::getline(cin, name);
 	cout << "Contrasena : "; cin >> password;
 };
-
-
 
 void Menu::passengerOptions(int& opcion) {
 	std::system("cls");
@@ -283,8 +295,16 @@ void Menu::driverRegisterTrip(string& partida, string& llegada, float& km, int& 
 	cout << "Lynx > Conductor > Registrar viaje\n---------------------\n";
 	cout << "Partida: "; cin >> partida;
 	cout << "llegada: "; cin >> llegada;
-	cout << "Tipo: [1] Economico  [2] Estandar  [3] Premium -> "; cin >> tipo;
-	cout << "km: "; cin >> km;
+	cout << "Tipo: [1] Economico  [2] Estandar  [3] Premium -> "; while (!(cin >> tipo) || tipo < 1 || tipo > 3) {
+		cout << "Error: Ingrese un numero valido (1-3): ";
+		cin.clear(); // Limpia el estado de error
+		cin.ignore(10000, '\n'); // Descarta la entrada incorrecta
+	}
+	cout << "km: "; while (!(cin >> km) || km <= 0) {
+		cout << "Error: Ingrese un numero de km valido (mayor a 0): ";
+		cin.clear(); // Limpia el estado de error de cin 
+		cin.ignore(10000, '\n'); // Vacía el búfer de entrada
+	}
 };
 
 void Menu::driverSingIn(string& DNI, string& name, string& password) {
@@ -352,10 +372,18 @@ void Menu::LYNX() {
 				passengerMenu(option);
 				switch (option) {
 				case 1:
-					do {
-						//Inicio de sesion 
-						passengerLogin(DNI, name, password);
-					} while (!(DNI == passenger.getDni() && password == passenger.getPassword() && name == passenger.getName()));
+					
+					//Inicio de sesion 
+					passengerLogin(DNI, name, password);
+					
+
+					if (!(DNI == passenger.getDni() && password == passenger.getPassword() && name == passenger.getName())) {
+						std::system("cls");
+						std::cout << "Datos incorrectos\n";
+						std::system("pause");
+						option = 6;
+						break;
+					}
 
 					cout << "Sesion iniciada. Bienvenido, " << passenger.getName() << "\n";
 					std::system("pause");
@@ -543,10 +571,16 @@ void Menu::LYNX() {
 				switch (option) {
 				case 1:
 					
-						do {
-							driverLogin(DNI, name, password);
+						//iniciar sesion
+						driverLogin(DNI, name, password);
 
-						} while (!(DNI == driver.getDni() && password == driver.getPassword() && name == driver.getName()));
+						if (!(DNI == driver.getDni() && password == driver.getPassword() && name == driver.getName())) {
+							std::system("cls");
+							std::cout << "Datos incorrectos\n";
+							std::system("pause");
+							option = 6;
+							break;
+						}
 
 						cout << "Sesion iniciada. Bienvenido, " << driver.getName() << "\n";
 						std::system("pause");
@@ -555,9 +589,18 @@ void Menu::LYNX() {
 
 							switch (option) {
 							case 1:
-								do {
-									driverRegisterTrip(partida, llegada, km, tipo);
-								} while ( partida == "" || llegada == "" || km < 0.1 || tipo>3||tipo<1);
+								
+								driverRegisterTrip(partida, llegada, km, tipo);
+								
+
+								if (partida == "" || llegada == "" || km < 0.1 || tipo>3 || tipo < 1) {
+									std::system("cls");
+									std::cout << "Datos incorrectos\n";
+									std::system("pause");
+									option = 6;
+									break;
+								}
+
 								trip.setOrigin(partida);
 								trip.setDestination(llegada);
 								trip.setTipe(tipo);
