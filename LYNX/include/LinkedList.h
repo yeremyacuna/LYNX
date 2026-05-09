@@ -266,7 +266,37 @@ public:
         cout << "\n";
     }
 
+    // LAMBDAS
 
+    // LAMBDA 1: recorre la lista y ejecuta una accion sobre cada elemento
+    // Ej: lista.forEach([](Driver d){ d.mostrar(); });
+    void forEach(function<void(T)> accion) {
+        auto recorrer = [&](Node<T>* nodo, function<void(T)> fn) {
+            while (nodo != nullptr) { fn(nodo->data); nodo = nodo->next; }
+            };
+        recorrer(head, accion);
+    }
+
+    // LAMBDA 2: filtra elementos que cumplen un criterio y retorna una nueva lista
+    // Ej: auto libres = lista.filter([](Driver d){ return d.getIsAvailable(); });
+    LinkedList<T> filter(function<bool(T)> criterio) {
+        auto cumple = [&](Node<T>* nodo, LinkedList<T>& resultado, function<bool(T)> fn) {
+            while (nodo != nullptr) { if (fn(nodo->data)) resultado.pushBack(nodo->data); nodo = nodo->next; }
+            };
+        LinkedList<T> resultado;
+        cumple(head, resultado, criterio);
+        return resultado;
+    }
+
+    // LAMBDA 3: busca y retorna el primer elemento que cumple el criterio, o T{} si no hay
+    // Ej: Passenger p = lista.findFirst([&](Passenger p){ return p.getDni() == dni; });
+    T findFirst(function<bool(T)> criterio) {
+        auto buscar = [](Node<T>* nodo, function<bool(T)> fn) -> T {
+            while (nodo != nullptr) { if (fn(nodo->data)) return nodo->data; nodo = nodo->next; }
+            return T{};
+            };
+        return buscar(head, criterio);
+    }
 
 
     /*

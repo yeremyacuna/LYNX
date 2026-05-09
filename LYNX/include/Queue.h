@@ -38,6 +38,36 @@ public:
     bool isEmpty() const;
     int  getSize() const;
 
+    // LAMBDA
+
+    /* LAMBDA 1: encola solo si el elemento cumple una condicion
+    Ej: cola.enqueueIf(trip, [](Trip t){ return t.getPrice() > 0; });
+    Evita encolar viajes invalidos sin hacer la verificacion afuera*/
+    bool enqueueIf(T value, function<bool(T)> condicion) {
+        auto validar = [](T val, function<bool(T)> cond) -> bool { return cond(val); };
+        if (validar(value, condicion)) { enqueue(value); return true; }
+        return false;
+    }
+
+    // LAMBDA 2: recorre toda la cola aplicando una accion sobre cada elemento sin modificarla
+    // Ej: cola.forEach([](Trip t){ t.mostrar(); });
+    void forEach(function<void(T)> accion) {
+        auto recorrer = [](Node<T>* nodo, function<void(T)> fn) {
+            while (nodo != nullptr) { fn(nodo->data); nodo = nodo->next; }
+            };
+        recorrer(front, accion);
+    }
+
+    // LAMBDA 3: suma un valor numerico extraido de cada elemento de la cola
+    // Ej: float total = cola.sumBy([](Trip t){ return t.getPrice(); });
+    float sumBy(function<float(T)> extractor) {
+        auto sumar = [](Node<T>* nodo, function<float(T)> fn) -> float {
+            float acum = 0.0f;
+            while (nodo != nullptr) { acum += fn(nodo->data); nodo = nodo->next; }
+            return acum;
+            };
+        return sumar(front, extractor);
+    }
 };
 
 template <class T>
