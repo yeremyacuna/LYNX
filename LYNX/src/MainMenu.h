@@ -7,7 +7,10 @@
 #include "Driver.h"
 #include "Passenger.h"
 #include "Trip.h"
-
+#include "../include/LinkedList.h"
+#include "../include/Queue.h"
+#include "../include/Stack.h"
+#include "../include/LinkedDoubleList.h"
 
 using namespace System;
 using std::cout; using std::cin; using std::function;
@@ -17,7 +20,7 @@ class Menu
 public:
 	Menu();
 	~Menu();
-
+	
 	void lynx();
 	void principal(int& opcion);
 	void principal2(int& opcion);
@@ -33,6 +36,11 @@ public:
 	void driverOptions(int& opcion, string name, string placa, bool estado, float rating);
 	void driverRegisterTrip(string& partida, string& llegada, float& km, int& tipo);
 	void driverSingIn(string& DNI, string& name, string& password);
+	void driverRegisterCar(string& placa, string& marca, string& modelo, string& color, int& ano);
+	void driverGains(int& option, Driver driver);
+	void passengerProfile(int& option, Passenger passenger);
+	void driverProfile(int& option, Driver driver);
+	void tripHistory(int& option, Trip trips[], int s, string title);
 
 	void LYNX();
 
@@ -50,11 +58,11 @@ Menu::~Menu()
 
 void Menu::lynx() {
 	Console::ForegroundColor = ConsoleColor::Blue;
-    std::cout << (char)219 << (char)219 << "     " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << " "<<(char)219 << (char)219 << (char)219 <<"   "<< (char)219 << (char)219  <<" "<< (char)219 << (char)219 << "   "<< (char)219 << (char)219 <<"\n";
-	std::cout << (char)219 << (char)219 << "      " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
-	std::cout << (char)219 << (char)219 << "       " << (char)219 << (char)219 <<  (char)219 << (char)219 << "   " << (char)219 << (char)219  << " "<<(char)219 << (char)219 <<" " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << "\n";
-	std::cout << (char)219 << (char)219 << "        " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 <<  "\n";
-	std::cout << (char)219 << (char)219<< (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
+	Console::SetCursorPosition(45,5);std::cout << (char)219 << (char)219 << "     " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << " " << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
+	Console::SetCursorPosition(45, 6);std::cout << (char)219 << (char)219 << "      " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
+	Console::SetCursorPosition(45, 7);std::cout << (char)219 << (char)219 << "       " << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << "\n";
+	Console::SetCursorPosition(45, 8);std::cout << (char)219 << (char)219 << "        " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
+	Console::SetCursorPosition(45, 9);std::cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
 
 	Console::ForegroundColor = ConsoleColor::White;
 }
@@ -84,7 +92,6 @@ void Seleccion(int keycode, int& inicio, int min, int max) {
 	}
 }
 
-
 void Menu::principal2(int& opcion) {
 	std::system("cls");
 	
@@ -102,11 +109,11 @@ void Menu::principal2(int& opcion) {
 			lynx();
 			
 			Console::ForegroundColor = ConsoleColor::Yellow;
-			cout << "1. Soy pasajero <<\n";
+			Console::SetCursorPosition(52, 11);cout << " >> Soy pasajero <<\n";
 			Console::ForegroundColor = ConsoleColor::White;
-			cout << "2. Soy conductor\n";
-			cout << "3. Panel BackOffice\n";
-			cout << "4. Salir\n";
+			Console::SetCursorPosition(52, 12);cout << "Soy conductor\n";
+			Console::SetCursorPosition(52, 13);cout << "Administracion\n";
+			Console::SetCursorPosition(52, 14);cout << "Salir\n";
 			o = _getch();
 			if (o == 13) {
 				return;
@@ -117,12 +124,12 @@ void Menu::principal2(int& opcion) {
 			lynx();
 			
 			
-			cout << "1. Soy pasajero\n";
+			Console::SetCursorPosition(52, 11);cout << "Soy pasajero\n";
 			Console::ForegroundColor = ConsoleColor::Yellow;
-			cout << "2. Soy conductor <<\n";
+			Console::SetCursorPosition(52, 12);cout << ">> Soy conductor <<\n";
 			Console::ForegroundColor = ConsoleColor::White;
-			cout << "3. Panel BackOffice\n";
-			cout << "4. Salir\n";
+			Console::SetCursorPosition(52, 13);cout << "Administracion\n";
+			Console::SetCursorPosition(52, 14);cout << "Salir\n";
 			o = _getch();
 			if (o == 13) {
 				return;
@@ -133,13 +140,13 @@ void Menu::principal2(int& opcion) {
 			std::system("cls");
 			lynx();
 			
-			cout << "1. Soy pasajero\n";
+			Console::SetCursorPosition(52, 11);cout << "Soy pasajero\n";
 			
-			cout << "2. Soy conductor\n";
+			Console::SetCursorPosition(52, 12);cout << "Soy conductor\n";
 			Console::ForegroundColor = ConsoleColor::Yellow;
-			cout << "3. Panel BackOffice <<\n";
+			Console::SetCursorPosition(52, 13);cout << " >> Administracion <<\n";
 			Console::ForegroundColor = ConsoleColor::White;
-			cout << "4. Salir\n";
+			Console::SetCursorPosition(52, 14);cout << "Salir\n";
 			o = _getch();
 			if (o == 13) {
 				return;
@@ -149,13 +156,13 @@ void Menu::principal2(int& opcion) {
 			std::system("cls");
 			lynx();
 
-			cout << "1. Soy pasajero\n";
+			Console::SetCursorPosition(52, 11);cout << "Soy pasajero\n";
 
-			cout << "2. Soy conductor\n";
+			Console::SetCursorPosition(52, 12);cout << "Soy conductor\n";
 			
-			cout << "3. Panel BackOffice\n";
+			Console::SetCursorPosition(52, 13);cout << "Administracion\n";
 			Console::ForegroundColor = ConsoleColor::Yellow;
-			cout << "4. Salir <<\n";
+			Console::SetCursorPosition(52, 14);cout << ">> Salir <<\n";
 			Console::ForegroundColor = ConsoleColor::White;
 			o = _getch();
 			if (o == 13) {
@@ -185,139 +192,387 @@ void Menu::principal2(int& opcion) {
 };
 
 void Menu::passengerMenu(int& opcion) {
-	std::system("cls");
-	cout << "Lynx > Pasajero\n---------------------\n";
-	cout << "[1] - Iniciar Sesion\n";
-	cout << "[2] - Registrarme\n";
-	cout << "---------------------------\n[0] - Volver al menu principal \n";
-	cin >> opcion;
+	opcion = 1;
+	while (true) {
+		std::system("cls");
+		lynx();
+		Console::SetCursorPosition(52, 10); cout << "Pasajero\n";
+		Console::SetCursorPosition(52, 11); cout << "---------------------\n";
+
+		Console::SetCursorPosition(52, 12);
+		if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Iniciar Sesion\n"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Iniciar Sesion\n"; }
+
+		Console::SetCursorPosition(52, 13);
+		if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Registrarme\n"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Registrarme\n"; }
+
+		Console::ForegroundColor = ConsoleColor::White;
+		Console::SetCursorPosition(52, 14); cout << "---------------------------\n";
+		Console::SetCursorPosition(52, 15);
+		if (opcion == 3) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Volver al menu principal \n"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Volver al menu principal \n"; }
+
+		Console::ForegroundColor = ConsoleColor::White;
+
+		int key = _getch();
+		if (key == 13) {
+			if (opcion == 3) opcion = 0;
+			return;
+		}
+		if (key == 0 || key == 224) key = _getch();
+		Seleccion(key, opcion, 1, 3);
+	}
 };
 
 void Menu::passengerLogin(string& DNI, string& name, string& password) {
 	std::system("cls");
-	cout << "Lynx > Pasajero\n---------------------\n";
-	cout << "En caso no se coloquen bien los datos se volvera a generar el formulario.\n";
-	cout << "DNI : "; cin >> DNI;
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Lynx > Pasajero > Iniciar Sesion";
+	Console::SetCursorPosition(52, y++); cout << "--------------------------------";
+	Console::SetCursorPosition(52, y++); cout << "DNI             : "; cin >> DNI;
 	cin.ignore();
-	cout << "Nombre Completo : "; std::getline(cin, name);
-	cout << "Contrasena : "; cin >> password;
+	Console::SetCursorPosition(52, y++); cout << "Nombre Completo : "; std::getline(cin, name);
+	Console::SetCursorPosition(52, y++); cout << "Contrasena      : "; cin >> password;
 };
 
 void Menu::passengerSignIn(string& DNI, string& name, string& password) {
 	std::system("cls");
-	cout << "Lynx > Pasajero\n---------------------";
-	cout << "\nDNI : "; cin >> DNI;
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Lynx > Pasajero > Registro";
+	Console::SetCursorPosition(52, y++); cout << "--------------------------------";
+	Console::SetCursorPosition(52, y++); cout << "DNI             : "; cin >> DNI;
 	cin.ignore();
-	cout << "Nombre Completo : "; std::getline(cin, name);
-	cout << "Contrasena : "; cin >> password;
+	Console::SetCursorPosition(52, y++); cout << "Nombre Completo : "; std::getline(cin, name);
+	Console::SetCursorPosition(52, y++); cout << "Contrasena      : "; cin >> password;
 };
 
 void Menu::passengerOptions(int& opcion) {
-	std::system("cls");
-	cout << "Lynx > Pasajero\n---------------------\n";
-	cout << "[1] - Solicitar un viaje\n";
-	cout << "[2] - Ver viaje activo\n";
-	cout << "[3] - Historial de viajes\n";
-	cout << "[4] - Calificar ultimo conductor\n";
-	cout << "[5] - Perfil\n";
-	cout << "---------------------------\n[0] - Cerrar sesion \n";
-	cin >> opcion;
+	opcion = 1;
+	while (true) {
+		std::system("cls");
+		lynx();
+		Console::SetCursorPosition(52, 11); cout << "Pasajero";
+		Console::SetCursorPosition(52, 12); cout << "---------------------";
+
+		Console::SetCursorPosition(52, 13);
+		if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Solicitar un viaje"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Solicitar un viaje"; }
+
+		Console::SetCursorPosition(52, 14);
+		if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ver viaje activo"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ver viaje activo"; }
+
+		Console::SetCursorPosition(52, 15);
+		if (opcion == 3) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Historial de viajes"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Historial de viajes"; }
+
+		Console::SetCursorPosition(52, 16);
+		if (opcion == 4) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Calificar ultimo conductor"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Calificar ultimo conductor"; }
+
+		Console::SetCursorPosition(52, 17);
+		if (opcion == 5) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Perfil"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Perfil"; }
+
+		Console::ForegroundColor = ConsoleColor::White;
+		Console::SetCursorPosition(52, 18); cout << "---------------------------";
+		Console::SetCursorPosition(52, 19);
+		if (opcion == 6) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Cerrar sesion"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Cerrar sesion"; }
+
+		Console::ForegroundColor = ConsoleColor::White;
+
+		int key = _getch();
+		if (key == 13) {
+			if (opcion == 6) opcion = 0;
+			return;
+		}
+		if (key == 0 || key == 224) key = _getch();
+		Seleccion(key, opcion, 1, 6);
+	}
 };
 
 void Menu::passengerSendTrip(string& origen, string& destino, int& tipo, float& km) {
 	std::system("cls");
-	cout << "Lynx > Pasajero > Solicitar Viaje\n---------------------\n";
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Pasajero > Solicitar Viaje";
+	Console::SetCursorPosition(52, y++); cout << "--------------------------";
 	cin.ignore();
-	cout << "Origen: "; std::getline(cin,origen);
-	cout << "Destino: "; std::getline(cin,destino);
-	cout << "Tipo: [1] Economico  [2] Estandar  [3] Premium -> ";
+	Console::SetCursorPosition(52, y++); cout << "Origen   : "; std::getline(cin, origen);
+	Console::SetCursorPosition(52, y++); cout << "Destino  : "; std::getline(cin, destino);
+	
+	int yPrompt = y;
+	Console::SetCursorPosition(52, y++); cout << "Tipo [1:Eco, 2:Std, 3:Pre]: ";
 	while (!(cin >> tipo) || tipo < 1 || tipo > 3) {
-		cout << "Error: Ingrese un numero valido (1-3): ";
-		cin.clear(); // Limpia el estado de error
-		cin.ignore(10000, '\n'); // Descarta la entrada incorrecta
+		Console::SetCursorPosition(52, y); cout << "Error: Elija 1-3.         ";
+		cin.clear();
+		cin.ignore(10000, '\n');
+		Console::SetCursorPosition(80, yPrompt); cout << "   ";
+		Console::SetCursorPosition(80, yPrompt);
 	}
-	cout << "km: "; while (!(cin >> km) || km <= 0) {
-		cout << "Error: Ingrese un numero de km valido (mayor a 0): ";
-		cin.clear(); // Limpia el estado de error de cin 
-		cin.ignore(10000, '\n'); // Vacía el búfer de entrada
+	y++;
+
+	int yKm = y;
+	Console::SetCursorPosition(52, y++); cout << "Distancia (km): ";
+	while (!(cin >> km) || km <= 0) {
+		Console::SetCursorPosition(52, y); cout << "Error: Km > 0.            ";
+		cin.clear();
+		cin.ignore(10000, '\n');
+		Console::SetCursorPosition(68, yKm); cout << "   ";
+		Console::SetCursorPosition(68, yKm);
 	}
 };
 
 void Menu::passengerConfirmTrip(int& opcion, string origen, string destino, int tipo, Trip trip) {
-	System::Random f;
+	opcion = 1;
+	while (true) {
+		std::system("cls");
+		lynx();
+		int y = 11;
+		Console::SetCursorPosition(52, y++); cout << "Pasajero > Confirmar Viaje";
+		Console::SetCursorPosition(52, y++); cout << "--------------------------";
+		trip.mostrar(52, y);
+
+		y++;
+		Console::SetCursorPosition(52, y);
+		if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Confirmar viaje"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Confirmar viaje"; }
+
+		Console::SetCursorPosition(52, y + 1);
+		if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Cancelar"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Cancelar"; }
+
+		Console::ForegroundColor = ConsoleColor::White;
+
+		int key = _getch();
+		if (key == 13) return;
+		if (key == 0 || key == 224) key = _getch();
+		Seleccion(key, opcion, 1, 2);
+	}
+};
+
+void Menu::passengerProfile(int& option, Passenger passenger) {
 	std::system("cls");
-	cout << "Lynx > Pasajero > Confirmar Viaje\n---------------------\n";
-	trip.mostrar();
-	cout << "\n---------------------\n";
-	cout << "[1] - Confirmar viaje\n";
-	cout << "[2] - Cancelar\n";
-	cout << "\nIngrese opcion: "; cin >> opcion;
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Lynx > Pasajero > Perfil";
+	Console::SetCursorPosition(52, y++); cout << "------------------------";
+	passenger.mostrar(52, y);
+	y++;
+	Console::SetCursorPosition(52, y++); cout << "[0] - Volver";
+	Console::SetCursorPosition(65, y-1); cin >> option;
 };
 
 void Menu::driverMenu(int& opcion) {
-	std::system("cls");
-	cout << "Lynx > Conductor\n---------------------\n";
-	cout << "[1] - Iniciar Sesion\n";
-	cout << "[2] - Registrarme como conductor\n";
-	cout << "---------------------------\n[0] - Volver al menu principal \n";
-	cin >> opcion;
-};
+	opcion = 1;
+	while (true) {
+		std::system("cls");
+		lynx();
+		Console::SetCursorPosition(52, 10); cout << "Conductor\n";
+		Console::SetCursorPosition(52, 11); cout << "---------------------\n";
+
+		Console::SetCursorPosition(52, 12);
+		if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Iniciar Sesion\n"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Iniciar Sesion\n"; }
+
+		Console::SetCursorPosition(52, 13);
+		if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Registrarme\n"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Registrarme\n"; }
+
+		Console::ForegroundColor = ConsoleColor::White;
+		Console::SetCursorPosition(52, 14); cout << "---------------------------\n";
+		Console::SetCursorPosition(52, 15);
+		if (opcion == 3) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Volver al menu principal \n"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Volver al menu principal \n"; }
+
+		Console::ForegroundColor = ConsoleColor::White;
+
+		int key = _getch();
+		if (key == 13) {
+			if (opcion == 3) opcion = 0;
+			return;
+		}
+		if (key == 0 || key == 224) key = _getch();
+		Seleccion(key, opcion, 1, 3);
+	}
+}
 
 void Menu::driverLogin(string& DNI, string& name, string& password) {
 	std::system("cls");
-	cout << "Lynx > Conductor\n---------------------\n";
-	cout << "En caso no se coloquen bien los datos se volvera a generar el formulario.\n";
-	cout << "DNI : "; cin >> DNI;
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Conductor > Iniciar Sesion";
+	Console::SetCursorPosition(52, y++); cout << "--------------------------------";
+	Console::SetCursorPosition(52, y++); cout << "DNI             : "; cin >> DNI;
 	cin.ignore();
-	cout << "Nombre Completo : "; std::getline(cin, name);
-	cout << "Contrasena : "; cin >> password;
-};
+	Console::SetCursorPosition(52, y++); cout << "Nombre Completo : "; std::getline(cin, name);
+	Console::SetCursorPosition(52, y++); cout << "Contrasena      : "; cin >> password;
+}
 
-void Menu::driverOptions(int& opcion, string name, string placa,bool estado, float rating) {
-	std::system("cls");
-	cout << "Lynx > Conductor\n";
-	cout << name << "   Placa: " << placa << "\n";
-	cout << "Estado: "; if (estado) { cout << "Disponible  "; }
-	else { cout << "No Disponible  "; }cout << "Rating: " << rating << "\n";
-	cout << "---------------------\n";
-	cout << "[1] - Registrar viaje\n";
-	cout << "[2] - Ver carreras hechas\n";
-	cout << "[3] - Cambiar a disponible\n";
-	cout << "[4] - Ver mis ganancias\n";
-	cout << "[5] - Gestionar vehiculo\n";
-	cout << "[6] - Ver perfil y estadisticas\n";
-	cout << "---------------------------\n[0] - Cerrar sesion \n";
-	cin >> opcion;
-};
+void Menu::driverOptions(int& opcion, string name, string placa, bool estado, float rating) {
+	opcion = 1;
+	while (true) {
+		std::system("cls");
+		lynx();
+		Console::SetCursorPosition(52, 11); cout << "Conductor";
+		Console::SetCursorPosition(52, 12); cout << "---------------------";
+
+		Console::SetCursorPosition(52, 13);
+		if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Solicitar un viaje"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Solicitar un viaje"; }
+
+		Console::SetCursorPosition(52, 14);
+		if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ver viaje activo"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ver viaje activo"; }
+
+		Console::SetCursorPosition(52, 15);
+		if (opcion == 3) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Historial de viajes"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Historial de viajes"; }
+
+		Console::SetCursorPosition(52, 16);
+		if (opcion == 4) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Calificar ultimo conductor"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Calificar ultimo conductor"; }
+
+		Console::SetCursorPosition(52, 17);
+		if (opcion == 5) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Perfil"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Perfil"; }
+
+		Console::ForegroundColor = ConsoleColor::White;
+		Console::SetCursorPosition(52, 18); cout << "---------------------------";
+		Console::SetCursorPosition(52, 19);
+		if (opcion == 6) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Cerrar sesion"; }
+		else { Console::ForegroundColor = ConsoleColor::White; cout << "    Cerrar sesion"; }
+
+		Console::ForegroundColor = ConsoleColor::White;
+
+		int key = _getch();
+		if (key == 13) {
+			if (opcion == 6) opcion = 0;
+			return;
+		}
+		if (key == 0 || key == 224) key = _getch();
+		Seleccion(key, opcion, 1, 6);
+	}
+}
 
 void Menu::driverRegisterTrip(string& partida, string& llegada, float& km, int& tipo) {
 	std::system("cls");
-	cout << "Lynx > Conductor > Registrar viaje\n---------------------\n";
-	cout << "Partida: "; cin >> partida;
-	cout << "llegada: "; cin >> llegada;
-	cout << "Tipo: [1] Economico  [2] Estandar  [3] Premium -> "; while (!(cin >> tipo) || tipo < 1 || tipo > 3) {
-		cout << "Error: Ingrese un numero valido (1-3): ";
-		cin.clear(); // Limpia el estado de error
-		cin.ignore(10000, '\n'); // Descarta la entrada incorrecta
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Conductor > Solicitar Viaje";
+	Console::SetCursorPosition(52, y++); cout << "--------------------------";
+	cin.ignore();
+	Console::SetCursorPosition(52, y++); cout << "Origen   : "; std::getline(cin, partida);
+	Console::SetCursorPosition(52, y++); cout << "Destino  : "; std::getline(cin, llegada);
+
+	int yT = y;
+	Console::SetCursorPosition(52, y++); cout << "Tipo [1:Eco, 2:Std, 3:Pre]: ";
+	while (!(cin >> tipo) || tipo < 1 || tipo > 3) {
+		Console::SetCursorPosition(52, y); cout << "Error: Elija 1-3.         ";
+		cin.clear();
+		cin.ignore(10000, '\n');
+		Console::SetCursorPosition(80, yT); cout << "   ";
+		Console::SetCursorPosition(80, yT);
 	}
-	cout << "km: "; while (!(cin >> km) || km <= 0) {
-		cout << "Error: Ingrese un numero de km valido (mayor a 0): ";
-		cin.clear(); // Limpia el estado de error de cin 
-		cin.ignore(10000, '\n'); // Vacía el búfer de entrada
+	y++;
+
+	int yKm = y;
+	Console::SetCursorPosition(52, y++); cout << "Distancia (km): ";
+	while (!(cin >> km) || km <= 0) {
+		Console::SetCursorPosition(52, y); cout << "Error: Km > 0.            ";
+		cin.clear();
+		cin.ignore(10000, '\n');
+		Console::SetCursorPosition(68, yKm); cout << "   ";
+		Console::SetCursorPosition(68, yKm);
 	}
-};
+}
 
 void Menu::driverSingIn(string& DNI, string& name, string& password) {
 	std::system("cls");
-	cout << "Lynx > Conductor >> registro\n---------------------";
-	cout << "\nDNI : "; cin >> DNI;
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Conductor > Registro";
+	Console::SetCursorPosition(52, y++); cout << "--------------------------------";
+	Console::SetCursorPosition(52, y++); cout << "DNI             : "; cin >> DNI;
 	cin.ignore();
-	cout << "Nombre Completo : "; std::getline(cin, name);
-	cout << "Contrasena : "; cin >> password;
+	Console::SetCursorPosition(52, y++); cout << "Nombre Completo : "; std::getline(cin, name);
+	Console::SetCursorPosition(52, y++); cout << "Contrasena      : "; cin >> password;
+}
+
+void Menu::driverRegisterCar(string& placa, string& marca, string& modelo, string& color, int& ano) {
+	std::system("cls");
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Conductor > Registrar Carro";
+	Console::SetCursorPosition(52, y++); cout << "--------------------------------";
+	Console::SetCursorPosition(52, y++); cout << "Placa           : "; cin >> placa;
+	Console::SetCursorPosition(52, y++); cout << "Marca           : "; cin >> marca;
+	Console::SetCursorPosition(52, y++); cout << "Modelo          : "; cin >> modelo;
+	Console::SetCursorPosition(52, y++); cout << "Color           : "; cin >> color;
+	Console::SetCursorPosition(52, y++); cout << "Anio            : "; cin >> ano;
+}
+
+void Menu::driverGains(int& option, Driver driver) {
+	std::system("cls");
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Conductor > Ganancias";
+	Console::SetCursorPosition(52, y++); cout << "--------------------------------";
+	Console::SetCursorPosition(52, y++); cout << "Viajes           : "; std::cout << driver.getTotalTrips();
+	Console::SetCursorPosition(52, y++); cout << "Ganancia Bruta  : "; std::cout << driver.getTotalEarnings();
+	Console::SetCursorPosition(52, y++); cout << "Comision (20%)  : "; std::cout << driver.getTotalEarnings()*0.20;
+	Console::SetCursorPosition(52, y++); cout << "Ganancia Neta   : "; std::cout << driver.getNetEarnings();
+}
+
+void Menu::driverProfile(int& option, Driver driver) {
+	std::system("cls");
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Conductor > Perfil";
+	Console::SetCursorPosition(52, y++); cout << "-------------------------";
+	driver.mostrar(52, y);
+	y++;
+	Console::SetCursorPosition(52, y++); cout << "[0] - Volver";
+	Console::SetCursorPosition(65, y-1); cin >> option;
 };
 
+void Menu::tripHistory(int& option, Trip trips[], int s, string title) {
+	std::system("cls");
+	lynx();
+	int y = 11;
+	Console::SetCursorPosition(52, y++); cout << "Lynx > " << title << " > Historial";
+	Console::SetCursorPosition(52, y++); cout << "------------------------------------";
+	if (s == 0) {
+		Console::SetCursorPosition(52, y++); cout << "No hay registros disponibles.";
+	} else {
+		for (int i = 0; i < s; i++) {
+			trips[i].mostrar(52, y);
+			y++;
+			if (y > 20) {
+				Console::SetCursorPosition(52, y++); cout << "-- Presione una tecla para mas --";
+				_getch();
+				std::system("cls"); lynx(); y = 11;
+				Console::SetCursorPosition(52, y++); cout << "Lynx > " << title << " > Historial (cont.)";
+				Console::SetCursorPosition(52, y++); cout << "------------------------------------";
+			}
+		}
+	}
+	y++;
+	Console::SetCursorPosition(52, y++); cout << "[0] - Volver";
+	Console::SetCursorPosition(65, y-1); cin >> option;
+};
 
 void Menu::LYNX() {
+	Console::SetWindowSize(120, 30);
+
+	LinkedList<int> passengers = LinkedList<int>();
+	LinkedList<int> drivers = LinkedList<int>();
+	LinkedList<int> tripsP = LinkedList<int>();
+	LinkedList<int> tripsD = LinkedList<int>();
 
 	Passenger passenger = Passenger();
 	Driver driver = Driver();
@@ -336,404 +591,240 @@ void Menu::LYNX() {
 	Passenger exppassenger = Passenger("Yeremy Chavez", "52348623", "123");
 	Passenger sa = Passenger("s", "s", "s");
 
-	//linked list of passenger
-	//linked list of driver
-
-
 	System::Random f;
-	//Pasajero
 	int option, tipo = 0;
 	string password = "", DNI = "", name = "", origen = "", destino = "";
-	bool activo = false, creada = false;
 	string id = "";
 
-	//Conductor
-	int dni2 = 0;
-	float rating = f.Next(0, 26) / 5, ganacias = 0, recokm = 0;
-	string contra2 = "", name2 = "";
-	bool creada2 = false, estado = false;
-
-	//Conductor viaje
-	float km = 0, precio = 0, estrellas = 10;
-	string nombre = "", partida = "", llegada = "";
-
-	//Vehiculo
+	float rating = f.Next(0, 26) / 5;
+	float km = 0;
+	string partida = "", llegada = "";
 	string placa = "", marca = "", color = "", modelo = "";
 	int ano = 0;
 
-
 	do {
-		//Menu principal
 		principal2(option);
 		switch (option) {
 		case 1:
 			do {
-				//Menu del pasajero
 				passengerMenu(option);
 				switch (option) {
 				case 1:
-					
-					//Inicio de sesion 
 					passengerLogin(DNI, name, password);
-					
-
 					if (!(DNI == passenger.getDni() && password == passenger.getPassword() && name == passenger.getName())) {
-						std::system("cls");
-						std::cout << "Datos incorrectos\n";
-						std::system("pause");
+						std::system("cls"); lynx();
+						Console::SetCursorPosition(52, 11); cout << "Datos incorrectos";
+						Console::SetCursorPosition(52, 13); std::system("pause");
 						option = 6;
 						break;
 					}
 
-					cout << "Sesion iniciada. Bienvenido, " << passenger.getName() << "\n";
-					std::system("pause");
 					do {
-						//Menu del pasajero con sus opciones
 						passengerOptions(option);
-
 						switch (option) {
 						case 1:
-							
-							//Registrar viaje
-							passengerSendTrip(origen, destino, tipo,km);
-							
+							passengerSendTrip(origen, destino, tipo, km);
 							if (origen == "" || destino == "" || tipo < 1 || tipo > 3 || km < 0.1) {
-								std::system("cls");
-								std::cout << "Datos incorrectos\n";
-								std::system("pause");
+								std::system("cls"); lynx();
+								Console::SetCursorPosition(52, 11); cout << "Datos invalidos";
+								Console::SetCursorPosition(52, 13); std::system("pause");
 								option = 6;
 								break;
 							}
-
 							trip.setOrigin(origen);
 							trip.setDestination(destino);
 							trip.setTipe(tipo);
 							trip.setPassengerDni(passenger.getDni());
-							if(s+r<10)id = "TRP0" + to_string(s+r+1);
-							else id = "TRP" + to_string(s+r + 1);
+							id = (s + r < 9 ? "TRP0" : "TRP") + to_string(s + r + 1);
 							trip.setTripId(id);
 							trip.setDriverName(expdriver.getName());
-							trip.setPrice(trip.calcPrice(trip.getTipe(), km));
+							trip.setPrice(trip.calcPrice(tipo, km));
 							
-							
-
 							do {
-								//Confimar viaje
-								passengerConfirmTrip(option, trip.getOrigin(), trip.getDestination(), trip.getTipe(),trip);
+								passengerConfirmTrip(option, trip.getOrigin(), trip.getDestination(), trip.getTipe(), trip);
 							} while (option > 2 || option < 1);
-							switch (option) {
-							case 1:
+
+							if (option == 1) {
 								trip.setStatus("en_curso");
-								std::system("cls");
-								cout << "[OK] Viaje solicitado! Tu conductor esta en camino.\n";
-								std::system("pause");
-								trips[s] = trip;
-								passenger.addTrip(trip.calcPrice(trip.getTipe(), km));
-								s++;
-								for (int i = s - 2;i >= 0;i--) {
-									if(trips[i].getStatus()=="en_curso")trips[i].setStatus("completado");
+								std::system("cls"); lynx();
+								Console::SetCursorPosition(52, 11); cout << "[OK] Viaje solicitado!";
+								Console::SetCursorPosition(52, 13); std::system("pause");
+								trips[s++] = trip;
+								passenger.addTrip(trip.getPrice());
+								for (int i = s - 2; i >= 0; i--) {
+									if (trips[i].getStatus() == "en_curso") trips[i].setStatus("completado");
 								}
-								break;
-							case 2:
+							} else {
 								trip.setStatus("cancelado");
-								std::system("cls");
-								cout << "[XX] Viaje cancelado\n";
-								std::system("pause");
-								break;
+								std::system("cls"); lynx();
+								Console::SetCursorPosition(52, 11); cout << "[XX] Viaje cancelado";
+								Console::SetCursorPosition(52, 13); std::system("pause");
 							}
 							option = 6;
-
 							break;
 
 						case 2:
-							//Ver viaje en curso
 							if (trip.getStatus() == "en_curso") {
-								do {
-									passengerConfirmTrip(option, trip.getOrigin(), trip.getDestination(), trip.getTipe(), trip);
-								} while (option != 0);
-							}
-							else {
-								std::system("cls");
-								cout << "No hay viaje activo.\n";
-								std::system("pause");
+								int subOpt = 1;
+								while(subOpt != 0) {
+									std::system("cls"); lynx();
+									int y = 11;
+									Console::SetCursorPosition(52, y++); cout << "Viaje en curso";
+									Console::SetCursorPosition(52, y++); cout << "--------------";
+									trip.mostrar(52, y);
+									y++;
+									Console::SetCursorPosition(52, y++); cout << "[0] - Volver";
+									Console::SetCursorPosition(65, y - 1); cin >> subOpt;
+								}
+							} else {
+								std::system("cls"); lynx();
+								Console::SetCursorPosition(52, 11); cout << "No hay viaje activo.";
+								Console::SetCursorPosition(52, 13); std::system("pause");
 							}
 							option = 6;
 							break;
 
 						case 3:
-							do {
-								std::system("cls");
-								cout << "Lynx > Pasajero > Historial de Viajes\n---------------------\n";
-								
-								for (int i = 0;i < s;i++) {
-									trips[i].mostrar();
-									cout << endl;
-								}
-								cout << "[0] - Volver al panel"; cin >> option;
-							} while (option != 0);
+							option = 1;
+							while (option != 0) { tripHistory(option, trips, s, "Pasajero"); }
 							option = 6;
 							break;
 
 						case 4:
-							//Supongo que aqui usaremos aqui pila ya que es el ultimo objeto de la lista
 							do {
-								std::system("cls");
-								cout << "Lynx > Pasajero > Calificar Conductor\n---------------------\n";
-								cout << "[1] - ★ Muy malo\n";
-								cout << "[2] - ★★ malo\n";
-								cout << "[3] - ★★★ Regular\n";
-								cout << "[4] - ★★★★ Bueno\n";
-								cout << "[5] - ★★★★★ Excelente\n";
-								cout << "[0] - Omitir"; cin >> option;
+								std::system("cls"); lynx();
+								int y = 11;
+								Console::SetCursorPosition(52, y++); cout << "Calificar Conductor";
+								Console::SetCursorPosition(52, y++); cout << "-------------------";
+								Console::SetCursorPosition(52, y++); cout << "[1] - * Muy malo";
+								Console::SetCursorPosition(52, y++); cout << "[2] - ** Malo";
+								Console::SetCursorPosition(52, y++); cout << "[3] - *** Regular";
+								Console::SetCursorPosition(52, y++); cout << "[4] - **** Bueno";
+								Console::SetCursorPosition(52, y++); cout << "[5] - ***** Excelente";
+								Console::SetCursorPosition(52, y++); cout << "[0] - Omitir";
+								Console::SetCursorPosition(52, y++); cout << "Opcion: "; cin >> option;
 							} while (option > 5 || option < 0);
-							switch (option) {
-							case 1:
-								//asignar al ultimo conductor una estrella
-								break;
-							case 2:
-								//asignar al ultimo conductor dos estrellas
-								break;
-							case 3:
-								//asignar al ultimo conductor tres estrellas
-								break;
-							case 4:
-								//asignar al ultimo conductor cuatro estrellas
-								break;
-							case 5:
-								//asignar al ultimo conductor cinco estrellas
-								break;
-							case 0:
-								break;
-							}
 							option = 6;
 							break;
 
 						case 5:
-							do {
-								//Ver perfin
-								std::system("cls");
-								cout << "Lynx > Pasajero > Perfil\n---------------------\n";
-								passenger.mostrar();
-								cout << "[0] - Volver"; cin >> option;
-							} while (option != 0);
+							option = 1;
+							while (option != 0) { passengerProfile(option, passenger); }
 							option = 6;
 							break;
-						case 0:
-							break;
 						}
-					} while (option > 5 || option < 0);
-
-
+					} while (option != 0);
 					option = 6;
 					break;
 
 				case 2:
-					do {
-						//registrar pasajero
-						passengerSignIn(DNI,name,password);
-					} while (DNI == "" || password == "" || name == "");
-
+					do { passengerSignIn(DNI, name, password); } while (DNI == "" || password == "" || name == "");
 					passenger = Passenger(name, DNI, password);
-
-
-					std::system("cls");
-					cout << "Cuenta creada.\n";
-					std::system("pause");
+					std::system("cls"); lynx();
+					Console::SetCursorPosition(52, 11); cout << "Cuenta creada exitosamente.";
+					Console::SetCursorPosition(52, 13); std::system("pause");
 					option = 6;
 					break;
-				case 0:
-					break;
-
-				};
-
-				
-				
-			} while (option < 0 || option>2);
+				}
+			} while (option != 0);
 			break;
-			
-
-
-
-
-
-
-
-
-
-
-
 
 		case 2:
 			do {
-				//Menu del conductor
 				driverMenu(option);
-
 				switch (option) {
 				case 1:
-					
-						//iniciar sesion
-						driverLogin(DNI, name, password);
+					driverLogin(DNI, name, password);
+					if (!(DNI == driver.getDni() && password == driver.getPassword() && name == driver.getName())) {
+						std::system("cls"); lynx();
+						Console::SetCursorPosition(52, 11); cout << "Datos incorrectos";
+						Console::SetCursorPosition(52, 13); std::system("pause");
+						option = 6;
+						break;
+					}
 
-						if (!(DNI == driver.getDni() && password == driver.getPassword() && name == driver.getName())) {
-							std::system("cls");
-							std::cout << "Datos incorrectos\n";
-							std::system("pause");
-							option = 6;
-							break;
-						}
-
-						cout << "Sesion iniciada. Bienvenido, " << driver.getName() << "\n";
-						std::system("pause");
-						do {
-							driverOptions(option, driver.getName(), driver.getVehicle().getPlate(), driver.getIsAvailable(), rating);
-
-							switch (option) {
-							case 1:
-								
-								driverRegisterTrip(partida, llegada, km, tipo);
-								
-
-								if (partida == "" || llegada == "" || km < 0.1 || tipo>3 || tipo < 1) {
-									std::system("cls");
-									std::cout << "Datos incorrectos\n";
-									std::system("pause");
-									option = 6;
-									break;
-								}
-
-								trip.setOrigin(partida);
-								trip.setDestination(llegada);
-								trip.setTipe(tipo);
-								trip.setPassengerDni(exppassenger.getDni());
-								if (r+s < 10)id = "TRP0" + to_string(r+s + 1);
-								else id = "TRP" + to_string(r+s + 1);
-								trip.setTripId(id);
-								trip.setDriverName(driver.getName());
-								trip.setPrice(trip.calcPrice(trip.getTipe(), km));
-								tripc[r] = trip;
-
-								r++;
-								
-								driver.acceptRide(trip.calcPrice(tipo, km));
+					do {
+						driverOptions(option, driver.getName(), driver.getVehicle().getPlate(), driver.getIsAvailable(), rating);
+						switch (option) {
+						case 1:
+							driverRegisterTrip(partida, llegada, km, tipo);
+							if (partida == "" || llegada == "" || km < 0.1 || tipo > 3 || tipo < 1) {
+								std::system("cls"); lynx();
+								Console::SetCursorPosition(52, 11); cout << "Datos invalidos";
+								Console::SetCursorPosition(52, 13); std::system("pause");
 								option = 7;
-
-								break;
-
-							case 2:
-								do {
-									std::system("cls");
-									cout << "Lynx > Conductor > Historial de Carreras\n---------------------\n";
-
-									for (int i = 0;i < r;i++) {
-										tripc[i].mostrar();
-										cout << endl;
-									}
-									cout << "[0] - Volver al panel"; cin >> option;
-								} while (option != 0);
-					
-								option = 7;
-								break;
-
-							case 3:
-								driver.finishRide();
-								option = 7;
-								break;
-
-							case 4:
-								do {
-									std::system("cls");
-									cout << "Lynx > Conductor > Ganancias\n---------------------\n";
-									
-									cout << "Viajes: " << driver.getTotalTrips();
-									cout << "\nGanancias brutas: S/" << driver.getTotalEarnings();
-									cout << "\nComision LYNX (20%): S/" << driver.getTotalEarnings() * 0.20;
-									cout << "\nGanancias netas: S/" << driver.getNetEarnings();
-									cout << "\n[0] - Volver"; cin >> option;
-								} while (option != 0);
-								option = 7;
-								break;
-
-							case 5:
-								do {
-									std::system("cls");
-									cout << "Lynx > Conductor > Mi Vehiculo\n---------------------\n";
-									driver.getVehicle().mostrar();
-									cout << "[0] - Volver"; cin >> option;
-								} while (option != 0);
-								
-
-								option = 7;
-								break;
-							case 6:
-								do {
-									std::system("cls");
-									cout << "Lynx > Conductor > Perfil\n---------------------\n";
-									driver.mostrar();
-									cout << "[0] - Volver"; cin >> option;
-								} while (option != 0);
-
-
-								option = 7;
-								break;
-							case 0:
 								break;
 							}
-						} while (option > 5 || option < 0);
-					
-					
+							trip.setOrigin(partida);
+							trip.setDestination(llegada);
+							trip.setTipe(tipo);
+							trip.setPassengerDni(exppassenger.getDni());
+							id = (r + s < 9 ? "TRP0" : "TRP") + to_string(r + s + 1);
+							trip.setTripId(id);
+							trip.setDriverName(driver.getName());
+							trip.setPrice(trip.calcPrice(tipo, km));
+							tripc[r++] = trip;
+							driver.acceptRide(trip.getPrice());
+							option = 7;
+							break;
+
+						case 2:
+							option = 1;
+							while (option != 0) { tripHistory(option, tripc, r, "Conductor"); }
+							option = 7;
+							break;
+
+						case 3:
+							driver.finishRide();
+							option = 7;
+							break;
+
+						case 4:
+							option = 1;
+							while (option != 0) { driverGains(option, driver); }
+							option = 7;
+							break;
+
+						case 5:
+							option = 1;
+							while (option != 0) {
+								std::system("cls"); lynx();
+								int y = 11;
+								Console::SetCursorPosition(52, y++); cout << "Mi Vehiculo";
+								Console::SetCursorPosition(52, y++); cout << "-----------";
+								driver.getVehicle().mostrar(52, y);
+								y++;
+								Console::SetCursorPosition(52, y++); cout << "[0] - Volver";
+								Console::SetCursorPosition(65, y - 1); cin >> option;
+							}
+							option = 7;
+							break;
+
+						case 6:
+							option = 1;
+							while (option != 0) { driverProfile(option, driver); }
+							option = 7;
+							break;
+						}
+					} while (option != 0);
 					option = 6;
 					break;
+
 				case 2:
-					do {
-						driverSingIn(DNI, name, password);
-					} while (DNI == "" || password == "" || name == "");
-
-					driver.setDni(DNI);
-					driver.setName(name);
-					driver.setPassword(password);
-
-					do {
-						std::system("cls");
-						cout << "Lynx > Panel Conductor >> Registro Vehiculo\n---------------------\n";
-						cout << "placa : "; cin >> placa;
-						cout << "marca : "; cin >> marca;
-						cout << "modelo : "; cin >> modelo;
-						cout << "color : "; cin >> color;
-						cout << "anio : "; cin >> ano;
-					} while (placa == "" || marca == "" || modelo == "" || color == "" || ano < 2005 || ano>2026);
-
-					vehicle.setPlate(placa);
-					vehicle.setBrand(marca);
-					vehicle.setModel(modelo);
-					vehicle.setColor(color);
-					vehicle.setYear(ano);
+					do { driverSingIn(DNI, name, password); } while (DNI == "" || password == "" || name == "");
+					driver.setDni(DNI); driver.setName(name); driver.setPassword(password);
+					do { driverRegisterCar(placa, marca, modelo, color, ano); } while (placa == "" || marca == "" || modelo == "" || color == "" || ano < 2005 || ano > 2026);
+					vehicle.setPlate(placa); vehicle.setBrand(marca); vehicle.setModel(modelo); vehicle.setColor(color); vehicle.setYear(ano);
 					driver.setVehicle(vehicle);
-
-					std::system("cls");
-					cout << "Cuenta creada.\n";
-					std::system("pause");
+					std::system("cls"); lynx();
+					Console::SetCursorPosition(52, 11); cout << "Cuenta de conductor creada.";
+					Console::SetCursorPosition(52, 13); std::system("pause");
 					option = 6;
-					break;
-				case 0:
 					break;
 				}
-			} while (option > 2 || option < 0);
-
-			option = 6;
-			break;
-		case 3:
-
-
-			break;
-		case 4:
+			} while (option != 0);
 			break;
 		}
-
-
 	} while (option != 4);
-
-	//Injection of data in the txt
-
-	
 	std::system("pause");
 };

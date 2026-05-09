@@ -45,12 +45,12 @@ public:
         return plate + " | " + brand + " " + model + " | " + color + " | " + to_string(year);
     }
 
-    void mostrar() {
-        cout << "  Placa  : " << plate << endl;
-        cout << "  Marca  : " << brand << endl;
-        cout << "  Modelo : " << model << endl;
-        cout << "  Color  : " << color << endl;
-        cout << "  Anio   : " << year << endl;
+    void mostrar(int x, int& y) {
+        Console::SetCursorPosition(x, y++); cout << "Placa  : " << plate << endl;
+        Console::SetCursorPosition(x, y++); cout << "Marca  : " << brand << endl;
+        Console::SetCursorPosition(x, y++); cout << "Modelo : " << model << endl;
+        Console::SetCursorPosition(x, y++); cout << "Color  : " << color << endl;
+        Console::SetCursorPosition(x, y++); cout << "Anio   : " << year << endl;
     }
 
     string getCodigo() { return plate; }
