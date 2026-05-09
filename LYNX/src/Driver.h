@@ -53,7 +53,7 @@ public:
         return (dni == _dni && checkPassword(_pass));
     }
 
-    /* Si acepta un viaje : se marca ocupadeishon
+    /* Si acepta un viaje : se marca ocupadeishon (busy)
     y se acumulan sus ganancias y viajes.*/
     void acceptRide(float precio) {
         isAvailable = false;
@@ -61,7 +61,7 @@ public:
         totalTrips++;
     }
 
-    // Termina el viaje y vuelve a estar disponibliseishon
+    // Termina el viaje y vuelve a estar disponibliseishon 
     void finishRide() {
         isAvailable = true;
     }

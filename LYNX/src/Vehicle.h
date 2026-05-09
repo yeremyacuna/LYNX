@@ -36,6 +36,10 @@ public:
 
     void setColor(string _color) { color = _color; }
     void setPlate(string _plate) { plate = _plate; }
+    void setBrand(string _brand) { brand = _brand; }
+    void setModel(string _model) { model = _model; }
+    void setYear(int _year) { year = _year; }
+    
 
     string toString() {
         return plate + " | " + brand + " " + model + " | " + color + " | " + to_string(year);

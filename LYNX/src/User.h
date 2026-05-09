@@ -27,16 +27,18 @@ public:
 
     string getName() { return name; }
     string getDni() { return dni; }
+    string getPassword() { return password; }
 
     void setName(string _name) { name = _name; }
     void setPassword(string _password) { password = _password; }
+    void setDni(string _dni) { dni = _dni; }
 
     // Verifica si la contra coincide con la guardada
     bool checkPassword(string intento) {
         return intento == password;
     }
-
     // datos del usuario como texto
+    
     virtual string toString() {
         return "Nombre: " + name + " | DNI: " + dni;
     }
