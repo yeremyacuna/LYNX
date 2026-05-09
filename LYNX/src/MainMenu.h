@@ -8,6 +8,7 @@
 #include "Passenger.h"
 #include "Trip.h"
 
+
 using namespace System;
 using std::cout; using std::cin; using std::function;
 
@@ -19,6 +20,7 @@ public:
 
 
 	void principal(int& opcion);
+	void principal2(int& opcion);
 	void passengerMenu(int& opcion);
 	void passengerLogin(string& DNI, string& name, string& password);
 	void passengerSignIn(string& DNI, string& name, string& password);
@@ -54,6 +56,118 @@ void Menu::principal(int& opcion) {
 	cout << "3. Panel BackOffice\n";
 	cout << "4. Salir\n";
 	cout << "\nIngrese opcion: "; cin >> opcion;
+};
+
+void Seleccion(int keycode, int& inicio, int min, int max) {
+	switch (keycode) {
+	case 72:
+		if (inicio > min) {
+			inicio--;
+		}
+		break;
+	case 80:
+		if (inicio < max) {
+			inicio++;
+		}
+		break;
+	}
+}
+
+
+void Menu::principal2(int& opcion) {
+	std::system("cls");
+	opcion = 1;
+	int o;
+	bool terminado = false;
+	while (!terminado) {
+		if (_kbhit()) {
+			int keycode = _getch();
+			Seleccion(keycode, opcion,1,4);
+		}
+		switch (opcion) {
+		case 1:
+			std::system("cls");
+			cout << "LYNX\n";
+			Console::ForegroundColor = ConsoleColor::Yellow;
+			cout << "1. Soy pasajero <<\n";
+			Console::ForegroundColor = ConsoleColor::White;
+			cout << "2. Soy conductor\n";
+			cout << "3. Panel BackOffice\n";
+			cout << "4. Salir\n";
+			o = _getch();
+			if (o == 13) {
+				return;
+			}
+			break;
+		case 2:
+			std::system("cls");
+			cout << "LYNX\n";
+			
+			cout << "1. Soy pasajero\n";
+			Console::ForegroundColor = ConsoleColor::Yellow;
+			cout << "2. Soy conductor <<\n";
+			Console::ForegroundColor = ConsoleColor::White;
+			cout << "3. Panel BackOffice\n";
+			cout << "4. Salir\n";
+			o = _getch();
+			if (o == 13) {
+				return;
+			}
+			break;
+
+		case 3:
+			std::system("cls");
+			cout << "LYNX\n";
+			
+			cout << "1. Soy pasajero\n";
+			
+			cout << "2. Soy conductor\n";
+			Console::ForegroundColor = ConsoleColor::Yellow;
+			cout << "3. Panel BackOffice <<\n";
+			Console::ForegroundColor = ConsoleColor::White;
+			cout << "4. Salir\n";
+			o = _getch();
+			if (o == 13) {
+				return;
+			}
+			break;
+		case 4:
+			std::system("cls");
+			cout << "LYNX\n";
+
+			cout << "1. Soy pasajero\n";
+
+			cout << "2. Soy conductor\n";
+			
+			cout << "3. Panel BackOffice\n";
+			Console::ForegroundColor = ConsoleColor::Yellow;
+			cout << "4. Salir <<\n";
+			Console::ForegroundColor = ConsoleColor::White;
+			o = _getch();
+			if (o == 13) {
+				return;
+			}
+			break;
+		}
+		if (opcion == 5) {
+
+			opcion = 1;
+			return;
+			break;
+		}
+		if (opcion == 6) {
+			opcion = 2;
+		}
+		if (opcion == 7) {
+			opcion = 3;
+		}
+		if (opcion == 8) {
+			opcion = 4;
+		}
+	}
+	
+	
+	
 };
 
 void Menu::passengerMenu(int& opcion) {
@@ -104,8 +218,17 @@ void Menu::passengerSendTrip(string& origen, string& destino, int& tipo, float& 
 	cin.ignore();
 	cout << "Origen: "; std::getline(cin,origen);
 	cout << "Destino: "; std::getline(cin,destino);
-	cout << "Tipo: [1] Economico  [2] Estandar  [3] Premium -> "; cin >> tipo;
-	cout << "km: "; cin >> km;
+	cout << "Tipo: [1] Economico  [2] Estandar  [3] Premium -> ";
+	while (!(cin >> tipo) || tipo < 1 || tipo > 3) {
+		cout << "Error: Ingrese un numero valido (1-3): ";
+		cin.clear(); // Limpia el estado de error
+		cin.ignore(10000, '\n'); // Descarta la entrada incorrecta
+	}
+	cout << "km: "; while (!(cin >> km) || km <= 0) {
+		cout << "Error: Ingrese un numero de km valido (mayor a 0): ";
+		cin.clear(); // Limpia el estado de error de cin 
+		cin.ignore(10000, '\n'); // Vacía el búfer de entrada
+	}
 };
 
 void Menu::passengerConfirmTrip(int& opcion, string origen, string destino, int tipo, Trip trip) {
@@ -191,6 +314,7 @@ void Menu::LYNX() {
 	Vehicle expvehicle = Vehicle("PER-422","Toyota,","RAV4","Azul",2019);
 	Driver expdriver = Driver("Juan Valdez", "60473829", "123",expvehicle );
 	Passenger exppassenger = Passenger("Yeremy Chavez", "52348623", "123");
+	Passenger sa = Passenger("s", "s", "s");
 
 	//linked list of passenger
 	//linked list of driver
@@ -220,7 +344,7 @@ void Menu::LYNX() {
 
 	do {
 		//Menu principal
-		principal(option);
+		principal2(option);
 		switch (option) {
 		case 1:
 			do {
@@ -241,10 +365,17 @@ void Menu::LYNX() {
 
 						switch (option) {
 						case 1:
-							do {
-								//Registrar viaje
-								passengerSendTrip(origen, destino, tipo,km);
-							} while (origen == "" || destino == "" || tipo < 1 || tipo > 3 || km<0.1);
+							
+							//Registrar viaje
+							passengerSendTrip(origen, destino, tipo,km);
+							
+							if (origen == "" || destino == "" || tipo < 1 || tipo > 3 || km < 0.1) {
+								std::system("cls");
+								std::cout << "Datos incorrectos\n";
+								std::system("pause");
+								option = 6;
+								break;
+							}
 
 							trip.setOrigin(origen);
 							trip.setDestination(destino);
@@ -255,11 +386,7 @@ void Menu::LYNX() {
 							trip.setTripId(id);
 							trip.setDriverName(expdriver.getName());
 							trip.setPrice(trip.calcPrice(trip.getTipe(), km));
-							trips[s] = trip;
-
-
-							passenger.addTrip(trip.calcPrice(trip.getTipe(), km));
-							s++;
+							
 							
 
 							do {
@@ -272,7 +399,9 @@ void Menu::LYNX() {
 								std::system("cls");
 								cout << "[OK] Viaje solicitado! Tu conductor esta en camino.\n";
 								std::system("pause");
-
+								trips[s] = trip;
+								passenger.addTrip(trip.calcPrice(trip.getTipe(), km));
+								s++;
 								for (int i = s - 2;i >= 0;i--) {
 									if(trips[i].getStatus()=="en_curso")trips[i].setStatus("completado");
 								}
@@ -389,11 +518,11 @@ void Menu::LYNX() {
 
 				};
 
-				option = 6;
+				
 				
 			} while (option < 0 || option>2);
-
-
+			break;
+			
 
 
 
@@ -473,10 +602,10 @@ void Menu::LYNX() {
 									cout << "Lynx > Conductor > Ganancias\n---------------------\n";
 									
 									cout << "Viajes: " << driver.getTotalTrips();
-									cout << "Ganancias brutas: S/" << driver.getTotalEarnings();
-									cout << "Comision LYNX (20%): S/" << driver.getTotalEarnings() * 0.20;
-									cout << "Ganancias netas: S/" << driver.getNetEarnings();
-									cout << "[0] - Volver"; cin >> option;
+									cout << "\nGanancias brutas: S/" << driver.getTotalEarnings();
+									cout << "\nComision LYNX (20%): S/" << driver.getTotalEarnings() * 0.20;
+									cout << "\nGanancias netas: S/" << driver.getNetEarnings();
+									cout << "\n[0] - Volver"; cin >> option;
 								} while (option != 0);
 								option = 7;
 								break;
