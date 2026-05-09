@@ -130,15 +130,15 @@ public:
         return resto;                                               // este no
     }
 
-    void mostrar() {
-        cout << "  ID         : " << tripId << endl;
-        cout << "  Origen     : " << origin << endl;
-        cout << "  Destino    : " << destination << endl;
-        cout << "  Precio     : S/ " << price << endl;
-        cout << "  Estado     : " << getStatusLabel() << endl;
-        cout << "  Conductor  : " << driverName << endl;
-        cout << "  Fecha      : " << date << endl;
-        cout << "  -----------------------" << endl;
+    void mostrar(int x, int& y) {
+        Console::SetCursorPosition(x, y++); cout << "ID         : " << tripId << endl;
+        Console::SetCursorPosition(x, y++); cout << "Origen     : " << origin << endl;
+        Console::SetCursorPosition(x, y++); cout << "Destino    : " << destination << endl;
+        Console::SetCursorPosition(x, y++); cout << "Precio     : S/ " << price << endl;
+        Console::SetCursorPosition(x, y++); cout << "Estado     : " << getStatusLabel() << endl;
+        Console::SetCursorPosition(x, y++); cout << "Conductor  : " << driverName << endl;
+        Console::SetCursorPosition(x, y++); cout << "Fecha      : " << date << endl;
+        Console::SetCursorPosition(x, y++); cout << "-----------------------" << endl;
     }
 
     string getCodigo() { return tripId; }

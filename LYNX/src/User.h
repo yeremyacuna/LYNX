@@ -44,7 +44,8 @@ public:
         return "Nombre: " + name + " | DNI: " + dni;
     }
 
-    virtual void mostrar() {
+    virtual void mostrar(int x, int& y) {
+        Console::SetCursorPosition(x, y++);
         cout << toString() << endl;
     }
 

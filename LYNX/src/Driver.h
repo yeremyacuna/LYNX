@@ -113,28 +113,29 @@ public:
     // LAMBDA 3
     /* Muestra si el conductor esta disponible o no
     Se usa en el panel del conductor y en el backoffice.*/
-    void mostrarEstado() {
+    void mostrarEstado(int x, int& y) {
         auto etiqueta = [](bool disponible) -> string {
             if (disponible) return "[LIBRE]   Listo para recibir viajes";
             else            return "[OCUPADO] Actualmente en viaje";
             };
-        cout << "  Estado : " << etiqueta(isAvailable) << endl;
+        Console::SetCursorPosition(x, y++);
+        cout << "Estado : " << etiqueta(isAvailable) << endl;
     }
 
 
-    void mostrar() override {
-        string estado = isAvailable ? "Disponible" : "En viaje";
-        cout << "  ID         : " << driverId << endl;
-        cout << "  Nombre     : " << name << endl;
-        cout << "  DNI        : " << dni << endl;
-        cout << "  Rating     : " << rating << endl;
-        cout << "  Viajes     : " << totalTrips << endl;
-        cout << "  Ganancias  : S/ " << totalEarnings << endl;
-        cout << "  Neto (80%) : S/ " << getNetEarnings() << endl;
-        cout << "  Estado     : " << estado << endl;
-        cout << "  -- Vehiculo --" << endl;
-        vehicle.mostrar();
-        cout << "  -----------------------" << endl;
+    void mostrar(int x, int& y) override {
+        string estadoStr = isAvailable ? "Disponible" : "En viaje";
+        Console::SetCursorPosition(x, y++); cout << "ID         : " << driverId << endl;
+        Console::SetCursorPosition(x, y++); cout << "Nombre     : " << name << endl;
+        Console::SetCursorPosition(x, y++); cout << "DNI        : " << dni << endl;
+        Console::SetCursorPosition(x, y++); cout << "Rating     : " << rating << endl;
+        Console::SetCursorPosition(x, y++); cout << "Viajes     : " << totalTrips << endl;
+        Console::SetCursorPosition(x, y++); cout << "Ganancias  : S/ " << totalEarnings << endl;
+        Console::SetCursorPosition(x, y++); cout << "Neto (80%) : S/ " << getNetEarnings() << endl;
+        Console::SetCursorPosition(x, y++); cout << "Estado     : " << estadoStr << endl;
+        Console::SetCursorPosition(x, y++); cout << "-- Vehiculo --" << endl;
+        vehicle.mostrar(x, y);
+        Console::SetCursorPosition(x, y++); cout << "-----------------------" << endl;
     }
 
     string getCodigo() { return driverId; }

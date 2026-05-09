@@ -93,14 +93,15 @@ public:
     // LAMBDA 2
     // Rating del pasajero con estrellas (*).
 
-    void mostrarRating() {
+    void mostrarRating(int x, int& y) {
         auto estrellas = [](float r) -> string {
             string s = "";
             int cantidad = (int)r;
             for (int i = 0; i < cantidad; i++) s += "*";
             return s;
             };
-        cout << "  Rating : " << rating << "  [" << estrellas(rating) << "]" << endl;
+        Console::SetCursorPosition(x, y++);
+        cout << "Rating  : " << rating << "  [" << estrellas(rating) << "]" << endl;
     }
 
     //  RECURSIVIDAD
@@ -119,14 +120,14 @@ public:
         return resto;                                                          // este no
     }
 
-    void mostrar() override {
-        cout << "  ID      : " << passengerId << endl;
-        cout << "  Nombre  : " << name << endl;
-        cout << "  DNI     : " << dni << endl;
-        cout << "  Viajes  : " << totalTrips << endl;
-        cout << "  Gastado : S/ " << totalSpent << endl;
-        mostrarRating();
-        cout << "  -----------------------" << endl;
+    void mostrar(int x, int& y) override {
+        Console::SetCursorPosition(x, y++); cout << "ID      : " << passengerId << endl;
+        Console::SetCursorPosition(x, y++); cout << "Nombre  : " << name << endl;
+        Console::SetCursorPosition(x, y++); cout << "DNI     : " << dni << endl;
+        Console::SetCursorPosition(x, y++); cout << "Viajes  : " << totalTrips << endl;
+        Console::SetCursorPosition(x, y++); cout << "Gastado : S/ " << totalSpent << endl;
+        mostrarRating(x, y);
+        Console::SetCursorPosition(x, y++); cout << "-----------------------" << endl;
     }
 
     string getCodigo() { return passengerId; }
