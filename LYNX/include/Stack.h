@@ -36,11 +36,11 @@ public:
 	bool isEmpty();
 	int getSize();
 
-	// -------- LAMBDA --------
+	// LAMBDA
 
-	// LAMBDA 1: busca en toda la pila el primer elemento que cumpla el criterio -> O(n)
-	// Uso: Trip t = historial.findInStack([&](Trip t){ return t.getPassengerDni()==dni; });
-	// Util para buscar el ultimo viaje de un pasajero sin destruir la pila
+	/* LAMBDA 1: busca en toda la pila el primer elemento que cumpla el criterio
+	Ej: Trip t = historial.findInStack([&](Trip t){ return t.getPassengerDni()==dni; });
+	para buscar el ultimo viaje de un pasajero sin destruir la pila*/
 	T findInStack(function<bool(T)> criterio) {
 		auto buscar = [](Node<T>* nodo, function<bool(T)> fn) -> T {
 			while (nodo != nullptr) { if (fn(nodo->data)) return nodo->data; nodo = nodo->next; }
