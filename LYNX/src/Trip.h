@@ -16,6 +16,7 @@ private:
     string date;
     string driverName;
     string passengerDni;
+    int tipe;
 
 public:
 
@@ -51,9 +52,13 @@ public:
     string getDate() { return date; }
     string getDriverName() { return driverName; }
     string getPassengerDni() { return passengerDni; }
+    int getTipe() { return tipe; }
 
     void setStatus(string s) { status = s; }
     void setPrice(float p) { price = p; }
+    void setOrigin(string s) { origin = s; }
+    void setDestination(string s) { destination = s; }
+    void setTipe(int t) { tipe = t; }
 
     /*segun el tipo de servicio y los km estimados.
     Tipo 1 = Economico  -> S/ 1.20 por km

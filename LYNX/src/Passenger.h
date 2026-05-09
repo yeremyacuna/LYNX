@@ -11,7 +11,7 @@ private:
     string passengerId;
     float  rating;
     int    totalTrips;
-    float  totalSpent;    // total gastado en viajes completados
+    float  totalSpent;    // total gastado en viajes completados 
 
 public:
 
@@ -34,6 +34,7 @@ public:
     ~Passenger() {}
 
     string getPassengerId() { return passengerId; }
+   
     float  getRating() { return rating; }
     int    getTotalTrips() { return totalTrips; }
     float  getTotalSpent() { return totalSpent; }
