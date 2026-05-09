@@ -154,7 +154,7 @@ void Queue<T>::print() {
     cout << "front -> [ ";
     while (current != nullptr) // mientras que current este lleno
     {
-        cout << current->data;  // imprime
+        cout << current->data.toString();  // imprime
 
         if (current->next != nullptr) // separa entre cada puntero a next
             cout << " | ";

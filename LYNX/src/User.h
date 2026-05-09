@@ -45,6 +45,7 @@ public:
         return "Nombre: " + name + " | DNI: " + dni;
     }
 
+    // para MainMenu
     virtual void mostrar(int x, int& y) {
         Console::SetCursorPosition(x, y++);
         cout << toString() << endl;

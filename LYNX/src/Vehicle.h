@@ -47,6 +47,7 @@ public:
         return plate + " | " + brand + " " + model + " | " + color + " | " + std::to_string(year);
     }
 
+    // para MainMenu)
     void mostrar(int x, int& y) {
         Console::SetCursorPosition(x, y++); cout << "Placa  : " << plate << endl;
         Console::SetCursorPosition(x, y++); cout << "Marca  : " << brand << endl;
