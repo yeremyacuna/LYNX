@@ -59,6 +59,10 @@ public:
     void setOrigin(string s) { origin = s; }
     void setDestination(string s) { destination = s; }
     void setTipe(int t) { tipe = t; }
+    void setPassengerDni(string d) { passengerDni = d; }
+    void setTripId(string s) { tripId = s; }
+    void setDriverName(string s) { driverName = s; }
+    void setDate(string s) { date = s; }
 
     /*segun el tipo de servicio y los km estimados.
     Tipo 1 = Economico  -> S/ 1.20 por km
