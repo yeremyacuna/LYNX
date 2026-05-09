@@ -106,6 +106,15 @@ public:
         cout << "Rating  : " << rating << "  [" << estrellas(rating) << "]" << endl;
     }
 
+    // LAMBDA 3: etiqueta segun cuanto ha gastado el pasajero
+    string getNivelCliente() {
+        auto nivel = [](float gasto) -> string {
+            if (gasto < 50.0f)  return "Cliente nuevo";
+            if (gasto < 200.0f) return "Cliente frecuente";
+            return                     "Cliente premium";
+            };
+        return nivel(totalSpent);
+    }
     //  RECURSIVIDAD
  
     /* Cuenta cuantos viajes del historial estan completados.
