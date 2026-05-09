@@ -2,9 +2,9 @@
 #include "User.h"
 #include <iostream>
 #include <string>
-#include <functional>
 #include "Trip.h"
-using namespace std;
+
+using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
 class Passenger : public User {
 private:

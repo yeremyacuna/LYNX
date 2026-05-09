@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
-using namespace std;
+
+using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
 class Vehicle {
 private:
@@ -42,7 +43,7 @@ public:
     
 
     string toString() {
-        return plate + " | " + brand + " " + model + " | " + color + " | " + to_string(year);
+        return plate + " | " + brand + " " + model + " | " + color + " | " + std::to_string(year);
     }
 
     void mostrar() {

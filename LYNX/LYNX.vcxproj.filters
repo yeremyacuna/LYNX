@@ -13,6 +13,9 @@
     <Filter Include="include">
       <UniqueIdentifier>{697b1ae0-1ecd-4832-89f0-92c8ac5586a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{9b55f143-4b47-466b-943b-5aa76dd50155}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MainMenu.h">
@@ -46,6 +49,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\Stack.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

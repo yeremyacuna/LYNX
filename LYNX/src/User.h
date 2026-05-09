@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
-using namespace std;
+
+using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
 class User {
 protected:
@@ -25,9 +26,9 @@ public:
 
     virtual ~User() {}
 
-    string getName() { return name; }
-    string getDni() { return dni; }
-    string getPassword() { return password; }
+    string getName() const  { return name; }
+    string getDni() const  { return dni; }
+    string getPassword() const { return password; }
 
     void setName(string _name) { name = _name; }
     void setPassword(string _password) { password = _password; }

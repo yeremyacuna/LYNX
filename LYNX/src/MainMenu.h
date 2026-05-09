@@ -1,15 +1,12 @@
 #pragma once
 #include <iostream>
-#include <windows.h>
-#include <conio.h>
-#include <cstdio>
 #include <string>
 #include "Driver.h"
 #include "Passenger.h"
 #include "Trip.h"
 
 using namespace System;
-using std::cout; using std::cin; using std::function;
+using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
 class Menu
 {
@@ -562,6 +559,7 @@ void Menu::LYNX() {
 
 	//Injection of data in the txt
 
-	
-	std::system("pause");
+	cout << "Hasta la proxima" << endl << endl;
+	std::cin.ignore();
+	std::cin.get();
 };

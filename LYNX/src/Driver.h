@@ -3,8 +3,8 @@
 #include "Vehicle.h"
 #include <iostream>
 #include <string>
-#include <functional>
-using namespace std;
+
+using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
 class Driver : public User {
 private:
@@ -38,13 +38,17 @@ public:
 
     ~Driver() {}
 
-    string  getDriverId() { return driverId; }
-    float   getRating() { return rating; }
-    bool    getIsAvailable() { return isAvailable; }
-    int     getTotalTrips() { return totalTrips; }
-    float   getTotalEarnings() { return totalEarnings; }
-    Vehicle getVehicle() { return vehicle; }
+    string  getDriverId() const { return driverId; }
+    float   getRating() const  { return rating; }
+    bool    getIsAvailable() const { return isAvailable; }
+    int     getTotalTrips() const  { return totalTrips; }
+    float   getTotalEarnings() const  { return totalEarnings; }
+    Vehicle getVehicle() const  { return vehicle; }
 
+    void setDriverId(string dId) { driverId = dId;}
+    void setRating(float rat) { rating = rat; }
+    void setTotalTrips(int totalT) { totalTrips = totalT; }
+    void setTotalEarnings(float totalE) { totalEarnings = totalE; }
     void setAvailable(bool estado) { isAvailable = estado; }
     void setVehicle(Vehicle v) { vehicle = v; }
 

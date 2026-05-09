@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <functional>
-using namespace std;
+
+using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
+
 //  Guarda el origen, destino, precio, estado y quien lo hizo.
 //  Estados posibles: "pendiente", "en_curso", "completado", "cancelado"
 
