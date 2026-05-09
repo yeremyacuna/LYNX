@@ -12,7 +12,7 @@ private:
     Node<T>* tail;  // cola -> apunta al ultimo nodo
     int size;   // tamaño -> para controlar el tamaño
 
-    bool validIndex(int index)      // para validar indice que no sobrepase ni que haga fuga
+    bool validIndex(int index) const      // para validar indice que no sobrepase ni que haga fuga
     {
         return (index >= 0 && index < size);    
     }
@@ -34,7 +34,7 @@ public:
         }
     }
 
-    bool isEmpty() { return size == 0; }    // si es vacio
+    bool isEmpty() const { return size == 0; }    // si es vacio
     int  getSize() { return size; }         // get tamaño
 
     // pushFront: inserta valor al inicio
@@ -179,27 +179,27 @@ public:
 
     // ===================== others function falta
     T get(int index) const {
-        if (!isValidIndex(index)) {
-            cout << "[LinkedList] get(" << index << ") out of range. size=" << size_ << "\n";
+        if (!validIndex(index)) {
+            cout << "[LinkedDoubleList] get(" << index << ") out of range. size=" << size << "\n";
             return T{};
         }
-        Node<T>* current = head_;
+        Node<T>* current = head;
         for (int i = 0; i < index; i++) current = current->next;
         return current->data;
     }
 
     T front() const {
-        if (isEmpty()) { cout << "[LinkedList] front() — empty\n"; return T{}; }
-        return head_->data;
+        if (isEmpty()) { cout << "[LinkedDoubleList] front() — empty\n"; return T{}; }
+        return head->data;
     }
 
     T back() {
-        if (isEmpty()) { cout << "[LinkedList] back() — empty\n"; return T{}; }
-        return tail_->data;
+        if (isEmpty()) { cout << "[LinkedDoubleList] back() — empty\n"; return T{}; }
+        return tail->data;
     }
 
     int search(T value) {
-        Node<T>* current = head_;
+        Node<T>* current = head;
         int index = 0;
         while (current != nullptr) {
             if (current->data == value) return index;
@@ -212,7 +212,7 @@ public:
     bool contains(T value) { return search(value) != -1; }
 
     int count(T value) {
-        Node<T>* current = head_;
+        Node<T>* current = head;
         int n = 0;
         while (current != nullptr) {
             if (current->data == value) n++;
@@ -222,34 +222,34 @@ public:
     }
 
     void reverse() {
-        if (size_ <= 1) return;
+        if (size <= 1) return;
         Node<T>* prev = nullptr;
-        Node<T>* current = head_;
-        tail_ = head_;
+        Node<T>* current = head;
+        tail = head;
         while (current != nullptr) {
             Node<T>* next = current->next;
             current->next = prev;
             prev = current;
             current = next;
         }
-        head_ = prev;
+        head = prev;
     }
 
     void clear() {
-        Node<T>* current = head_;
+        Node<T>* current = head;
         while (current != nullptr) {
             Node<T>* next = current->next;
             delete current;
             current = next;
         }
-        head_ = nullptr;
-        tail_ = nullptr;
-        size_ = 0;
+        head = nullptr;
+        tail = nullptr;
+        size = 0;
     }
 
     void print() {
         if (isEmpty()) { cout << "[ empty ]\n"; return; }
-        Node<T>* current = head_;
+        Node<T>* current = head;
         cout << "[ ";
         while (current != nullptr) {
             cout << current->data;
@@ -260,12 +260,11 @@ public:
     }
 
     void printInfo() {
-        cout << "size=" << size_;
+        cout << "size=" << size;
         if (!isEmpty())
-            cout << " | head=" << head_->data << " | tail=" << tail_->data;
+            cout << " | head=" << head->data << " | tail=" << tail->data;
         cout << "\n";
     }
-
 
 
 

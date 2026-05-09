@@ -7,11 +7,11 @@
 
 ###### Files
 - [main.cpp](LYXN/src/main.cpp)
-- [Node.h](LYNX/src/Node.h)
-- [LinkedList.h](LYNX/src/LinkedList.h)
-- [LinkedDoubleList.h](LYNX/src/LinkedDoubleList.h)
-- [Queue.h](LYNX/src/Queue.h)
-- [Stack.h](LYNX/src/Stack.h)
+- [Node.h](LYNX/include/Node.h)
+- [LinkedList.h](LYNX/include/LinkedList.h)
+- [LinkedDoubleList.h](LYNX/include/LinkedDoubleList.h)
+- [Queue.h](LYNX/include/Queue.h)
+- [Stack.h](LYNX/include/Stack.h)
 - [MainMenu.h](LYNX/src/MainMenu.h)
 - [Passenger.h](LYNX/src/Passenger.h)
 - [Trip.h](LYNX/src/Trip.h)

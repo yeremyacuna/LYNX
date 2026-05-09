@@ -6,7 +6,7 @@
 using std::cout; using std::cin; using std::function;
 
 template<class T>
-class Stack	// LAST IN FIRST OUT
+class Stack	// LAST IN FIRST OUT: LIFO
 {
 private:
 	Node<T>* top;
@@ -27,7 +27,9 @@ public:
 	
 	void push(T dato);
 	void pop();
+
 	T peek();
+
 	void clear();
 	void print();
 
@@ -58,7 +60,7 @@ void Stack<T>::pop()
 {
 	if (isEmpty())
 	{
-		cout << "La Stack esta vacia\n"; return 0;	// si es empty
+		cout << "La Stack esta vacia\n"; return;	// si es empty
 	}
 	Node<T>* toDelete = top;	// un node de apoyo para borrar que apunta al ultimo agregado
 	top = top->next;	// entonces top ahora va hacer su siguiente top->next

@@ -1,82 +1,135 @@
 #pragma once
-
-#include "Node.h"
 #include <iostream>
+#include <functional>  
+#include "Node.h"
 
-template<class T>
-class queue {
+using std::cout; using std::cin; using std::function;
+
+template <class T>
+class Queue // FIRST IN FIRST OUT: FIFO 
+{
 private:
-	Node<T>* inicio;
-	Node<T>* fin;
-	int sz;
-public:
-	queue() {
-		this->inicio = nullptr;
-		this->fin = nullptr;
-		sz = 0;
-	}
+    Node<T>* front;     // first
+    Node<T>* back;      // last el ultimo
+    int      size;
 
-	void push(T v);
-	void pop();
-	T front();
-	bool empty();
-	int size();
+public:
+    Queue() : front(nullptr), back(nullptr), size(0) {}
+
+    ~Queue() {
+        Node<T>* current = front;   // un nodo actual que es igual al front
+        while (current != nullptr)  // va a borrar siempre y cuando sea diferente que nullptr
+        {
+            Node<T>* next = current->next;  // va haber un nodo siguiente que tome el valor dell valor siguiente de la cabeza current
+            delete current; // borra valor current, pero el siguiente se quedo guardado en next.
+            current = next; // borra y setea current con next
+        }
+    }
+
+    void enqueue(T value);
+    void dequeue();
+
+    T getFront() const;
+    T getBack() const;
+
+    void clear();
+    void print();
+
+    bool isEmpty() const;
+    int  getSize() const;
 
 };
 
-template<class T>
-bool queue<T>::empty() {
-	return (inicio == nullptr);
+template <class T>
+bool Queue<T>::isEmpty()  const { return size == 0; }
+template <class T>
+int  Queue<T>::getSize()  const { return size; }
+
+// enqueue: encolar o agregar un elemento al final de la cola
+template <class T>
+void Queue<T>::enqueue(T value) 
+{
+    Node<T>* newNode = new Node<T>(value);  //crea nuevo nodo
+    if (back == nullptr)    // si el back es nullptr, porque queue es vacia 
+    {
+        front = newNode;    // entonces el front sera el nuevo valor y back tambien
+        back = newNode;
+    }
+    else 
+    {
+        back->next = newNode;  // si no es el caso , el back next apuntara al nuevo nodo
+        back = newNode; // back es mi nuevo nodo
+    }
+    size++;
 }
 
-template<class T>
-void queue<T>::push(T v) {
-	Node<T>* nodo = new Node<T>(v);
-	if (empty()) {
-		inicio = nodo;
-		fin = inicio;
-	}
-	else {
+// dequeue; desencolar o quitar el primer elemento de la cola
+template <class T>
+void Queue<T>::dequeue() 
+{
+    if (isEmpty()) {
+        cout << "La Queue esta vacia\n"; return;	// si es empty
+    }
 
-		fin->next = nodo;
-		fin = nodo;
-	}
-	nodo = nullptr;
-	sz++;
+    Node<T>* toDelete = front;  // va a borrarse el primero
+    front = front->next;    // ahora nuestro primer elementito es el siguiente next
+    delete toDelete;
+
+    if (front == nullptr)   // si front es nullptr es decir solo tiene 1 elemento tambien back es null
+        back = nullptr;
+
+    size--;
 }
 
-template<class T>
-void queue<T>::pop() {
-	if (empty()) {
-		return;
-	}
-
-	T dato = inicio->data;
-
-	if (inicio == fin) {
-		inicio = nullptr;
-		fin = nullptr;
-	}
-	else {
-		inicio = inicio->next;
-	}
-	sz--;
+// getFront(): obtener el valor primero de la queue 
+template <class T>
+T Queue<T>::getFront() const 
+{
+    if (isEmpty()) { cout << "La Queue esta vacia\n"; return T{}; } // si es empty // T{}: define que retornar segun el tipo de dato del template ("", (0,1), '')
+    
+    return front->data;
 }
 
-template<class T>
-T queue<T>::front() {
-	if (empty()) {
-		return nullptr;
-	}
-	T dato = inicio->dato;
-
-	return dato;
+// getBack(): obtener el valor ultimo de la queue 
+template <class T>
+T Queue<T>::getBack() const {
+    if (isEmpty()) { cout << "La Queue esta vacia\n"; return T{}; }// si es empty // T{}: define que retornar segun el tipo de dato del template ("", (0,1), '')
+    return back->data;
 }
 
-template<class T>
-int queue<T>::size() {
-	if (empty()) {
-		return 0;
-	}
-	return sz;
+// clear: limpia todo el queue
+template <class T>
+void Queue<T>::clear() {
+    Node<T>* current = front;   // un nodo nuevo q apunta al primer elemento
+
+    while (current != nullptr) // mientras que este lleno;
+    {
+        Node<T>* next = current->next;  // logica de destructor
+        delete current;
+        current = next;
+    }
+
+    front = nullptr;   // seteamos todo
+    back = nullptr;
+    size = 0;
+}
+
+// print: imprime (cambiar segun datos de clase)
+template <class T>
+void Queue<T>::print() {
+    if (isEmpty()) { cout << "[ empty ]\n"; return; }
+
+    Node<T>* current = front; // un nuevo nodo que sea a front el primer elemento
+    
+    cout << "front -> [ ";
+    while (current != nullptr) // mientras que current este lleno
+    {
+        cout << current->data;  // imprime
+
+        if (current->next != nullptr) // separa entre cada puntero a next
+            cout << " | ";
+
+        current = current->next; // actual se actualiza con el siguiente;
+    }
+    cout << " ] <- back\n";
 }
