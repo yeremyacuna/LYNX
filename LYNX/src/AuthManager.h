@@ -206,6 +206,59 @@ public:
         return resto;
     }
 
-    //  ESPACIO PARA ORDENAMIENTO
-    //  void sortDriversByRating() { /* ordenamiento wiwiwi) */ }
+    // ordena conductores por rating de mayor a menor
+    void sortDriversByRating() {
+        int n = driverList.getSize();
+        if (n <= 1) return;
+
+        // Copiamos a arreglo auxiliar
+        Driver* arr = new Driver[n];
+        for (int i = 0; i < n; i++) arr[i] = driverList.get(i);
+
+        // Shell Sort: gap a la mitad en cada pasada
+        for (int gap = n / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < n; i++) {
+                Driver temp = arr[i];
+                int j = i;
+                // Mientras el elemento anterior (a distancia gap) tenga menor rating
+                while (j >= gap && arr[j - gap].getRating() < temp.getRating()) {
+                    arr[j] = arr[j - gap];
+                    j -= gap;
+                }
+                arr[j] = temp;
+            }
+        }
+
+        // Reconstruimos la lista con el orden nuevo
+        driverList.clear();
+        for (int i = 0; i < n; i++) driverList.pushBack(arr[i]);
+        delete[] arr;
+    }
+
+    // ordena pasajeros por gasto total de mayor a menor
+    void sortUsersBySpent() {
+        int n = userList.getSize();
+        if (n <= 1) return;
+
+        // Copiamos a arreglo auxiliar
+        Passenger* arr = new Passenger[n];
+        for (int i = 0; i < n; i++) arr[i] = userList.get(i);
+
+        // Insertion Sort: inserta cada elemento en su posición correcta
+        for (int i = 1; i < n; i++) {
+            Passenger key = arr[i];
+            int j = i - 1;
+            // Desplaza hacia la derecha mientras el gasto sea menor
+            while (j >= 0 && arr[j].getTotalSpent() < key.getTotalSpent()) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+
+        // Reconstruimos la lista
+        userList.clear();
+        for (int i = 0; i < n; i++) userList.pushBack(arr[i]);
+        delete[] arr;
+    }
 };

@@ -27,6 +27,8 @@ public:
             cout << "  [5] Ordenar conductores por rating\n";
             cout << "  [6] Top conductores del mes\n";
             cout << "  [7] Estadisticas generales\n";
+            cout << "  [8] Ordenar pasajeros por gasto\n";
+            cout << "  [9] Ordenar viajes activos por precio\n";
             cout << "  --------------------------------\n";
             cout << "  [0] Volver al menu principal\n";
             cout << "  Opcion: "; cin >> op;
@@ -38,6 +40,8 @@ public:
             else if (op == 5) ordenarConductores();
             else if (op == 6) topConductores();
             else if (op == 7) estadisticas();
+            else if (op == 8) ordenarPasajeros();
+            else if (op == 9) ordenarViajesActivos();
         } while (op != 0);
     }
 
@@ -108,11 +112,26 @@ private:
         pausar();
     }
 
-    // [5] ESPACIO PARA ORDENAMIENTO
-    void ordenarConductores() {/*
-        algoritmo de ordenamiento
-        sobre la lista de conductores
-    */
+    // [5] ORDENAMIENTO
+    void ordenarConductores() {
+        system("cls");
+        cout << "  === ORDENAR CONDUCTORES POR RATING ===\n\n";
+        cout << "  Antes del ordenamiento:\n";
+        int i = 1;
+        authMgr->getDriverList().forEach([&i](Driver d) {
+            cout << "  [" << i++ << "] " << d.getName()
+                << " - Rating: " << d.getRating() << "\n";
+            });
+
+        authMgr->sortDriversByRating();  // Shell Sort
+
+        cout << "\n  Despues del ordenamiento (mayor a menor rating):\n";
+        i = 1;
+        authMgr->getDriverList().forEach([&i](Driver d) {
+            cout << "  [" << i++ << "] " << d.getName()
+                << " - Rating: " << d.getRating() << "\n";
+            });
+        pausar();
     }
 
     // [6] lambda para filtrar por rating
@@ -157,6 +176,50 @@ private:
         fila("Viajes en historial", to_string(tripMgr->getTotalHistoryTrips()));
         fila("Ganancia plataforma", "S/ " + to_string(ganancia));
         tripMgr->mostrarEstadoCola();
+        pausar();
+    }
+
+    //[8]
+    void ordenarPasajeros() {
+        system("cls");
+        cout << "  === ORDENAR PASAJEROS POR GASTO TOTAL ===\n\n";
+        cout << "  Antes del ordenamiento:\n";
+        int i = 1;
+        authMgr->getUserList().forEach([&i](Passenger p) {
+            cout << "  [" << i++ << "] " << p.getName()
+                << " - Gastado: S/ " << p.getTotalSpent() << "\n";
+            });
+
+        authMgr->sortUsersBySpent();  // Insertion Sort
+
+        cout << "\n  Despues del ordenamiento (mayor a menor gasto):\n";
+        i = 1;
+        authMgr->getUserList().forEach([&i](Passenger p) {
+            cout << "  [" << i++ << "] " << p.getName()
+                << " - Gastado: S/ " << p.getTotalSpent() << "\n";
+            });
+        pausar();
+    }
+
+    //[9]
+    void ordenarViajesActivos() {
+        system("cls");
+        cout << "  === ORDENAR VIAJES ACTIVOS POR PRECIO ===\n\n";
+        cout << "  Antes del ordenamiento:\n";
+        for (int i = 0; i < tripMgr->getActiveTrips().getSize(); i++) {
+            Trip t = tripMgr->getActiveTrips().get(i);
+            cout << "  [" << i + 1 << "] " << t.getTripId()
+                << " - S/ " << t.getPrice() << "\n";
+        }
+
+        tripMgr->sortActiveTripsByPrice();  // Selection Sort
+
+        cout << "\n  Despues del ordenamiento (mayor a menor precio):\n";
+        for (int i = 0; i < tripMgr->getActiveTrips().getSize(); i++) {
+            Trip t = tripMgr->getActiveTrips().get(i);
+            cout << "  [" << i + 1 << "] " << t.getTripId()
+                << " - S/ " << t.getPrice() << "\n";
+        }
         pausar();
     }
 

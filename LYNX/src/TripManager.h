@@ -221,6 +221,34 @@ public:
         return total;
     }
 
-    //  ESPACIO PARA ORDENAMIENTO
-    //  void sortTripsByPrice() { /* ordenamiento wiwiwi sobre activeTrips }
+    // ordena viajes activos por precio de mayor a menor
+    void sortActiveTripsByPrice() {
+        int n = activeTrips.getSize();
+        if (n <= 1) return;
+
+        // Copiamos a arreglo auxiliar
+        Trip* arr = new Trip[n];
+        for (int i = 0; i < n; i++) arr[i] = activeTrips.get(i);
+
+        // Selection Sort: busca el máximo en el subarreglo restante y lo pone al frente
+        for (int i = 0; i < n - 1; i++) {
+            int maxIdx = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j].getPrice() > arr[maxIdx].getPrice()) {
+                    maxIdx = j;
+                }
+            }
+            // Intercambiamos
+            if (maxIdx != i) {
+                Trip temp = arr[i];
+                arr[i] = arr[maxIdx];
+                arr[maxIdx] = temp;
+            }
+        }
+
+        // Reconstruimos la lista doble
+        activeTrips.clear();
+        for (int i = 0; i < n; i++) activeTrips.pushBack(arr[i]);
+        delete[] arr;
+    }
 };
