@@ -13,7 +13,7 @@ using std::string; using std::cout; using std::cin; using std::getline; using st
 //  3. Al CERRAR el programa   -> pasar LinkedList a vector -> guardar TXT
 
 
-//hola
+/*
 int main()
 {
     cout << std::filesystem::current_path() << endl;
@@ -40,38 +40,6 @@ int main()
     //  con pushBack luego haces delete del puntero porque ya no lo necesitas.
     // ==========================================================
     cout << "\n--- [2] Registrando nuevos conductores ---\n";
-
-    // --- Driver 1 ---
-    Vehicle* v1 = new Vehicle("B3K-447", "Toyota", "Corolla", "Plata", 2022);
-    Driver* d1 = new Driver("Pedro Quispe", "45678901", "pass123", *v1);
-
-    listaDobleDrivers->pushBack(*d1);        // *d1 pasa la copia al nodo interno
-    cout << "Registrado: " << d1->getName() << "\n";
-
-    delete v1;                   
-    delete d1;                   
-
-
-    // --- Driver 2 ---
-    Vehicle* v2 = new Vehicle("A1P-885", "Honda", "Civic", "Negro", 2021);
-    Driver* d2 = new Driver("Salvador Rivera", "50193847", "rosa456", *v2);
-
-    listaDobleDrivers->pushBack(*d2);
-    cout << "Registrado: " << d2->getName() << "\n";
-
-    delete v2;
-    delete d2;
-
-
-    // --- Driver 3 ---
-    Vehicle* v3 = new Vehicle("C7M-219", "Hyundai", "Tucson", "Blanco", 2023);
-    Driver* d3 = new Driver("Luis Mamani", "38201947", "luis789", *v3);
-
-    listaDobleDrivers->pushBack(*d3);
-    cout << "Registrado: " << d3->getName() << "\n";
-
-    delete v3;
-    delete d3;
 
 
     // =======================================================
@@ -120,4 +88,4 @@ int main()
 
     cin.get();
     return 0;
-}
+}*/

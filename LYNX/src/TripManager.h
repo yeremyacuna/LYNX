@@ -16,9 +16,9 @@ using namespace std;
 
 class TripManager {
 private:
-    Queue<Trip>            waitingQueue;
+    Queue<Trip>         waitingQueue;
     LinkedDoubleList<Trip> activeTrips;
-    Stack<Trip>            history;
+    Stack<Trip>        history;
     int                    tripCounter;
 
     // Genera ID unico: TRP-10001, TRP-10002, ...
@@ -110,13 +110,13 @@ public:
     }
 
     // Busca el conductor disponible con mejor rating
-    // Devuelve su DNI, o "" si no hay ning
+    // Devuelve su DNI, o "" si no hay ninguno
     string matchBestDriver(AuthManager& auth) {
         string bestDni = "";
         float  bestRating = -1.0f;
-        LinkedList<Driver>& dl = auth.getDriverList();
-        for (int i = 0; i < dl.getSize(); i++) {
-            Driver d = dl.get(i);
+        LinkedList<Driver>* dl = auth.getDriverList();
+        for (int i = 0; i < dl->getSize(); i++) {
+            Driver d = dl->get(i);
             if (d.getIsAvailable() && d.getRating() > bestRating) {
                 bestRating = d.getRating();
                 bestDni = d.getDni();

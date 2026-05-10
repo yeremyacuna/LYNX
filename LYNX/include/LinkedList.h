@@ -35,7 +35,7 @@ public:
     }
 
     bool isEmpty() const { return size == 0; }    // si es vacio
-    int  getSize() { return size; }         // get tamaño
+    int  getSize() { return size; }         // Obtener tamaño de LinkedList
 
     // pushFront: inserta valor al inicio
     void pushFront(T value)  // complejidad O(1)
@@ -174,10 +174,6 @@ public:
         size--;
     }
 
-
-
-
-    // ===================== others function falta
     T get(int index) const {
         if (!validIndex(index)) {
             cout << "[LinkedDoubleList] get(" << index << ") out of range. size=" << size << "\n";
@@ -189,14 +185,16 @@ public:
     }
 
     T front() const {
-        if (isEmpty()) { cout << "[LinkedDoubleList] front() — empty\n"; return T{}; }
+        if (isEmpty()) { cout << "[LinkedList] front() — empty\n"; return T{}; }
         return head->data;
     }
 
     T back() {
-        if (isEmpty()) { cout << "[LinkedDoubleList] back() — empty\n"; return T{}; }
+        if (isEmpty()) { cout << "[LinkedList] back() — empty\n"; return T{}; }
         return tail->data;
     }
+
+    // otras funciones
 
     int search(T value) {
         Node<T>* current = head;

@@ -142,4 +142,16 @@ public:
     }
 
     string getCodigo() { return passengerId; }
+
+    bool operator==(const Passenger& other) const  // Recibe otro conductor (other) por referencia. No hace copia del objeto  más eficiente.
+    {
+        return passengerId == other.passengerId;  // Entonces operator sera comparar los id
+    }
+
+    friend ostream& operator<<(ostream& os, const Passenger& d) // friend para acceder a atributos privados
+    {
+        os << d.toString();
+        return os;
+    }
+
 };

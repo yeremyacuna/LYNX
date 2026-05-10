@@ -4,7 +4,7 @@
 using namespace System;
 using std::cout;
 
-/*
+
 int main()
 {
 	
@@ -14,4 +14,3 @@ int main()
 
 	return 0;
 }
-*/

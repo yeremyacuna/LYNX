@@ -11,8 +11,4 @@ public:
         next = nullptr;
     }
 
-    Node(T _data, Node<T>* _next = nullptr) {
-        next = _next;
-        this->data = _data;
-    }
 };
