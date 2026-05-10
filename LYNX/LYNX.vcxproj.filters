@@ -36,9 +36,6 @@
     <ClInclude Include="src\Vehicle.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="include\LinkedDoubleList.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\LinkedList.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -62,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="src\TripManager.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LinkedDoubleList.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

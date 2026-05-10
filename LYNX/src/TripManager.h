@@ -133,20 +133,14 @@ public:
     }
 
     void viewActive() {
-        cout << "\n  VIAJES ACTIVOS (" << activeTrips.getSize() << ")\n";
-        if (activeTrips.getSize() == 0) { cout << "  (ninguno)\n"; return; }
-        int x = 4, y = 0;
-        for (int i = 0; i < activeTrips.getSize(); i++) {
-            cout << "  [" << i + 1 << "] " << activeTrips.get(i).toString() << "\n";
-        }
+        cout << "VIAJES ACTIVOS (" << activeTrips.getSize() << ")\n";
+        
     }
 
     void viewHistory() {
-        cout << "\n  HISTORIAL DE VIAJES (" << history.getSize() << ")\n";
+        cout << "HISTORIAL DE VIAJES (" << history.getSize() << ")\n";
         int n; Trip* arr = historyToArray(n);
-        if (!arr) { cout << "  (sin historial)\n"; return; }
-        for (int i = 0; i < n; i++)
-            cout << "  [" << i + 1 << "] " << arr[i].toString() << "\n";
+        
         delete[] arr;
     }
 
@@ -174,12 +168,8 @@ public:
     // LAMBDA 4: muestra la cola de espera con posicion con Queue::forEach
     // Se usa en listarViajes() del AdministratorMenu para mostrar la cola sin sacar elementos
     void viewWaitingDetailed() {
-        cout << "\n  COLA DE ESPERA (" << waitingQueue.getSize() << " viajes)\n";
-        if (waitingQueue.isEmpty()) { cout << "  (ninguno)\n"; return; }
-        int pos = 1;
-        waitingQueue.forEach([&pos](Trip t) {
-            cout << "  [" << pos++ << "] " << t.toString() << "\n";
-            });
+        cout << "COLA DE ESPERA (" << waitingQueue.getSize() << " viajes)\n";
+        
     }
 
     // LAMBDA 5: busca el ultimo viaje de un pasajero en el historial con Stack::findInStack

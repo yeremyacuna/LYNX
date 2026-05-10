@@ -174,8 +174,8 @@ public:
     // LAMBDA 2: muestra totales de usuarios y conductores en consola
     void mostrarResumen() {
         auto resumen = [](int users, int drivers) {
-            cout << "  Usuarios registrados   : " << users << "\n";
-            cout << "  Conductores registrados: " << drivers << "\n";
+            Console::SetCursorPosition(50, 12);cout << "  Usuarios registrados   : " << users;
+            Console::SetCursorPosition(50, 12);cout << "  Conductores registrados: " << drivers;
             };
         resumen(userList->getSize(), driverList->getSize());
     }
@@ -208,12 +208,12 @@ public:
 
     // ordena conductores por rating de mayor a menor
     void sortDriversByRating() {
-        int n = driverList.getSize();
+        int n = driverList->getSize();
         if (n <= 1) return;
 
         // Copiamos a arreglo auxiliar
         Driver* arr = new Driver[n];
-        for (int i = 0; i < n; i++) arr[i] = driverList.get(i);
+        for (int i = 0; i < n; i++) arr[i] = driverList->get(i);
 
         // Shell Sort: gap a la mitad en cada pasada
         for (int gap = n / 2; gap > 0; gap /= 2) {
@@ -230,19 +230,19 @@ public:
         }
 
         // Reconstruimos la lista con el orden nuevo
-        driverList.clear();
-        for (int i = 0; i < n; i++) driverList.pushBack(arr[i]);
+        driverList->clear();
+        for (int i = 0; i < n; i++) driverList->pushBack(arr[i]);
         delete[] arr;
     }
 
     // ordena pasajeros por gasto total de mayor a menor
     void sortUsersBySpent() {
-        int n = userList.getSize();
+        int n = userList->getSize();
         if (n <= 1) return;
 
         // Copiamos a arreglo auxiliar
         Passenger* arr = new Passenger[n];
-        for (int i = 0; i < n; i++) arr[i] = userList.get(i);
+        for (int i = 0; i < n; i++) arr[i] = userList->get(i);
 
         // Insertion Sort: inserta cada elemento en su posición correcta
         for (int i = 1; i < n; i++) {
@@ -257,8 +257,8 @@ public:
         }
 
         // Reconstruimos la lista
-        userList.clear();
-        for (int i = 0; i < n; i++) userList.pushBack(arr[i]);
+        userList->clear();
+        for (int i = 0; i < n; i++) userList->pushBack(arr[i]);
         delete[] arr;
     }
 };

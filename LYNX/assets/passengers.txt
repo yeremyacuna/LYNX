@@ -11,7 +11,7 @@ PAS-0099|Rosa Condori|37482911|rosa321|4.2|48|1110
 PAS-0005|Oscar Reyes|90817264|oscarrr|3.0|10|180
 PAS-0053|Luciana Torres|19283748|luciator|4.6|63|1500
 PAS-0038|Javier Luna|83746594|jluna77|3.4|16|320
-PAS-0078|Maria Vargas|10284757|mariav|4.1|42|940
+PAS-0078|Mario Vargas|10284757|mariav|4.1|42|940
 PAS-0019|Victor Perez|91827368|victorp|2.8|6|90
 PAS-0047|Melissa Orihuela|74829103|meli2024|4.9|82|1890
 PAS-0003|Carlos Perez|58291047|carlpass|3.8|25|540

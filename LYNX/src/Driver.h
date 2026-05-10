@@ -147,7 +147,7 @@ public:
         return driverId == other.driverId;  // Entonces operator sera comparar los id
     }
 
-    friend ostream& operator<<(ostream& os, const Driver& d) // friend para acceder a atributos privados
+    friend ostream& operator<<(ostream& os, const Driver& d) // friend para acceder a atributos privados pankeiks
     {
         os << d.toString();
         return os;

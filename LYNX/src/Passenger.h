@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "Trip.h"
+#include "../include/Queue.h"
 
 using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
@@ -12,6 +13,7 @@ private:
     float  rating;
     int    totalTrips;
     float  totalSpent;    // total gastado en viajes completados 
+    Queue<Trip> trips;
 
 public:
 
