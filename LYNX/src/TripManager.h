@@ -152,7 +152,7 @@ public:
             if (pendientes == 0) return "[--] Sin viajes en espera";
             return "[>>] " + to_string(pendientes) + " viaje(s) esperando conductor";
             };
-        cout << "  Cola: " << etiqueta(waitingQueue.getSize()) << "\n";
+        cout << "  Cola: " << etiqueta(waitingQueue.getSize());
     }
 
     // LAMBDA 2: suma precios de viajes en cola con sumBy() de Queue

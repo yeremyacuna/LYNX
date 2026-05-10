@@ -171,8 +171,8 @@ public:
     // LAMBDA 2: muestra totales de usuarios y conductores en consola
     void mostrarResumen() {
         auto resumen = [](int users, int drivers) {
-            Console::SetCursorPosition(50, 12);cout << "  Usuarios registrados   : " << users;
-            Console::SetCursorPosition(50, 12);cout << "  Conductores registrados: " << drivers;
+            Console::SetCursorPosition(50+18, 12);cout << "  Usuarios registrados   : " << users;
+            Console::SetCursorPosition(50+18, 12);cout << "  Conductores registrados: " << drivers;
             };
         resumen(userList.getSize(), driverList.getSize());
     }

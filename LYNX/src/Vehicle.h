@@ -48,12 +48,12 @@ public:
     }
 
     // para MainMenu)
-    void mostrar(int x, int& y) {
-        Console::SetCursorPosition(x, y++); cout << "Placa  : " << plate << endl;
-        Console::SetCursorPosition(x, y++); cout << "Marca  : " << brand << endl;
-        Console::SetCursorPosition(x, y++); cout << "Modelo : " << model << endl;
-        Console::SetCursorPosition(x, y++); cout << "Color  : " << color << endl;
-        Console::SetCursorPosition(x, y++); cout << "Anio   : " << year << endl;
+    void mostrar(int x, int y) {
+        Console::SetCursorPosition(x, y); cout << "Placa  : " << plate << endl;
+        Console::SetCursorPosition(x, y+2); cout << "Marca  : " << brand << endl;
+        Console::SetCursorPosition(x, y+4); cout << "Modelo : " << model << endl;
+        Console::SetCursorPosition(x, y+6); cout << "Color  : " << color << endl;
+        Console::SetCursorPosition(x, y+8); cout << "Anio   : " << year << endl;
     }
 
     string getCodigo() { return plate; }
