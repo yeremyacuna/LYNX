@@ -89,5 +89,11 @@
     <Text Include="assets\drivers.txt">
       <Filter>assets</Filter>
     </Text>
+    <Text Include="assets\passengers.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\trips.txt">
+      <Filter>assets</Filter>
+    </Text>
   </ItemGroup>
 </Project>

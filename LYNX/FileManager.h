@@ -10,7 +10,7 @@
 using std::string; using std::vector; using std::cout; using std::cin; using std::stringstream; using std::getline;
 
 
-//  Uso basico:
+//  Uso basico :
 //      FileManager fm;
 //      fm.guardarDriversTXT(lista);
 //      vector<Driver> drivers = fm.leerDriversTXT();

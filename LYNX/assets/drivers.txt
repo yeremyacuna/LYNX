@@ -6,7 +6,7 @@ DRV-0001|Carlos Ruiz|12938475|pass1|4.1|1|210|500|A1B-111|Hyundai|Elantra|Gris|2
 DRV-0033|Ana Torres|91827364|pass33|3.5|0|90|300|C2D-222|Kia|Rio|Rojo|2020
 DRV-0018|Diego Flores|56473829|pass18|4.7|1|500|870|D3E-333|BMW|X3|Negro|2022
 DRV-0044|Lucia Ramos|37482910|pass44|2.6|1|60|210|E4F-444|Nissan|Sentra|Blanco|2019
-DRV-0099|Jorge Medina|10293847|pass99|3.9|0|400|780|F5G-555|Audi|A4|Plata|2023
+DRV-0099|Jorge Quiroga|10293847|pass99|3.9|0|400|780|F5G-555|Audi|A4|Plata|2023
 DRV-0012|Pedro Castillo|91827365|pass12|4|1|150|400|G6H-666|Mazda|3|Rojo|2020
 DRV-0060|Elena Vargas|56473820|pass60|3.2|1|70|260|H7I-777|Toyota|Yaris|Azul|2018
 DRV-0003|Cristiano Ronaldo|77777777|cr7pass|5|1|900|999|CR7-001|Ferrari|Roma|Rojo|2024
