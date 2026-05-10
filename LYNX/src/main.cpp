@@ -1,5 +1,5 @@
 #include <iostream>
-#include "MainMenu.h"
+#include "MainMenuDos.h"
 
 using namespace System;
 using std::cout;
@@ -8,7 +8,7 @@ using std::cout;
 int main()
 {
 	
-	Menu menu = Menu();
+	MenuDos menu = MenuDos();
 
 	menu.LYNX();
 

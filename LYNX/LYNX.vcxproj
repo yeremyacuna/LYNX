@@ -112,7 +112,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="FileManager.h" />
+    <ClInclude Include="include\FileManager.h" />
     <ClInclude Include="include\LinkedDoubleList.h" />
     <ClInclude Include="include\LinkedList.h" />
     <ClInclude Include="include\Node.h" />
@@ -122,6 +122,7 @@
     <ClInclude Include="src\AuthManager.h" />
     <ClInclude Include="src\Driver.h" />
     <ClInclude Include="src\MainMenu.h" />
+    <ClInclude Include="src\mainMenuDos.h" />
     <ClInclude Include="src\Passenger.h" />
     <ClInclude Include="src\Trip.h" />
     <ClInclude Include="src\TripManager.h" />

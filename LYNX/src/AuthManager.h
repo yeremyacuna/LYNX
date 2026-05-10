@@ -3,6 +3,7 @@
 #include <string>
 #include "../include/LinkedList.h"
 #include "../include/Queue.h"
+#include "../include/FileManager.h"
 #include "Passenger.h"
 #include "Driver.h"
 #include "Trip.h"
@@ -12,13 +13,14 @@ using std::string; using std::cout; using std::cin; using std::getline; using st
 //  Guarda y gestiona las listas de pasajeros y conductores.
 class AuthManager {
 private:
-    LinkedList<Passenger>* userList = new LinkedList<Passenger>();
+    LinkedList<Passenger>* passengerList = new LinkedList<Passenger>();
     LinkedList<Driver>* driverList = new LinkedList<Driver>();
+    FileManager* fileManager = new FileManager();
 
     // Busca la posicion de un pasajero por DNI
     int indexOfUser(string dni) {
-        for (int i = 0; i < userList->getSize(); i++)
-            if (userList->get(i).getDni() == dni) return i;
+        for (int i = 0; i < passengerList->getSize(); i++)
+            if (passengerList->get(i).getDni() == dni) return i;
         return -1;
     }
 
@@ -30,24 +32,72 @@ private:
     }
 
 public:
-    AuthManager() {}
+    AuthManager() {
+        cout << "\n--- [1] Cargando drivers desde archivo ---\n";
+        vector<Driver> driversCargados = fileManager->leerDriversTXT();
+        for (int i = 0; i < (int)driversCargados.size(); i++)
+        {
+            driverList->pushBack(driversCargados[i]);
+        }
+
+        vector<Passenger> passengersCargados = fileManager->leerPassengersTXT();
+        for (int i = 0; i < (int)passengersCargados.size(); i++)
+        {
+            passengerList->pushBack(passengersCargados[i]);
+        }
+
+
+        cout << "Drivers cargados en lista: " << driverList->getSize() << "\n";
+        cout << "Passengers cargados en lista: " << passengerList->getSize() << "\n";
+
+    }
     ~AuthManager() {
-        delete userList;
+        delete passengerList;
         delete driverList;
+        delete fileManager;
     }
 
-    LinkedList<Passenger>*& getUserList() { return userList; }
+    LinkedList<Passenger>*& getPassengerList() { return passengerList; }
     LinkedList<Driver>*& getDriverList() { return driverList; }
-    int getTotalUsers() { return userList->getSize(); }
+    int getTotalUsers() { return passengerList->getSize(); }
     int getTotalDrivers() { return driverList->getSize(); }
+
+    void savePassengers() {
+
+        vector<Passenger> pasajeros;
+
+        for (int i = 0; i < passengerList->getSize(); i++) {
+            pasajeros.push_back(passengerList->get(i));
+        }
+
+        fileManager->guardarPassengersTXT(pasajeros);
+    }
+
+    void saveDrivers() {
+
+        vector<Driver> drivers;
+
+        for (int i = 0; i < driverList->getSize(); i++) {
+            drivers.push_back(driverList->get(i));
+        }
+
+        fileManager->guardarDriversTXT(drivers);
+    }
+
+    void saveAll() {
+        savePassengers();
+        saveDrivers();
+    }
 
     // PASAJEROS
     bool userExists(string dni) { return indexOfUser(dni) != -1; }
 
     // Registra pasajero nuevo si el DNI no existe
-    bool registerUser(string name, string dni, string password) {
+    bool registerPassenger(string name, string dni, string password) {
         if (userExists(dni)) { cout << "  [!] DNI ya registrado.\n"; return false; }
-        userList->pushBack(Passenger(name, dni, password));
+        
+        passengerList->pushBack(Passenger(name, dni, password));
+        savePassengers();
         cout << "  [OK] Pasajero registrado.\n";
         return true;
     }
@@ -56,34 +106,36 @@ public:
     bool loginUserValid(string dni, string password) {
         int i = indexOfUser(dni);
         if (i == -1) return false;
-        return userList->get(i).login(dni, password);
+        return passengerList->get(i).login(dni, password);
     }
 
     // Devuelve copia del pasajero por DNI
     Passenger getUserByDni(string dni) {
         int i = indexOfUser(dni);
         if (i == -1) return Passenger();
-        return userList->get(i);
+        return passengerList->get(i);
     }
 
     // Registra un viaje al pasajero y lo actualiza en la lista
     void addTripToUser(string dni, float precio) {
         int i = indexOfUser(dni);
         if (i == -1) return;
-        Passenger p = userList->get(i);
+        Passenger p = passengerList->get(i);
         p.addTrip(precio);
-        userList->remove(i);
-        userList->insert(i, p);
+        passengerList->remove(i);
+        passengerList->insert(i, p);
+        savePassengers();
     }
 
     // Actualiza el rating
     void updateUserRating(string dni, float nuevaCalif) {
         int i = indexOfUser(dni);
         if (i == -1) return;
-        Passenger p = userList->get(i);
+        Passenger p = passengerList->get(i);
         p.updateRating(nuevaCalif);
-        userList->remove(i);
-        userList->insert(i, p);
+        passengerList->remove(i);
+        passengerList->insert(i, p);
+        savePassengers();
     }
 
     // CONDUCTORES
@@ -92,7 +144,10 @@ public:
     // Registra conductor nuevo con su vehiculo
     bool registerDriver(string name, string dni, string password, Vehicle vehicle) {
         if (driverExists(dni)) { cout << "  [!] DNI ya registrado.\n"; return false; }
+        
         driverList->pushBack(Driver(name, dni, password, vehicle));
+        saveDrivers();
+
         cout << "  [OK] Conductor registrado.\n";
         return true;
     }
@@ -119,6 +174,7 @@ public:
         d.setAvailable(disponible);
         driverList->remove(i);
         driverList->insert(i, d);
+        saveDrivers();
     }
 
     // Actualiza el rating
@@ -129,6 +185,7 @@ public:
         d.updateRating(nuevaCalif);
         driverList->remove(i);
         driverList->insert(i, d);
+        saveDrivers();
     }
 
     // Marca al conductor como ocupado y acumula ganancia
@@ -139,6 +196,7 @@ public:
         d.acceptRide(precio);
         driverList->remove(i);
         driverList->insert(i, d);
+        saveDrivers();
     }
 
     // Marca al conductor como disponible ota ve
@@ -149,6 +207,7 @@ public:
         d.finishRide();
         driverList->remove(i);
         driverList->insert(i, d);
+        saveDrivers();
     }
 
     // Devuelve DNI del primer conductor disponible, "" si no hay
@@ -158,6 +217,10 @@ public:
                 return driverList->get(i).getDni();
         return "";
     }
+
+
+
+
 
     //  LAMBDAS
 
@@ -174,11 +237,12 @@ public:
     // LAMBDA 2: muestra totales de usuarios y conductores en consola
     void mostrarResumen() {
         auto resumen = [](int users, int drivers) {
-            Console::SetCursorPosition(50, 12);cout << "  Usuarios registrados   : " << users;
-            Console::SetCursorPosition(50, 12);cout << "  Conductores registrados: " << drivers;
+            Console::SetCursorPosition(50, 12); cout << "  Usuarios registrados   : " << users;
+            Console::SetCursorPosition(50, 12); cout << "  Conductores registrados: " << drivers;
             };
-        resumen(userList->getSize(), driverList->getSize());
+        resumen(passengerList->getSize(), driverList->getSize());
     }
+
 
     // LAMBDA 3: usa filter() de LinkedList para obtener solo conductores disponibles
     LinkedList<Driver> getConductoresDisponibles() {
@@ -237,12 +301,12 @@ public:
 
     // ordena pasajeros por gasto total de mayor a menor
     void sortUsersBySpent() {
-        int n = userList->getSize();
+        int n = passengerList->getSize();
         if (n <= 1) return;
 
         // Copiamos a arreglo auxiliar
         Passenger* arr = new Passenger[n];
-        for (int i = 0; i < n; i++) arr[i] = userList->get(i);
+        for (int i = 0; i < n; i++) arr[i] = passengerList->get(i);
 
         // Insertion Sort: inserta cada elemento en su posición correcta
         for (int i = 1; i < n; i++) {
@@ -257,8 +321,8 @@ public:
         }
 
         // Reconstruimos la lista
-        userList->clear();
-        for (int i = 0; i < n; i++) userList->pushBack(arr[i]);
+        passengerList->clear();
+        for (int i = 0; i < n; i++) passengerList->pushBack(arr[i]);
         delete[] arr;
     }
 };

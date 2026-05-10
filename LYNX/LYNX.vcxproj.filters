@@ -48,9 +48,6 @@
     <ClInclude Include="include\Stack.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="FileManager.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="src\AdministratorMenu.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -62,6 +59,12 @@
     </ClInclude>
     <ClInclude Include="include\LinkedDoubleList.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mainMenuDos.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

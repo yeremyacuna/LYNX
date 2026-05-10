@@ -109,11 +109,11 @@ public:
         system("cls");
         lynxs();
         Console::SetCursorPosition(50, 11);cout << "LISTA DE PASAJEROS";
-        if (authMgr->getUserList()->isEmpty()) {
+        if (authMgr->getPassengerList()->isEmpty()) {
             Console::SetCursorPosition(48, 12); cout << "  Sin pasajeros registrados.\n"; pausar(); return;
         }
         int i = 1, y=12;
-        authMgr->getUserList()->forEach([&i,&y](Passenger p) {
+        authMgr->getPassengerList()->forEach([&i,&y](Passenger p) {
             Console::SetCursorPosition(18, y++);cout << "  [" << i++ << "] " << p.toString() << "\n";
             });
         pausar();
@@ -156,7 +156,7 @@ public:
         string dni;
         Console::SetCursorPosition(55, 12);cout << "DNI: "; cin >> dni;
 
-        Passenger p = authMgr->getUserList()->findFirst([&](Passenger x) { return x.getDni() == dni; });
+        Passenger p = authMgr->getPassengerList()->findFirst([&](Passenger x) { return x.getDni() == dni; });
 
         if (p.getDni() == "") {
             cout << "  No se encontro pasajero con DNI: " << dni << "\n";
@@ -246,7 +246,7 @@ public:
         cout << "  === ORDENAR PASAJEROS POR GASTO TOTAL ===\n\n";
         cout << "  Antes del ordenamiento:\n";
         int i = 1;
-        authMgr->getUserList()->forEach([&i](Passenger p) {
+        authMgr->getPassengerList()->forEach([&i](Passenger p) {
             cout << "  [" << i++ << "] " << p.getName()
                 << " - Gastado: S/ " << p.getTotalSpent() << "\n";
             });
@@ -255,7 +255,7 @@ public:
 
         cout << "\n  Despues del ordenamiento (mayor a menor gasto):\n";
         i = 1;
-        authMgr->getUserList()->forEach([&i](Passenger p) {
+        authMgr->getPassengerList()->forEach([&i](Passenger p) {
             cout << "  [" << i++ << "] " << p.getName()
                 << " - Gastado: S/ " << p.getTotalSpent() << "\n";
             });
