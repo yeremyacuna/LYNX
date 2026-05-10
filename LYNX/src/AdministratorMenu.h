@@ -6,6 +6,32 @@
 #include <string>
 using std::cout; using std::cin;
 
+void lynxs() {
+    Console::ForegroundColor = ConsoleColor::Green;
+    Console::SetCursorPosition(45, 5);std::cout << (char)219 << (char)219 << "     " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << " " << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
+    Console::SetCursorPosition(45, 6);std::cout << (char)219 << (char)219 << "      " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
+    Console::SetCursorPosition(45, 7);std::cout << (char)219 << (char)219 << "       " << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << "\n";
+    Console::SetCursorPosition(45, 8);std::cout << (char)219 << (char)219 << "        " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
+    Console::SetCursorPosition(45, 9);std::cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
+
+    Console::ForegroundColor = ConsoleColor::White;
+}
+
+void Seleccions(int keycode, int& inicio, int min, int max) {
+    switch (keycode) {
+    case 72:
+        if (inicio > min) {
+            inicio--;
+        }
+        break;
+    case 80:
+        if (inicio < max) {
+            inicio++;
+        }
+        break;
+    }
+};
+
 class AdministratorMenu {
 private:
     AuthManager* authMgr;
@@ -14,23 +40,55 @@ private:
 public:
     AdministratorMenu(AuthManager* a, TripManager* t) : authMgr(a), tripMgr(t) {}
 
-    void run() {
-        int op;
-        do {
+    void run(int & opcion) {
+        opcion = 1;
+        while (true) {
             system("cls");
-            cout << "\n  Lynx > ADMIN PANEL\n";
-            cout << "  --------------------------------\n";
-            cout << "  [1] Listar todos los usuarios\n";
-            cout << "  [2] Listar todos los conductores\n";
-            cout << "  [3] Listar todos los viajes\n";
-            cout << "  [4] Buscar usuario por DNI\n";
-            cout << "  [5] Ordenar conductores por rating\n";
-            cout << "  [6] Top conductores del mes\n";
-            cout << "  [7] Estadisticas generales\n";
-            cout << "  --------------------------------\n";
-            cout << "  [0] Volver al menu principal\n";
-            cout << "  Opcion: "; cin >> op;
+            lynxs();
+            Console::SetCursorPosition(54, 11);cout << "ADMIN PANEL";
+            Console::SetCursorPosition(46, 12);cout << "    ----------------------------";
+            Console::SetCursorPosition(48, 13);
+            if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Listar todos los usuarios"; }
+            else { Console::ForegroundColor = ConsoleColor::White; cout << "    Listar todos los usuarios"; }
+            Console::SetCursorPosition(48, 14);
+            if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Listar todos los conductores"; }
+            else { Console::ForegroundColor = ConsoleColor::White; cout << "    Listar todos los conductores"; }
+            Console::SetCursorPosition(48, 15);
+            if (opcion == 3) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Listar todos los viajes"; }
+            else { Console::ForegroundColor = ConsoleColor::White; cout << "    Listar todos los viajes"; }
+            Console::SetCursorPosition(48, 16);
+            if (opcion == 4) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Buscar usuario por DNI"; }
+            else { Console::ForegroundColor = ConsoleColor::White; cout << "    Buscar usuario por DNI"; }
 
+            Console::SetCursorPosition(48, 17);
+            if (opcion == 5) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ordenar conductores por rating"; }
+            else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ordenar conductores por rating"; }
+
+            Console::SetCursorPosition(48, 18);
+            if (opcion == 6) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Top conductores del mes"; }
+            else { Console::ForegroundColor = ConsoleColor::White; cout << "    Top conductores del mes"; }
+
+            Console::SetCursorPosition(48, 19);
+            if (opcion == 7) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Estadisticas generales"; }
+            else { Console::ForegroundColor = ConsoleColor::White; cout << "    Estadisticas generales"; }
+            Console::ForegroundColor = ConsoleColor::White;
+            Console::SetCursorPosition(46, 20);cout << "    ----------------------------";
+            Console::SetCursorPosition(48, 21);
+            if (opcion == 8) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Volver al menu principal"; }
+            else { Console::ForegroundColor = ConsoleColor::White; cout << "    Volver al menu principal"; }
+
+            Console::ForegroundColor = ConsoleColor::White;
+
+            int key = _getch();
+            if (key == 13) {
+                if (opcion == 8) opcion = 0;
+                return;
+            }
+            if (key == 0 || key == 224) key = _getch();
+            Seleccions(key, opcion, 1, 8);
+        }
+
+            /*
             if (op == 1) listarUsuarios();
             else if (op == 2) listarConductores();
             else if (op == 3) listarViajes();
@@ -38,21 +96,24 @@ public:
             else if (op == 5) ordenarConductores();
             else if (op == 6) topConductores();
             else if (op == 7) estadisticas();
-        } while (op != 0);
+            */
+      
     }
 
-private:
 
+
+   
     // [1] LinkedList::forEach
     void listarUsuarios() {
         system("cls");
-        cout << "  === LISTA DE PASAJEROS ===\n\n";
+        lynxs();
+        Console::SetCursorPosition(50, 11);cout << "LISTA DE PASAJEROS";
         if (authMgr->getUserList().isEmpty()) {
-            cout << "  Sin pasajeros registrados.\n"; pausar(); return;
+            Console::SetCursorPosition(48, 12); cout << "  Sin pasajeros registrados.\n"; pausar(); return;
         }
-        int i = 1;
-        authMgr->getUserList().forEach([&i](Passenger p) {
-            cout << "  [" << i++ << "] " << p.toString() << "\n";
+        int i = 1, y=12;
+        authMgr->getUserList().forEach([&i,&y](Passenger p) {
+            Console::SetCursorPosition(18, y++);cout << "  [" << i++ << "] " << p.toString() << "\n";
             });
         pausar();
     }
@@ -60,13 +121,14 @@ private:
     // [2] LinkedList::forEach
     void listarConductores() {
         system("cls");
-        cout << "  === LISTA DE CONDUCTORES ===\n\n";
+        lynxs();
+        Console::SetCursorPosition(50, 11);cout << "LISTA DE CONDUCTORES";
         if (authMgr->getDriverList().isEmpty()) {
-            cout << "  Sin conductores registrados.\n"; pausar(); return;
+            Console::SetCursorPosition(48, 12);cout << "  Sin conductores registrados.\n"; pausar(); return;
         }
-        int i = 1;
-        authMgr->getDriverList().forEach([&i](Driver d) {
-            cout << "  [" << i++ << "] " << d.toString() << "\n";
+        int i = 1, y=12;
+        authMgr->getDriverList().forEach([&i,&y](Driver d) {
+            Console::SetCursorPosition(18, y++);cout << "  [" << i++ << "] " << d.toString() << "\n";
             });
         pausar();
     }
@@ -74,12 +136,13 @@ private:
     // [3] viewWaitingDetailed usa Queue::forEach (TripManager)
     void listarViajes() {
         system("cls");
-        cout << "  === TODOS LOS VIAJES ===\n";
-        tripMgr->viewWaitingDetailed();
-        tripMgr->viewActive();
-        tripMgr->viewHistory();
-        cout << "  Ganancia plataforma (20%): S/ "
-            << tripMgr->getTotalPlatformEarnings() << "\n";
+        lynxs();
+        Console::SetCursorPosition(52, 11);cout << "TODOS LOS VIAJES";
+        Console::SetCursorPosition(47, 12);tripMgr->viewWaitingDetailed();
+        Console::SetCursorPosition(47, 14);tripMgr->viewActive();
+        Console::SetCursorPosition(47, 16);tripMgr->viewHistory();
+        Console::SetCursorPosition(47, 18);cout << "Ganancia plataforma (20%): S/ "
+            << tripMgr->getTotalPlatformEarnings();
         pausar();
     }
 
@@ -87,9 +150,10 @@ private:
          + Stack::findInStack via getLastTripByPassenger (TripManager)*/
     void buscarUsuario() {
         system("cls");
-        cout << "  === BUSCAR PASAJERO ===\n";
+        lynxs();
+        Console::SetCursorPosition(53, 11);cout << "BUSCAR PASAJERO";
         string dni;
-        cout << "  DNI: "; cin >> dni;
+        Console::SetCursorPosition(55, 12);cout << "DNI: "; cin >> dni;
 
         Passenger p = authMgr->getUserList()
             .findFirst([&](Passenger x) { return x.getDni() == dni; });
@@ -118,30 +182,31 @@ private:
     // [6] lambda para filtrar por rating
     void topConductores() {
         system("cls");
-        cout << "  === TOP CONDUCTORES (rating >= 4.0) ===\n\n";
+        Console::SetCursorPosition(48, 11);cout << "TOP CONDUCTORES (rating >= 4.0)";
 
         auto tieneBuenRating = [](Driver d) -> bool {
             return d.getRating() >= 4.0f;
             };
 
-        int i = 1;
+        int i = 1,y=12;
         bool alguno = false;
         for (int j = 0; j < authMgr->getDriverList().getSize(); j++) {
             Driver d = authMgr->getDriverList().get(j);
             if (tieneBuenRating(d)) {
-                cout << "  [" << i++ << "] " << d.toString() << "\n";
+                Console::SetCursorPosition(20, y++);cout << "  [" << i++ << "] " << d.toString() << "\n";
                 alguno = true;
             }
         }
-        if (!alguno) cout << "  Ningun conductor con rating >= 4.0\n";
+        if (!alguno) Console::SetCursorPosition(47, 12);cout << "  Ningun conductor con rating >= 4.0\n";
         pausar();
     }
 
     /*[7] mostrarResumen(AuthManager), mostrarEstadoCola(TripManager)
          + recursividad: contarConductoresDisponibles, getTotalPlatformEarnings*/
     void estadisticas() {
+
         system("cls");
-        cout << "  === ESTADISTICAS GENERALES ===\n\n";
+        Console::SetCursorPosition(60, 11);cout << "ESTADISTICAS GENERALES";
 
         auto fila = [](string etiqueta, string valor) {
             cout << "  " << etiqueta << ": " << valor << "\n";
@@ -151,16 +216,19 @@ private:
         float ganancia = tripMgr->getTotalPlatformEarnings();
 
         authMgr->mostrarResumen();
-        fila("Conductores disponibles", to_string(disponibles));
-        fila("Viajes en espera", to_string(tripMgr->getTotalWaiting()));
-        fila("Viajes activos", to_string(tripMgr->getTotalActiveTrips()));
-        fila("Viajes en historial", to_string(tripMgr->getTotalHistoryTrips()));
-        fila("Ganancia plataforma", "S/ " + to_string(ganancia));
+        Console::SetCursorPosition(50, 13);fila("Conductores disponibles", to_string(disponibles));
+        Console::SetCursorPosition(50, 14);fila("Viajes en espera", to_string(tripMgr->getTotalWaiting()));
+        Console::SetCursorPosition(50, 15);fila("Viajes activos", to_string(tripMgr->getTotalActiveTrips()));
+        Console::SetCursorPosition(50, 16);fila("Viajes en historial", to_string(tripMgr->getTotalHistoryTrips()));
+        Console::SetCursorPosition(50, 17);fila("Ganancia plataforma", "S/ " + to_string(ganancia));
         tripMgr->mostrarEstadoCola();
         pausar();
     }
 
     void pausar() {
-        cout << "\n  [0] Volver\n  Opcion: "; int op; cin >> op;
+        Console::SetCursorPosition(46, 27); cout << "Presione enter para continuar";
+        int op = 0;
+        int get = _getch();
+        if (get == 13)op = 0;
     }
 };

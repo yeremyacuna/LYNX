@@ -8,6 +8,7 @@
 #include "../include/Queue.h"
 #include "../include/Stack.h"
 #include "../include/LinkedDoubleList.h"
+#include "AdministratorMenu.h"
 
 using namespace System;
 using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
@@ -54,7 +55,7 @@ Menu::~Menu()
 }
 
 void Menu::lynx() {
-	Console::ForegroundColor = ConsoleColor::Magenta;
+	Console::ForegroundColor = ConsoleColor::Green;
 	Console::SetCursorPosition(45,5);std::cout << (char)219 << (char)219 << "     " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << " " << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
 	Console::SetCursorPosition(45, 6);std::cout << (char)219 << (char)219 << "      " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
 	Console::SetCursorPosition(45, 7);std::cout << (char)219 << (char)219 << "       " << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << "\n";
@@ -316,11 +317,11 @@ void Menu::passengerSendTrip(string& origen, string& destino, int& tipo, float& 
 	int yKm = y;
 	Console::SetCursorPosition(48, y++); cout << "Distancia (km): ";
 	while (!(cin >> km) || km <= 0) {
-		Console::SetCursorPosition(48, y); cout << "Error: Km > 0.            ";
+		Console::SetCursorPosition(48, y); cout << "Error: Ingrese un dato valido (km > 0)";
 		cin.clear();
 		cin.ignore(10000, '\n');
-		Console::SetCursorPosition(68, yKm); cout << "   ";
-		Console::SetCursorPosition(68, yKm);
+		Console::SetCursorPosition(64, yKm); cout << "                             ";
+		Console::SetCursorPosition(64, yKm);
 	}
 };
 
@@ -360,8 +361,9 @@ void Menu::passengerProfile(int& option, Passenger passenger) {
 	Console::SetCursorPosition(46, y++); cout << "----------------------------";
 	passenger.mostrar(48, y);
 	y++;
-	Console::SetCursorPosition(52, y++); cout << "[0] - Volver";
-	Console::SetCursorPosition(65, y-1); cin >> option;
+	Console::SetCursorPosition(56, y++); cout << "Volver";
+	int get = _getch();
+	if (get == 13)option = 0;
 };
 
 void Menu::driverMenu(int& opcion) {
@@ -564,8 +566,11 @@ void Menu::tripHistory(int& option, Trip trips[], int s, string title) {
 };
 
 void Menu::LYNX() {
-	Console::SetWindowSize(120, 30);
+	Console::SetWindowSize(160, 30);
 
+	AuthManager* authMgr = new AuthManager();
+	TripManager* tripMgr = new TripManager();
+	AdministratorMenu* Admin = new AdministratorMenu(authMgr, tripMgr);
 
 	Passenger passenger = Passenger();
 	Driver driver = Driver();
@@ -713,6 +718,9 @@ void Menu::LYNX() {
 				case 2:
 					do { passengerSignIn(DNI, name, password); } while (DNI == "" || password == "" || name == "");
 					passenger = Passenger(name, DNI, password);
+					authMgr->registerUser(name, DNI, password);
+
+
 					std::system("cls"); lynx();
 					Console::SetCursorPosition(48, 11); cout << "Cuenta creada exitosamente.";
 					Console::SetCursorPosition(48, 13); std::system("pause");
@@ -820,6 +828,56 @@ void Menu::LYNX() {
 					option = 6;
 					break;
 				}
+			} while (option != 0);
+			break;
+		case 3:
+			do {
+				//Menu de administrador
+				Admin->run(option);
+				switch (option) {
+				case 1:
+					//Listar todos los usuarios
+					Admin->listarUsuarios();
+					option = 8;
+					break;
+
+				case 2:
+					//Listar todos los conductores
+					Admin->listarConductores();
+					option = 8;
+					break;
+				case 3:
+					//Listar todos los viajes
+					Admin->listarViajes();
+					option = 8;
+					break;
+
+				case 4:
+					//Buscar usuuario por DNI
+					Admin->buscarUsuario();
+					option = 8;
+					break;
+				case 5:
+					//Ordenar conductores por rating
+					Admin->ordenarConductores();
+					option = 8;
+					break;
+
+				case 6:
+					//top conductores del mes
+					Admin->topConductores();
+					option = 8;
+					break;
+				case 7:
+					//estadisticas generales
+					Admin->estadisticas();
+					option = 8;
+					break;
+
+				case 0:
+					break;
+				}
+
 			} while (option != 0);
 			break;
 		}

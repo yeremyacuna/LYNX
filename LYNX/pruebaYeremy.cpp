@@ -14,6 +14,7 @@ using std::string; using std::cout; using std::cin; using std::getline; using st
 
 
 //hola
+/*
 int main()
 {
     cout << std::filesystem::current_path() << endl;
@@ -121,3 +122,4 @@ int main()
     cin.get();
     return 0;
 }
+*/
