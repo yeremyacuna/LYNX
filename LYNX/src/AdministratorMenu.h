@@ -4,6 +4,7 @@
 #include "Trip.h"
 #include <iostream>
 #include <string>
+#include <conio.h>
 using std::cout; using std::cin;
 
 void lynxs() {
@@ -287,6 +288,6 @@ public:
         Console::SetCursorPosition(46, 27); cout << "Presione enter para continuar";
         int op = 0;
         int get = _getch();
-        if (get == 13)op = 0;
+        if (get == 13) op = 0;
     }
 };
