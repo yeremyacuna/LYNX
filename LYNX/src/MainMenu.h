@@ -10,10 +10,6 @@
 #include "AdministratorMenu.h"
 #include "../include/FileManager.h"
 
-
-
-
-
 using namespace System;
 using std::vector; using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
@@ -24,21 +20,27 @@ public:
     ~Menu();
 
     void lynx();
+    void navBar();
+    void navBarP();
+    void navBarC();
+    void navBarA();
+    void navName(string name);
+
     void principal(int& opcion);
     void passengerMenu(int& opcion);
     void passengerLogin(string& DNI, string& name, string& password);
     void passengerSignIn(string& DNI, string& name, string& password);
-    void passengerOptions(int& opcion);
-    void passengerSendTrip(string& origen, string& destino, int& tipo, float& km);
-    void passengerConfirmTrip(int& opcion, string origen, string destino, int tipo, Trip trip);
+    void passengerOptions(int& opcion, Passenger passenger);
+    void passengerSendTrip(string& origen, string& destino, int& tipo, float& km, Passenger passenger);
+    void passengerConfirmTrip(int& opcion, string origen, string destino, int tipo, Trip trip, Passenger passenger);
     void passengerProfile(int& option, Passenger passenger);
 
     void driverMenu(int& opcion);
     void driverLogin(string& DNI, string& name, string& password);
-    void driverOptions(int& opcion, string name, string placa, bool estado, float rating);
-    void driverRegisterTrip(string& partida, string& llegada, float& km, int& tipo);
+    void driverOptions(int& opcion, string name, string placa, bool estado, float rating, Driver driver);
+    void driverRegisterTrip(string& partida, string& llegada, float& km, int& tipo, Driver driver);
     void driverSingIn(string& DNI, string& name, string& password);
-    void driverRegisterCar(string& placa, string& marca, string& modelo, string& color, int& ano);
+    void driverRegisterCar(string& placa, string& marca, string& modelo, string& color, int& ano, Driver driver);
     void driverGains(int& option, Driver driver);
     void driverProfile(int& option, Driver driver);
 
@@ -68,6 +70,9 @@ private:
     Trip buscarViajePendienteDePasajero(TripManager& tripMgr, const string& dni);
     vector<Trip> historialDePasajero(TripManager& tripMgr, const string& dni);
     vector<Trip> historialDeConductor(TripManager& tripMgr, const string& driverName);
+
+    void showPassengerSidebar(Passenger passenger);
+    void showDriverSidebar(Driver driver);
 };
 
 Menu::Menu() {}
@@ -88,11 +93,11 @@ void Menu::mostrarMensaje(string titulo, string detalle)
 {
     limpiarPantalla();
     lynx();
-    Console::SetCursorPosition(48, 11); cout << titulo;
+    Console::SetCursorPosition(48 + 18, 11); cout << titulo;
     if (!detalle.empty()) {
-        Console::SetCursorPosition(48, 13); cout << detalle;
+        Console::SetCursorPosition(48 + 18, 13); cout << detalle;
     }
-    Console::SetCursorPosition(48, 15); cout << "Presione una tecla para continuar...";
+    Console::SetCursorPosition(48 + 18, 15); cout << "Presione una tecla para continuar...";
     _getch();
 }
 
@@ -239,11 +244,123 @@ vector<Trip> Menu::historialDeConductor(TripManager& tripMgr, const string& driv
 void Menu::lynx()
 {
     Console::ForegroundColor = ConsoleColor::Green;
-    Console::SetCursorPosition(45, 5); std::cout << (char)219 << (char)219 << "     " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << " " << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
-    Console::SetCursorPosition(45, 6); std::cout << (char)219 << (char)219 << "      " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
-    Console::SetCursorPosition(45, 7); std::cout << (char)219 << (char)219 << "       " << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << "\n";
-    Console::SetCursorPosition(45, 8); std::cout << (char)219 << (char)219 << "        " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
-    Console::SetCursorPosition(45, 9); std::cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
+    Console::SetCursorPosition(63, 5); std::cout << (char)219 << (char)219 << "     " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << " " << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
+    Console::SetCursorPosition(63, 6); std::cout << (char)219 << (char)219 << "      " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
+    Console::SetCursorPosition(63, 7); std::cout << (char)219 << (char)219 << "       " << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << "\n";
+    Console::SetCursorPosition(63, 8); std::cout << (char)219 << (char)219 << "        " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "  " << (char)219 << (char)219 << (char)219 << (char)219 << "  " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "\n";
+    Console::SetCursorPosition(63, 9); std::cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
+    Console::ForegroundColor = ConsoleColor::White;
+}
+
+void Menu::navBar() {
+    Console::BackgroundColor = ConsoleColor::White;
+    Console::SetCursorPosition(0, 0); std::cout << "                                                                                                                                                                ";
+    Console::SetCursorPosition(0, 1); std::cout << "                                                                                                                                                                ";
+    Console::SetCursorPosition(0, 2); std::cout << "                                                                                                                                                                ";
+    Console::ForegroundColor = ConsoleColor::Black;
+    Console::SetCursorPosition(3, 1); std::cout << "LYNX";
+    Console::SetCursorPosition(20, 1); std::cout << "Pasajero";
+    Console::SetCursorPosition(31, 1); std::cout << "Conductor";
+    Console::SetCursorPosition(43, 1); std::cout << "Admin";
+    Console::BackgroundColor = ConsoleColor::Black;
+    Console::ForegroundColor = ConsoleColor::White;
+}
+
+void Menu::navBarP() {
+    Console::BackgroundColor = ConsoleColor::White;
+    Console::SetCursorPosition(0, 0); std::cout << "                                                                                                                                                                ";
+    Console::SetCursorPosition(0, 1); std::cout << "                                                                                                                                                                ";
+    Console::SetCursorPosition(0, 2); std::cout << "                                                                                                                                                                ";
+    Console::ForegroundColor = ConsoleColor::Black;
+    Console::SetCursorPosition(3, 1); std::cout << "LYNX";
+    Console::ForegroundColor = ConsoleColor::Green;
+    Console::SetCursorPosition(20, 1); std::cout << "Pasajero";
+    Console::ForegroundColor = ConsoleColor::Black;
+    Console::SetCursorPosition(31, 1); std::cout << "Conductor";
+    Console::SetCursorPosition(43, 1); std::cout << "Admin";
+    Console::BackgroundColor = ConsoleColor::Black;
+    Console::ForegroundColor = ConsoleColor::White;
+}
+
+void Menu::navBarC() {
+    Console::BackgroundColor = ConsoleColor::White;
+    Console::SetCursorPosition(0, 0); std::cout << "                                                                                                                                                                ";
+    Console::SetCursorPosition(0, 1); std::cout << "                                                                                                                                                                ";
+    Console::SetCursorPosition(0, 2); std::cout << "                                                                                                                                                                ";
+    Console::ForegroundColor = ConsoleColor::Black;
+    Console::SetCursorPosition(3, 1); std::cout << "LYNX";
+    Console::SetCursorPosition(20, 1); std::cout << "Pasajero";
+    Console::ForegroundColor = ConsoleColor::Green;
+    Console::SetCursorPosition(31, 1); std::cout << "Conductor";
+    Console::ForegroundColor = ConsoleColor::Black;
+    Console::SetCursorPosition(43, 1); std::cout << "Admin";
+    Console::BackgroundColor = ConsoleColor::Black;
+    Console::ForegroundColor = ConsoleColor::White;
+}
+
+void Menu::navBarA() {
+    Console::BackgroundColor = ConsoleColor::White;
+    Console::SetCursorPosition(0, 0); std::cout << "                                                                                                                                                                ";
+    Console::SetCursorPosition(0, 1); std::cout << "                                                                                                                                                                ";
+    Console::SetCursorPosition(0, 2); std::cout << "                                                                                                                                                                ";
+    Console::ForegroundColor = ConsoleColor::Black;
+    Console::SetCursorPosition(3, 1); std::cout << "LYNX";
+    Console::SetCursorPosition(20, 1); std::cout << "Pasajero";
+    Console::SetCursorPosition(31, 1); std::cout << "Conductor";
+    Console::ForegroundColor = ConsoleColor::Green;
+    Console::SetCursorPosition(43, 1); std::cout << "Admin";
+    Console::BackgroundColor = ConsoleColor::Black;
+    Console::ForegroundColor = ConsoleColor::White;
+}
+
+void Menu::navName(string name) {
+    Console::BackgroundColor = ConsoleColor::White;
+    Console::ForegroundColor = ConsoleColor::Black;
+    Console::SetCursorPosition(140, 1); std::cout << name;
+    Console::BackgroundColor = ConsoleColor::Black;
+    Console::ForegroundColor = ConsoleColor::White;
+}
+
+void Menu::showPassengerSidebar(Passenger passenger) {
+    int y = 7, dy = 9;
+    Console::ForegroundColor = ConsoleColor::Gray;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "           Perfil           " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(130, y++); cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219;
+    passenger.mostrar(131, dy);
+    Console::ForegroundColor = ConsoleColor::White;
+}
+
+void Menu::showDriverSidebar(Driver driver) {
+    int y = 7, dy = 9, x = 128;
+    Console::ForegroundColor = ConsoleColor::Gray;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "           Perfil           " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << "                            " << (char)219;
+    Console::SetCursorPosition(x, y++); cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219;
+    driver.mostrar(x + 2, dy);
     Console::ForegroundColor = ConsoleColor::White;
 }
 
@@ -253,19 +370,20 @@ void Menu::principal(int& opcion)
     while (true) {
         limpiarPantalla();
         lynx();
-        Console::SetCursorPosition(52, 11);
+        navBar();
+        Console::SetCursorPosition(52 + 18, 11);
         if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Soy pasajero <<"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "Soy pasajero"; }
 
-        Console::SetCursorPosition(52, 12);
+        Console::SetCursorPosition(52 + 18, 12);
         if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << ">> Soy conductor <<"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "Soy conductor"; }
 
-        Console::SetCursorPosition(52, 13);
+        Console::SetCursorPosition(52 + 18, 13);
         if (opcion == 3) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Administracion <<"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "Administracion"; }
 
-        Console::SetCursorPosition(52, 14);
+        Console::SetCursorPosition(52 + 18, 14);
         if (opcion == 4) { Console::ForegroundColor = ConsoleColor::Yellow; cout << ">> Salir <<"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "Salir"; }
 
@@ -284,18 +402,18 @@ void Menu::passengerMenu(int& opcion)
     while (true) {
         limpiarPantalla();
         lynx();
-        Console::SetCursorPosition(56, 10); cout << "Pasajero";
-        Console::SetCursorPosition(46, 11); cout << "----------------------------";
-        Console::SetCursorPosition(50, 12);
+        navBarP();
+        Console::SetCursorPosition(46 + 18, 12); cout << "----------------------------";
+        Console::SetCursorPosition(50 + 18, 13);
         if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Iniciar Sesion"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Iniciar Sesion"; }
-        Console::SetCursorPosition(50, 13);
+        Console::SetCursorPosition(50 + 18, 14);
         if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Registrarme"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Registrarme"; }
 
         Console::ForegroundColor = ConsoleColor::White;
-        Console::SetCursorPosition(46, 14); cout << "----------------------------";
-        Console::SetCursorPosition(50, 15);
+        Console::SetCursorPosition(46 + 18, 15); cout << "----------------------------";
+        Console::SetCursorPosition(50 + 18, 16);
         if (opcion == 3) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Volver al menu principal "; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Volver al menu principal "; }
 
@@ -312,49 +430,49 @@ void Menu::passengerMenu(int& opcion)
 
 void Menu::passengerLogin(string& DNI, string& name, string& password)
 {
-    limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(50, y++); cout << "Pasajero > Iniciar Sesion";
-    Console::SetCursorPosition(46, y++); cout << "----------------------------";
-    Console::SetCursorPosition(48, y++); cout << "DNI             : "; cin >> DNI; cin.ignore();
-    Console::SetCursorPosition(48, y++); cout << "Nombre Completo : "; std::getline(cin, name);
-    Console::SetCursorPosition(48, y++); cout << "Contrasena      : "; cin >> password;
+    limpiarPantalla(); lynx(); navBarP(); int y = 11;
+    Console::SetCursorPosition(54 + 18, y++); cout << "Iniciar Sesion";
+    Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
+    Console::SetCursorPosition(48 + 18, y++); cout << "DNI             : "; cin >> DNI; cin.ignore();
+    Console::SetCursorPosition(48 + 18, y++); cout << "Nombre Completo : "; std::getline(cin, name);
+    Console::SetCursorPosition(48 + 18, y++); cout << "Contrasena      : "; cin >> password;
 }
 
 void Menu::passengerSignIn(string& DNI, string& name, string& password)
 {
-    limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(50, y++); cout << "Pasajero > Registro";
-    Console::SetCursorPosition(46, y++); cout << "----------------------------";
-    Console::SetCursorPosition(48, y++); cout << "DNI             : "; cin >> DNI; cin.ignore();
-    Console::SetCursorPosition(48, y++); cout << "Nombre Completo : "; std::getline(cin, name);
-    Console::SetCursorPosition(48, y++); cout << "Contrasena      : "; cin >> password;
+    limpiarPantalla(); lynx(); navBarP(); int y = 11;
+    Console::SetCursorPosition(54 + 18, y++); cout << "Registro";
+    Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
+    Console::SetCursorPosition(48 + 18, y++); cout << "DNI             : "; cin >> DNI; cin.ignore();
+    Console::SetCursorPosition(48 + 18, y++); cout << "Nombre Completo : "; std::getline(cin, name);
+    Console::SetCursorPosition(48 + 18, y++); cout << "Contrasena      : "; cin >> password;
 }
 
-void Menu::passengerOptions(int& opcion)
+void Menu::passengerOptions(int& opcion, Passenger passenger)
 {
     opcion = 1;
     while (true) {
-        limpiarPantalla(); lynx();
-        Console::SetCursorPosition(56, 11); cout << "Pasajero";
-        Console::SetCursorPosition(46, 12); cout << "----------------------------";
-        Console::SetCursorPosition(48, 13);
+        limpiarPantalla(); lynx(); navBarP(); navName(passenger.getName());
+        showPassengerSidebar(passenger);
+        Console::SetCursorPosition(46 + 18, 12); cout << "----------------------------";
+        Console::SetCursorPosition(48 + 18, 13);
         if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Solicitar un viaje"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Solicitar un viaje"; }
-        Console::SetCursorPosition(48, 14);
+        Console::SetCursorPosition(48 + 18, 14);
         if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ver viaje activo"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ver viaje activo"; }
-        Console::SetCursorPosition(48, 15);
+        Console::SetCursorPosition(48 + 18, 15);
         if (opcion == 3) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Historial de viajes"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Historial de viajes"; }
-        Console::SetCursorPosition(48, 16);
+        Console::SetCursorPosition(48 + 18, 16);
         if (opcion == 4) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Calificar ultimo conductor"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Calificar ultimo conductor"; }
-        Console::SetCursorPosition(48, 17);
+        Console::SetCursorPosition(48 + 18, 17);
         if (opcion == 5) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Perfil"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Perfil"; }
         Console::ForegroundColor = ConsoleColor::White;
-        Console::SetCursorPosition(46, 18); cout << "----------------------------";
-        Console::SetCursorPosition(48, 19);
+        Console::SetCursorPosition(46 + 18, 18); cout << "----------------------------";
+        Console::SetCursorPosition(48 + 18, 19);
         if (opcion == 6) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Cerrar sesion"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Cerrar sesion"; }
         Console::ForegroundColor = ConsoleColor::White;
@@ -368,42 +486,46 @@ void Menu::passengerOptions(int& opcion)
     }
 }
 
-void Menu::passengerSendTrip(string& origen, string& destino, int& tipo, float& km)
+void Menu::passengerSendTrip(string& origen, string& destino, int& tipo, float& km, Passenger passenger)
 {
-    limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(50, y++); cout << "Pasajero > Solicitar Viaje";
-    Console::SetCursorPosition(46, y++); cout << "----------------------------";
+    limpiarPantalla(); lynx(); navBarP(); navName(passenger.getName());
+    showPassengerSidebar(passenger);
+    int y = 11;
+    Console::SetCursorPosition(53 + 18, y++); cout << "Solicitar Viaje";
+    Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
     cin.ignore();
-    Console::SetCursorPosition(48, y++); cout << "Origen   : "; std::getline(cin, origen);
-    Console::SetCursorPosition(48, y++); cout << "Destino  : "; std::getline(cin, destino);
+    Console::SetCursorPosition(48 + 18, y++); cout << "Origen   : "; std::getline(cin, origen);
+    Console::SetCursorPosition(48 + 18, y++); cout << "Destino  : "; std::getline(cin, destino);
     int yPrompt = y;
-    Console::SetCursorPosition(48, y++); cout << "Tipo [1:Eco, 2:Std, 3:Pre]: ";
+    Console::SetCursorPosition(48 + 18, y++); cout << "Tipo [1:Eco, 2:Std, 3:Pre]: ";
     while (!(cin >> tipo) || tipo < 1 || tipo > 3) {
-        Console::SetCursorPosition(48, y); cout << "Error: Elija 1-3.         ";
+        Console::SetCursorPosition(48 + 18, y); cout << "Error: Elija 1-3.         ";
         cin.clear(); cin.ignore(10000, '\n');
-        Console::SetCursorPosition(80, yPrompt); cout << "   "; Console::SetCursorPosition(80, yPrompt);
+        Console::SetCursorPosition(80 + 18, yPrompt); cout << "   "; Console::SetCursorPosition(80 + 18, yPrompt);
     }
     y++; int yKm = y;
-    Console::SetCursorPosition(48, y++); cout << "Distancia (km): ";
+    Console::SetCursorPosition(48 + 18, y++); cout << "Distancia (km): ";
     while (!(cin >> km) || km <= 0) {
-        Console::SetCursorPosition(48, y); cout << "Error: Ingrese un dato valido (km > 0)";
+        Console::SetCursorPosition(48 + 18, y); cout << "Error: Ingrese un dato valido (km > 0)";
         cin.clear(); cin.ignore(10000, '\n');
-        Console::SetCursorPosition(64, yKm); cout << "                             "; Console::SetCursorPosition(64, yKm);
+        Console::SetCursorPosition(64 + 18, yKm); cout << "                             "; Console::SetCursorPosition(64 + 18, yKm);
     }
 }
 
-void Menu::passengerConfirmTrip(int& opcion, string origen, string destino, int tipo, Trip trip)
+void Menu::passengerConfirmTrip(int& opcion, string origen, string destino, int tipo, Trip trip, Passenger passenger)
 {
     opcion = 1;
     while (true) {
-        limpiarPantalla(); lynx(); int y = 11;
-        Console::SetCursorPosition(50, y++); cout << "Pasajero > Confirmar Viaje";
-        Console::SetCursorPosition(46, y++); cout << "----------------------------";
-        trip.mostrar(52, y); y++;
-        Console::SetCursorPosition(48, y);
+        limpiarPantalla(); lynx(); navBarP(); navName(passenger.getName());
+        showPassengerSidebar(passenger);
+        int y = 11;
+        Console::SetCursorPosition(55 + 18, y++); cout << "Confirmar Viaje";
+        Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
+        trip.mostrar(52 + 18, y); y += 6;
+        Console::SetCursorPosition(48 + 18, y);
         if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Confirmar viaje"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Confirmar viaje"; }
-        Console::SetCursorPosition(48, y + 1);
+        Console::SetCursorPosition(48 + 18, y + 1);
         if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Cancelar"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Cancelar"; }
         Console::ForegroundColor = ConsoleColor::White;
@@ -416,32 +538,33 @@ void Menu::passengerConfirmTrip(int& opcion, string origen, string destino, int 
 
 void Menu::passengerProfile(int& option, Passenger passenger)
 {
-    limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(50, y++); cout << "Pasajero > Perfil";
-    Console::SetCursorPosition(46, y++); cout << "----------------------------";
-    passenger.mostrar(48, y); y++;
-    Console::SetCursorPosition(48, y++); cout << "[1] - Actualizar Datos";
-    Console::SetCursorPosition(48, y++); cout << "[0] - Volver";
-    Console::SetCursorPosition(48, y++); cout << "Opcion: ";
-    Console::SetCursorPosition(56, y - 1); cin >> option;
+    limpiarPantalla(); lynx(); navBarP(); navName(passenger.getName());
+    showPassengerSidebar(passenger);
+    int y = 11;
+    Console::SetCursorPosition(50 + 18, y++); cout << "Perfil";
+    Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
+    passenger.mostrar(48 + 18, y); y += 6;
+    Console::SetCursorPosition(48 + 18, y++); cout << "[1] - Actualizar Datos";
+    Console::SetCursorPosition(48 + 18, y++); cout << "[0] - Volver";
+    Console::SetCursorPosition(48 + 18, y++); cout << "Opcion: ";
+    Console::SetCursorPosition(56 + 18, y - 1); cin >> option;
 }
 
 void Menu::driverMenu(int& opcion)
 {
     opcion = 1;
     while (true) {
-        limpiarPantalla(); lynx();
-        Console::SetCursorPosition(50, 10); cout << "Conductor";
-        Console::SetCursorPosition(46, 11); cout << "----------------------------";
-        Console::SetCursorPosition(48, 12);
+        limpiarPantalla(); lynx(); navBarC();
+        Console::SetCursorPosition(46 + 18, 11); cout << "----------------------------";
+        Console::SetCursorPosition(48 + 18, 12);
         if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Iniciar Sesion"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Iniciar Sesion"; }
-        Console::SetCursorPosition(48, 13);
+        Console::SetCursorPosition(48 + 18, 13);
         if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Registrarme"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Registrarme"; }
         Console::ForegroundColor = ConsoleColor::White;
-        Console::SetCursorPosition(46, 14); cout << "----------------------------";
-        Console::SetCursorPosition(48, 15);
+        Console::SetCursorPosition(46 + 18, 14); cout << "----------------------------";
+        Console::SetCursorPosition(48 + 18, 15);
         if (opcion == 3) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Volver al menu principal "; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Volver al menu principal "; }
         Console::ForegroundColor = ConsoleColor::White;
@@ -457,39 +580,39 @@ void Menu::driverMenu(int& opcion)
 
 void Menu::driverLogin(string& DNI, string& name, string& password)
 {
-    limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(50, y++); cout << "Conductor > Iniciar Sesion";
-    Console::SetCursorPosition(46, y++); cout << "----------------------------";
-    Console::SetCursorPosition(48, y++); cout << "DNI             : "; cin >> DNI; cin.ignore();
-    Console::SetCursorPosition(48, y++); cout << "Nombre Completo : "; std::getline(cin, name);
-    Console::SetCursorPosition(48, y++); cout << "Contrasena      : "; cin >> password;
+    limpiarPantalla(); lynx(); navBarC(); int y = 11;
+    Console::SetCursorPosition(54 + 18, y++); cout << "Iniciar Sesion";
+    Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
+    Console::SetCursorPosition(48 + 18, y++); cout << "DNI             : "; cin >> DNI; cin.ignore();
+    Console::SetCursorPosition(48 + 18, y++); cout << "Nombre Completo : "; std::getline(cin, name);
+    Console::SetCursorPosition(48 + 18, y++); cout << "Contrasena      : "; cin >> password;
 }
 
-void Menu::driverOptions(int& opcion, string name, string placa, bool estado, float rating)
+void Menu::driverOptions(int& opcion, string name, string placa, bool estado, float rating, Driver driver)
 {
     opcion = 1;
     while (true) {
-        limpiarPantalla(); lynx();
-        Console::SetCursorPosition(50, 11); cout << "Conductor";
-        Console::SetCursorPosition(46, 12); cout << "----------------------------";
-        Console::SetCursorPosition(48, 13);
+        limpiarPantalla(); lynx(); navBarC(); navName(driver.getName());
+        showDriverSidebar(driver);
+        Console::SetCursorPosition(46 + 18, 12); cout << "----------------------------";
+        Console::SetCursorPosition(48 + 18, 13);
         if (opcion == 1) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Registrar Viaje Manual"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Registrar Viaje Manual"; }
-        Console::SetCursorPosition(48, 14);
+        Console::SetCursorPosition(48 + 18, 14);
         if (opcion == 2) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ver Carreras Hechas"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ver Carreras Hechas"; }
-        Console::SetCursorPosition(48, 15);
+        Console::SetCursorPosition(48 + 18, 15);
         if (opcion == 3) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Cambiar a Disponible / Finalizar Viaje"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Cambiar a Disponible / Finalizar Viaje"; }
-        Console::SetCursorPosition(48, 16);
+        Console::SetCursorPosition(48 + 18, 16);
         if (opcion == 4) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ver mis Ganancias"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ver mis Ganancias"; }
-        Console::SetCursorPosition(48, 17);
+        Console::SetCursorPosition(48 + 18, 17);
         if (opcion == 5) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Perfil"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Perfil"; }
         Console::ForegroundColor = ConsoleColor::White;
-        Console::SetCursorPosition(46, 18); cout << "----------------------------";
-        Console::SetCursorPosition(48, 19);
+        Console::SetCursorPosition(46 + 18, 18); cout << "----------------------------";
+        Console::SetCursorPosition(48 + 18, 19);
         if (opcion == 6) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Cerrar sesion"; }
         else { Console::ForegroundColor = ConsoleColor::White; cout << "    Cerrar sesion"; }
         Console::ForegroundColor = ConsoleColor::White;
@@ -503,98 +626,107 @@ void Menu::driverOptions(int& opcion, string name, string placa, bool estado, fl
     }
 }
 
-void Menu::driverRegisterTrip(string& partida, string& llegada, float& km, int& tipo)
+void Menu::driverRegisterTrip(string& partida, string& llegada, float& km, int& tipo, Driver driver)
 {
-    limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(50, y++); cout << "Conductor > Registrar Viaje";
-    Console::SetCursorPosition(46, y++); cout << "----------------------------";
+    limpiarPantalla(); lynx(); navBarC(); navName(driver.getName());
+    showDriverSidebar(driver);
+    int y = 11;
+    Console::SetCursorPosition(53 + 18, y++); cout << "Registrar Viaje";
+    Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
     cin.ignore();
-    Console::SetCursorPosition(48, y++); cout << "Origen   : "; std::getline(cin, partida);
-    Console::SetCursorPosition(48, y++); cout << "Destino  : "; std::getline(cin, llegada);
-    int yT = y; Console::SetCursorPosition(48, y++); cout << "Tipo [1:Eco, 2:Std, 3:Pre]: ";
+    Console::SetCursorPosition(48 + 18, y++); cout << "Origen   : "; std::getline(cin, partida);
+    Console::SetCursorPosition(48 + 18, y++); cout << "Destino  : "; std::getline(cin, llegada);
+    int yT = y; Console::SetCursorPosition(48 + 18, y++); cout << "Tipo [1:Eco, 2:Std, 3:Pre]: ";
     while (!(cin >> tipo) || tipo < 1 || tipo > 3) {
-        Console::SetCursorPosition(48, y); cout << "Error: Elija 1-3.         ";
+        Console::SetCursorPosition(48 + 18, y); cout << "Error: Elija 1-3.         ";
         cin.clear(); cin.ignore(10000, '\n');
-        Console::SetCursorPosition(80, yT); cout << "   "; Console::SetCursorPosition(80, yT);
+        Console::SetCursorPosition(80 + 18, yT); cout << "   "; Console::SetCursorPosition(80 + 18, yT);
     }
-    y++; int yKm = y; Console::SetCursorPosition(48, y++); cout << "Distancia (km): ";
+    y++; int yKm = y; Console::SetCursorPosition(48 + 18, y++); cout << "Distancia (km): ";
     while (!(cin >> km) || km <= 0) {
-        Console::SetCursorPosition(48, y); cout << "Error: Km > 0.            ";
+        Console::SetCursorPosition(48 + 18, y); cout << "Error: Km > 0.            ";
         cin.clear(); cin.ignore(10000, '\n');
-        Console::SetCursorPosition(68, yKm); cout << "   "; Console::SetCursorPosition(68, yKm);
+        Console::SetCursorPosition(68 + 18, yKm); cout << "   "; Console::SetCursorPosition(68 + 18, yKm);
     }
 }
 
 void Menu::driverSingIn(string& DNI, string& name, string& password)
 {
-    limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(50, y++); cout << "Conductor > Registro";
-    Console::SetCursorPosition(46, y++); cout << "----------------------------";
-    Console::SetCursorPosition(48, y++); cout << "DNI             : "; cin >> DNI; cin.ignore();
-    Console::SetCursorPosition(48, y++); cout << "Nombre Completo : "; std::getline(cin, name);
-    Console::SetCursorPosition(48, y++); cout << "Contrasena      : "; cin >> password;
+    limpiarPantalla(); lynx(); navBarC(); int y = 11;
+    Console::SetCursorPosition(50 + 18, y++); cout << "Registro";
+    Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
+    Console::SetCursorPosition(48 + 18, y++); cout << "DNI             : "; cin >> DNI; cin.ignore();
+    Console::SetCursorPosition(48 + 18, y++); cout << "Nombre Completo : "; std::getline(cin, name);
+    Console::SetCursorPosition(48 + 18, y++); cout << "Contrasena      : "; cin >> password;
 }
 
-void Menu::driverRegisterCar(string& placa, string& marca, string& modelo, string& color, int& ano)
+void Menu::driverRegisterCar(string& placa, string& marca, string& modelo, string& color, int& ano, Driver driver)
 {
-    limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(50, y++); cout << "Conductor > Registrar Carro";
-    Console::SetCursorPosition(46, y++); cout << "----------------------------";
-    Console::SetCursorPosition(48, y++); cout << "Placa           : "; cin >> placa;
-    Console::SetCursorPosition(48, y++); cout << "Marca           : "; cin >> marca;
-    Console::SetCursorPosition(48, y++); cout << "Modelo          : "; cin >> modelo;
-    Console::SetCursorPosition(48, y++); cout << "Color           : "; cin >> color;
-    Console::SetCursorPosition(48, y++); cout << "Anio            : "; cin >> ano;
+    limpiarPantalla(); lynx(); navBarC(); navName(driver.getName());
+    showDriverSidebar(driver);
+    int y = 11;
+    Console::SetCursorPosition(50 + 18, y++); cout << "Registrar Carro";
+    Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
+    Console::SetCursorPosition(48 + 18, y++); cout << "Placa           : "; cin >> placa;
+    Console::SetCursorPosition(48 + 18, y++); cout << "Marca           : "; cin >> marca;
+    Console::SetCursorPosition(48 + 18, y++); cout << "Modelo          : "; cin >> modelo;
+    Console::SetCursorPosition(48 + 18, y++); cout << "Color           : "; cin >> color;
+    Console::SetCursorPosition(48 + 18, y++); cout << "Anio            : "; cin >> ano;
 }
 
 void Menu::driverGains(int& option, Driver driver)
 {
-    limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(50, y++); cout << "Conductor > Ganancias";
-    Console::SetCursorPosition(46, y++); cout << "----------------------------";
-    Console::SetCursorPosition(48, y++); cout << "Viajes          : "; std::cout << driver.getTotalTrips();
-    Console::SetCursorPosition(48, y++); cout << "Ganancia Bruta  : "; std::cout << driver.getTotalEarnings();
-    Console::SetCursorPosition(48, y++); cout << "Comision (20%)  : "; std::cout << driver.getTotalEarnings() * 0.20f;
-    Console::SetCursorPosition(48, y++); cout << "Ganancia Neta   : "; std::cout << driver.getNetEarnings();
-    y++; Console::SetCursorPosition(48, y++); cout << "[0] - Volver";
-    Console::SetCursorPosition(61, y - 1); cin >> option;
+    limpiarPantalla(); lynx(); navBarC(); navName(driver.getName());
+    showDriverSidebar(driver);
+    int y = 11;
+    Console::SetCursorPosition(50 + 18, y++); cout << "Ganancias";
+    Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
+    Console::SetCursorPosition(48 + 18, y++); cout << "Viajes          : "; std::cout << driver.getTotalTrips();
+    Console::SetCursorPosition(48 + 18, y++); cout << "Ganancia Bruta  : "; std::cout << driver.getTotalEarnings();
+    Console::SetCursorPosition(48 + 18, y++); cout << "Comision (20%)  : "; std::cout << driver.getTotalEarnings() * 0.20f;
+    Console::SetCursorPosition(48 + 18, y++); cout << "Ganancia Neta   : "; std::cout << driver.getNetEarnings();
+    y++; Console::SetCursorPosition(48 + 18, y++); cout << "[0] - Volver";
+    Console::SetCursorPosition(61 + 18, y - 1); cin >> option;
 }
 
 void Menu::driverProfile(int& option, Driver driver)
 {
-    limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(52, y++); cout << "Conductor > Perfil";
-    Console::SetCursorPosition(52, y++); cout << "-------------------------";
-    driver.mostrar(52, y); y++;
-    Console::SetCursorPosition(52, y++); cout << "[0] - Volver";
-    Console::SetCursorPosition(65, y - 1); cin >> option;
+    limpiarPantalla(); lynx(); navBarC(); navName(driver.getName());
+    showDriverSidebar(driver);
+    int y = 11;
+    Console::SetCursorPosition(52 + 18, y++); cout << "Perfil";
+    Console::SetCursorPosition(52 + 18, y++); cout << "-------------------------";
+    driver.mostrar(52 + 18, y); y += 6;
+    Console::SetCursorPosition(52 + 18, y++); cout << "[0] - Volver";
+    Console::SetCursorPosition(65 + 18, y - 1); cin >> option;
 }
 
 void Menu::tripHistory(int& option, Trip trips[], int s, string title)
 {
     limpiarPantalla(); lynx(); int y = 11;
-    Console::SetCursorPosition(52, y++); cout << "Lynx > " << title << " > Historial";
-    Console::SetCursorPosition(52, y++); cout << "------------------------------------";
+    Console::SetCursorPosition(52 + 18, y++); cout << "Lynx > " << title << " > Historial";
+    Console::SetCursorPosition(52 + 18, y++); cout << "------------------------------------";
     if (s == 0 || trips == nullptr) {
-        Console::SetCursorPosition(52, y++); cout << "No hay registros disponibles.";
+        Console::SetCursorPosition(52 + 18, y++); cout << "No hay registros disponibles.";
     }
     else {
         for (int i = 0; i < s; i++) {
-            trips[i].mostrar(52, y); y++;
+            trips[i].mostrar(52 + 18, y);
             if (y > 20) {
-                Console::SetCursorPosition(52, y++); cout << "-- Presione una tecla para mas --";
+                Console::SetCursorPosition(52 + 18, y++); cout << "-- Presione una tecla para mas --";
                 _getch(); limpiarPantalla(); lynx(); y = 11;
-                Console::SetCursorPosition(52, y++); cout << "Lynx > " << title << " > Historial (cont.)";
-                Console::SetCursorPosition(52, y++); cout << "------------------------------------";
+                Console::SetCursorPosition(52 + 18, y++); cout << "Lynx > " << title << " > Historial (cont.)";
+                Console::SetCursorPosition(52 + 18, y++); cout << "------------------------------------";
             }
         }
     }
-    y++; Console::SetCursorPosition(52, y++); cout << "[0] - Volver";
-    Console::SetCursorPosition(65, y - 1); cin >> option;
+    y++; Console::SetCursorPosition(52 + 18, y++); cout << "[0] - Volver";
+    Console::SetCursorPosition(65 + 18, y - 1); cin >> option;
 }
 
 void Menu::LYNX()
 {
+    Console::CursorVisible = false;
     Console::SetWindowSize(160, 30);
     prepararDirectorioTrabajo();
 
@@ -635,11 +767,12 @@ void Menu::LYNX()
                     currentPassengerDni = DNI;
 
                     do {
-                        passengerOptions(option);
+                        Passenger menuPassenger = authMgr.getUserByDni(currentPassengerDni);
+                        passengerOptions(option, menuPassenger);
                         switch (option) {
                         case 1:
                         {
-                            passengerSendTrip(origen, destino, tipo, km);
+                            passengerSendTrip(origen, destino, tipo, km, menuPassenger);
                             if (origen.empty() || destino.empty() || tipo < 1 || tipo > 3 || km <= 0.0f) {
                                 mostrarMensaje("Datos invalidos"); option = 6; break;
                             }
@@ -663,7 +796,7 @@ void Menu::LYNX()
                             if (bestDriverDni.empty()) preview.setStatus("pendiente");
                             else preview.setStatus("en_curso");
 
-                            do { passengerConfirmTrip(option, origen, destino, tipo, preview); } while (option < 1 || option > 2);
+                            do { passengerConfirmTrip(option, origen, destino, tipo, preview, menuPassenger); } while (option < 1 || option > 2);
 
                             if (option == 1) {
                                 Trip activeT;
@@ -694,12 +827,14 @@ void Menu::LYNX()
                             if (activeTrip.getTripId() != "") {
                                 int subOpt = 1;
                                 while (subOpt != 0) {
-                                    limpiarPantalla(); lynx(); int y = 11;
-                                    Console::SetCursorPosition(48, y++); cout << "Viaje en curso";
-                                    Console::SetCursorPosition(48, y++); cout << "--------------";
-                                    activeTrip.mostrar(48, y); y++;
-                                    Console::SetCursorPosition(48, y++); cout << "[0] - Volver";
-                                    Console::SetCursorPosition(48, y - 1); cin >> subOpt;
+                                    limpiarPantalla(); lynx(); navBarP(); navName(menuPassenger.getName());
+                                    showPassengerSidebar(menuPassenger);
+                                    int y = 11;
+                                    Console::SetCursorPosition(48 + 18, y++); cout << "Viaje en curso";
+                                    Console::SetCursorPosition(48 + 18, y++); cout << "--------------";
+                                    activeTrip.mostrar(48 + 18, y); y += 6;
+                                    Console::SetCursorPosition(48 + 18, y++); cout << "[0] - Volver";
+                                    Console::SetCursorPosition(48 + 18, y - 1); cin >> subOpt;
                                 }
                             }
                             else {
@@ -707,12 +842,14 @@ void Menu::LYNX()
                                 if (pendingTrip.getTripId() != "") {
                                     int subOpt = 1;
                                     while (subOpt != 0) {
-                                        limpiarPantalla(); lynx(); int y = 11;
-                                        Console::SetCursorPosition(48, y++); cout << "Viaje pendiente";
-                                        Console::SetCursorPosition(48, y++); cout << "---------------";
-                                        pendingTrip.mostrar(48, y); y++;
-                                        Console::SetCursorPosition(48, y++); cout << "[0] - Volver";
-                                        Console::SetCursorPosition(48, y - 1); cin >> subOpt;
+                                        limpiarPantalla(); lynx(); navBarP(); navName(menuPassenger.getName());
+                                        showPassengerSidebar(menuPassenger);
+                                        int y = 11;
+                                        Console::SetCursorPosition(48 + 18, y++); cout << "Viaje pendiente";
+                                        Console::SetCursorPosition(48 + 18, y++); cout << "---------------";
+                                        pendingTrip.mostrar(48 + 18, y); y += 6;
+                                        Console::SetCursorPosition(48 + 18, y++); cout << "[0] - Volver";
+                                        Console::SetCursorPosition(48 + 18, y - 1); cin >> subOpt;
                                     }
                                 }
                                 else { mostrarMensaje("No hay viaje activo."); }
@@ -738,16 +875,18 @@ void Menu::LYNX()
 
                             int ratingOption = -1;
                             do {
-                                limpiarPantalla(); lynx(); int y = 11;
-                                Console::SetCursorPosition(48, y++); cout << "Calificar Conductor";
-                                Console::SetCursorPosition(48, y++); cout << "-------------------";
-                                Console::SetCursorPosition(48, y++); cout << "[1] - * Muy malo";
-                                Console::SetCursorPosition(48, y++); cout << "[2] - ** Malo";
-                                Console::SetCursorPosition(48, y++); cout << "[3] - *** Regular";
-                                Console::SetCursorPosition(48, y++); cout << "[4] - **** Bueno";
-                                Console::SetCursorPosition(48, y++); cout << "[5] - ***** Excelente";
-                                Console::SetCursorPosition(48, y++); cout << "[0] - Omitir";
-                                Console::SetCursorPosition(48, y++); cout << "Opcion: "; cin >> ratingOption;
+                                limpiarPantalla(); lynx(); navBarP(); navName(menuPassenger.getName());
+                                showPassengerSidebar(menuPassenger);
+                                int y = 11;
+                                Console::SetCursorPosition(48 + 18, y++); cout << "Calificar Conductor";
+                                Console::SetCursorPosition(48 + 18, y++); cout << "-------------------";
+                                Console::SetCursorPosition(48 + 18, y++); cout << "[1] - * Muy malo";
+                                Console::SetCursorPosition(48 + 18, y++); cout << "[2] - ** Malo";
+                                Console::SetCursorPosition(48 + 18, y++); cout << "[3] - *** Regular";
+                                Console::SetCursorPosition(48 + 18, y++); cout << "[4] - **** Bueno";
+                                Console::SetCursorPosition(48 + 18, y++); cout << "[5] - ***** Excelente";
+                                Console::SetCursorPosition(48 + 18, y++); cout << "[0] - Omitir";
+                                Console::SetCursorPosition(48 + 18, y++); cout << "Opcion: "; cin >> ratingOption;
                             } while (ratingOption < 0 || ratingOption > 5);
 
                             if (ratingOption > 0) {
@@ -770,12 +909,14 @@ void Menu::LYNX()
                                 passengerProfile(profileOption, current);
                                 if (profileOption == 1) {
                                     string newName, newPass;
-                                    limpiarPantalla(); lynx(); int y = 11;
-                                    Console::SetCursorPosition(50, y++); cout << "Pasajero > Actualizar Datos";
-                                    Console::SetCursorPosition(46, y++); cout << "----------------------------";
+                                    limpiarPantalla(); lynx(); navBarP(); navName(current.getName());
+                                    showPassengerSidebar(current);
+                                    int y = 11;
+                                    Console::SetCursorPosition(50 + 18, y++); cout << "Pasajero > Actualizar Datos";
+                                    Console::SetCursorPosition(46 + 18, y++); cout << "----------------------------";
                                     cin.ignore();
-                                    Console::SetCursorPosition(48, y++); cout << "Nuevo Nombre : "; std::getline(cin, newName);
-                                    Console::SetCursorPosition(48, y++); cout << "Nueva Contra : "; cin >> newPass;
+                                    Console::SetCursorPosition(48 + 18, y++); cout << "Nuevo Nombre : "; std::getline(cin, newName);
+                                    Console::SetCursorPosition(48 + 18, y++); cout << "Nueva Contra : "; cin >> newPass;
                                     if (!newName.empty() && !newPass.empty()) {
                                         authMgr.updatePassengerData(currentPassengerDni, newName, newPass);
                                         guardarDatos(fileManager, authMgr, tripMgr);
@@ -821,11 +962,11 @@ void Menu::LYNX()
 
                     do {
                         Driver menuDriver = authMgr.getDriverByDni(currentDriverDni);
-                        driverOptions(option, menuDriver.getName(), menuDriver.getVehicle().getPlate(), menuDriver.getIsAvailable(), menuDriver.getRating());
+                        driverOptions(option, menuDriver.getName(), menuDriver.getVehicle().getPlate(), menuDriver.getIsAvailable(), menuDriver.getRating(), menuDriver);
                         switch (option) {
                         case 1:
                         {
-                            driverRegisterTrip(partida, llegada, km, tipo);
+                            driverRegisterTrip(partida, llegada, km, tipo, menuDriver);
                             if (partida.empty() || llegada.empty() || km <= 0.0f || tipo < 1 || tipo > 3) { mostrarMensaje("Datos invalidos"); option = 7; break; }
 
                             Driver current = authMgr.getDriverByDni(currentDriverDni);
@@ -889,7 +1030,10 @@ void Menu::LYNX()
                 {
                     do { driverSingIn(DNI, name, password); } while (DNI.empty() || password.empty() || name.empty());
                     if (!authMgr.validateDni(DNI)) { mostrarMensaje("DNI invalido", "Debe tener 8 digitos."); option = 6; break; }
-                    do { driverRegisterCar(placa, marca, modelo, color, anio); } while (placa.empty() || marca.empty() || modelo.empty() || color.empty() || anio < 2005 || anio > 2026);
+                    do {
+                        Driver dummy; dummy.setName(name); dummy.setDni(DNI);
+                        driverRegisterCar(placa, marca, modelo, color, anio, dummy);
+                    } while (placa.empty() || marca.empty() || modelo.empty() || color.empty() || anio < 2005 || anio > 2026);
                     Vehicle vehicle(placa, marca, modelo, color, anio);
                     if (!authMgr.registerDriver(name, DNI, password, vehicle)) { mostrarMensaje("No se pudo crear la cuenta", "El DNI ya esta registrado."); option = 6; break; }
                     guardarDatos(fileManager, authMgr, tripMgr);

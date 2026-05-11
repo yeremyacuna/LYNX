@@ -89,29 +89,29 @@ public:
             if (opcion == 7) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Estadisticas generales"; }
             else { Console::ForegroundColor = ConsoleColor::White; cout << "    Estadisticas generales"; }
 
-            Console::SetCursorPosition(48, 19);
+            Console::SetCursorPosition(48 + 18, 20);
             if (opcion == 8) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ordenar pasajeros por gasto"; }
             else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ordenar pasajeros por gasto"; }
 
-            Console::SetCursorPosition(48, 20);
+            Console::SetCursorPosition(48 + 18, 21);
             if (opcion == 9) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ordenar pasajeros por ID"; }
             else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ordenar pasajeros por ID"; }
 
-            Console::SetCursorPosition(48, 21);
+            Console::SetCursorPosition(48 + 18, 22);
             if (opcion == 10) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ordenar conductores por ID"; }
             else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ordenar conductores por ID"; }
 
-            Console::SetCursorPosition(48, 22);
+            Console::SetCursorPosition(48 + 18, 23);
             if (opcion == 11) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ordenar viajes activos por precio"; }
             else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ordenar viajes activos por precio"; }
 
-            Console::SetCursorPosition(48, 23);
+            Console::SetCursorPosition(48 + 18, 24);
             if (opcion == 12) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Ver passwords en binario"; }
             else { Console::ForegroundColor = ConsoleColor::White; cout << "    Ver passwords en binario"; }
 
             Console::ForegroundColor = ConsoleColor::White;
-            Console::SetCursorPosition(46, 24); cout << "    ----------------------------";
-            Console::SetCursorPosition(48, 25);
+            Console::SetCursorPosition(46 + 18, 25); cout << "    ----------------------------";
+            Console::SetCursorPosition(48 + 18, 26);
             if (opcion == 13) { Console::ForegroundColor = ConsoleColor::Yellow; cout << " >> Volver al menu principal"; }
             else { Console::ForegroundColor = ConsoleColor::White; cout << "    Volver al menu principal"; }
 
