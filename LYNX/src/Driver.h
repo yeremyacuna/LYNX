@@ -167,17 +167,17 @@ public:
 
     void mostrar(int x, int& y) override {
         string estadoStr = isAvailable ? "Disponible" : "En viaje";
-        Console::SetCursorPosition(x, y++); cout << "ID         : " << driverId << endl;
-        Console::SetCursorPosition(x, y++); cout << "Nombre     : " << name << endl;
-        Console::SetCursorPosition(x, y++); cout << "DNI        : " << dni << endl;
-        Console::SetCursorPosition(x, y++); cout << "Rating     : " << rating << endl;
-        Console::SetCursorPosition(x, y++); cout << "Viajes     : " << totalTrips << endl;
-        Console::SetCursorPosition(x, y++); cout << "Ganancias  : S/ " << totalEarnings << endl;
-        Console::SetCursorPosition(x, y++); cout << "Neto (80%) : S/ " << getNetEarnings() << endl;
-        Console::SetCursorPosition(x, y++); cout << "Estado     : " << estadoStr << endl;
-        Console::SetCursorPosition(x, y++); cout << "-- Vehiculo --" << endl;
+        Console::SetCursorPosition(x, y+1); cout << "ID       : " << driverId;
+        Console::SetCursorPosition(x, y+3); cout << "Nombre   : " << name;
+        Console::SetCursorPosition(x, y+5); cout << "DNI      : " << dni;
+        Console::SetCursorPosition(x, y+7); cout << "Rating   : " << rating;
+        Console::SetCursorPosition(x, y+9); cout << "Estado   : " << estadoStr;
+        Console::SetCursorPosition(x-2, y+11);cout<< (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219;
+    }
+
+    void mostrarVehiculo(int x, int& y) {
+        Console::SetCursorPosition(x, y + 11); cout << "-- Vehiculo --" << endl;
         vehicle.mostrar(x, y);
-        Console::SetCursorPosition(x, y++); cout << "-----------------------" << endl;
     }
 
     string getCodigo() { return driverId; }

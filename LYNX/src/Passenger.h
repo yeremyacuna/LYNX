@@ -178,13 +178,14 @@ public:
     }
 
     void mostrar(int x, int& y) override {
-        Console::SetCursorPosition(x, y++); cout << "ID      : " << passengerId << endl;
-        Console::SetCursorPosition(x, y++); cout << "Nombre  : " << name << endl;
-        Console::SetCursorPosition(x, y++); cout << "DNI     : " << dni << endl;
-        Console::SetCursorPosition(x, y++); cout << "Viajes  : " << totalTrips << endl;
-        Console::SetCursorPosition(x, y++); cout << "Gastado : S/ " << totalSpent << endl;
-        mostrarRating(x, y);
-        Console::SetCursorPosition(x, y++); cout << "-----------------------" << endl;
+        Console::SetCursorPosition(x, y+1); cout << " ID      : " << passengerId ;
+        Console::SetCursorPosition(x, y+3); cout << " Nombre  : " << name;
+        Console::SetCursorPosition(x, y+5); cout << " DNI     : " << dni ;
+        Console::SetCursorPosition(x, y+7); cout << " Viajes  : " << totalTrips ;
+        Console::SetCursorPosition(x, y+9); cout << " Gastado : S/ " << totalSpent;
+        y += 11;
+        mostrarRating(x+1, y);
+        Console::SetCursorPosition(x-1, y+1); cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219;
     }
 
     string getCodigo() { return passengerId; }
