@@ -16,12 +16,24 @@ using namespace std;
 
 class TripManager {
 private:
-    Queue<Trip>         waitingQueue;
+    Queue<Trip> waitingQueue;
     LinkedDoubleList<Trip> activeTrips;
-    Stack<Trip>        history;
-    int                    tripCounter;
+    Stack<Trip> history;
+    int tripCounter;
 
-    // Genera ID unico: TRP-10001, TRP-10002, ...
+    // extre los id de cada trip
+    static int extractTripNumber(const string& tripId) {
+        if (tripId.size() < 5) return 0;
+        if (tripId.substr(0, 4) != "TRP-") return 0;
+        try {
+            return std::stoi(tripId.substr(4));
+        }
+        catch (...) {
+            return 0;
+        }
+    }
+
+    // Genera ID unico: TRP-10001, TRP-10002
     string generateId() {
         return "TRP-" + to_string(10000 + (++tripCounter));
     }
@@ -32,12 +44,18 @@ private:
         if (n == 0) return nullptr;
         Trip* arr = new Trip[n];
         Stack<Trip> temp;
+
         for (int i = 0; i < n; i++) {
             arr[i] = history.peek();
             temp.push(history.peek());
             history.pop();
         }
-        while (!temp.isEmpty()) { history.push(temp.peek()); temp.pop(); }
+
+        while (!temp.isEmpty()) {
+            history.push(temp.peek());
+            temp.pop();
+        }
+
         return arr;
     }
 
@@ -52,12 +70,40 @@ public:
     int getTotalActiveTrips() { return activeTrips.getSize(); }
     int getTotalHistoryTrips() { return history.getSize(); }
 
+    // reconstruir contador de viajes o ids para el file trip
+    void rebuildTripCounter() {
+        int maxId = 0;
+
+        waitingQueue.forEach([&](Trip t) {
+            int actual = extractTripNumber(t.getTripId());
+            if (actual > maxId) maxId = actual;
+            });
+
+        for (int i = 0; i < activeTrips.getSize(); i++) {
+            int actual = extractTripNumber(activeTrips.get(i).getTripId());
+            if (actual > maxId) maxId = actual;
+        }
+
+        int n = 0;
+        Trip* historial = historyToArray(n);
+        for (int i = 0; i < n; i++) {
+            int actual = extractTripNumber(historial[i].getTripId());
+            if (actual > maxId) maxId = actual;
+        }
+        delete[] historial;
+
+        if (maxId >= 10000) tripCounter = maxId - 10000;
+        else tripCounter = 0;
+    }
+
     // Crea un viaje, calcula su precio y lo mete a la cola de espera
     Trip createTrip(string origin, string destination, int tipo, float km,
         string driverName, string passengerDni, string date) {
         Trip t(generateId(), origin, destination, 0.0f, driverName, passengerDni, date);
         t.setTipe(tipo);
-        t.calcPrice(tipo, km);
+        t.setPrice(t.calcPrice(tipo, km));
+        t.setStatus("pendiente");
+        if (driverName.empty()) t.setDriverName("Por asignar");
         waitingQueue.enqueue(t);
         cout << "  [OK] Viaje " << t.getTripId() << " creado | S/ " << t.getPrice() << "\n";
         return t;
@@ -69,6 +115,8 @@ public:
         if (waitingQueue.isEmpty()) { cout << "  [!] No hay viajes en espera.\n"; return false; }
         Trip t = waitingQueue.getFront();
         waitingQueue.dequeue();
+        Driver d = auth.getDriverByDni(driverDni);
+        t.setDriverName(d.getName());
         t.setStatus("en_curso");
         activeTrips.pushBack(t);
         auth.driverAcceptRide(driverDni, t.getPrice());
@@ -80,9 +128,9 @@ public:
     void cancelTrip() {
         if (waitingQueue.isEmpty()) { cout << "  [!] Cola vacia.\n"; return; }
         Trip t = waitingQueue.getFront();
+        waitingQueue.dequeue();
         t.setStatus("cancelado");
         history.push(t);
-        waitingQueue.dequeue();
         cout << "  [XX] Viaje " << t.getTripId() << " cancelado.\n";
     }
 
@@ -113,8 +161,9 @@ public:
     // Devuelve su DNI, o "" si no hay ninguno
     string matchBestDriver(AuthManager& auth) {
         string bestDni = "";
-        float  bestRating = -1.0f;
+        float bestRating = -1.0f;
         LinkedList<Driver>* dl = auth.getDriverList();
+
         for (int i = 0; i < dl->getSize(); i++) {
             Driver d = dl->get(i);
             if (d.getIsAvailable() && d.getRating() > bestRating) {
@@ -125,22 +174,42 @@ public:
         return bestDni;
     }
 
-    // VER
-
+    // FUNCIONES DE VER COMPLETADO
     void viewWaiting() {
-        cout << "\n  COLA DE ESPERA (" << waitingQueue.getSize() << " viajes)\n";
+        cout << "\nCOLA DE ESPERA (" << waitingQueue.getSize() << " viajes)\n";
+        if (waitingQueue.isEmpty()) {
+            cout << "  Sin viajes pendientes.\n";
+            return;
+        }
         waitingQueue.print();
     }
 
     void viewActive() {
         cout << "VIAJES ACTIVOS (" << activeTrips.getSize() << ")\n";
-        
+        if (activeTrips.isEmpty()) {
+            cout << "  Sin viajes activos.\n";
+            return;
+        }
+
+        for (int i = 0; i < activeTrips.getSize(); i++) {
+            cout << "  [" << i + 1 << "] " << activeTrips.get(i).toString() << "\n";
+        }
     }
 
     void viewHistory() {
         cout << "HISTORIAL DE VIAJES (" << history.getSize() << ")\n";
-        int n; Trip* arr = historyToArray(n);
-        
+        int n = 0;
+        Trip* arr = historyToArray(n);
+
+        if (!arr) {
+            cout << "  Sin historial registrado.\n";
+            return;
+        }
+
+        for (int i = 0; i < n; i++) {
+            cout << "  [" << i + 1 << "] " << arr[i].toString() << "\n";
+        }
+
         delete[] arr;
     }
 
@@ -169,11 +238,19 @@ public:
     // Se usa en listarViajes() del AdministratorMenu para mostrar la cola sin sacar elementos
     void viewWaitingDetailed() {
         cout << "COLA DE ESPERA (" << waitingQueue.getSize() << " viajes)\n";
-        
+        if (waitingQueue.isEmpty()) {
+            cout << "  Sin viajes pendientes.\n";
+            return;
+        }
+
+        int posicion = 1;
+        waitingQueue.forEach([&](Trip t) {
+            cout << "  [" << posicion++ << "] " << t.toString() << "\n";
+            });
     }
 
     // LAMBDA 5: busca el ultimo viaje de un pasajero en el historial con Stack::findInStack
-    // No destruye la pila. Se usa en buscarUsuario() del AdministratorMenu
+   // No destruye la pila. Se usa en buscarUsuario() del AdministratorMenu
     Trip getLastTripByPassenger(string dni) {
         return history.findInStack([&](Trip t) { return t.getPassengerDni() == dni; });
     }
@@ -181,12 +258,16 @@ public:
     // LAMBDA 6: cancela un viaje activo por ID usando LinkedDoubleList::updateIf
     // Cambia su estado a "cancelado" sin necesitar el indice
     bool cancelActiveTrip(string tripId) {
-        bool encontrado = false;
-        activeTrips.updateIf(
-            [&](Trip t) { if (t.getTripId() == tripId) { encontrado = true; return true; } return false; },
-            [](Trip& t) { t.setStatus("cancelado"); }
-        );
-        return encontrado;
+        for (int i = 0; i < activeTrips.getSize(); i++) {
+            if (activeTrips.get(i).getTripId() == tripId) {
+                Trip t = activeTrips.get(i);
+                t.setStatus("cancelado");
+                history.push(t);
+                activeTrips.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     /*  RECURSIVIDAD
@@ -195,16 +276,17 @@ public:
     si no                       -> solo sigue*/
 private:
     float sumarGananciaRec(Trip* arr, int indice, int total) {
-        if (indice == total) return 0.0f;                   // caso base
+        if (indice == total) return 0.0f;
         float resto = sumarGananciaRec(arr, indice + 1, total);
         if (arr[indice].estaCompletado())
-            return arr[indice].getPrice() * 0.20f + resto;  // plataforma cobra 20%
+            return arr[indice].getPrice() * 0.20f + resto;
         return resto;
     }
 
 public:
     float getTotalPlatformEarnings() {
-        int n; Trip* arr = historyToArray(n);
+        int n = 0;
+        Trip* arr = historyToArray(n);
         if (!arr) return 0.0f;
         float total = sumarGananciaRec(arr, 0, n);
         delete[] arr;

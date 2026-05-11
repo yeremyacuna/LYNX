@@ -82,6 +82,9 @@
     <None Include="..\.gitignore">
       <Filter>ProjectFiles</Filter>
     </None>
+    <None Include="assets\passwords.bin">
+      <Filter>assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\LYNX_image.png">

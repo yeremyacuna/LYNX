@@ -2,6 +2,8 @@
 #include "User.h"
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <iomanip>
 #include "Trip.h"
 #include "../include/Queue.h"
 
@@ -15,6 +17,19 @@ private:
     float  totalSpent;    // total gastado en viajes completados 
     Queue<Trip> trips;
 
+    static int& nextPassengerNumber() // para poner su id en orden
+    {
+        static int nextId = 1;
+        return nextId;
+    }
+
+    static string formatPassengerId(int numero)
+    {
+        std::ostringstream FullIdPassenger;
+        FullIdPassenger << "PAS-" << std::setw(4) << std::setfill('0') << numero;
+        return FullIdPassenger.str();
+    }
+
 public:
 
     Passenger() : User() {
@@ -27,7 +42,7 @@ public:
     Passenger(string _name, string _dni, string _password)
         : User(_name, _dni, _password)
     {
-        passengerId = "PAS-" + _dni.substr(0, 4);
+        passengerId = formatPassengerId(nextPassengerNumber()++);   // suma cada vez que se crea uno nuevo
         rating = 5.0f;
         totalTrips = 0;
         totalSpent = 0.0f;
@@ -36,15 +51,40 @@ public:
     ~Passenger() {}
 
     string getPassengerId() const { return passengerId; }
-   
-    float  getRating() const  { return rating; }
+
+    float  getRating() const { return rating; }
     int    getTotalTrips() const { return totalTrips; }
     float  getTotalSpent() const { return totalSpent; }
 
     void setRating(float r) { rating = r; }
     void setTotalTrips(int t) { totalTrips = t; }
-    void setPassengerId(string pID) { passengerId = pID;  }
+    void setPassengerId(string pID) { passengerId = pID; }
     void setTotalSpent(float tSpent) { totalSpent = tSpent; }
+
+
+    // extraer pasajeros su id
+    static int extractPassengerNumber(const string& id) // con ayuda de la IA aqui se se uso para evitar errores al leer Id si es que este no tiene nigun string
+    {
+        if (id.size() < 5) return 0;
+        if (id.substr(0, 4) != "PAS-") return 0;
+        try {
+            return std::stoi(id.substr(4));
+        }
+        catch (...) {
+            return 0;
+        }
+    }
+
+    // generar el siguiente id para otro pasajero
+    static string generateNextPassengerId() {
+        return formatPassengerId(nextPassengerNumber()++);
+    }
+
+    // sincroniczar al siguiente pasajero con su id
+    static void syncNextPassengerId(int nextId) {
+        if (nextId < 1) nextId = 1;
+        nextPassengerNumber() = nextId;
+    }
 
     // c/viaje completado suma el precio pagado
     void addTrip(float precio) {
@@ -64,7 +104,7 @@ public:
 
     /* El pasajero califica al conductor
     Devuelve la calificacion para que Driver la procese con updateRating().
-    
+
     Ej:float nota = pasajero.rateDriver(5);
             conductor.updateRating(nota);*/
     float rateDriver(int estrellas) {
@@ -74,17 +114,21 @@ public:
     }
 
     string toString() const override {
-        return "ID: " + passengerId +
-            " | Nombre: " + name +
-            " | DNI: " + dni +
-            " | Viajes: " + to_string(totalTrips) +
-            " | Gastado: S/ " + to_string(totalSpent) +
-            " | Rating: " + to_string(rating);
+        std::stringstream ss; std::stringstream dd;
+        ss << std::fixed << std::setprecision(1) << rating;
+        dd << std::fixed << std::setprecision(2) << totalSpent;
+
+        return "ID:" + passengerId +
+            "|Nombre: " + name +
+            "|DNI: " + dni +
+            "|Viajes: " + to_string(totalTrips) +
+            "|Gastado: S/ " + dd.str() +
+            "|Rating: " + ss.str();
     }
 
     // LAMBDA 1(promedio)
     // Actualiza el rating del pasajero cuando un conductor lo califica.
-   
+
     void updateRating(float nuevaCalif) {
         auto calcularPromedio = [](float ratingActual, float nueva, int viajes) -> float {
             if (viajes == 0) return nueva;
@@ -93,7 +137,7 @@ public:
         rating = calcularPromedio(rating, nuevaCalif, totalTrips);
     }
 
-   
+
     // LAMBDA 2
     // Rating del pasajero con estrellas (*).
 
@@ -118,7 +162,7 @@ public:
         return nivel(totalSpent);
     }
     //  RECURSIVIDAD
- 
+
     /* Cuenta cuantos viajes del historial estan completados.
     Si ya no hay mas (indice == total) -> devuelve 0
     Si el viaje actual esta completado -> suma 1 y sigue

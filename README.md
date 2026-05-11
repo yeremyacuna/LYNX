@@ -12,11 +12,15 @@
 - [LinkedDoubleList.h](LYNX/include/LinkedDoubleList.h)
 - [Queue.h](LYNX/include/Queue.h)
 - [Stack.h](LYNX/include/Stack.h)
+- [FileManager.h](LYNX/include/FileManager.h)
 - [MainMenu.h](LYNX/src/MainMenu.h)
 - [Passenger.h](LYNX/src/Passenger.h)
 - [Trip.h](LYNX/src/Trip.h)
 - [User.h](LYNX/src/User.h)
 - [Vehicle.h](LYNX/src/Vehicle.h)
+- [AdministratorMenu.h](LYNX/src/AdministratorMenu.h)
+- [AuthManager.h](LYNX/src/AuthManager.h)
+- [TripManager](LYNX/src/TripManager.h)
 
 ###### Icon
 ![LYNX.](/LYNX/resources/LYNX_image.png "LYNX.")

@@ -114,11 +114,11 @@ public:
     //  RECURSIVIDAD
 
     /* Suma el precio total de los viajes COMPLETADOS en un arreglo
-    
+
     Si ya no hay mas viajes (indice == total) -> devuelve 0
     Si el viaje actual esta completado        -> suma su precio y sigue
     Si esta cancelado o pendiente             -> solo sigue
-    
+
     Ej:
     Trip historial[4] = { t1, t2, t3, t4 };
     float total = t1.sumarGastado(historial, 0, 4);*/

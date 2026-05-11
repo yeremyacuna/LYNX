@@ -44,7 +44,7 @@ public:
     
 
     string toString() const {
-        return plate + " | " + brand + " " + model + " | " + color + " | " + std::to_string(year);
+        return plate + "|" + brand + " " + model + "|" + color + "|" + std::to_string(year);
     }
 
     // para MainMenu)

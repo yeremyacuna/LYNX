@@ -136,6 +136,7 @@
   <ItemGroup>
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
+    <None Include="assets\passwords.bin" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\LYNX_image.png" />

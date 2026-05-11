@@ -3,6 +3,8 @@
 #include "Vehicle.h"
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <iomanip>
 
 
 using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string; 
@@ -17,6 +19,17 @@ private:
     float   totalEarnings;
     Vehicle vehicle;
 
+    static int& nextDriverNumber() {   // para poner su id en orden
+        static int nextId = 1;
+        return nextId;
+    }
+
+    static string formatDriverId(int numero) {
+        std::ostringstream oss;
+        oss << "DRV-" << std::setw(4) << std::setfill('0') << numero;
+        return oss.str();
+    }
+
 public:
 
     Driver() : User() {
@@ -30,7 +43,7 @@ public:
     Driver(string _name, string _dni, string _password, Vehicle _vehicle)
         : User(_name, _dni, _password)
     {
-        driverId = "DRV-" + _dni.substr(0, 4);
+        driverId = formatDriverId(nextDriverNumber()++);   // suma cada vez que se crea uno nuevo
         rating = 5.0f;
         isAvailable = true;
         totalTrips = 0;
@@ -53,6 +66,30 @@ public:
     void setTotalEarnings(float totalE) { totalEarnings = totalE; }
     void setAvailable(bool estado) { isAvailable = estado; }
     void setVehicle(Vehicle v) { vehicle = v; }
+
+    // extraer drivers su id
+    static int extractDriverNumber(const string& id) // con ayuda de la IA aqui se se uso para evitar errores al leer Id si es que este no tiene nigun string
+    { 
+        if (id.size() < 5) return 0;
+        if (id.substr(0, 4) != "DRV-") return 0;
+        try {
+            return std::stoi(id.substr(4));
+        }
+        catch (...) {
+            return 0;
+        }
+    }
+
+    // generar el siguiente id para otro driver
+    static string generateNextDriverId() {
+        return formatDriverId(nextDriverNumber()++);
+    }
+
+    // sincroniczar al siguiente driver con su id
+    static void syncNextDriverId(int nextId) {
+        if (nextId < 1) nextId = 1;
+        nextDriverNumber() = nextId;
+    }
 
 
     bool login(string _dni, string _pass) {
@@ -83,13 +120,16 @@ public:
 
     string toString() const override {
         string estado = isAvailable ? "Disponible" : "En viaje";
-        return "ID: " + driverId +
-            " | Nombre: " + name +
-            " | DNI: " + dni +
-            " | Rating: " + to_string(rating) +
-            " | Viajes: " + to_string(totalTrips) +
-            " | Estado: " + estado +
-            " | Vehiculo: " + vehicle.toString();
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision(1) << rating;
+
+        return "ID:" + driverId +
+            "|" + name +
+            "|DNI:" + dni +
+            "|Rating:" + ss.str() +
+            "|Viajes:" + to_string(totalTrips) +
+            "|" + estado +
+            "|Vehiculo:" + vehicle.toString();
     }
 
     // LAMBDA 1

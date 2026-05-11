@@ -6,7 +6,8 @@
 #include <iostream>
 #include "../src/Driver.h"
 #include "../src/Passenger.h"
-    
+#include "../src/Trip.h"
+
 using std::string; using std::vector; using std::cout; using std::cin; using std::stringstream; using std::getline;
 
 //  Uso basico:
@@ -15,20 +16,28 @@ using std::string; using std::vector; using std::cout; using std::cin; using std
 //      vector<Driver> drivers = fm.leerDriversTXT();
 // ============================================================
 
-class FileManager 
+class FileManager
 {
 private:
     char separador; // separador de atributos de cada clase en el TXT = |
     string rutaDrivers;
     string rutaPassengers;
     string rutaTrips;
+    string rutaPasswordsBin;
+
+    struct PasswordRecordBin {      // para hacer binarios necesito chars asi que arreglo de charcitos para guardar
+        char tipo[16];
+        char id[24];
+        char dni[16];
+        char password[32];
+    };
 
     // ----------------------------------------------------------
     //  Divide una linea en partes usando el separador
     //  "DRV001|Cristiano|4.8"  ->  ["DRV001", "Cristiano", "4.8"]
     // ----------------------------------------------------------
 
-    vector<string> dividirLinea(string linea) 
+    vector<string> dividirLinea(string linea)
     {
         vector<string> partes;  // arreglo o vector de todas las partes que hay en una linea txt
         stringstream cinString(linea);  // cinString es como el lector de cin pero ya no de teclado si no de strings
@@ -65,20 +74,29 @@ private:
     }
 
 public:
+    struct PasswordPreview {    // variables que van hacer ingresadas por users son strings
+        string tipo;
+        string id;
+        string dni;
+        string password;
+    };
+
     FileManager() {
         separador = '|';
         rutaDrivers = "assets/drivers.txt";
         rutaPassengers = "assets/passengers.txt";
         rutaTrips = "assets/trips.txt";
+        rutaPasswordsBin = "assets/passwords.bin";
     }
 
-   
+
     FileManager(char _separador)  // constructor si quiero usar otro separador
     {
         separador = _separador;
         rutaDrivers = "assets/drivers.txt";
         rutaPassengers = "assets/passengers.txt";
         rutaTrips = "assets/trips.txt";
+        rutaPasswordsBin = "assets/passwords.bin";
     }
 
     ~FileManager()
@@ -183,7 +201,7 @@ public:
     //  Formato de cada linea en passengers.txt:
     //  passengerId|name|dni|password|rating|totalTrips|totalSpent
 
-    bool guardarPassengersTXT(const vector<Passenger>& listaDePassengers) 
+    bool guardarPassengersTXT(const vector<Passenger>& listaDePassengers)
     {
         // Abriendo el archivo o creando si no existe :
         std::ofstream MyFile(rutaPassengers);      // MyFile: como esta con ofstream, sirve para escribir
@@ -259,7 +277,7 @@ public:
     //  Formato de cada linea en trips.txt:
     //  tripId|origin|destination|price|tipe|status|driverName|passengerDni|date
 
-    bool guardarTripsTXT(const vector<Trip>& listaDeTrips) 
+    bool guardarTripsTXT(const vector<Trip>& listaDeTrips)
     {
         // Abriendo el archivo o creando si no existe :
         std::ofstream MyFile(rutaTrips);      // MyFile: como esta con ofstream, sirve para escribir
@@ -309,7 +327,7 @@ public:
 
             if (linea.empty()) continue;
 
-            vector<std::string> p = dividirLinea(linea);
+            vector<string> p = dividirLinea(linea);
 
             if ((int)p.size() < 9) {
                 std::cout << "[PELIGRO] Linea incompleta, se omite.\n";
@@ -319,12 +337,12 @@ public:
             Trip t;
             t.setTripId(p[0]);
             t.setOrigin(p[1]);
-            t.setDestination(p[2]) ;
-            t.setPrice(std::stof(p[3])) ;
-            t.setTipe(std::stoi(p[4])) ;
-            t.setStatus(p[5]) ;
-            t.setDriverName(p[6]) ;
-            t.setPassengerDni(p[7]) ;
+            t.setDestination(p[2]);
+            t.setPrice(std::stof(p[3]));
+            t.setTipe(std::stoi(p[4]));
+            t.setStatus(p[5]);
+            t.setDriverName(p[6]);
+            t.setPassengerDni(p[7]);
             t.setDate(p[8]);
 
             listaDeTrips.push_back(t);
@@ -334,266 +352,66 @@ public:
         std::cout << "[OK] " << listaDeTrips.size() << " trips leidos de: " << rutaTrips << "\n";
         return listaDeTrips;
     }
-    
-    /*
-    // ==========================================================
-    //  STRUCTS PARA BINARIO
-    //  El binario necesita tamanos fijos en memoria.
-    //  std::string no tiene tamano fijo, asi que aqui usamos
-    //  char[] de tamano definido. Son SOLO para el archivo,
-    //  no reemplazan tus clases del dominio.
-    // ==========================================================
 
-    /*
-    struct DriverBin {
-        char  driverId[20];
-        char  name[50];
-        char  dni[10];
-        char  password[30];
-        float rating;
-        bool  isAvailable;
-        int   totalTrips;
-        float totalEarnings;
-        // campos de Vehicle aplanados aqui
-        char  plate[10];
-        char  brand[30];
-        char  model[30];
-        char  color[20];
-        int   year;
-    };
 
-    struct PassengerBin {
-        char  passengerId[20];
-        char  name[50];
-        char  dni[10];
-        char  password[30];
-        float rating;
-        int   totalTrips;
-        float totalSpent;
-    };
 
-    struct TripBin {
-        char  tripId[20];
-        char  passengerId[20];
-        char  driverId[20];
-        char  origin[60];
-        char  destination[60];
-        float price;
-        char  status[15];
-        char  date[15];
-    };
-   
-    // ==========================================================
-    //  BINARIO  -  DRIVER
-    // ==========================================================
 
-    bool guardarDriversBIN(std::vector<Driver> lista, std::string archivo) {
-        std::ofstream file(archivo, std::ios::binary);
+    /// para Binarios de contraseñas
+    ///  Formato de cada linea en passwords.bin:
+    ///  tripId|origin|destination|price|tipe|status|driverName|passengerDni|date
 
-        if (!file.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << archivo << "\n";
+    bool guardarPasswordsBIN(const vector<Passenger>& listaDePassengers, const vector<Driver>& listaDeDrivers) {
+        std::ofstream MyFile(rutaPasswordsBin, std::ios::binary); // abrir o crear si no existe los binarios un MyFile de binary
+
+        if (!MyFile.is_open()) {
+            std::cout << "[ERROR] No se pudo abrir el archivo binario: " << rutaPasswordsBin << "\n";
             return false;
         }
 
-        for (int i = 0; i < (int)lista.size(); i++) {
-            Driver d = lista[i];
-
-            DriverBin db;
-            memset(&db, 0, sizeof(DriverBin));  // limpia basura de memoria
-
-            copiarAChar(db.driverId, d.getDriverId(), 20);
-            copiarAChar(db.name, d.getName(), 50);
-            copiarAChar(db.dni, d.getDni(), 10);
-            copiarAChar(db.password, d.getPassword(), 30);
-            db.rating = d.getRating();
-            db.isAvailable = d.getIsAvailable();
-            db.totalTrips = d.getTotalTrips();
-            db.totalEarnings = d.getTotalEarnings();
-            copiarAChar(db.plate, d.getVehicle().getPlate(), 10);
-            copiarAChar(db.brand, d.getVehicle().getBrand(), 30);
-            copiarAChar(db.model, d.getVehicle().getModel(), 30);
-            copiarAChar(db.color, d.getVehicle().getColor(), 20);
-            db.year = d.getVehicle().getYear();
-
-            // escribe exactamente sizeof(DriverBin) bytes en disco
-            file.write((char*)&db, sizeof(DriverBin));
+        for (int i = 0; i < (int)listaDePassengers.size(); i++) {   // reccoro la lista de pasajeros y extraigo la info que quiero
+            PasswordRecordBin miBinario{};
+            copiarAChar(miBinario.tipo, "Passenger", 16);   // 16 de tamaño para el tipo
+            copiarAChar(miBinario.id, listaDePassengers[i].getPassengerId(), 24); // 24 de tamaño  
+            copiarAChar(miBinario.dni, listaDePassengers[i].getDni(), 16);
+            copiarAChar(miBinario.password, listaDePassengers[i].getPassword(), 32);
+            MyFile.write(reinterpret_cast<char*>(&miBinario), sizeof(PasswordRecordBin));   // casting para transformar mi binario a char
         }
 
-        file.close();
-        std::cout << "[OK] Drivers guardados en binario: " << archivo << "\n";
+        for (int i = 0; i < (int)listaDeDrivers.size(); i++) { // reccoro la lista de drivers y extraigo la info que quiero
+            PasswordRecordBin miBinario{};
+            copiarAChar(miBinario.tipo, "Driver", 16);
+            copiarAChar(miBinario.id, listaDeDrivers[i].getDriverId(), 24);
+            copiarAChar(miBinario.dni, listaDeDrivers[i].getDni(), 16);
+            copiarAChar(miBinario.password, listaDeDrivers[i].getPassword(), 32);
+            MyFile.write(reinterpret_cast<char*>(&miBinario), sizeof(PasswordRecordBin)); // casting para transformar mi binario a char
+        }
+
+        MyFile.close();
+        std::cout << "[OK] Passwords guardadas en binario: " << rutaPasswordsBin << "\n";
         return true;
     }
 
+    vector<PasswordPreview> leerPasswordsBIN() {
+        vector<PasswordPreview> listaDelArchivoBin;
+        std::ifstream MyFile(rutaPasswordsBin, std::ios::binary);
 
-    std::vector<Driver> leerDriversBIN(std::string archivo) {
-        std::vector<Driver> lista;
-        std::ifstream file(archivo, std::ios::binary);
-
-        if (!file.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << archivo << "\n";
-            return lista;
+        if (!MyFile.is_open()) {
+            std::ofstream crearArchivo(rutaPasswordsBin, std::ios::binary);
+            crearArchivo.close();
+            return listaDelArchivoBin;
         }
 
-        DriverBin db;
-        // lee de a un bloque del tamano exacto de DriverBin hasta EOF
-        while (file.read((char*)&db, sizeof(DriverBin))) {
-
-            Vehicle v;
-            v.setPlate(std::string(db.plate));
-            v.setBrand(std::string(db.brand));
-            v.setModel(std::string(db.model));
-            v.setColor(std::string(db.color));
-            v.setYear(db.year);
-
-            Driver d;
-            d.setDriverId(std::string(db.driverId));
-            d.setName(std::string(db.name));
-            d.setDni(std::string(db.dni));
-            d.setPassword(std::string(db.password));
-            d.setRating(db.rating);
-            d.setIsAvailable(db.isAvailable);
-            d.setTotalTrips(db.totalTrips);
-            d.setTotalEarnings(db.totalEarnings);
-            d.setVehicle(v);
-
-            lista.push_back(d);
+        PasswordRecordBin miBinario{};
+        while (MyFile.read(reinterpret_cast<char*>(&miBinario), sizeof(PasswordRecordBin))) {
+            PasswordPreview pas;
+            pas.tipo = miBinario.tipo;
+            pas.id = miBinario.id;
+            pas.dni = miBinario.dni;
+            pas.password = miBinario.password;
+            listaDelArchivoBin.push_back(pas);
         }
 
-        file.close();
-        std::cout << "[OK] " << lista.size() << " drivers leidos de binario: " << archivo << "\n";
-        return lista;
+        MyFile.close();
+        return listaDelArchivoBin;
     }
-
-
-    // ==========================================================
-    //  BINARIO  -  PASSENGER
-    // ==========================================================
-
-    bool guardarPassengersBIN(std::vector<Passenger> lista, std::string archivo) {
-        std::ofstream file(archivo, std::ios::binary);
-
-        if (!file.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << archivo << "\n";
-            return false;
-        }
-
-        for (int i = 0; i < (int)lista.size(); i++) {
-            Passenger p = lista[i];
-
-            PassengerBin pb;
-            memset(&pb, 0, sizeof(PassengerBin));
-
-            copiarAChar(pb.passengerId, p.getPassengerId(), 20);
-            copiarAChar(pb.name, p.getName(), 50);
-            copiarAChar(pb.dni, p.getDni(), 10);
-            copiarAChar(pb.password, p.getPassword(), 30);
-            pb.rating = p.getRating();
-            pb.totalTrips = p.getTotalTrips();
-            pb.totalSpent = p.getTotalSpent();
-
-            file.write((char*)&pb, sizeof(PassengerBin));
-        }
-
-        file.close();
-        std::cout << "[OK] Passengers guardados en binario: " << archivo << "\n";
-        return true;
-    }
-
-
-    std::vector<Passenger> leerPassengersBIN(std::string archivo) {
-        std::vector<Passenger> lista;
-        std::ifstream file(archivo, std::ios::binary);
-
-        if (!file.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << archivo << "\n";
-            return lista;
-        }
-
-        PassengerBin pb;
-        while (file.read((char*)&pb, sizeof(PassengerBin))) {
-
-            Passenger p;
-            p.setPassengerId(std::string(pb.passengerId));
-            p.setName(std::string(pb.name));
-            p.setDni(std::string(pb.dni));
-            p.setPassword(std::string(pb.password));
-            p.setRating(pb.rating);
-            p.setTotalTrips(pb.totalTrips);
-            p.setTotalSpent(pb.totalSpent);
-
-            lista.push_back(p);
-        }
-
-        file.close();
-        std::cout << "[OK] " << lista.size() << " passengers leidos de binario: " << archivo << "\n";
-        return lista;
-    }
-
-
-    // ==========================================================
-    //  BINARIO  -  TRIP
-    // ==========================================================
-
-    bool guardarTripsBIN(std::vector<Trip> lista, std::string archivo) {
-        std::ofstream file(archivo, std::ios::binary);
-
-        if (!file.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << archivo << "\n";
-            return false;
-        }
-
-        for (int i = 0; i < (int)lista.size(); i++) {
-            Trip t = lista[i];
-
-            TripBin tb;
-            memset(&tb, 0, sizeof(TripBin));
-
-            copiarAChar(tb.tripId, t.getTripId(), 20);
-            copiarAChar(tb.passengerId, t.getPassengerId(), 20);
-            copiarAChar(tb.driverId, t.getDriverId(), 20);
-            copiarAChar(tb.origin, t.getOrigin(), 60);
-            copiarAChar(tb.destination, t.getDestination(), 60);
-            tb.price = t.getPrice();
-            copiarAChar(tb.status, t.getStatus(), 15);
-            copiarAChar(tb.date, t.getDate(), 15);
-
-            file.write((char*)&tb, sizeof(TripBin));
-        }
-
-        file.close();
-        std::cout << "[OK] Trips guardados en binario: " << archivo << "\n";
-        return true;
-    }
-
-
-    std::vector<Trip> leerTripsBIN(std::string archivo) {
-        std::vector<Trip> lista;
-        std::ifstream file(archivo, std::ios::binary);
-
-        if (!file.is_open()) {
-            std::cout << "[ERROR] No se pudo abrir: " << archivo << "\n";
-            return lista;
-        }
-
-        TripBin tb;
-        while (file.read((char*)&tb, sizeof(TripBin))) {
-
-            Trip t;
-            t.setTripId(std::string(tb.tripId));
-            t.setPassengerId(std::string(tb.passengerId));
-            t.setDriverId(std::string(tb.driverId));
-            t.setOrigin(std::string(tb.origin));
-            t.setDestination(std::string(tb.destination));
-            t.setPrice(tb.price);
-            t.setStatus(std::string(tb.status));
-            t.setDate(std::string(tb.date));
-
-            lista.push_back(t);
-        }
-
-        file.close();
-        std::cout << "[OK] " << lista.size() << " trips leidos de binario: " << archivo << "\n";
-        return lista;
-    }
-    */
 };
