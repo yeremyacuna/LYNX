@@ -132,11 +132,11 @@ public:
         system("cls");
         lynxs();navBarAs();
         Console::SetCursorPosition(50 + 18, 11);cout << "LISTA DE PASAJEROS";
-        if (authMgr->getUserList().isEmpty()) {
+        if (authMgr->getUserList()->isEmpty()) {
             Console::SetCursorPosition(48 + 18, 12); cout << "  Sin pasajeros registrados.\n"; pausar(); return;
         }
         int i = 1, y=12;
-        authMgr->getUserList().forEach([&i,&y](Passenger p) {
+        authMgr->getUserList()->forEach([&i,&y](Passenger p) {
             Console::SetCursorPosition(18 + 18, y++);cout << "  [" << i++ << "] " << p.toString() << "\n";
             });
         pausar();
@@ -147,11 +147,11 @@ public:
         system("cls");
         lynxs();navBarAs();
         Console::SetCursorPosition(50 + 18, 11);cout << "LISTA DE CONDUCTORES";
-        if (authMgr->getDriverList().isEmpty()) {
+        if (authMgr->getDriverList()->isEmpty()) {
             Console::SetCursorPosition(48 + 18, 12);cout << "  Sin conductores registrados.\n"; pausar(); return;
         }
         int i = 1, y=12;
-        authMgr->getDriverList().forEach([&i,&y](Driver d) {
+        authMgr->getDriverList()->forEach([&i,&y](Driver d) {
             Console::SetCursorPosition(18 + 18, y++);cout << "  [" << i++ << "] " << d.toString() << "\n";
             });
         pausar();

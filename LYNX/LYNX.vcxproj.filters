@@ -63,15 +63,9 @@
     <ClInclude Include="include\FileManager.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="src\mainMenuDos.h">
-      <Filter>src</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="pruebaYeremy.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -100,6 +94,9 @@
     </Text>
     <Text Include="assets\trips.txt">
       <Filter>assets</Filter>
+    </Text>
+    <Text Include="resources\Readme.txt">
+      <Filter>ProjectFiles</Filter>
     </Text>
   </ItemGroup>
 </Project>

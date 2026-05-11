@@ -1,57 +1,61 @@
-TRP-10001|Breña|Comas|40|3|en_curso|Patricia Gomez|37482913|09/05/2026
-TRP-10003|Villa María del Triunfo|Larco Mar|42.5|3|en_curso|Sofia Delgado|37482922|10/04/2026
-TRP-10008|Chimbote|Juliaca|218.5|3|en_curso|Sofia Delgado|47291038|28/04/2026
 TRP-10009|Huánuco|São Paulo|1702.5|2|en_curso|Juan Castillo|90817264|07/05/2026
-TRP-10012|Pueblo Libre|Hospital Rebagliati|29.8|2|en_curso|Carlos Medina|37482918|08/05/2026
-TRP-10014|Chiclayo|Moquegua|110.8|1|en_curso|Diego Flores|56473821|03/05/2026
-TRP-10015|San Juan de Miraflores|Miraflores|43.6|2|en_curso|Sofia Vega|56492029|25/04/2026
-TRP-10022|Huancayo|Trujillo|512.2|3|en_curso|Ricardo Nunez|91827374|25/04/2026
-TRP-10026|Villa El Salvador|Rímac|28.9|2|en_curso|Ricardo Nunez|56492023|28/04/2026
-TRP-10036|Andahuaylalas|Huánuco|196.4|2|en_curso|Pedro Flores|90817272|05/05/2026
-TRP-10042|Comas|Real Plaza Salaverry|18.1|2|en_curso|Carlos Messi|10284767|20/04/2026
-TRP-10043|Huancayo|Jaén|53|1|en_curso|Fernanda Salas|56492028|25/03/2026
-TRP-10044|La Victoria|Carabayllo|19.2|1|en_curso|Luis Castillo|90817270|05/05/2026
-TRP-10045|Barranco|Aeropuerto Jorge Chávez|40|3|en_curso|Sofia Torres|91827366|03/05/2026
-TRP-10054|Lima|Andahuaylalas|241.9|2|en_curso|Ana Gomez|90817272|25/04/2026
-TRP-10057|Tumbes|Paracas|247.6|3|en_curso|Carlos Ruiz|91827378|25/03/2026
-TRP-10058|Huancayo|Iquitos|104.3|1|en_curso|Javier Luna|56492021|10/05/2026
-TRP-10060|Cerro de Pasco|Ferreñafe|191.1|2|en_curso|Pedro Flores|90817270|28/04/2026
-TRP-10061|Cajamarca|Tacna|450.7|3|en_curso|Natalia Paredes|19283759|05/04/2026
-TRP-10062|Comas|Rímac|49.8|3|en_curso|Lucia Ramos|19283748|05/05/2026
-TRP-10064|San Juan de Miraflores|El Agustino|16.9|2|en_curso|Yeremy Acuna|90817275|25/03/2026
-TRP-10073|Lima|Cerro de Pasco|97.5|1|en_curso|Sofia Delgado|10284758|05/05/2026
-TRP-10078|PUCP|Plaza Mayor de Lima|50.9|3|en_curso|Andrea Rios|83746597|05/05/2026
-TRP-10082|Huánuco|Cerro de Pasco|79.3|1|en_curso|Pedro Castillo|90817268|05/05/2026
-TRP-10085|CC Jockey|Villa El Salvador|38.6|3|en_curso|Natalia Paredes|37482913|10/04/2026
-TRP-10097|Villa María del Triunfo|San Borja|56.9|3|en_curso|Luis Soto|56492027|20/04/2026
-TRP-10110|Huancayo|Barcelona|591.5|1|en_curso|Carlos Messi|74829103|10/05/2026
-TRP-10111|San Miguel|Independencia|74.5|3|en_curso|Erick Huaman|10284757|08/05/2026
-TRP-10112|Jockey Plaza|La Victoria|20.2|1|en_curso|Carlos Rojas|19283746|09/05/2026
-TRP-10114|CC Jockey|Independencia|34.5|2|en_curso|Raul Herrera|74829103|01/05/2026
-TRP-10116|Huaraz|Chiclayo|100.8|1|en_curso|Maria Quispe|56492020|28/04/2026
-TRP-10121|Callao|Ate Vitarte|75|3|en_curso|Sebastian Mora|47291038|07/05/2026
-TRP-10123|Arequipa|Huánuco|448.1|3|en_curso|Ana Gomez|19283747|05/04/2026
-TRP-10126|El Agustino|Villa El Salvador|21|2|en_curso|Pedro Rivera|91827371|25/04/2026
-TRP-10130|Los Olivos|Aeropuerto Jorge Chávez|15.8|2|en_curso|Valeria Cruz|90817265|03/05/2026
-TRP-10131|Huánuco|Moyobamba|77.1|1|en_curso|Erick Huaman|56473821|01/05/2026
-TRP-10133|CC Jockey|PUCP|27.6|2|en_curso|Victor Salazar|83746593|25/03/2026
 TRP-10135|Moyobamba|Nueva York|878.8|2|en_curso|Patricia Gomez|70112233|25/03/2026
-TRP-10140|Villa El Salvador|Breña|32.4|3|en_curso|Jhon Castillo|10284767|09/05/2026
-TRP-10148|Jockey Plaza|UPC San Isidro|15.9|1|en_curso|Carlos Messi|19283756|03/05/2026
+TRP-10110|Huancayo|Barcelona|591.5|1|en_curso|Carlos Messi|74829103|10/05/2026
+TRP-10022|Huancayo|Trujillo|512.2|3|en_curso|Ricardo Nunez|91827374|25/04/2026
+TRP-10061|Cajamarca|Tacna|450.7|3|en_curso|Natalia Paredes|19283759|05/04/2026
+TRP-10123|Arequipa|Huánuco|448.1|3|en_curso|Ana Gomez|19283747|05/04/2026
+TRP-10184|Moyobamba|Chiclayo|264|3|en_curso|Pedro Gomez|90817271|28/04/2026
+TRP-10057|Tumbes|Paracas|247.6|3|en_curso|Carlos Ruiz|91827378|25/03/2026
+TRP-10054|Lima|Andahuaylalas|241.9|2|en_curso|Ana Gomez|90817272|25/04/2026
+TRP-10008|Chimbote|Juliaca|218.5|3|en_curso|Sofia Delgado|47291038|28/04/2026
+TRP-10202|UPC villa|UPC monterrico|213|1|en_curso|Luis Paredes|77111111|10/05/2026
+TRP-10036|Andahuaylalas|Huánuco|196.4|2|en_curso|Pedro Flores|90817272|05/05/2026
+TRP-10060|Cerro de Pasco|Ferreñafe|191.1|2|en_curso|Pedro Flores|90817270|28/04/2026
+TRP-10014|Chiclayo|Moquegua|110.8|1|en_curso|Diego Flores|56473821|03/05/2026
+TRP-10185|Trujillo|Tacna|105.3|1|en_curso|Carlos Mendoza|19283749|01/05/2026
+TRP-10058|Huancayo|Iquitos|104.3|1|en_curso|Javier Luna|56492021|10/05/2026
+TRP-10116|Huaraz|Chiclayo|100.8|1|en_curso|Maria Quispe|56492020|28/04/2026
+TRP-10162|Ferreñafe|Nazca|99.4|2|en_curso|Luis Castillo|37482913|01/05/2026
+TRP-10073|Lima|Cerro de Pasco|97.5|1|en_curso|Sofia Delgado|10284758|05/05/2026
+TRP-10082|Huánuco|Cerro de Pasco|79.3|1|en_curso|Pedro Castillo|90817268|05/05/2026
+TRP-10131|Huánuco|Moyobamba|77.1|1|en_curso|Erick Huaman|56473821|01/05/2026
+TRP-10121|Callao|Ate Vitarte|75|3|en_curso|Sebastian Mora|47291038|07/05/2026
+TRP-10111|San Miguel|Independencia|74.5|3|en_curso|Erick Huaman|10284757|08/05/2026
+TRP-10180|Arequipa|Cajamarca|69.1|1|en_curso|Carlos Rojas|10284762|20/04/2026
+TRP-10164|Cercado de Lima|Surquillo|62.7|3|en_curso|Ana Torres|10284758|07/05/2026
+TRP-10195|CC Jockey|Plaza Mayor de Lima|58.4|3|en_curso|Hector Ruiz|19283759|10/04/2026
+TRP-10097|Villa María del Triunfo|San Borja|56.9|3|en_curso|Luis Soto|56492027|20/04/2026
+TRP-10043|Huancayo|Jaén|53|1|en_curso|Fernanda Salas|56492028|25/03/2026
+TRP-10078|PUCP|Plaza Mayor de Lima|50.9|3|en_curso|Andrea Rios|83746597|05/05/2026
+TRP-10062|Comas|Rímac|49.8|3|en_curso|Lucia Ramos|19283748|05/05/2026
 TRP-10150|Huancayo|Jaén|48.7|1|en_curso|Andrea Diaz|56492029|09/05/2026
 TRP-10151|Carabayllo|UNMSM|44.2|2|en_curso|Andrea Flores|70112233|15/04/2026
-TRP-10159|Los Olivos|Hospital Rebagliati|31.8|2|en_curso|Donald rump|10284764|09/05/2026
-TRP-10160|San Isidro|Plaza Mayor de Lima|71.5|3|en_curso|Maria Vega|37482917|01/05/2026
-TRP-10162|Ferreñafe|Nazca|99.4|2|en_curso|Luis Castillo|37482913|01/05/2026
-TRP-10164|Cercado de Lima|Surquillo|62.7|3|en_curso|Ana Torres|10284758|07/05/2026
-TRP-10165|Villa El Salvador|Parque Kennedy|10.1|1|en_curso|Ricardo Nunez|90817275|08/05/2026
-TRP-10178|Lince|Hospital Rebagliati|18.8|1|en_curso|Jhon Castillo|90817272|10/05/2026
-TRP-10180|Arequipa|Cajamarca|69.1|1|en_curso|Carlos Rojas|10284762|20/04/2026
-TRP-10184|Moyobamba|Chiclayo|264|3|en_curso|Pedro Gomez|90817271|28/04/2026
-TRP-10185|Trujillo|Tacna|105.3|1|en_curso|Carlos Mendoza|19283749|01/05/2026
-TRP-10195|CC Jockey|Plaza Mayor de Lima|58.4|3|en_curso|Hector Ruiz|19283759|10/04/2026
-TRP-10196|Ate Vitarte|Barranco|38.7|2|en_curso|Maria Castillo|91827366|25/03/2026
+TRP-10015|San Juan de Miraflores|Miraflores|43.6|2|en_curso|Sofia Vega|56492029|25/04/2026
+TRP-10003|Villa María del Triunfo|Larco Mar|42.5|3|en_curso|Sofia Delgado|37482922|10/04/2026
 TRP-10197|PUCP|Plaza Mayor de Lima|41.4|3|en_curso|Maria Dolores|83726194|05/05/2026
+TRP-10001|Breña|Comas|40|3|en_curso|Patricia Gomez|37482913|09/05/2026
+TRP-10045|Barranco|Aeropuerto Jorge Chávez|40|3|en_curso|Sofia Torres|91827366|03/05/2026
+TRP-10196|Ate Vitarte|Barranco|38.7|2|en_curso|Maria Castillo|91827366|25/03/2026
+TRP-10085|CC Jockey|Villa El Salvador|38.6|3|en_curso|Natalia Paredes|37482913|10/04/2026
+TRP-10114|CC Jockey|Independencia|34.5|2|en_curso|Raul Herrera|74829103|01/05/2026
+TRP-10140|Villa El Salvador|Breña|32.4|3|en_curso|Jhon Castillo|10284767|09/05/2026
+TRP-10159|Los Olivos|Hospital Rebagliati|31.8|2|en_curso|Donald rump|10284764|09/05/2026
+TRP-10012|Pueblo Libre|Hospital Rebagliati|29.8|2|en_curso|Carlos Medina|37482918|08/05/2026
+TRP-10026|Villa El Salvador|Rímac|28.9|2|en_curso|Ricardo Nunez|56492023|28/04/2026
+TRP-10133|CC Jockey|PUCP|27.6|2|en_curso|Victor Salazar|83746593|25/03/2026
+TRP-10126|El Agustino|Villa El Salvador|21|2|en_curso|Pedro Rivera|91827371|25/04/2026
+TRP-10112|Jockey Plaza|La Victoria|20.2|1|en_curso|Carlos Rojas|19283746|09/05/2026
+TRP-10044|La Victoria|Carabayllo|19.2|1|en_curso|Luis Castillo|90817270|05/05/2026
+TRP-10178|Lince|Hospital Rebagliati|18.8|1|en_curso|Jhon Castillo|90817272|10/05/2026
+TRP-10042|Comas|Real Plaza Salaverry|18.1|2|en_curso|Carlos Messi|10284767|20/04/2026
+TRP-10064|San Juan de Miraflores|El Agustino|16.9|2|en_curso|Yeremy Acuna|90817275|25/03/2026
+TRP-10148|Jockey Plaza|UPC San Isidro|15.9|1|en_curso|Carlos Messi|19283756|03/05/2026
+TRP-10130|Los Olivos|Aeropuerto Jorge Chávez|15.8|2|en_curso|Valeria Cruz|90817265|03/05/2026
+TRP-10165|Villa El Salvador|Parque Kennedy|10.1|1|en_curso|Ricardo Nunez|90817275|08/05/2026
+TRP-10204|New York|Washington|24.9983|2|completado|Gotenk Son||10/05/2026
+TRP-10160|San Isidro|Plaza Mayor de Lima|71.5|3|completado|Maria Vega|37482917|01/05/2026
+TRP-10203|UPC|PUCP|33|3|completado|Maria Vega||10/05/2026
+TRP-10201|Monterrico|Santa Anita|34.025|3|completado|Carlos Rivera|77111111|10/05/2026
 TRP-10002|San Borja|Los Olivos|22|2|completado|Valeria Cruz|19283757|07/05/2026
 TRP-10004|Santa Anita|Cercado de Lima|18.1|2|completado|Donald rump|91827365|01/04/2026
 TRP-10005|Pucallpa|Chiclayo|117.8|1|completado|Pedro Flores|83746600|05/05/2026
