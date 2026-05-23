@@ -275,13 +275,13 @@ public:
         recorrer(head, accion);
     }
 
-    // LAMBDA 2: filtra elementos que cumplen un criterio y retorna una nueva lista
-    // Ej: auto libres = lista.filter([](Driver d){ return d.getIsAvailable(); });
-    LinkedList<T> filter(function<bool(T)> criterio) {
-        auto cumple = [&](Node<T>* nodo, LinkedList<T>& resultado, function<bool(T)> fn) {
-            while (nodo != nullptr) { if (fn(nodo->data)) resultado.pushBack(nodo->data); nodo = nodo->next; }
+    // LAMBDA 2: filtra elementos que cumplen un criterio y retorna una nueva lista dinamica
+    // Ej: LinkedList<Driver>* libres = lista.filter([](Driver d){ return d.getIsAvailable(); });
+    LinkedList<T>* filter(function<bool(T)> criterio) {
+        auto cumple = [&](Node<T>* nodo, LinkedList<T>* resultado, function<bool(T)> fn) {
+            while (nodo != nullptr) { if (fn(nodo->data)) resultado->pushBack(nodo->data); nodo = nodo->next; }
             };
-        LinkedList<T> resultado;
+        LinkedList<T>* resultado = new LinkedList<T>();
         cumple(head, resultado, criterio);
         return resultado;
     }

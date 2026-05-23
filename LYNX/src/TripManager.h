@@ -70,6 +70,9 @@ public:
     int getTotalActiveTrips() { return activeTrips.getSize(); }
     int getTotalHistoryTrips() { return history.getSize(); }
 
+    // previewNextTripId: muestra cual seria el proximo id sin consumirlo todavia
+    string previewNextTripId() const { return "TRP-" + to_string(10000 + tripCounter + 1); }
+
     // reconstruir contador de viajes o ids para el file trip
     void rebuildTripCounter() {
         int maxId = 0;
@@ -96,27 +99,37 @@ public:
         else tripCounter = 0;
     }
 
-    // Crea un viaje, calcula su precio y lo mete a la cola de espera
+    // createTrip: crea el viaje, calcula precio y lo encola como pendiente
+    // si no hay conductor, guarda "Por asignar" y deja driverDni vacio
     Trip createTrip(string origin, string destination, int tipo, float km,
-        string driverName, string passengerDni, string date) {
-        Trip t(generateId(), origin, destination, 0.0f, driverName, passengerDni, date);
+        string driverName, string driverDni, string passengerDni, string date) {
+        Trip t(generateId(), origin, destination, 0.0f, driverName, driverDni, passengerDni, date);
         t.setTipe(tipo);
         t.setPrice(t.calcPrice(tipo, km));
         t.setStatus("pendiente");
-        if (driverName.empty()) t.setDriverName("Por asignar");
+        if (driverName.empty()) {
+            t.setDriverName("Por asignar");
+            t.setDriverDni("");
+        }
         waitingQueue.enqueue(t);
         cout << "  [OK] Viaje " << t.getTripId() << " creado | S/ " << t.getPrice() << "\n";
         return t;
     }
 
-    // Saca el primer viaje de la cola y lo asigna al conductor
-    // Marca al conductor como ocupado en AuthManager
+    // assignDriver: toma el primer viaje pendiente y lo pasa a activos
+    // tambien marca al conductor como ocupado dentro del AuthManager
     bool assignDriver(string driverDni, AuthManager& auth) {
         if (waitingQueue.isEmpty()) { cout << "  [!] No hay viajes en espera.\n"; return false; }
+        Driver d = auth.getDriverByDni(driverDni);
+        if (d.getDni() == "" || !d.getIsAvailable()) {
+            cout << "  [!] Conductor invalido o no disponible.\n";
+            return false;
+        }
+
         Trip t = waitingQueue.getFront();
         waitingQueue.dequeue();
-        Driver d = auth.getDriverByDni(driverDni);
         t.setDriverName(d.getName());
+        t.setDriverDni(d.getDni());
         t.setStatus("en_curso");
         activeTrips.pushBack(t);
         auth.driverAcceptRide(driverDni, t.getPrice());
@@ -134,13 +147,17 @@ public:
         cout << "  [XX] Viaje " << t.getTripId() << " cancelado.\n";
     }
 
-    // Busca el viaje por ID en los activos, lo completa y lo manda al historial
-    bool finishTrip(string tripId, AuthManager& auth, string passengerDni) {
+    // finishTrip: mueve un viaje activo al historial como completado
+    // actualiza al pasajero y libera al conductor si el viaje ya tenia driverDni
+    bool finishTrip(string tripId, AuthManager& auth) {
         for (int i = 0; i < activeTrips.getSize(); i++) {
             if (activeTrips.get(i).getTripId() == tripId) {
                 Trip t = activeTrips.get(i);
                 t.setStatus("completado");
-                auth.addTripToUser(passengerDni, t.getPrice());
+                auth.addTripToUser(t.getPassengerDni(), t.getPrice());
+                if (!t.getDriverDni().empty()) {
+                    auth.driverFinishRide(t.getDriverDni());
+                }
                 history.push(t);
                 activeTrips.remove(i);
                 cout << "  [OK] Viaje " << tripId << " completado.\n";
@@ -255,13 +272,16 @@ public:
         return history.findInStack([&](Trip t) { return t.getPassengerDni() == dni; });
     }
 
-    // LAMBDA 6: cancela un viaje activo por ID usando DoublyLinkedList::updateIf
-    // Cambia su estado a "cancelado" sin necesitar el indice
-    bool cancelActiveTrip(string tripId) {
+    // cancelActiveTrip: cancela un viaje activo, lo manda al historial
+    // y devuelve el conductor a disponible si estaba asignado
+    bool cancelActiveTrip(string tripId, AuthManager& auth) {
         for (int i = 0; i < activeTrips.getSize(); i++) {
             if (activeTrips.get(i).getTripId() == tripId) {
                 Trip t = activeTrips.get(i);
                 t.setStatus("cancelado");
+                if (!t.getDriverDni().empty()) {
+                    auth.driverFinishRide(t.getDriverDni());
+                }
                 history.push(t);
                 activeTrips.remove(i);
                 return true;

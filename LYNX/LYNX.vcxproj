@@ -148,6 +148,9 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.github\workflows\build-cpp.yml" />
+    <None Include="..\.github\workflows\deploy.yml" />
+    <None Include="..\.github\workflows\release-exe.yml" />
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
     <None Include="assets\passwords.bin" />

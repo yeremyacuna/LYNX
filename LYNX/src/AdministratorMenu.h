@@ -7,6 +7,7 @@
 #include <conio.h>
 using std::cout; using std::cin;
 
+// lynxs: dibuja el titulo LYNX en la vista de administrador
 void lynxs() {
     Console::ForegroundColor = ConsoleColor::Green;
     Console::SetCursorPosition(45+18, 5);std::cout << (char)219 << (char)219 << "     " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << " " << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
@@ -18,6 +19,7 @@ void lynxs() {
     Console::ForegroundColor = ConsoleColor::White;
 }
 
+// navBarAs: pinta la barra superior y resalta la seccion admin
 void navBarAs() {
     Console::BackgroundColor = ConsoleColor::White;
     Console::SetCursorPosition(0, 0);std::cout << "                                                                                                                                                                ";
@@ -34,6 +36,7 @@ void navBarAs() {
     Console::ForegroundColor = ConsoleColor::White;
 }
 
+// Seleccions: mueve la opcion seleccionada con flechas arriba y abajo
 void Seleccions(int keycode, int& inicio, int min, int max) {
     switch (keycode) {
     case 72:
@@ -57,6 +60,8 @@ private:
 public:
     AdministratorMenu(AuthManager* a, TripManager* t) : authMgr(a), tripMgr(t) {}
 
+    // run: bucle principal del menu de administrador
+    // aqui solo se navega entre opciones y se decide que modulo ejecutar
     void run(int& opcion) {
         opcion = 1;
         while (true) {
@@ -234,7 +239,10 @@ public:
                 alguno = true;
             }
         }
-        if (!alguno) Console::SetCursorPosition(47 + 18, 12);cout << "  Ningun conductor con rating >= 4.0\n";
+        if (!alguno) {
+            Console::SetCursorPosition(47 + 18, 12);
+            cout << "  Ningun conductor con rating >= 4.0\n";
+        }
         pausar();
     }
 
@@ -364,6 +372,7 @@ public:
         pausar();
     }
 
+    // pausar: espera enter para que el usuario pueda leer la pantalla antes de volver
     void pausar() {
         lynxs();navBarAs();
         Console::SetCursorPosition(46 + 18, 27); cout << "Presione enter para continuar";

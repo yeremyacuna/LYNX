@@ -1,0 +1,37 @@
+name: Build LYNX C++
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      
+      - name: Configurar MSBuild
+        uses: microsoft/setup-msbuild@v2
+      
+      - name: Compilar con .slnx
+        shell: pwsh
+        run: |
+          msbuild LYNX.slnx /p:Configuration=Release /p:Platform=x64
+      
+      - name: Buscar ejecutable
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path . -Recurse -Filter *.exe | Select-Object FullName
+      
+      - name: Subir ejecutable
+        uses: actions/upload-artifact@v4
+        with:
+          name: LYNX-Windows-x64
+          path: |
+            **/Release/*.exe
+            **/x64/Release/*.exe
+          if-no-files-found: error

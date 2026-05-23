@@ -51,7 +51,7 @@ public:
 
     // LAMBDA 2: recorre toda la cola aplicando una accion sobre cada elemento sin modificarla
     // Ej: cola.forEach([](Trip t){ t.mostrar(); });
-    void forEach(function<void(T)> accion) {
+    void forEach(function<void(T)> accion) const {
         auto recorrer = [](Node<T>* nodo, function<void(T)> fn) {
             while (nodo != nullptr) { fn(nodo->data); nodo = nodo->next; }
             };
@@ -60,7 +60,7 @@ public:
 
     // LAMBDA 3: suma un valor numerico extraido de cada elemento de la cola
     // Ej: float total = cola.sumBy([](Trip t){ return t.getPrice(); });
-    float sumBy(function<float(T)> extractor) {
+    float sumBy(function<float(T)> extractor) const {
         auto sumar = [](Node<T>* nodo, function<float(T)> fn) -> float {
             float acum = 0.0f;
             while (nodo != nullptr) { acum += fn(nodo->data); nodo = nodo->next; }

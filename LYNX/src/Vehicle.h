@@ -14,6 +14,8 @@ private:
     int    year;
 
 public:
+    // Vehicle: constructor vacio
+    // deja los datos del vehiculo con valores por defecto
     Vehicle() {
         plate = "";
         brand = "";
@@ -22,6 +24,7 @@ public:
         year = 0;
     }
 
+    // Vehicle: constructor completo del vehiculo
     Vehicle(string _plate, string _brand, string _model, string _color, int _year) {
         plate = _plate;
         brand = _brand;
@@ -30,12 +33,14 @@ public:
         year = _year;
     }
 
+    // getters: devuelven cada dato del vehiculo
     string getPlate() { return plate; }
     string getBrand() { return brand; }
     string getModel() { return model; }
     string getColor() { return color; }
     int    getYear() { return year; }
 
+    // setters: actualizan los atributos del vehiculo
     void setColor(string _color) { color = _color; }
     void setPlate(string _plate) { plate = _plate; }
     void setBrand(string _brand) { brand = _brand; }
@@ -43,6 +48,7 @@ public:
     void setYear(int _year) { year = _year; }
     
 
+    // toString: compacta los datos en una sola cadena util para imprimir o guardar
     string toString() const {
         return plate + "|" + brand + " " + model + "|" + color + "|" + std::to_string(year);
     }

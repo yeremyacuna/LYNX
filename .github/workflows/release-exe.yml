@@ -1,0 +1,51 @@
+name: Release LYNX
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      
+      - name: Configurar MSBuild
+        uses: microsoft/setup-msbuild@v2
+      
+      - name: Compilar con .slnx
+        shell: pwsh
+        run: |
+          msbuild LYNX.slnx /p:Configuration=Release /p:Platform=x64
+      
+      - name: Buscar todos los archivos compilados
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path . -Recurse | Select-Object FullName
+      
+      - name: Crear carpeta release y copiar .exe
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path release
+          Get-ChildItem -Path . -Recurse -Filter *.exe | Copy-Item -Destination release/ -Force
+      
+      - name: Verificar archivos en release
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path release
+      
+      - name: Crear ZIP
+        shell: pwsh
+        run: |
+          Compress-Archive -Path release\* -DestinationPath LYNX-${{ github.ref_name }}.zip
+      
+      - name: Crear Release en GitHub
+        uses: softprops/action-gh-release@v2
+        with:
+          files: PlaNet-${{ github.ref_name }}.zip

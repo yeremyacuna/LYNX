@@ -32,6 +32,8 @@ private:
 
 public:
 
+    // Driver: constructor vacio
+    // deja el conductor listo con valores por defecto y sin vehiculo asignado manualmente
     Driver() : User() {
         driverId = "";
         rating = 5.0f;
@@ -40,6 +42,8 @@ public:
         totalEarnings = 0.0f;
     }
 
+    // Driver: constructor principal
+    // crea el conductor, genera su id automatico y guarda el vehiculo inicial
     Driver(string _name, string _dni, string _password, Vehicle _vehicle)
         : User(_name, _dni, _password)
     {
@@ -53,6 +57,7 @@ public:
 
     ~Driver() {}
 
+    // getters: devuelven la informacion actual del conductor
     string  getDriverId() const { return driverId; }
     float   getRating() const  { return rating; }
     bool    getIsAvailable() const { return isAvailable; }
@@ -60,6 +65,7 @@ public:
     float   getTotalEarnings() const  { return totalEarnings; }
     Vehicle getVehicle() const  { return vehicle; }
 
+    // setters: actualizan los datos editables del conductor
     void setDriverId(string dId) { driverId = dId;}
     void setRating(float rat) { rating = rat; }
     void setTotalTrips(int totalT) { totalTrips = totalT; }
@@ -80,18 +86,19 @@ public:
         }
     }
 
-    // generar el siguiente id para otro driver
+    // generateNextDriverId: genera el siguiente codigo secuencial para un nuevo conductor
     static string generateNextDriverId() {
         return formatDriverId(nextDriverNumber()++);
     }
 
-    // sincroniczar al siguiente driver con su id
+    // syncNextDriverId: reacomoda el contador interno despues de cargar datos guardados
     static void syncNextDriverId(int nextId) {
         if (nextId < 1) nextId = 1;
         nextDriverNumber() = nextId;
     }
 
 
+    // login: valida DNI y contra del conductor actual
     bool login(string _dni, string _pass) {
         return (dni == _dni && checkPassword(_pass));
     }
@@ -118,6 +125,7 @@ public:
         return (float)estrellas;
     }
 
+    // toString: arma una descripcion corta del conductor para imprimir o listar
     string toString() const override {
         string estado = isAvailable ? "Disponible" : "En viaje";
         std::stringstream ss;
@@ -165,6 +173,7 @@ public:
     }
 
 
+    // mostrar: dibuja en consola el resumen del conductor
     void mostrar(int x, int& y) override {
         string estadoStr = isAvailable ? "Disponible" : "En viaje";
         Console::SetCursorPosition(x, y+1); cout << "ID       : " << driverId;
@@ -175,11 +184,13 @@ public:
         Console::SetCursorPosition(x-2, y+11);cout<< (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219;
     }
 
+    // mostrarVehiculo: imprime debajo el detalle del carro asociado al conductor
     void mostrarVehiculo(int x, int& y) {
         Console::SetCursorPosition(x, y + 11); cout << "-- Vehiculo --" << endl;
         vehicle.mostrar(x, y);
     }
 
+    // getCodigo: devuelve el id del conductor como codigo de referencia
     string getCodigo() { return driverId; }
 
     bool operator==(const Driver& other) const  // Recibe otro conductor (other) por referencia. No hace copia del objeto  más eficiente.

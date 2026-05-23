@@ -70,10 +70,18 @@ private:
     bool sanitizeLoadedPassengers() {
         bool changed = false;
         vector<string> usedIds;
+        vector<string> usedDnis;
+        LinkedList<Passenger>* limpia = new LinkedList<Passenger>();
         int nextId = maxPassengerIdNumber() + 1;
 
         for (int i = 0; i < passengerList->getSize(); i++) {
             Passenger p = passengerList->get(i);
+
+            if (containsString(usedDnis, p.getDni())) {
+                changed = true;
+                continue;
+            }
+
             string currentId = p.getPassengerId();
             bool invalidId = Passenger::extractPassengerNumber(currentId) <= 0;
             bool duplicateId = containsString(usedIds, currentId);
@@ -86,8 +94,16 @@ private:
             }
 
             usedIds.push_back(p.getPassengerId());
-            passengerList->remove(i);
-            passengerList->insert(i, p);
+            usedDnis.push_back(p.getDni());
+            limpia->pushBack(p);
+        }
+
+        if (changed) {
+            delete passengerList;
+            passengerList = limpia;
+        }
+        else {
+            delete limpia;
         }
 
         return changed;
@@ -138,6 +154,7 @@ private:
 
 public:
     // construye todo solo de pasejero y drivers
+    // al iniciar, carga desde archivos, limpia datos repetidos y reordena ids
     AuthManager() {
         vector<Driver> driversCargados = fileManager->leerDriversTXT();
         for (int i = 0; i < (int)driversCargados.size(); i++) {
@@ -161,12 +178,14 @@ public:
         }
     }
 
+    // ~AuthManager: libera las estructuras dinamicas principales del modulo
     ~AuthManager() {
         delete passengerList;
         delete driverList;
         delete fileManager;
     }
 
+    // getters: exponen las listas y contadores globales de usuarios y conductores
     LinkedList<Passenger>*& getPassengerList() { return passengerList; }
     LinkedList<Passenger>*& getUserList() { return passengerList; }
     LinkedList<Driver>*& getDriverList() { return driverList; }
@@ -174,29 +193,38 @@ public:
     int getTotalDrivers() { return driverList->getSize(); }
 
     //  FUNCIONES DE GUARDADO
+    // savePassengers: ordena y guarda la lista de pasajeros en txt
     void savePassengers() {
         sortPassengersById();
         fileManager->guardarPassengersTXT(exportPassengerVector());
     }
+
+    // saveDrivers: ordena y guarda la lista de conductores en txt
     void saveDrivers() {
         sortDriversById();
         fileManager->guardarDriversTXT(exportDriverVector());
     }
+
+    // saveAll: persiste pasajeros y conductores juntos
     void saveAll() // guardar ambos pasajero y conductor
     {
         savePassengers();
         saveDrivers();
     }
+
+    // savePasswordsBinary: genera el archivo binario de passwords para consulta admin
     bool savePasswordsBinary() {
         return fileManager->guardarPasswordsBIN(exportPassengerVector(), exportDriverVector());
     }
 
     // FUNCION QUE PASA LA ESTRCUTURA PARA QUE GUARDE DE PASAJERO Y DRIVER
+    // readPasswordsBinary: lee el archivo binario y devuelve una vista amigable
     vector<FileManager::PasswordPreview> readPasswordsBinary() {
         return fileManager->leerPasswordsBIN();
     }
 
     // linked list to vector
+    // exportPassengerVector: convierte la lista enlazada de pasajeros a vector
     vector<Passenger> exportPassengerVector() {
         vector<Passenger> pasajeros;
         for (int i = 0; i < passengerList->getSize(); i++) {
@@ -206,6 +234,7 @@ public:
     }
 
     // linked list to vector
+    // exportDriverVector: convierte la lista enlazada de conductores a vector
     vector<Driver> exportDriverVector() {
         vector<Driver> drivers;
         for (int i = 0; i < driverList->getSize(); i++) {
@@ -215,11 +244,15 @@ public:
     }
 
     // PASAJEROS
+    // userExists: verifica si ya existe un pasajero con ese DNI
     bool userExists(string dni) { return indexOfUser(dni) != -1; }
+
+    // dniExistsAnyRole: evita que el mismo DNI aparezca como pasajero y conductor a la vez
+    bool dniExistsAnyRole(string dni) { return userExists(dni) || driverExists(dni); }
 
     // Registra pasajero nuevo si el DNI no existe
     bool registerPassenger(string name, string dni, string password) {
-        if (userExists(dni)) { cout << "  [!] DNI ya registrado.\n"; return false; }
+        if (dniExistsAnyRole(dni)) { cout << "  [!] DNI ya registrado.\n"; return false; }
         passengerList->pushBack(Passenger(name, dni, password));
         sortPassengersById();
         syncNextGeneratedIds();
@@ -227,7 +260,7 @@ public:
         return true;
     }
 
-    // funcion de registro cooperativo solo en el -> register
+    // registerUser: alias simple para registrar pasajero desde otros modulos
     bool registerUser(string name, string dni, string password) {
         return registerPassenger(name, dni, password);
     }
@@ -239,7 +272,7 @@ public:
         return passengerList->get(i).login(dni, password);
     }
 
-    // Devuelve copia del pasajero por DNI
+    // getUserByDni: busca y devuelve el pasajero correspondiente o uno vacio si no existe
     Passenger getUserByDni(string dni) {
         int i = indexOfUser(dni);
         if (i == -1) return Passenger();
@@ -257,6 +290,7 @@ public:
         savePassengers();
     }
 
+    // updatePassengerData: cambia nombre y contra de un pasajero ya registrado
     void updatePassengerData(string dni, string newName, string newPass) {
         int i = indexOfUser(dni);
         if (i == -1) return;
@@ -280,11 +314,12 @@ public:
     }
 
     // CONDUCTORES
+    // driverExists: verifica si ya existe un conductor con ese DNI
     bool driverExists(string dni) { return indexOfDriver(dni) != -1; }
 
     // Registra conductor nuevo con su vehiculo
     bool registerDriver(string name, string dni, string password, Vehicle vehicle) {
-        if (driverExists(dni)) { cout << "  [!] DNI ya registrado.\n"; return false; }
+        if (dniExistsAnyRole(dni)) { cout << "  [!] DNI ya registrado.\n"; return false; }
         driverList->pushBack(Driver(name, dni, password, vehicle));
         sortDriversById();
         syncNextGeneratedIds();
@@ -299,14 +334,14 @@ public:
         return driverList->get(i).login(dni, password);
     }
 
-    // Devuelve copia del conductor por DNI
+    // getDriverByDni: busca y devuelve el conductor correspondiente o uno vacio si no existe
     Driver getDriverByDni(string dni) {
         int i = indexOfDriver(dni);
         if (i == -1) return Driver();
         return driverList->get(i);
     }
 
-    // Cambia disponibilidad
+    // setDriverAvailability: fuerza el estado libre/ocupado del conductor
     void setDriverAvailability(string dni, bool disponible) {
         int i = indexOfDriver(dni);
         if (i == -1) return;
@@ -328,7 +363,7 @@ public:
         saveDrivers();
     }
 
-    // Marca al conductor como ocupado y acumula ganancia
+    // driverAcceptRide: marca viaje aceptado y suma viajes/ganancias del conductor
     void driverAcceptRide(string dni, float precio) {
         int i = indexOfDriver(dni);
         if (i == -1) return;
@@ -339,7 +374,7 @@ public:
         saveDrivers();
     }
 
-    // Marca al conductor como disponible ota ve
+    // driverFinishRide: regresa al conductor a estado disponible
     void driverFinishRide(string dni) {
         int i = indexOfDriver(dni);
         if (i == -1) return;
@@ -350,7 +385,7 @@ public:
         saveDrivers();
     }
 
-    // Devuelve DNI del primer conductor disponible, "" si no hay
+    // findAvailableDriver: devuelve el primer conductor libre encontrado
     string findAvailableDriver() {
         for (int i = 0; i < driverList->getSize(); i++)
             if (driverList->get(i).getIsAvailable())
@@ -377,7 +412,7 @@ public:
     }
 
     // LAMBDA 3: usa filter() de LinkedList para obtener solo conductores disponibles
-    LinkedList<Driver> getConductoresDisponibles() {
+    LinkedList<Driver>* getConductoresDisponibles() {
         return driverList->filter([](Driver d) { return d.getIsAvailable(); });
     }
 
@@ -402,7 +437,7 @@ public:
         return resto;
     }
 
-    // ordena conductores por rating de mayor a menor
+    // sortDriversByRating: ordena conductores de mayor a menor rating usando Shell Sort
     void sortDriversByRating() {
         int n = driverList->getSize();
         if (n <= 1) return;
@@ -428,7 +463,7 @@ public:
         delete[] arr;
     }
 
-    // ordena pasajeros por gasto total de mayor a menor
+    // sortUsersBySpent: ordena pasajeros de mayor a menor gasto total
     void sortUsersBySpent() {
         int n = passengerList->getSize();
         if (n <= 1) return;
@@ -454,7 +489,7 @@ public:
         delete[] arr;
     }
 
-    // ordena pasejeros por id
+    // sortPassengersById: ordena pasajeros por su numero interno de id
     void sortPassengersById() {
         int n = passengerList->getSize();
         if (n <= 1) return;
@@ -480,11 +515,12 @@ public:
         delete[] arr;
     }
 
+    // sortUsersById: alias para ordenar pasajeros por id
     void sortUsersById() {
         sortPassengersById();
     }
 
-    // ordena drivers por id
+    // sortDriversById: ordena conductores por su numero interno de id
     void sortDriversById() {
         int n = driverList->getSize();
         if (n <= 1) return;

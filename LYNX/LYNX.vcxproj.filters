@@ -109,6 +109,15 @@
     <None Include="assets\passwords.bin">
       <Filter>assets</Filter>
     </None>
+    <None Include="..\.github\workflows\build-cpp.yml">
+      <Filter>ProjectFiles</Filter>
+    </None>
+    <None Include="..\.github\workflows\deploy.yml">
+      <Filter>ProjectFiles</Filter>
+    </None>
+    <None Include="..\.github\workflows\release-exe.yml">
+      <Filter>ProjectFiles</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\LYNX_image.png">

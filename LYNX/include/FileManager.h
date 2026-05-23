@@ -275,7 +275,7 @@ public:
 
 
     //  Formato de cada linea en trips.txt:
-    //  tripId|origin|destination|price|tipe|status|driverName|passengerDni|date
+    //  tripId|origin|destination|price|tipe|status|driverName|driverDni|passengerDni|date
 
     bool guardarTripsTXT(const vector<Trip>& listaDeTrips)
     {
@@ -297,6 +297,7 @@ public:
                 << t.getTipe() << separador
                 << t.getStatus() << separador
                 << t.getDriverName() << separador
+                << t.getDriverDni() << separador
                 << t.getPassengerDni() << separador
                 << t.getDate()
                 << "\n";
@@ -342,8 +343,16 @@ public:
             t.setTipe(std::stoi(p[4]));
             t.setStatus(p[5]);
             t.setDriverName(p[6]);
-            t.setPassengerDni(p[7]);
-            t.setDate(p[8]);
+            if ((int)p.size() >= 10) {
+                t.setDriverDni(p[7]);
+                t.setPassengerDni(p[8]);
+                t.setDate(p[9]);
+            }
+            else {
+                t.setDriverDni("");
+                t.setPassengerDni(p[7]);
+                t.setDate(p[8]);
+            }
 
             listaDeTrips.push_back(t);
         }

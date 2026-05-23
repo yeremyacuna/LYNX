@@ -16,11 +16,14 @@ private:
     string status;
     string date;
     string driverName;
+    string driverDni;
     string passengerDni;
     int tipe;
 
 public:
 
+    // Trip: constructor vacio
+    // deja el viaje en estado pendiente y con todos sus campos inicializados
     Trip() {
         tripId = "";
         origin = "";
@@ -29,11 +32,15 @@ public:
         status = "pendiente";
         date = "";
         driverName = "";
+        driverDni = "";
         passengerDni = "";
+        tipe = 0;
     }
 
+    // Trip: constructor principal
+    // crea un viaje base con los datos mas importantes y lo deja pendiente por defecto
     Trip(string _id, string _origin, string _destination,
-        float _price, string _driverName, string _passengerDni, string _date)
+        float _price, string _driverName, string _driverDni, string _passengerDni, string _date)
     {
         tripId = _id;
         origin = _origin;
@@ -41,10 +48,13 @@ public:
         price = _price;
         status = "pendiente";
         driverName = _driverName;
+        driverDni = _driverDni;
         passengerDni = _passengerDni;
         date = _date;
+        tipe = 0;
     }
 
+    // getters: devuelven cada dato guardado del viaje
     string getTripId() const { return tripId; }
     string getOrigin() const { return origin; }
     string getDestination() const { return destination; }
@@ -52,9 +62,11 @@ public:
     string getStatus() const { return status; }
     string getDate() const { return date; }
     string getDriverName()  const { return driverName; }
+    string getDriverDni() const { return driverDni; }
     string getPassengerDni() const { return passengerDni; }
     int getTipe() const { return tipe; }
 
+    // setters: actualizan los atributos del viaje segun su avance o carga desde archivo
     void setStatus(string s) { status = s; }
     void setPrice(float p) { price = p; }
     void setOrigin(string s) { origin = s; }
@@ -63,6 +75,7 @@ public:
     void setPassengerDni(string d) { passengerDni = d; }
     void setTripId(string s) { tripId = s; }
     void setDriverName(string s) { driverName = s; }
+    void setDriverDni(string s) { driverDni = s; }
     void setDate(string s) { date = s; }
 
     /*segun el tipo de servicio y los km estimados.
@@ -79,6 +92,7 @@ public:
         return price;
     }
 
+    // toString: convierte el viaje en una linea facil de mostrar en listas
     string toString() {
         return tripId + " | " + origin + " -> " + destination +
             " | S/ " + to_string(price) +
@@ -130,6 +144,7 @@ public:
         return resto;                                               // este no
     }
 
+    // mostrar: imprime el detalle del viaje en la consola usando coordenadas
     void mostrar(int x, int& y) {
         Console::SetCursorPosition(x, y++); cout << "ID         : " << tripId << endl;
         Console::SetCursorPosition(x, y++); cout << "Origen     : " << origin << endl;
@@ -141,5 +156,6 @@ public:
         Console::SetCursorPosition(x, y++); cout << "-----------------------" << endl;
     }
 
+    // getCodigo: devuelve el id del viaje como codigo de referencia
     string getCodigo() { return tripId; }
 };

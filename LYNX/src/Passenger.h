@@ -15,7 +15,21 @@ private:
     float  rating;
     int    totalTrips;
     float  totalSpent;    // total gastado en viajes completados 
-    Queue<Trip> trips;
+    Queue<Trip>* trips;
+
+    // cloneTrips: crea una copia profunda de la cola de viajes del pasajero
+    // se usa para que cada pasajero maneje su propia memoria dinamica sin compartir punteros
+    static Queue<Trip>* cloneTrips(const Queue<Trip>* source)
+    {
+        Queue<Trip>* copia = new Queue<Trip>();
+        if (source == nullptr) return copia;
+
+        source->forEach([&](Trip t) {
+            copia->enqueue(t);
+            });
+
+        return copia;
+    }
 
     static int& nextPassengerNumber() // para poner su id en orden
     {
@@ -32,13 +46,17 @@ private:
 
 public:
 
+    // Passenger: constructor vacio
+    // ademas de datos base, reserva memoria para la cola dinamica de viajes
     Passenger() : User() {
         passengerId = "";
         rating = 5.0f;
         totalTrips = 0;
         totalSpent = 0.0f;
+        trips = new Queue<Trip>();
     }
 
+    // Passenger: constructor principal para registrar un pasajero nuevo
     Passenger(string _name, string _dni, string _password)
         : User(_name, _dni, _password)
     {
@@ -46,9 +64,44 @@ public:
         rating = 5.0f;
         totalTrips = 0;
         totalSpent = 0.0f;
+        trips = new Queue<Trip>();
     }
 
-    ~Passenger() {}
+    // Passenger: constructor copia
+    // copia datos simples y clona la cola dinamica para evitar compartir memoria
+    Passenger(const Passenger& other) : User(other.name, other.dni, other.password)
+    {
+        passengerId = other.passengerId;
+        rating = other.rating;
+        totalTrips = other.totalTrips;
+        totalSpent = other.totalSpent;
+        trips = cloneTrips(other.trips);
+    }
+
+    // operator=: reemplaza el contenido actual por el de otro pasajero
+    // primero libera la cola anterior y luego crea una nueva copia profunda
+    Passenger& operator=(const Passenger& other)
+    {
+        if (this != &other) {
+            name = other.name;
+            dni = other.dni;
+            password = other.password;
+            passengerId = other.passengerId;
+            rating = other.rating;
+            totalTrips = other.totalTrips;
+            totalSpent = other.totalSpent;
+
+            delete trips;
+            trips = cloneTrips(other.trips);
+        }
+        return *this;
+    }
+
+    // ~Passenger: libera la cola dinamica reservada para el historial interno
+    ~Passenger() {
+        delete trips;
+        trips = nullptr;
+    }
 
     string getPassengerId() const { return passengerId; }
 
