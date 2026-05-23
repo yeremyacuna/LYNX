@@ -16,6 +16,12 @@
     <Filter Include="assets">
       <UniqueIdentifier>{ac209418-ac51-4322-bfb2-113623f6ad97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{efbd3d30-f337-47d2-8c0c-2b60cfa63dbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\forms">
+      <UniqueIdentifier>{e7e175c5-781f-46d4-9239-8cd5f2566576}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MainMenu.h">
@@ -57,16 +63,40 @@
     <ClInclude Include="src\TripManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="include\LinkedDoubleList.h">
+    <ClInclude Include="include\DoublyLinkedList.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\FileManager.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="src\forms\AdminMenuForm.h">
+      <Filter>src\forms</Filter>
+    </ClInclude>
+    <ClInclude Include="src\forms\PassengerMenuForm.h">
+      <Filter>src\forms</Filter>
+    </ClInclude>
+    <ClInclude Include="src\forms\DriverMenuForm.h">
+      <Filter>src\forms</Filter>
+    </ClInclude>
+    <ClInclude Include="src\forms\MainMenuForm.h">
+      <Filter>src\forms</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\forms\AdminMenuForm.cpp">
+      <Filter>src\forms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\forms\PassengerMenuForm.cpp">
+      <Filter>src\forms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\forms\DriverMenuForm.cpp">
+      <Filter>src\forms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\forms\MainMenuForm.cpp">
+      <Filter>src\forms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,8 +125,8 @@
     <Text Include="assets\trips.txt">
       <Filter>assets</Filter>
     </Text>
-    <Text Include="resources\Readme.txt">
-      <Filter>ProjectFiles</Filter>
+    <Text Include="docs\ReadmeCourse.txt">
+      <Filter>docs</Filter>
     </Text>
   </ItemGroup>
 </Project>

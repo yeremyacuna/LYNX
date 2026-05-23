@@ -1,6 +1,6 @@
 #pragma once
 #include "../include/Queue.h"
-#include "../include/LinkedDoubleList.h"
+#include "../include/DoublyLinkedList.h"
 #include "../include/Stack.h"
 #include "Trip.h"
 #include "AuthManager.h"
@@ -11,13 +11,13 @@ using namespace std;
 //  TripManager
 //  Maneja el ciclo de vida de un viaje usando las 4 estructuras:
 //  waitingQueue -> Queue<Trip>             viajes esperando conductor (FIFO)
-//  activeTrips  -> LinkedDoubleList<Trip>  viajes en curso ahora mismo
+//  activeTrips  -> DoublyLinkedList<Trip>  viajes en curso ahora mismo
 //  history      -> Stack<Trip>             historial (el ultimo viaje queda top)
 
 class TripManager {
 private:
     Queue<Trip> waitingQueue;
-    LinkedDoubleList<Trip> activeTrips;
+    DoublyLinkedList<Trip> activeTrips;
     Stack<Trip> history;
     int tripCounter;
 
@@ -64,7 +64,7 @@ public:
 
     // Acceso a las estructuras (las usa AdministratorMenu)
     Queue<Trip>& getWaitingQueue() { return waitingQueue; }
-    LinkedDoubleList<Trip>& getActiveTrips() { return activeTrips; }
+    DoublyLinkedList<Trip>& getActiveTrips() { return activeTrips; }
     Stack<Trip>& getHistory() { return history; }
     int getTotalWaiting() { return waitingQueue.getSize(); }
     int getTotalActiveTrips() { return activeTrips.getSize(); }
@@ -229,7 +229,7 @@ public:
         return waitingQueue.sumBy([](Trip t) { return t.getPrice(); });
     }
 
-    // LAMBDA 3: cuenta viajes activos con countIf() de LinkedDoubleList
+    // LAMBDA 3: cuenta viajes activos con countIf() de DoublyLinkedList
     int contarViajesEnCurso() {
         return activeTrips.countIf([](Trip t) { return t.getStatus() == "en_curso"; });
     }
@@ -255,7 +255,7 @@ public:
         return history.findInStack([&](Trip t) { return t.getPassengerDni() == dni; });
     }
 
-    // LAMBDA 6: cancela un viaje activo por ID usando LinkedDoubleList::updateIf
+    // LAMBDA 6: cancela un viaje activo por ID usando DoublyLinkedList::updateIf
     // Cambia su estado a "cancelado" sin necesitar el indice
     bool cancelActiveTrip(string tripId) {
         for (int i = 0; i < activeTrips.getSize(); i++) {

@@ -20,7 +20,7 @@ public:
 };
 
 template <typename T>
-class LinkedDoubleList
+class DoublyLinkedList
 {
 private:
     DNode<T>* head;  // cabeza -> apunta al primer nodo
@@ -33,13 +33,13 @@ private:
     }
 
 public:
-    LinkedDoubleList() {
+    DoublyLinkedList() {
         head = nullptr;
         tail = nullptr;
         size = 0;
     }
 
-    ~LinkedDoubleList()
+    ~DoublyLinkedList()
     {
         DNode<T>* current = head;
         while (current != nullptr) {       // mientras que la cabeza actual sea diferente que nullptr
@@ -74,7 +74,7 @@ public:
         DNode<T>* newNode = new DNode<T>(value);
 
         if (tail == nullptr) {    // es decir si; la cola es vacia entonces no hay ningun valor
-            head = newNode;    
+            head = newNode;
             tail = newNode;
         }
         else {
@@ -128,7 +128,7 @@ public:
     {
         if (isEmpty())
         {
-            cout << "La LinkedDoubleList esta vacia\n";
+            cout << "La DoublyLinkedList esta vacia\n";
             return;
         }
 
@@ -136,10 +136,10 @@ public:
         head = head->next;  // la cabeza va hacer ahora el siguiente
         delete toDelete; // se borro el primer elemento o nodo
 
-        if (head == nullptr) { 
-            tail = nullptr; 
+        if (head == nullptr) {
+            tail = nullptr;
         }
-        else 
+        else
             head->prev = nullptr;
 
         size--;
@@ -150,7 +150,7 @@ public:
     {
         if (isEmpty())
         {
-            cout << "La LinkedDoubleList esta vacia\n";
+            cout << "La DoublyLinkedList esta vacia\n";
             return;
         }
 
@@ -190,7 +190,7 @@ public:
 
     T get(int index) const {
         if (!validIndex(index)) {
-            cout << "[LinkedDoubleList] get(" << index << ") out of range. size=" << size << "\n";
+            cout << "[DoublyLinkedList] get(" << index << ") out of range. size=" << size << "\n";
             return T{};
         }
         DNode<T>* current = head;
@@ -199,16 +199,16 @@ public:
     }
 
     T front() const {
-        if (isEmpty()) { cout << "[LinkedDoubleList] front() — empty\n"; return T{}; }
+        if (isEmpty()) { cout << "[DoublyLinkedList] front() — empty\n"; return T{}; }
         return head->data;
     }
 
     T back() {
-        if (isEmpty()) { cout << "[LinkedDoubleList] back() — empty\n"; return T{}; }
+        if (isEmpty()) { cout << "[DoublyLinkedList] back() — empty\n"; return T{}; }
         return tail->data;
     }
 
-    vector<T> linkedDoubleListToVector(LinkedDoubleList<T>& list)
+    vector<T> linkedDoubleListToVector(DoublyLinkedList<T>& list)
     {
         vector<T> totalList;
 

@@ -113,7 +113,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\FileManager.h" />
-    <ClInclude Include="include\LinkedDoubleList.h" />
+    <ClInclude Include="include\DoublyLinkedList.h" />
     <ClInclude Include="include\LinkedList.h" />
     <ClInclude Include="include\Node.h" />
     <ClInclude Include="include\Queue.h" />
@@ -121,6 +121,18 @@
     <ClInclude Include="src\AdministratorMenu.h" />
     <ClInclude Include="src\AuthManager.h" />
     <ClInclude Include="src\Driver.h" />
+    <ClInclude Include="src\forms\AdminMenuForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="src\forms\DriverMenuForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="src\forms\MainMenuForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="src\forms\PassengerMenuForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="src\MainMenu.h" />
     <ClInclude Include="src\Passenger.h" />
     <ClInclude Include="src\Trip.h" />
@@ -129,6 +141,10 @@
     <ClInclude Include="src\Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\forms\AdminMenuForm.cpp" />
+    <ClCompile Include="src\forms\DriverMenuForm.cpp" />
+    <ClCompile Include="src\forms\MainMenuForm.cpp" />
+    <ClCompile Include="src\forms\PassengerMenuForm.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,7 +159,28 @@
     <Text Include="assets\drivers.txt" />
     <Text Include="assets\passengers.txt" />
     <Text Include="assets\trips.txt" />
-    <Text Include="resources\Readme.txt" />
+    <Text Include="docs\ReadmeCourse.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\forms\AdminMenuForm.resx">
+      <DependentUpon>src\forms\AdminMenuForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\DriverMenuForm.resx">
+      <DependentUpon>src\forms\DriverMenuForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\MainMenuForm.resx">
+      <DependentUpon>src\forms\MainMenuForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\PassengerMenuForm.resx">
+      <DependentUpon>src\forms\PassengerMenuForm.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
