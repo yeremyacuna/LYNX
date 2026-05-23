@@ -1,18 +1,22 @@
 #pragma once
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <conio.h>
 #include <ctime>
 #include <filesystem>
-#include <windows.h>
 #include "Driver.h"
 #include "Passenger.h"
 #include "Trip.h"
 #include "AdministratorMenu.h"
 #include "../include/FileManager.h"
 
-using namespace System;
+using System::Console;
+using System::ConsoleColor;
+
 using std::vector; using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
 class Menu

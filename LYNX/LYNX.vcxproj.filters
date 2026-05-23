@@ -72,13 +72,13 @@
     <ClInclude Include="src\forms\AdminMenuForm.h">
       <Filter>src\forms</Filter>
     </ClInclude>
-    <ClInclude Include="src\forms\PassengerMenuForm.h">
-      <Filter>src\forms</Filter>
-    </ClInclude>
     <ClInclude Include="src\forms\DriverMenuForm.h">
       <Filter>src\forms</Filter>
     </ClInclude>
     <ClInclude Include="src\forms\MainMenuForm.h">
+      <Filter>src\forms</Filter>
+    </ClInclude>
+    <ClInclude Include="src\forms\PassengerMenuForm.h">
       <Filter>src\forms</Filter>
     </ClInclude>
   </ItemGroup>
@@ -89,13 +89,13 @@
     <ClCompile Include="src\forms\AdminMenuForm.cpp">
       <Filter>src\forms</Filter>
     </ClCompile>
-    <ClCompile Include="src\forms\PassengerMenuForm.cpp">
-      <Filter>src\forms</Filter>
-    </ClCompile>
     <ClCompile Include="src\forms\DriverMenuForm.cpp">
       <Filter>src\forms</Filter>
     </ClCompile>
     <ClCompile Include="src\forms\MainMenuForm.cpp">
+      <Filter>src\forms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\forms\PassengerMenuForm.cpp">
       <Filter>src\forms</Filter>
     </ClCompile>
   </ItemGroup>

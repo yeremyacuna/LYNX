@@ -1,19 +1,21 @@
 #include <iostream>
 #include "MainMenu.h"
+#include "forms/MainMenuForm.h"
 
-using namespace System;
 using std::cout;
 
-
-// main: punto de entrada del programa
+// main
 // aqui se crea el menu principal y se arranca todo el flujo del sistema
+[STAThread]
 int main()
 {
-	// menu principal que controla pasajero, conductor y admin
-	Menu menu = Menu();
+    System::Windows::Forms::Application::EnableVisualStyles();
+    System::Windows::Forms::Application::SetCompatibleTextRenderingDefault(false);
 
-	// inicia la interfaz actual en consola
-	menu.LYNX();
+    Menu menu;
+    menu.LYNX();
 
-	return 0;
+    System::Windows::Forms::Application::Run(gcnew LYNX::MainMenuForm());
+
+    return 0;
 }
