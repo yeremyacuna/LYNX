@@ -308,6 +308,7 @@ namespace LYNX {
 			this->Name = L"AdminMenuForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"LYNX | Admin";
+			this->Load += gcnew System::EventHandler(this, &AdminMenuForm::AdminMenuForm_Load);
 			this->headerPanel->ResumeLayout(false);
 			this->statsPanel->ResumeLayout(false);
 			this->card3->ResumeLayout(false);
@@ -329,5 +330,7 @@ namespace LYNX {
 			);
 		}
 
+private: System::Void AdminMenuForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

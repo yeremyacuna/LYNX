@@ -81,6 +81,12 @@
     <ClInclude Include="src\forms\PassengerMenuForm.h">
       <Filter>src\forms</Filter>
     </ClInclude>
+    <ClInclude Include="src\forms\LoginPassengerForm.h">
+      <Filter>src\forms</Filter>
+    </ClInclude>
+    <ClInclude Include="src\forms\RegisterPassengerForm.h">
+      <Filter>src\forms</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -96,6 +102,12 @@
       <Filter>src\forms</Filter>
     </ClCompile>
     <ClCompile Include="src\forms\PassengerMenuForm.cpp">
+      <Filter>src\forms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\forms\LoginPassengerForm.cpp">
+      <Filter>src\forms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\forms\RegisterPassengerForm.cpp">
       <Filter>src\forms</Filter>
     </ClCompile>
   </ItemGroup>

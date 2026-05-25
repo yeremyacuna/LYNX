@@ -814,9 +814,7 @@ void Menu::tripHistory(int& option, Trip trips[], int s, string title)
 // aqui se cargan datos, se navega entre roles y se ejecutan las acciones del sistema
 void Menu::LYNX()
 {
-    Console::CursorVisible = false;
-    Console::SetWindowSize(160, 30);
-    prepararDirectorioTrabajo();
+    
 
     FileManager fileManager;
     AuthManager authMgr;

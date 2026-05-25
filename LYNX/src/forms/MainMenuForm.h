@@ -2,6 +2,8 @@
 #include "PassengerMenuForm.h"
 #include "DriverMenuForm.h"
 #include "AdminMenuForm.h"
+#include "LoginPassengerForm.h"
+#include "RegisterPassengerForm.h"
 
 namespace LYNX {
 
@@ -73,13 +75,18 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ footerTitle;
 	private: System::Windows::Forms::Label^ footerText;
 	private: System::Windows::Forms::Panel^ metricB;
+	private: System::Windows::Forms::Timer^ timer1;
+	private: System::ComponentModel::IContainer^ components;
 
 	private:
-		System::ComponentModel::Container^ components;
 
+		LoginPassengerForm^ formlg = gcnew LoginPassengerForm();
+		RegisterPassengerForm^ formrg = gcnew RegisterPassengerForm();
+		PassengerMenuForm^ formpm = gcnew PassengerMenuForm();
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->topBar = (gcnew System::Windows::Forms::Panel());
 			this->liveChip = (gcnew System::Windows::Forms::Label());
 			this->subtitleLabel = (gcnew System::Windows::Forms::Label());
@@ -93,6 +100,7 @@ namespace LYNX {
 			this->heroChip = (gcnew System::Windows::Forms::Label());
 			this->previewPanel = (gcnew System::Windows::Forms::Panel());
 			this->metricC = (gcnew System::Windows::Forms::Panel());
+			this->metricB = (gcnew System::Windows::Forms::Panel());
 			this->metricA = (gcnew System::Windows::Forms::Panel());
 			this->previewBand = (gcnew System::Windows::Forms::Panel());
 			this->previewTitle = (gcnew System::Windows::Forms::Label());
@@ -114,7 +122,7 @@ namespace LYNX {
 			this->footerPanel = (gcnew System::Windows::Forms::Panel());
 			this->footerText = (gcnew System::Windows::Forms::Label());
 			this->footerTitle = (gcnew System::Windows::Forms::Label());
-			this->metricB = (gcnew System::Windows::Forms::Panel());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->topBar->SuspendLayout();
 			this->heroPanel->SuspendLayout();
 			this->previewPanel->SuspendLayout();
@@ -287,6 +295,15 @@ namespace LYNX {
 			this->metricC->Name = L"metricC";
 			this->metricC->Size = System::Drawing::Size(126, 96);
 			this->metricC->TabIndex = 4;
+			// 
+			// metricB
+			// 
+			this->metricB->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(247)), static_cast<System::Int32>(static_cast<System::Byte>(248)),
+				static_cast<System::Int32>(static_cast<System::Byte>(244)));
+			this->metricB->Location = System::Drawing::Point(180, 222);
+			this->metricB->Name = L"metricB";
+			this->metricB->Size = System::Drawing::Size(126, 96);
+			this->metricB->TabIndex = 3;
 			// 
 			// metricA
 			// 
@@ -526,14 +543,10 @@ namespace LYNX {
 			this->footerTitle->TabIndex = 0;
 			this->footerTitle->Text = L"TEXT";
 			// 
-			// metricB
+			// timer1
 			// 
-			this->metricB->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(247)), static_cast<System::Int32>(static_cast<System::Byte>(248)),
-				static_cast<System::Int32>(static_cast<System::Byte>(244)));
-			this->metricB->Location = System::Drawing::Point(180, 222);
-			this->metricB->Name = L"metricB";
-			this->metricB->Size = System::Drawing::Size(126, 96);
-			this->metricB->TabIndex = 3;
+			this->timer1->Enabled = true;
+			this->timer1->Tick += gcnew System::EventHandler(this, &MainMenuForm::timer1_Tick);
 			// 
 			// MainMenuForm
 			// 
@@ -564,26 +577,64 @@ namespace LYNX {
 
 		}
 #pragma endregion
-
+	public: bool LR = false;
 	private:
 		System::Void OpenPassengerForm(System::Object^ sender, System::EventArgs^ e)
 		{
-			PassengerMenuForm^ form = gcnew PassengerMenuForm();
-			form->Show();
+			
+			if (formlg == nullptr || formlg->IsDisposed) {
+				delete formlg;
+				formlg = gcnew LoginPassengerForm();
+			}
+			formlg->Show();
+			LR = true;
+			//this->Close();
 		}
 
 		System::Void OpenDriverForm(System::Object^ sender, System::EventArgs^ e)
 		{
 			DriverMenuForm^ form = gcnew DriverMenuForm();
 			form->Show();
+			//this->Close();
 		}
 
 		System::Void OpenAdminForm(System::Object^ sender, System::EventArgs^ e)
 		{
 			AdminMenuForm^ form = gcnew AdminMenuForm();
 			form->Show();
+			//this->Close();
 		}
 	
 
+private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+
+	if (formlg->switchToRegister) {
+		formlg->switchToRegister = false;
+		if (formrg == nullptr || formrg->IsDisposed) {
+			delete formrg;
+			formrg = gcnew RegisterPassengerForm();
+		}
+		formrg->Show();
+	}
+
+	if (formrg->switchToLogin) {
+		formrg->switchToLogin = false;
+		if (formlg == nullptr || formlg->IsDisposed) {
+			delete formlg;
+			formlg = gcnew LoginPassengerForm();
+		}
+		formlg->Show();
+	}
+	if (formlg->passengerScreen || formrg->passengerScreen) {
+		formlg->passengerScreen = false;
+		if (formpm == nullptr || formpm->IsDisposed) {
+			delete formpm;
+			formpm = gcnew PassengerMenuForm();
+		}
+		formpm->Show();
+	}
+	
+	
+}
 };
 }
