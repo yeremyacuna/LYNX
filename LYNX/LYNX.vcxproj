@@ -166,6 +166,7 @@
     <None Include="assets\passwords.bin" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\LYNX_image.ico" />
     <Image Include="resources\LYNX_image.png" />
   </ItemGroup>
   <ItemGroup>

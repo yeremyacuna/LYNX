@@ -1,13 +1,14 @@
 #include <iostream>
-#include "MainMenu.h"
 #include "forms/MainMenuForm.h"
+
 
 
 using std::cout;
 
 // main
 // aqui se crea el menu principal y se arranca todo el flujo del sistema
-[STAThread]
+
+[System::STAThread]
 int main()
 {
     System::Windows::Forms::Application::EnableVisualStyles();

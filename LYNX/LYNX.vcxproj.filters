@@ -135,6 +135,9 @@
     <Image Include="resources\LYNX_image.png">
       <Filter>resources</Filter>
     </Image>
+    <Image Include="resources\LYNX_image.ico">
+      <Filter>resources</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\drivers.txt">

@@ -1,4 +1,5 @@
 #pragma once
+
 namespace LYNX {
 
 	using namespace System;
@@ -8,25 +9,27 @@ namespace LYNX {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for RegisterPassengerForm
-	/// </summary>
 	public ref class RegisterPassengerForm : public System::Windows::Forms::Form
 	{
 	public:
 		RegisterPassengerForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			
+			// icon
+			try
+			{
+				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+			}
+			catch (System::Exception^ ex)
+			{
+				// empty	
+			}
+
 			this->CenterToScreen();
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~RegisterPassengerForm()
 		{
 			if (components)
@@ -34,34 +37,32 @@ namespace LYNX {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ label1;
-	protected:
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::TextBox^ tbDni;
-	private: System::Windows::Forms::TextBox^ tbName;
-	private: System::Windows::Forms::TextBox^ tbPassword;
-	private: System::Windows::Forms::Button^ btnSignin;
-	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::TextBox^ tbConfirmPassword;
-	private: System::Windows::Forms::LinkLabel^ llLogin;
-	private: System::Windows::Forms::Label^ label6;
-	private: System::Windows::Forms::Label^ label7;
 
+		// OBJETOS
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
+
+		// COMPONENTES
+	private: 
+		System::Windows::Forms::Label^ label1;
+		System::Windows::Forms::Label^ label2;
+		System::Windows::Forms::Label^ label3;
+		System::Windows::Forms::Label^ label4;
+		System::Windows::Forms::TextBox^ tbDni;
+		System::Windows::Forms::TextBox^ tbName;
+		System::Windows::Forms::TextBox^ tbPassword;
+		System::Windows::Forms::Button^ btnSignin;
+		System::Windows::Forms::Label^ label5;
+		System::Windows::Forms::TextBox^ tbConfirmPassword;
+		System::Windows::Forms::LinkLabel^ llLogin;
+		System::Windows::Forms::Label^ label6;
+		System::Windows::Forms::Label^ label7;
 		System::ComponentModel::Container ^components;
 
-#pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
+	private:
+		#pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(RegisterPassengerForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -214,37 +215,52 @@ namespace LYNX {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			//this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"RegisterPassengerForm";
 			this->Text = L"RegisterPassengerForm";
+			this->Load += gcnew System::EventHandler(this, &RegisterPassengerForm::RegisterPassengerForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
-#pragma endregion
-		public: bool passengerScreen = false;
-	private: System::Void btnSignin_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ dni = this->tbDni->Text;
-		String^ name = this->tbName->Text;
-		String^ password = this->tbPassword->Text;
-		String^ confirmPassword = this->tbConfirmPassword->Text;
 
-		if (dni->Length == 0 || password->Length == 0 || name->Length == 0 || confirmPassword->Length==0) {
-			MessageBox::Show("Porfavor llene todos los campos", "Error DNI, Nombre o Contrasena", MessageBoxButtons::OK);
-			return;
-		}
+		// LOGIC
+		#pragma endregion
+		public:
+			bool passengerScreen = false;
 
-		if (String::Compare(password, confirmPassword) != 0) {
-			MessageBox::Show("Incompatibilidad de Contrasenas", "Error Contrasena", MessageBoxButtons::OK);
-			return;
-		}
-		this->switchToLogin = true;
-		this->Close();
-	}
-	public: bool switchToLogin = false;
-	private: System::Void llLogin_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-		this->switchToLogin = true;
-		
-		this->Close();
-}
+		private:
+			System::Void btnSignin_Click(System::Object^ sender, System::EventArgs^ e) {
+				String^ dni = this->tbDni->Text;
+				String^ name = this->tbName->Text;
+				String^ password = this->tbPassword->Text;
+				String^ confirmPassword = this->tbConfirmPassword->Text;
+
+				if (dni->Length == 0 || password->Length == 0 || name->Length == 0 || confirmPassword->Length == 0) {
+					MessageBox::Show("Porfavor llene todos los campos", "Error DNI, Nombre o Contrasena", MessageBoxButtons::OK);
+					return;
+				}
+
+				if (String::Compare(password, confirmPassword) != 0) {
+					MessageBox::Show("Incompatibilidad de Contrasenas", "Error Contrasena", MessageBoxButtons::OK);
+					return;
+				}
+				this->switchToLogin = true;
+				this->Close();
+			}
+
+		public:
+			bool switchToLogin = false;
+
+		private:
+			System::Void llLogin_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+				this->switchToLogin = true;
+				this->Close();
+			}
+
+		private: 
+			System::Void RegisterPassengerForm_Load(System::Object^ sender, System::EventArgs^ e) {
+
+			}
 };
 }

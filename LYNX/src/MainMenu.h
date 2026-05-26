@@ -52,7 +52,7 @@ public:
 
     void tripHistory(int& option, Trip trips[], int s, string title);
 
-    void LYNX();
+    void LYNXMenu();
 
 private:
     void Seleccion(int keycode, int& inicio, int min, int max);
@@ -812,7 +812,7 @@ void Menu::tripHistory(int& option, Trip trips[], int s, string title)
 
 // LYNX: flujo principal de toda la aplicacion
 // aqui se cargan datos, se navega entre roles y se ejecutan las acciones del sistema
-void Menu::LYNX()
+void Menu::LYNXMenu()
 {
     
 

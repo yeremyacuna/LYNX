@@ -9,18 +9,22 @@ namespace LYNX {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for PassengerMenuForm
-	/// </summary>
 	public ref class PassengerMenuForm : public System::Windows::Forms::Form
 	{
 	public:
 		PassengerMenuForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+
+			// icon
+			try
+			{
+				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+			}
+			catch (System::Exception^ ex)
+			{
+				// empty	
+			}
 		}
 
 	protected:
@@ -397,6 +401,7 @@ namespace LYNX {
 			this->Controls->Add(this->queuePanel);
 			this->Name = L"PassengerMenuForm";
 			this->Text = L"PassengerMenuForm";
+			this->Load += gcnew System::EventHandler(this, &PassengerMenuForm::PassengerMenuForm_Load);
 			this->vehiclePanel->ResumeLayout(false);
 			this->maintenancePanel->ResumeLayout(false);
 			this->historyPanel->ResumeLayout(false);
@@ -408,5 +413,7 @@ namespace LYNX {
 		}
 #pragma endregion
 	private: System::Void q3Title_Click(System::Object^ sender, System::EventArgs^ e) {	}
+private: System::Void PassengerMenuForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
