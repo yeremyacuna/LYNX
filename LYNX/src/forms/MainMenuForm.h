@@ -1,9 +1,11 @@
 #pragma once
+#pragma comment(lib, "user32.lib")
 #include "PassengerMenuForm.h"
 #include "DriverMenuForm.h"
 #include "AdminMenuForm.h"
 #include "LoginPassengerForm.h"
 #include "RegisterPassengerForm.h"
+#include "../library/FormsStatus.h"	
 
 namespace LYNX {
 
@@ -21,23 +23,24 @@ namespace LYNX {
 		{
 			InitializeComponent();
 
+			// CENTRAR TODO
+			this->CenterToScreen();
+
 			// ACTIVAR F11
 			this->KeyPreview = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MaximizeBox = false; // quitar maximizar
-			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainMenuForm::MainMenuForm_KeyDown);
+			// this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainMenuForm::MainMenuForm_KeyDown);
 
 			// CARGAR ICONO
 			try
 			{
 				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
 			}
-			catch (System::Exception^ ex)
+			catch (...)
 			{
 				// empty	
 			}
-
-
 		}
 
 	protected:
@@ -96,6 +99,7 @@ namespace LYNX {
 	private: System::Windows::Forms::Panel^ pnlDecoration1;	
 	private: System::ComponentModel::IContainer^ components;
 
+		// WINDOWS INITIALIZE
 	private:
 		#pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
@@ -172,6 +176,7 @@ namespace LYNX {
 			this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBoxIcon->TabIndex = 3;
 			this->pictureBoxIcon->TabStop = false;
+			this->pictureBoxIcon->Click += gcnew System::EventHandler(this, &MainMenuForm::pictureBoxIcon_Click);
 			// 
 			// lblLYNX
 			// 
@@ -677,7 +682,9 @@ namespace LYNX {
 			this->Name = L"MainMenuForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"LYNX | Inicio";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainMenuForm::MainMenuForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainMenuForm::MainMenuForm_Load);
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainMenuForm::MainMenuForm_KeyDown);
 			this->pnlTopBar->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->EndInit();
 			this->pnlOpciones->ResumeLayout(false);
@@ -693,9 +700,6 @@ namespace LYNX {
 
 		// LOGICA
 		#pragma endregion
-		public: 
-			bool LR = false;
-
 		private:
 
 		//
@@ -703,8 +707,20 @@ namespace LYNX {
 		// 
 			System::Void MainMenuForm_Load(System::Object^ sender, System::EventArgs^ e) {
 
+				// Para Picture Box LYNX
 				this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
 				this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+
+				// Para Pantalla Completa
+				normalSize = this->Size;
+				normalLocation = this->Location;
+				normalState = this->WindowState;
+				FormsStatus::SaveWindow(this);
+
+				if (FormsStatus::isFullscreen)
+				{
+					FormsStatus::ApplyWindow(this);
+				}
 			}
 
 		//
@@ -717,7 +733,10 @@ namespace LYNX {
 					delete formlg;
 					formlg = gcnew LoginPassengerForm();
 				}
+				FormsStatus::SaveWindow(this);
+				FormsStatus::ApplyWindow(formlg);
 				formlg->Show();
+				formlg->BringToFront();
 				this->Hide(); // ocultar MainMenu
 
 				
@@ -727,14 +746,22 @@ namespace LYNX {
 			System::Void OpenDriverForm(System::Object^ sender, System::EventArgs^ e)
 			{
 				DriverMenuForm^ form = gcnew DriverMenuForm();
+				FormsStatus::SaveWindow(this);
+				FormsStatus::ApplyWindow(form);
 				form->Show();
+				form->BringToFront();
+				this->Hide(); // ocultar MainMenu
 			}
 
 			// btnAbrirAdministradorClick
 			System::Void OpenAdminForm(System::Object^ sender, System::EventArgs^ e)
 			{
 				AdminMenuForm^ form = gcnew AdminMenuForm();
+				FormsStatus::SaveWindow(this);
+				FormsStatus::ApplyWindow(form);
 				form->Show();
+				form->BringToFront();
+				this->Hide(); // ocultar MainMenu
 			}
 
 		//
@@ -742,29 +769,30 @@ namespace LYNX {
 		// 
 			System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
 
+			
 				if (formlg->switchToRegister) {
 					formlg->switchToRegister = false;
 					if (formrg == nullptr || formrg->IsDisposed) {
-						delete formrg;
 						formrg = gcnew RegisterPassengerForm();
 					}
+					FormsStatus::ApplyWindow(formrg);
 					formrg->Show();
 				}
 
 				if (formrg->switchToLogin) {
 					formrg->switchToLogin = false;
 					if (formlg == nullptr || formlg->IsDisposed) {
-						delete formlg;
 						formlg = gcnew LoginPassengerForm();
 					}
+					FormsStatus::ApplyWindow(formlg);
 					formlg->Show();
 				}
 				if (formlg->passengerScreen || formrg->passengerScreen) {
-					formlg->passengerScreen = false;
 					if (formpm == nullptr || formpm->IsDisposed) {
 						delete formpm;
 						formpm = gcnew PassengerMenuForm();
 					}
+					FormsStatus::ApplyWindow(formpm);
 					formpm->Show();
 				}
 			}
@@ -772,50 +800,104 @@ namespace LYNX {
 		//
 		// Full screen function
 		// 
-			bool isFullscreen = false;
 			System::Drawing::Size normalSize;
 			System::Drawing::Point normalLocation;
 			System::Windows::Forms::FormWindowState normalState;
 
 			System::Void MainMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 			{
+
 				if (e->KeyCode == System::Windows::Forms::Keys::F11)
 				{
-					if (!isFullscreen)
+					if (!FormsStatus::isFullscreen)
 					{
 						// Guardar estado actual
 						normalSize = this->Size;
 						normalLocation = this->Location;
 						normalState = this->WindowState;
 
+						FormsStatus::SaveWindow(this);
+
 						// Entrar a fullscreen
 						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 						this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-						isFullscreen = true;
+
+						FormsStatus::isFullscreen = true;
 					}
 					else
 					{
-						// Restaurar — CRÍTICO: volver a FixedSingle, no Sizable
+						// Restaurar volver a fixedSingle, no sizable
 						this->WindowState = System::Windows::Forms::FormWindowState::Normal;
 						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-						this->Size = normalSize;
-						this->Location = normalLocation;
-						isFullscreen = false;
+						this->Size = FormsStatus::normalSize;
+						this->Location = FormsStatus::normalLocation;
+
+						FormsStatus::isFullscreen = false;
+						InitButtonsStyle();
+						this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
 					}
 				}
 
-				// ESC también sale del fullscreen
-				if (e->KeyCode == System::Windows::Forms::Keys::Escape && isFullscreen)
+				// ESC sale del fullscreen
+				if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
 				{
 					this->WindowState = System::Windows::Forms::FormWindowState::Normal;
 					this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-					this->Size = normalSize;
-					this->Location = normalLocation;
-					isFullscreen = false;
+					this->Size = FormsStatus::normalSize;
+					this->Location = FormsStatus::normalLocation;
+
+					FormsStatus::isFullscreen = false;
+					InitButtonsStyle();
+					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
 				}
 			}
 
+			System::Void MainMenuForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+				System::Windows::Forms::Application::Exit();
+			}
+		
 
+			System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e) {
+				this->Show();
+				this->BringToFront();
+			}
+
+
+			System::Void InitButtonsStyle()
+			{
+				// BTN PASAJERO
+				btnAbrirPasajero->Size = System::Drawing::Size(261, 46);
+				btnAbrirPasajero->Location = System::Drawing::Point(35, 264);
+				btnAbrirPasajero->BackColor = System::Drawing::Color::FromArgb(33, 181, 109);
+				btnAbrirPasajero->ForeColor = System::Drawing::Color::White;
+				btnAbrirPasajero->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+				btnAbrirPasajero->Font = gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold);
+				btnAbrirPasajero->Text = L"Abrir pasajero";
+				btnAbrirPasajero->Visible = true;
+				btnAbrirPasajero->Enabled = true;
+
+				// BTN CONDUCTOR
+				btnAbrirConductor->Size = System::Drawing::Size(261, 46);
+				btnAbrirConductor->Location = System::Drawing::Point(313, 264);
+				btnAbrirConductor->BackColor = System::Drawing::Color::FromArgb(39, 50, 120);
+				btnAbrirConductor->ForeColor = System::Drawing::Color::White;
+				btnAbrirConductor->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+				btnAbrirConductor->Font = gcnew System::Drawing::Font( L"Segoe UI", 10, System::Drawing::FontStyle::Bold);
+				btnAbrirConductor->Text = L"Abrir conductor";
+				btnAbrirConductor->Visible = true;
+				btnAbrirConductor->Enabled = true;
+
+				// BTN ADMIN
+				btnAbrirAdmin->Size = System::Drawing::Size(264, 46);
+				btnAbrirAdmin->Location = System::Drawing::Point(594, 264);
+				btnAbrirAdmin->BackColor = System::Drawing::Color::FromArgb(57, 107, 239);
+				btnAbrirAdmin->ForeColor = System::Drawing::Color::White;
+				btnAbrirAdmin->FlatStyle =System::Windows::Forms::FlatStyle::Flat;
+				btnAbrirAdmin->Font = gcnew System::Drawing::Font(L"Segoe UI", 10,System::Drawing::FontStyle::Bold);
+				btnAbrirAdmin->Text = L"Abrir administrador";
+				btnAbrirAdmin->Visible = true;
+				btnAbrirAdmin->Enabled = true;
+			}
 };
 
 }

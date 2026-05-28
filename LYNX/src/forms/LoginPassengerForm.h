@@ -1,5 +1,7 @@
 #pragma once
 #include "PassengerMenuForm.h"
+#include "../library/FormsStatus.h"	
+#include <windows.h>
 
 namespace LYNX {
 
@@ -17,20 +19,29 @@ namespace LYNX {
 			
 		{
 			InitializeComponent();
+			
+			// CENTRAR TODO
 			this->CenterToScreen();
 
 			// ACTIVAR F11
 			this->KeyPreview = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MaximizeBox = false; // quitar maximizar
-			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &LoginPassengerForm::LoginPassengerForm_KeyDown);
 
+			// QUITAR COSITAS
+			this->MinimizeBox = false;
+			HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
+			HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
+			::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+			::DrawMenuBar(hWnd);
+			
+			
 			// CARGAR ICONO
 			try
 			{
 				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
 			}
-			catch (System::Exception^ ex)
+			catch (...)
 			{
 				// empty	
 			}
@@ -38,9 +49,6 @@ namespace LYNX {
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~LoginPassengerForm()
 		{
 			if (components)
@@ -48,160 +56,181 @@ namespace LYNX {
 				delete components;
 			}
 		}
+	
+		// OBJETOS
+	private:
 		
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Label^ label4;
+		// COMPONENTES
+	private: System::Windows::Forms::Label^ lblIniciarSesion;
+	private: System::Windows::Forms::Label^ lblDatoDNI;
+	private: System::Windows::Forms::Label^ lblDatoNombre;
+	private: System::Windows::Forms::Label^ lblDatoContrasena;
 	private: System::Windows::Forms::TextBox^ tbDni;
-	private: System::Windows::Forms::TextBox^ tbName;
-	private: System::Windows::Forms::TextBox^ tbPassword;
+	private: System::Windows::Forms::TextBox^ tbNombre;
+	private: System::Windows::Forms::TextBox^ tbContrasena;
 	private: System::Windows::Forms::Button^ btnEnter;
-	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::LinkLabel^ llRegister;
+	private: System::Windows::Forms::Label^ lblAviso1;
+	private: System::Windows::Forms::LinkLabel^ llblAviso2;
 	private: System::Windows::Forms::Panel^ pnlTopBar;
 	private: System::Windows::Forms::PictureBox^ pictureBoxIcon;
 	private: System::Windows::Forms::Label^ lblLYNX;
-
-	protected:
-
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		/// 
-		System::ComponentModel::Container^ components;
+	private: System::Windows::Forms::Label^ lblMarco1;
+	private: System::Windows::Forms::Label^ lblMarco2;
+	private: System::Windows::Forms::Label^ lblMarco4;
+	private: System::Windows::Forms::Label^ lblMarco3;
+	private: System::Windows::Forms::TableLayoutPanel^ tlpOptions;
+	private: System::Windows::Forms::Label^ lblBorrar;
+	private: System::ComponentModel::Container^ components;
 		
-
-#pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
+		// WINDOWS INITIALIZE
+	private:
+		#pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->lblIniciarSesion = (gcnew System::Windows::Forms::Label());
+			this->lblDatoDNI = (gcnew System::Windows::Forms::Label());
+			this->lblDatoNombre = (gcnew System::Windows::Forms::Label());
+			this->lblDatoContrasena = (gcnew System::Windows::Forms::Label());
 			this->tbDni = (gcnew System::Windows::Forms::TextBox());
-			this->tbName = (gcnew System::Windows::Forms::TextBox());
-			this->tbPassword = (gcnew System::Windows::Forms::TextBox());
+			this->tbNombre = (gcnew System::Windows::Forms::TextBox());
+			this->tbContrasena = (gcnew System::Windows::Forms::TextBox());
 			this->btnEnter = (gcnew System::Windows::Forms::Button());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->llRegister = (gcnew System::Windows::Forms::LinkLabel());
+			this->lblAviso1 = (gcnew System::Windows::Forms::Label());
+			this->llblAviso2 = (gcnew System::Windows::Forms::LinkLabel());
 			this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
 			this->pictureBoxIcon = (gcnew System::Windows::Forms::PictureBox());
 			this->lblLYNX = (gcnew System::Windows::Forms::Label());
+			this->lblMarco1 = (gcnew System::Windows::Forms::Label());
+			this->lblMarco2 = (gcnew System::Windows::Forms::Label());
+			this->lblMarco4 = (gcnew System::Windows::Forms::Label());
+			this->lblMarco3 = (gcnew System::Windows::Forms::Label());
+			this->tlpOptions = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->lblBorrar = (gcnew System::Windows::Forms::Label());
 			this->pnlTopBar->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
+			this->tlpOptions->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// label1
+			// lblIniciarSesion
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 28, System::Drawing::FontStyle::Bold));
-			this->label1->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label1->Location = System::Drawing::Point(627, 386);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(251, 46);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Iniciar Sesion";
-			this->label1->Click += gcnew System::EventHandler(this, &LoginPassengerForm::label1_Click);
+			this->lblIniciarSesion->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->lblIniciarSesion->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 28, System::Drawing::FontStyle::Bold));
+			this->lblIniciarSesion->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->lblIniciarSesion->Location = System::Drawing::Point(526, 348);
+			this->lblIniciarSesion->Name = L"lblIniciarSesion";
+			this->lblIniciarSesion->Size = System::Drawing::Size(429, 46);
+			this->lblIniciarSesion->TabIndex = 0;
+			this->lblIniciarSesion->Text = L"Iniciar Sesion";
+			this->lblIniciarSesion->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			// 
-			// label2
+			// lblDatoDNI
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
-			this->label2->ForeColor = System::Drawing::SystemColors::Control;
-			this->label2->Location = System::Drawing::Point(539, 439);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(31, 17);
-			this->label2->TabIndex = 1;
-			this->label2->Text = L"DNI";
+			this->lblDatoDNI->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->lblDatoDNI->AutoSize = true;
+			this->lblDatoDNI->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
+			this->lblDatoDNI->ForeColor = System::Drawing::SystemColors::Control;
+			this->lblDatoDNI->Location = System::Drawing::Point(523, 401);
+			this->lblDatoDNI->Name = L"lblDatoDNI";
+			this->lblDatoDNI->Size = System::Drawing::Size(31, 17);
+			this->lblDatoDNI->TabIndex = 1;
+			this->lblDatoDNI->Text = L"DNI";
 			// 
-			// label3
+			// lblDatoNombre
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
-			this->label3->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label3->Location = System::Drawing::Point(539, 492);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(60, 17);
-			this->label3->TabIndex = 2;
-			this->label3->Text = L"Nombre";
+			this->lblDatoNombre->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->lblDatoNombre->AutoSize = true;
+			this->lblDatoNombre->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
+			this->lblDatoNombre->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->lblDatoNombre->Location = System::Drawing::Point(523, 454);
+			this->lblDatoNombre->Name = L"lblDatoNombre";
+			this->lblDatoNombre->Size = System::Drawing::Size(60, 17);
+			this->lblDatoNombre->TabIndex = 2;
+			this->lblDatoNombre->Text = L"Nombre";
 			// 
-			// label4
+			// lblDatoContrasena
 			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
-			this->label4->ForeColor = System::Drawing::SystemColors::Control;
-			this->label4->Location = System::Drawing::Point(539, 547);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(81, 17);
-			this->label4->TabIndex = 3;
-			this->label4->Text = L"Contrasena";
+			this->lblDatoContrasena->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->lblDatoContrasena->AutoSize = true;
+			this->lblDatoContrasena->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
+			this->lblDatoContrasena->ForeColor = System::Drawing::SystemColors::Control;
+			this->lblDatoContrasena->Location = System::Drawing::Point(523, 509);
+			this->lblDatoContrasena->Name = L"lblDatoContrasena";
+			this->lblDatoContrasena->Size = System::Drawing::Size(81, 17);
+			this->lblDatoContrasena->TabIndex = 3;
+			this->lblDatoContrasena->Text = L"Contrasena";
 			// 
 			// tbDni
 			// 
+			this->tbDni->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->tbDni->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbDni->Location = System::Drawing::Point(542, 459);
+			this->tbDni->Location = System::Drawing::Point(526, 421);
 			this->tbDni->Name = L"tbDni";
 			this->tbDni->Size = System::Drawing::Size(429, 27);
 			this->tbDni->TabIndex = 4;
 			// 
-			// tbName
+			// tbNombre
 			// 
-			this->tbName->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbName->Location = System::Drawing::Point(542, 512);
-			this->tbName->Name = L"tbName";
-			this->tbName->Size = System::Drawing::Size(429, 27);
-			this->tbName->TabIndex = 5;
+			this->tbNombre->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->tbNombre->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbNombre->Location = System::Drawing::Point(526, 474);
+			this->tbNombre->Name = L"tbNombre";
+			this->tbNombre->Size = System::Drawing::Size(429, 27);
+			this->tbNombre->TabIndex = 5;
 			// 
-			// tbPassword
+			// tbContrasena
 			// 
-			this->tbPassword->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbPassword->Location = System::Drawing::Point(542, 567);
-			this->tbPassword->Name = L"tbPassword";
-			this->tbPassword->PasswordChar = '*';
-			this->tbPassword->Size = System::Drawing::Size(429, 27);
-			this->tbPassword->TabIndex = 6;
+			this->tbContrasena->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->tbContrasena->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbContrasena->Location = System::Drawing::Point(526, 529);
+			this->tbContrasena->Name = L"tbContrasena";
+			this->tbContrasena->PasswordChar = '*';
+			this->tbContrasena->Size = System::Drawing::Size(429, 27);
+			this->tbContrasena->TabIndex = 6;
 			// 
 			// btnEnter
 			// 
+			this->btnEnter->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->btnEnter->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
 				static_cast<System::Int32>(static_cast<System::Byte>(109)));
 			this->btnEnter->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnEnter->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
-			this->btnEnter->Location = System::Drawing::Point(672, 616);
+			this->btnEnter->Location = System::Drawing::Point(665, 572);
 			this->btnEnter->Name = L"btnEnter";
-			this->btnEnter->Size = System::Drawing::Size(150, 44);
+			this->btnEnter->Size = System::Drawing::Size(154, 44);
 			this->btnEnter->TabIndex = 7;
 			this->btnEnter->Text = L"Ingresar";
 			this->btnEnter->UseVisualStyleBackColor = false;
 			this->btnEnter->Click += gcnew System::EventHandler(this, &LoginPassengerForm::btnEnter_Click);
 			// 
-			// label5
+			// lblAviso1
 			// 
-			this->label5->AutoSize = true;
-			this->label5->ForeColor = System::Drawing::SystemColors::Control;
-			this->label5->Location = System::Drawing::Point(662, 679);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(94, 13);
-			this->label5->TabIndex = 8;
-			this->label5->Text = L"No tienes cuenta\?";
+			this->lblAviso1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->lblAviso1->ForeColor = System::Drawing::SystemColors::Control;
+			this->lblAviso1->Location = System::Drawing::Point(20, 0);
+			this->lblAviso1->Name = L"lblAviso1";
+			this->lblAviso1->Size = System::Drawing::Size(211, 13);
+			this->lblAviso1->TabIndex = 8;
+			this->lblAviso1->Text = L"No tienes cuenta\?";
+			this->lblAviso1->TextAlign = System::Drawing::ContentAlignment::TopRight;
 			// 
-			// llRegister
+			// llblAviso2
 			// 
-			this->llRegister->AutoSize = true;
-			this->llRegister->LinkColor = System::Drawing::Color::White;
-			this->llRegister->Location = System::Drawing::Point(762, 679);
-			this->llRegister->Name = L"llRegister";
-			this->llRegister->Size = System::Drawing::Size(60, 13);
-			this->llRegister->TabIndex = 9;
-			this->llRegister->TabStop = true;
-			this->llRegister->Text = L"Registrarse";
-			this->llRegister->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &LoginPassengerForm::llRegister_LinkClicked);
+			this->llblAviso2->LinkColor = System::Drawing::Color::White;
+			this->llblAviso2->Location = System::Drawing::Point(237, 0);
+			this->llblAviso2->Name = L"llblAviso2";
+			this->llblAviso2->Size = System::Drawing::Size(189, 13);
+			this->llblAviso2->TabIndex = 9;
+			this->llblAviso2->TabStop = true;
+			this->llblAviso2->Text = L"Registrarse";
+			this->llblAviso2->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &LoginPassengerForm::llRegister_LinkClicked);
 			// 
 			// pnlTopBar
 			// 
@@ -227,6 +256,7 @@ namespace LYNX {
 			this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBoxIcon->TabIndex = 3;
 			this->pictureBoxIcon->TabStop = false;
+			this->pictureBoxIcon->Click += gcnew System::EventHandler(this, &LoginPassengerForm::pictureBoxIcon_Click);
 			// 
 			// lblLYNX
 			// 
@@ -239,6 +269,84 @@ namespace LYNX {
 			this->lblLYNX->TabIndex = 0;
 			this->lblLYNX->Text = L"LYNX";
 			// 
+			// lblMarco1
+			// 
+			this->lblMarco1->BackColor = System::Drawing::Color::Red;
+			this->lblMarco1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblMarco1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
+				static_cast<System::Int32>(static_cast<System::Byte>(113)));
+			this->lblMarco1->Location = System::Drawing::Point(1, 79);
+			this->lblMarco1->Name = L"lblMarco1";
+			this->lblMarco1->Size = System::Drawing::Size(458, 850);
+			this->lblMarco1->TabIndex = 11;
+			this->lblMarco1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->lblMarco1->Visible = false;
+			// 
+			// lblMarco2
+			// 
+			this->lblMarco2->BackColor = System::Drawing::Color::Red;
+			this->lblMarco2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblMarco2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
+				static_cast<System::Int32>(static_cast<System::Byte>(113)));
+			this->lblMarco2->Location = System::Drawing::Point(1022, 79);
+			this->lblMarco2->Name = L"lblMarco2";
+			this->lblMarco2->Size = System::Drawing::Size(458, 850);
+			this->lblMarco2->TabIndex = 12;
+			this->lblMarco2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->lblMarco2->Visible = false;
+			// 
+			// lblMarco4
+			// 
+			this->lblMarco4->BackColor = System::Drawing::Color::Red;
+			this->lblMarco4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblMarco4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
+				static_cast<System::Int32>(static_cast<System::Byte>(113)));
+			this->lblMarco4->Location = System::Drawing::Point(450, 79);
+			this->lblMarco4->Name = L"lblMarco4";
+			this->lblMarco4->Size = System::Drawing::Size(595, 213);
+			this->lblMarco4->TabIndex = 13;
+			this->lblMarco4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->lblMarco4->Visible = false;
+			// 
+			// lblMarco3
+			// 
+			this->lblMarco3->BackColor = System::Drawing::Color::Red;
+			this->lblMarco3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblMarco3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
+				static_cast<System::Int32>(static_cast<System::Byte>(113)));
+			this->lblMarco3->Location = System::Drawing::Point(450, 707);
+			this->lblMarco3->Name = L"lblMarco3";
+			this->lblMarco3->Size = System::Drawing::Size(595, 213);
+			this->lblMarco3->TabIndex = 14;
+			this->lblMarco3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->lblMarco3->Visible = false;
+			// 
+			// tlpOptions
+			// 
+			this->tlpOptions->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->tlpOptions->ColumnCount = 2;
+			this->tlpOptions->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 54.61692F)));
+			this->tlpOptions->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 45.38308F)));
+			this->tlpOptions->Controls->Add(this->lblAviso1, 0, 0);
+			this->tlpOptions->Controls->Add(this->llblAviso2, 1, 0);
+			this->tlpOptions->Location = System::Drawing::Point(526, 635);
+			this->tlpOptions->Name = L"tlpOptions";
+			this->tlpOptions->RowCount = 1;
+			this->tlpOptions->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+			this->tlpOptions->Size = System::Drawing::Size(429, 21);
+			this->tlpOptions->TabIndex = 15;
+			// 
+			// lblBorrar
+			// 
+			this->lblBorrar->AutoSize = true;
+			this->lblBorrar->ForeColor = System::Drawing::Color::Red;
+			this->lblBorrar->Location = System::Drawing::Point(611, 315);
+			this->lblBorrar->Name = L"lblBorrar";
+			this->lblBorrar->Size = System::Drawing::Size(248, 13);
+			this->lblBorrar->TabIndex = 19;
+			this->lblBorrar->Text = L"Esto es logear para pasajero por ahora (lbl invisible)";
+			this->lblBorrar->Visible = false;
+			// 
 			// LoginPassengerForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -246,31 +354,39 @@ namespace LYNX {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
 				static_cast<System::Int32>(static_cast<System::Byte>(34)));
 			this->ClientSize = System::Drawing::Size(1480, 920);
+			this->Controls->Add(this->lblBorrar);
+			this->Controls->Add(this->tlpOptions);
+			this->Controls->Add(this->lblMarco3);
+			this->Controls->Add(this->lblMarco4);
+			this->Controls->Add(this->lblMarco2);
+			this->Controls->Add(this->lblMarco1);
 			this->Controls->Add(this->pnlTopBar);
-			this->Controls->Add(this->llRegister);
-			this->Controls->Add(this->label5);
 			this->Controls->Add(this->btnEnter);
-			this->Controls->Add(this->tbPassword);
-			this->Controls->Add(this->tbName);
+			this->Controls->Add(this->tbContrasena);
+			this->Controls->Add(this->tbNombre);
 			this->Controls->Add(this->tbDni);
-			this->Controls->Add(this->label4);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->lblDatoContrasena);
+			this->Controls->Add(this->lblDatoNombre);
+			this->Controls->Add(this->lblDatoDNI);
+			this->Controls->Add(this->lblIniciarSesion);
 			this->Name = L"LoginPassengerForm";
 			this->Text = L"LYNX | Iniciar Sesion";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &LoginPassengerForm::LoginPassengerForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &LoginPassengerForm::LoginPassengerForm_Load);
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &LoginPassengerForm::LoginPassengerForm_KeyDown);
+			this->Resize += gcnew System::EventHandler(this, &LoginPassengerForm::LoginPassengerForm_Resize);
 			this->pnlTopBar->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->EndInit();
+			this->tlpOptions->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 
-		// LOGICA
+		// LOGICA y PUBLIC
 		#pragma endregion
-
+		public: 
+			bool passengerScreen = false;
+			bool switchToRegister = false;
 		private:
 
 		//
@@ -278,101 +394,159 @@ namespace LYNX {
 		// 
 			System::Void LoginPassengerForm_Load(System::Object^ sender, System::EventArgs^ e) {
 
+				// Para Picture Box LYNX
 				this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
 				this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+
+				// Para Pantalla Completa
+				normalSize = this->Size;
+				normalLocation = this->Location;
+				normalState = this->WindowState;
+				FormsStatus::SaveWindow(this);
+
+				if (FormsStatus::isFullscreen)
+				{
+					FormsStatus::ApplyWindow(this);
+				}
 			}
 
-		
+		//
+		// Click functions
+		// 
+			bool _internalClose = false;
 
+			// btnEntrar
+			System::Void btnEnter_Click(System::Object^ sender, System::EventArgs^ e) {
 
+				String^ dni = this->tbDni->Text;
+				String^ name = this->tbNombre->Text;
+				String^ password = this->tbContrasena->Text;
 
+				if (dni->Length == 0 || password->Length == 0 || name->Length == 0) {
+					MessageBox::Show("Porfavor llene todos los campos", "Error DNI, Nombre o Contrasena", MessageBoxButtons::OK);
+				return;
+				}
 
-
-
-
-
-
-private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+				passengerScreen = true;
+				FormsStatus::SaveWindow(this);
+				_internalClose = true;  // marcar como cierre 
+				this->Close();
 			}
-		   public: bool passengerScreen = false;
-	private: System::Void btnEnter_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ dni = this->tbDni->Text;
-		String^ name = this->tbName->Text;
-		String^ password = this->tbPassword->Text;
 
-		
+			// linkerlabelClick
+			System::Void llRegister_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+				this->switchToRegister = true;
+				FormsStatus::SaveWindow(this);
+				_internalClose = true;  // marcar como cierre 
+				this->Close();
+			}
 
-		if (dni->Length == 0 || password->Length == 0 || name->Length == 0) {
-			MessageBox::Show("Porfavor llene todos los campos", "Error DNI, Nombre o Contrasena", MessageBoxButtons::OK);
-			return;
-		}
-
-		
-
-		passengerScreen = true;
-		this->Close();
-	}
-	public: bool switchToRegister = false;
-	private: System::Void llRegister_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-		this->switchToRegister = true;
-		this->Close();
-	}
+			// pictureLYNXClick
+			System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e) {
+				if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
+				{
+					FormsStatus::SaveWindow(this);
+					FormsStatus::ApplyWindow(FormsStatus::mainMenu);
+					FormsStatus::mainMenu->Show();
+					FormsStatus::mainMenu->BringToFront();
+					this->Hide();
+				}
+			}
 		  
+		//
+		// Full screen function
+		// 
+			System::Drawing::Size normalSize;
+			System::Drawing::Point normalLocation;
+			System::Windows::Forms::FormWindowState normalState;
+
+			System::Void LoginPassengerForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+			{
+
+				if (e->KeyCode == System::Windows::Forms::Keys::F11)
+				{
+					if (!FormsStatus::isFullscreen)
+					{
+						// Guardar estado actual
+						normalSize = this->Size;
+						normalLocation = this->Location;
+						normalState = this->WindowState;
+
+						FormsStatus::SaveWindow(this);
+
+						// Entrar a fullscreen
+						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+						this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+
+						FormsStatus::isFullscreen = true;
+					}
+					else
+					{
+						// Restaurar volver a fixedSingle, no sizable
+						this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+						this->Size = FormsStatus::normalSize;
+						this->Location = FormsStatus::normalLocation;
+
+						FormsStatus::isFullscreen  = false;
+
+						// DESACTIVAR CLOSE BOTTON
+						HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
+						HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
+						::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+						::DrawMenuBar(hWnd);
+
+						this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+					}
+				}
+
+				// ESC sale del fullscreen
+				if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
+				{
+					this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+					this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+					this->Size = FormsStatus::normalSize;
+					this->Location = FormsStatus::normalLocation;
+
+					FormsStatus::isFullscreen = false;
+
+					// DESACTIVAR CLOSE BOTTON
+					HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
+					HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
+					::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+					::DrawMenuBar(hWnd);
+
+					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+				}
+			}
+
+		//
+		// Login resize
+		// 
+			System::Void LoginPassengerForm_Resize(System::Object^ sender, System::EventArgs^ e) {
+
+				HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
+				HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
+				::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+				::DrawMenuBar(hWnd);
+			}
 
 
+		//
+		// Login cerrado closing
+		// 
+			System::Void LoginPassengerForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+				if (!_internalClose)
+				{
+					// cerrar todo
+					System::Windows::Forms::Application::Exit();
+				}
 
+				// si es interno, dejar cerrar normalmente
+				_internalClose = false;
+			}
 
+			
 
-
-
-
-
-
-
-	//
-	// Full screen function
-	// 
-	   bool isFullscreen = false;
-	   System::Drawing::Size normalSize;
-	   System::Drawing::Point normalLocation;
-	   System::Windows::Forms::FormWindowState normalState;
-
-	   System::Void LoginPassengerForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
-	   {
-		   if (e->KeyCode == System::Windows::Forms::Keys::F11)
-		   {
-			   if (!isFullscreen)
-			   {
-				   // Guardar estado actual
-				   normalSize = this->Size;
-				   normalLocation = this->Location;
-				   normalState = this->WindowState;
-
-				   // Entrar a fullscreen
-				   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-				   this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-				   isFullscreen = true;
-			   }
-			   else
-			   {
-				   // Restaurar — CRÍTICO: volver a FixedSingle, no Sizable
-				   this->WindowState = System::Windows::Forms::FormWindowState::Normal;
-				   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-				   this->Size = normalSize;
-				   this->Location = normalLocation;
-				   isFullscreen = false;
-			   }
-		   }
-
-		   // ESC también sale del fullscreen
-		   if (e->KeyCode == System::Windows::Forms::Keys::Escape && isFullscreen)
-		   {
-			   this->WindowState = System::Windows::Forms::FormWindowState::Normal;
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			   this->Size = normalSize;
-			   this->Location = normalLocation;
-			   isFullscreen = false;
-		   }
-	   }
 };
 }

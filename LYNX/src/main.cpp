@@ -12,19 +12,14 @@ using std::cout;
 int main()
 {
     System::Windows::Forms::Application::EnableVisualStyles();
+
     System::Windows::Forms::Application::SetCompatibleTextRenderingDefault(false);
 
-    // Inicializar el orquestador global (Pasajeros, Conductores y Viajes)
-  
+    // Crear formulario principal
+    LYNX::FormsStatus::mainMenu = gcnew LYNX::MainMenuForm();
 
-
-    
-    //menu.LYNX();
-
-    System::Windows::Forms::Application::Run(gcnew LYNX::MainMenuForm());
-
-    // Guardar datos al salir
-  
+    // Ejecutar aplicación
+    System::Windows::Forms::Application::Run(LYNX::FormsStatus::mainMenu);
 
     return 0;
 }

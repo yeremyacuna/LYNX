@@ -1,4 +1,5 @@
 #pragma once
+#include "../library/FormsStatus.h"	
 
 namespace LYNX {
 
@@ -16,12 +17,20 @@ namespace LYNX {
 		{
 			InitializeComponent();
 
+			// CENTRAR TODO
+			this->CenterToScreen();
+
+			// ACTIVAR F11
+			this->KeyPreview = true;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
+
 			// icon
 			try
 			{
 				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
 			}
-			catch (System::Exception^ ex)
+			catch (...)
 			{
 				// empty	
 			}
@@ -76,6 +85,13 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ q3Text;
 	private: System::Windows::Forms::Label^ q3Title;
 	private: System::Windows::Forms::Panel^ q3Dot;
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ lblMarco1;
+	private: System::Windows::Forms::Label^ lblMarco2;
+	private: System::Windows::Forms::Panel^ pnlTopBar;
+	private: System::Windows::Forms::PictureBox^ pictureBoxIcon;
+	private: System::Windows::Forms::Label^ lblLYNX;
 
 	private:
 		/// <summary>
@@ -113,12 +129,21 @@ namespace LYNX {
 			this->q3Text = (gcnew System::Windows::Forms::Label());
 			this->q3Title = (gcnew System::Windows::Forms::Label());
 			this->q3Dot = (gcnew System::Windows::Forms::Panel());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->lblMarco1 = (gcnew System::Windows::Forms::Label());
+			this->lblMarco2 = (gcnew System::Windows::Forms::Label());
+			this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
+			this->pictureBoxIcon = (gcnew System::Windows::Forms::PictureBox());
+			this->lblLYNX = (gcnew System::Windows::Forms::Label());
 			this->vehiclePanel->SuspendLayout();
 			this->maintenancePanel->SuspendLayout();
 			this->historyPanel->SuspendLayout();
 			this->topPanel->SuspendLayout();
 			this->queuePanel->SuspendLayout();
 			this->queueItem3->SuspendLayout();
+			this->pnlTopBar->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// historyListView
@@ -228,7 +253,7 @@ namespace LYNX {
 			this->topPanel->Controls->Add(this->onlineChip);
 			this->topPanel->Controls->Add(this->topText);
 			this->topPanel->Controls->Add(this->topTitle);
-			this->topPanel->Location = System::Drawing::Point(48, 17);
+			this->topPanel->Location = System::Drawing::Point(24, 55);
 			this->topPanel->Name = L"topPanel";
 			this->topPanel->Size = System::Drawing::Size(1422, 164);
 			this->topPanel->TabIndex = 6;
@@ -388,11 +413,104 @@ namespace LYNX {
 			this->q3Dot->Size = System::Drawing::Size(10, 10);
 			this->q3Dot->TabIndex = 0;
 			// 
+			// label4
+			// 
+			this->label4->BackColor = System::Drawing::Color::Red;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
+				static_cast<System::Int32>(static_cast<System::Byte>(113)));
+			this->label4->Location = System::Drawing::Point(21, 884);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(1443, 34);
+			this->label4->TabIndex = 16;
+			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->label4->Visible = false;
+			// 
+			// label1
+			// 
+			this->label1->BackColor = System::Drawing::Color::Red;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
+				static_cast<System::Int32>(static_cast<System::Byte>(113)));
+			this->label1->Location = System::Drawing::Point(27, 72);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(1443, 34);
+			this->label1->TabIndex = 15;
+			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->label1->Visible = false;
+			// 
+			// lblMarco1
+			// 
+			this->lblMarco1->BackColor = System::Drawing::Color::Red;
+			this->lblMarco1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblMarco1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
+				static_cast<System::Int32>(static_cast<System::Byte>(113)));
+			this->lblMarco1->Location = System::Drawing::Point(-1, 72);
+			this->lblMarco1->Name = L"lblMarco1";
+			this->lblMarco1->Size = System::Drawing::Size(28, 850);
+			this->lblMarco1->TabIndex = 14;
+			this->lblMarco1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->lblMarco1->Visible = false;
+			// 
+			// lblMarco2
+			// 
+			this->lblMarco2->BackColor = System::Drawing::Color::Red;
+			this->lblMarco2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblMarco2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
+				static_cast<System::Int32>(static_cast<System::Byte>(113)));
+			this->lblMarco2->Location = System::Drawing::Point(1454, 72);
+			this->lblMarco2->Name = L"lblMarco2";
+			this->lblMarco2->Size = System::Drawing::Size(28, 850);
+			this->lblMarco2->TabIndex = 13;
+			this->lblMarco2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->lblMarco2->Visible = false;
+			// 
+			// pnlTopBar
+			// 
+			this->pnlTopBar->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->pnlTopBar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(6)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
+				static_cast<System::Int32>(static_cast<System::Byte>(70)));
+			this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
+			this->pnlTopBar->Controls->Add(this->lblLYNX);
+			this->pnlTopBar->Location = System::Drawing::Point(2, -2);
+			this->pnlTopBar->Name = L"pnlTopBar";
+			this->pnlTopBar->Size = System::Drawing::Size(1480, 78);
+			this->pnlTopBar->TabIndex = 12;
+			// 
+			// pictureBoxIcon
+			// 
+			this->pictureBoxIcon->BackColor = System::Drawing::Color::Transparent;
+			this->pictureBoxIcon->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->pictureBoxIcon->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->pictureBoxIcon->Location = System::Drawing::Point(22, -27);
+			this->pictureBoxIcon->Name = L"pictureBoxIcon";
+			this->pictureBoxIcon->Size = System::Drawing::Size(75, 129);
+			this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
+			this->pictureBoxIcon->TabIndex = 3;
+			this->pictureBoxIcon->TabStop = false;
+			// 
+			// lblLYNX
+			// 
+			this->lblLYNX->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
+			this->lblLYNX->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->lblLYNX->Location = System::Drawing::Point(91, 18);
+			this->lblLYNX->Name = L"lblLYNX";
+			this->lblLYNX->Size = System::Drawing::Size(84, 40);
+			this->lblLYNX->TabIndex = 0;
+			this->lblLYNX->Text = L"LYNX";
+			// 
 			// PassengerMenuForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1518, 869);
+			this->ClientSize = System::Drawing::Size(1480, 920);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->lblMarco1);
+			this->Controls->Add(this->lblMarco2);
+			this->Controls->Add(this->pnlTopBar);
 			this->Controls->Add(this->vehiclePanel);
 			this->Controls->Add(this->historyPanel);
 			this->Controls->Add(this->manualPanel);
@@ -402,18 +520,72 @@ namespace LYNX {
 			this->Name = L"PassengerMenuForm";
 			this->Text = L"PassengerMenuForm";
 			this->Load += gcnew System::EventHandler(this, &PassengerMenuForm::PassengerMenuForm_Load);
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &PassengerMenuForm::PassengerMenuForm_KeyDown);
 			this->vehiclePanel->ResumeLayout(false);
 			this->maintenancePanel->ResumeLayout(false);
 			this->historyPanel->ResumeLayout(false);
 			this->topPanel->ResumeLayout(false);
 			this->queuePanel->ResumeLayout(false);
 			this->queueItem3->ResumeLayout(false);
+			this->pnlTopBar->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 	private: System::Void q3Title_Click(System::Object^ sender, System::EventArgs^ e) {	}
+		//
+		// Full screen function
+		//
+		System::Drawing::Size normalSize;
+		System::Drawing::Point normalLocation;
+		System::Windows::Forms::FormWindowState normalState;
+
+		System::Void PassengerMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+		{
+			if (e->KeyCode == System::Windows::Forms::Keys::F11)
+			{
+				if (!FormsStatus::isFullscreen)
+				{
+					normalSize = this->Size;
+					normalLocation = this->Location;
+					normalState = this->WindowState;
+					FormsStatus::SaveWindow(this);
+
+					this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+					this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+					FormsStatus::isFullscreen = true;
+				}
+				else
+				{
+					this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+					this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+					this->Size = FormsStatus::normalSize;
+					this->Location = FormsStatus::normalLocation;
+					FormsStatus::isFullscreen = false;
+				}
+			}
+
+			if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
+			{
+				this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				this->Size = FormsStatus::normalSize;
+				this->Location = FormsStatus::normalLocation;
+				FormsStatus::isFullscreen = false;
+			}
+		}
+
 private: System::Void PassengerMenuForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	normalSize = this->Size;
+	normalLocation = this->Location;
+	normalState = this->WindowState;
+	FormsStatus::SaveWindow(this);
+
+	if (FormsStatus::isFullscreen)
+	{
+		FormsStatus::ApplyWindow(this);
+	}
 }
 };
 }
