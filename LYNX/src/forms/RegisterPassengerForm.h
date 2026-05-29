@@ -555,7 +555,6 @@ namespace LYNX {
 			}
 
 
-
 		//
 		// Register cerrado closing
 		// 
