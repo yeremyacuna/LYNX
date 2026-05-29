@@ -22,6 +22,10 @@ obj/
 # Arquitecturas específicas
 LYNX/x64/
 LYNX/LYNX/x64/
+LYNX/LYNX/LYNX/x64/
+LYNX/X64/
+LYNX/LYNX/X64/
+LYNX/LYNX/LYNX/X64/
 LYNX/Debug/
 LYNX/Release/
 x86/
