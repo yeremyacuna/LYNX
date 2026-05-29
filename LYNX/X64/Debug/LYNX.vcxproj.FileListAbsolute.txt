@@ -1,0 +1,8 @@
+C:\Users\Usuario\Documents\Trabajo Estructura de Datos Avanzados\LYNX\x64\Debug\LYNX.vcxproj.AssemblyReference.cache
+C:\Users\Usuario\Documents\Trabajo Estructura de Datos Avanzados\LYNX\x64\Debug\LYNX.src.forms.AdminMenuForm.resources
+C:\Users\Usuario\Documents\Trabajo Estructura de Datos Avanzados\LYNX\x64\Debug\LYNX.src.forms.DriverMenuForm.resources
+C:\Users\Usuario\Documents\Trabajo Estructura de Datos Avanzados\LYNX\x64\Debug\LYNX.src.forms.LoginPassengerForm.resources
+C:\Users\Usuario\Documents\Trabajo Estructura de Datos Avanzados\LYNX\x64\Debug\LYNX.src.forms.MainMenuForm.resources
+C:\Users\Usuario\Documents\Trabajo Estructura de Datos Avanzados\LYNX\x64\Debug\LYNX.src.forms.PassengerMenuForm.resources
+C:\Users\Usuario\Documents\Trabajo Estructura de Datos Avanzados\LYNX\x64\Debug\LYNX.src.forms.RegisterPassengerForm.resources
+C:\Users\Usuario\Documents\Trabajo Estructura de Datos Avanzados\LYNX\x64\Debug\LYNX.vcxproj.GenerateResource.cache
