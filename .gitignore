@@ -20,8 +20,15 @@ bin/
 obj/
 
 # Arquitecturas específicas
+LYNX/x64/
+LYNX/LYNX/x64/
+LYNX/LYNX/LYNX/x64/
+LYNX/X64/
+LYNX/LYNX/X64/
+LYNX/LYNX/LYNX/X64/
+LYNX/Debug/
+LYNX/Release/
 x86/
-x64/
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
 
@@ -32,6 +39,7 @@ x64/
 *.cache
 *.ilk
 *.log
+x64/Debug/LYNX.exe.metagen
 
 ##################################################
 # 🔹 ARCHIVOS TEMPORALES
