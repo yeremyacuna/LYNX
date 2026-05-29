@@ -39,6 +39,7 @@ x86/
 *.cache
 *.ilk
 *.log
+x64/Debug/LYNX.exe.metagen
 
 ##################################################
 # 🔹 ARCHIVOS TEMPORALES
