@@ -852,6 +852,9 @@ namespace LYNX {
 					}
 					formpm = gcnew PassengerMenuForm(authManager, tripManager, passengerDni);
 					FormsStatus::ApplyWindow(formpm);
+					formpm->name = formlg->names;
+					formpm->dni = formlg->dnis;
+					formpm->password = formlg->passwords;
 					formpm->Show();
 				}
 			}

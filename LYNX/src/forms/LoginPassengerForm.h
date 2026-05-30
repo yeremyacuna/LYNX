@@ -4,6 +4,7 @@
 #include "../AuthManager.h"
 #include "../TripManager.h"
 #include <msclr/marshal_cppstd.h>
+#include <iostream>
 
 namespace LYNX {
 
@@ -13,6 +14,7 @@ namespace LYNX {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+
 
 	public ref class LoginPassengerForm : public System::Windows::Forms::Form
 	{
@@ -375,6 +377,10 @@ namespace LYNX {
 			bool switchToRegister = false;
 			String^ loggedPassengerDni = "";
 
+			String^ dnis;
+			String^ names;
+			String^ passwords;
+
 		private:
 
 		//
@@ -479,6 +485,11 @@ namespace LYNX {
 					this->tbContrasena->Clear();
 					return;
 				}
+
+				// variables de recuerdo e informacion para la prox pantalla (check)
+				dnis = dniText;
+				names = nameText;
+				passwords = passwordText;
 
 				loggedPassengerDni = dniText;
 				passengerScreen = true;

@@ -119,6 +119,6 @@ PAS-0118|Carlos Ruiz|56492029|cruiz|3.6|2|217.2
 PAS-0119|Pedro Gomez|90817275|pedrog|2.7|0|0
 PAS-0120|Luciana Torres|19283759|ltorres1|4.7|2|67.7
 PAS-0121|Pedrito Marmol|77111111|pepe3|5|1|34.025
-PAS-0122|s|12345678|s|5|0|0
-PAS-0123|Yeremy Acuña Chavez|70712345|admin123|5|0|0
-PAS-0124|Vinicius JR|00001111|vini|5|0|0
+PAS-0122|Remers Gonza|12345678|remersalbums|5|0|0
+PAS-0123|Vinicius JR|00001111|vini|5|0|0
+PAS-0124|Alvaro Diaz|14141414|omakase|5|0|0

@@ -37,14 +37,7 @@ namespace LYNX {
             if (components) delete components;
         }
 
-        //  DECLARACION DE CONTROLES
-
-        // Barra LYNX
-
-
-
-
-           // Titulo Panel Administrador
+        
 
 
 	private:
@@ -95,17 +88,6 @@ namespace LYNX {
 
            // Panel estadisticas generales
 
-
-
-
-
-
-
-
-
-
-
-
     private: System::Windows::Forms::Label^ lblTituloPrincipal;
     private: System::Windows::Forms::Panel^ pnlTitulo;
     private: System::Windows::Forms::Panel^ pnlTopBar;
@@ -128,25 +110,6 @@ namespace LYNX {
     private: System::Windows::Forms::Label^ lblTitPasswords;
     private: System::Windows::Forms::Button^ btnCargarPasswords;
     private: System::Windows::Forms::RichTextBox^ rtbPasswords;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private: System::ComponentModel::Container^ components;
 
