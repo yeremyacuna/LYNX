@@ -1,11 +1,18 @@
 #pragma once
 #pragma comment(lib, "user32.lib")
+
 #include "PassengerMenuForm.h"
 #include "DriverMenuForm.h"
 #include "AdminMenuForm.h"
 #include "LoginPassengerForm.h"
 #include "RegisterPassengerForm.h"
 #include "../library/FormsStatus.h"	
+#include "../AuthManager.h"
+#include "../TripManager.h"
+#include "../../include/FileManager.h"
+
+#include <vector>
+#include <string>
 
 namespace LYNX {
 
@@ -22,6 +29,16 @@ namespace LYNX {
 		MainMenuForm(void)
 		{
 			InitializeComponent();
+
+			// CONSTRUIR OBJETOS DE MANEJO USERS Y TRIPS
+			authManager = new AuthManager();
+			tripManager = new TripManager();
+
+			// CARGAR TODOS LOS VIAJES
+			LoadTripsFromFile();
+
+			formlg = gcnew LoginPassengerForm(authManager, tripManager);
+			formrg = gcnew RegisterPassengerForm(authManager, tripManager);
 
 			// CENTRAR TODO
 			this->CenterToScreen();
@@ -50,13 +67,17 @@ namespace LYNX {
 			{
 				delete components;
 			}
+			delete authManager;
+			delete tripManager;
 		}
 
 		// OBJETOS
 	private:
-		LoginPassengerForm^ formlg = gcnew LoginPassengerForm();
-		RegisterPassengerForm^ formrg = gcnew RegisterPassengerForm();
-		PassengerMenuForm^ formpm = gcnew PassengerMenuForm();
+		AuthManager* authManager = nullptr;
+		TripManager* tripManager = nullptr;
+		LoginPassengerForm^ formlg = nullptr;
+		RegisterPassengerForm^ formrg = nullptr;
+		PassengerMenuForm^ formpm = nullptr;
 	
 
 		// COMPONENTES
@@ -700,7 +721,41 @@ namespace LYNX {
 
 		// LOGICA
 		#pragma endregion
+		public: 
+
 		private:
+
+		//
+		// Load Trips from file
+		//
+			void LoadTripsFromFile()
+			{
+				if (tripManager == nullptr) 
+					return;
+
+				FileManager fileManager;
+				std::vector<Trip> trips = fileManager.leerTripsTXT();
+
+				for (int i = 0; i < (int)trips.size(); i++)
+				{
+					std::string status = trips[i].getStatus();
+
+					if (status == "pendiente")
+					{
+						tripManager->getWaitingQueue().enqueue(trips[i]);
+					}
+					else if (status == "en_curso")
+					{
+						tripManager->getActiveTrips().pushBack(trips[i]);
+					}
+					else
+					{
+						tripManager->getHistory().push(trips[i]);
+					}
+				}
+
+				tripManager->rebuildTripCounter();
+			}
 
 		//
 		// Load Form
@@ -731,21 +786,21 @@ namespace LYNX {
 			{
 				if (formlg == nullptr || formlg->IsDisposed) {
 					delete formlg;
-					formlg = gcnew LoginPassengerForm();
+					formlg = gcnew LoginPassengerForm(authManager, tripManager); // Le paso el formulario de constuctor LOGIN con manejador
 				}
 				FormsStatus::SaveWindow(this);
 				FormsStatus::ApplyWindow(formlg);
 				formlg->Show();
 				formlg->BringToFront();
 				this->Hide(); // ocultar MainMenu
-
 				
 			}
 
 			// btnAbrirConductorClick
 			System::Void OpenDriverForm(System::Object^ sender, System::EventArgs^ e)
 			{
-				DriverMenuForm^ form = gcnew DriverMenuForm();
+				// Conductor sujeto a cambios ya que no tiene propia Login, falta login register
+				DriverMenuForm^ form = gcnew DriverMenuForm(authManager, tripManager); // Le paso el formulario de constuctor con manejador
 				FormsStatus::SaveWindow(this);
 				FormsStatus::ApplyWindow(form);
 				form->Show();
@@ -756,7 +811,8 @@ namespace LYNX {
 			// btnAbrirAdministradorClick
 			System::Void OpenAdminForm(System::Object^ sender, System::EventArgs^ e)
 			{
-				AdminMenuForm^ form = gcnew AdminMenuForm();
+				// ADMIN sujeto a cambios ya que no tiene propia Login, falta login register
+				AdminMenuForm^ form = gcnew AdminMenuForm(authManager, tripManager); // Le paso el formulario de constuctor con manejador
 				FormsStatus::SaveWindow(this);
 				FormsStatus::ApplyWindow(form);
 				form->Show();
@@ -769,29 +825,32 @@ namespace LYNX {
 		// 
 			System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
 
-			
 				if (formlg->switchToRegister) {
 					formlg->switchToRegister = false;
 					if (formrg == nullptr || formrg->IsDisposed) {
-						formrg = gcnew RegisterPassengerForm();
+						formrg = gcnew RegisterPassengerForm(authManager, tripManager); // Verifica y crea
 					}
 					FormsStatus::ApplyWindow(formrg);
-					formrg->Show();
-				}
+					formrg->Show(); // Muestra
+				} 
 
 				if (formrg->switchToLogin) {
 					formrg->switchToLogin = false;
 					if (formlg == nullptr || formlg->IsDisposed) {
-						formlg = gcnew LoginPassengerForm();
+						formlg = gcnew LoginPassengerForm(authManager, tripManager); // Verifica y crea
 					}
 					FormsStatus::ApplyWindow(formlg);
-					formlg->Show();
+					formlg->Show();  // Muestra
 				}
-				if (formlg->passengerScreen || formrg->passengerScreen) {
-					if (formpm == nullptr || formpm->IsDisposed) {
+				if (formlg->passengerScreen || formrg->passengerScreen) // Comprueba si alguna pantalla pasajero esta abierta o no
+				{
+					String^ passengerDni = formlg->loggedPassengerDni;
+					formlg->passengerScreen = false;
+					formrg->passengerScreen = false;
+					if (formpm != nullptr && !formpm->IsDisposed) {
 						delete formpm;
-						formpm = gcnew PassengerMenuForm();
 					}
+					formpm = gcnew PassengerMenuForm(authManager, tripManager, passengerDni);
 					FormsStatus::ApplyWindow(formpm);
 					formpm->Show();
 				}
@@ -852,17 +911,26 @@ namespace LYNX {
 				}
 			}
 
+		//
+		// Closing de Form function
+		// 
 			System::Void MainMenuForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
 				System::Windows::Forms::Application::Exit();
 			}
-		
 
+		//
+		// Click functions
+		// 
+			// pictureLYNXClick
 			System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e) {
 				this->Show();
 				this->BringToFront();
 			}
 
-
+		
+		//
+		// Inicializador de positions
+		// 
 			System::Void InitButtonsStyle()
 			{
 				// BTN PASAJERO

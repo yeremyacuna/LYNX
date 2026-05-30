@@ -1,7 +1,9 @@
 #pragma once
-#include "PassengerMenuForm.h"
-#include "../library/FormsStatus.h"	
 #include <windows.h>
+#include "../library/FormsStatus.h"	
+#include "../AuthManager.h"
+#include "../TripManager.h"
+#include <msclr/marshal_cppstd.h>
 
 namespace LYNX {
 
@@ -16,38 +18,19 @@ namespace LYNX {
 	{
 	public:
 		LoginPassengerForm(void) 
-			
 		{
 			InitializeComponent();
-			
-			// CENTRAR TODO
-			this->CenterToScreen();
-
-			// ACTIVAR F11
-			this->KeyPreview = true;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false; // quitar maximizar
-
-			// QUITAR COSITAS
-			this->MinimizeBox = false;
-			HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
-			HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
-			::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
-			::DrawMenuBar(hWnd);
-			
-			
-			// CARGAR ICONO
-			try
-			{
-				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-			}
-			catch (...)
-			{
-				// empty	
-			}
-			
+			ConfigureForm();
 		}
 
+		LoginPassengerForm(AuthManager* auth, TripManager* trips)
+		{
+			this->authManager = auth;
+			this->tripManager = trips;
+			InitializeComponent();
+			ConfigureForm();
+		}
+	
 	protected:
 		~LoginPassengerForm()
 		{
@@ -59,6 +42,8 @@ namespace LYNX {
 	
 		// OBJETOS
 	private:
+		AuthManager* authManager = nullptr;
+		TripManager* tripManager = nullptr;
 		
 		// COMPONENTES
 	private: System::Windows::Forms::Label^ lblIniciarSesion;
@@ -387,7 +372,40 @@ namespace LYNX {
 		public: 
 			bool passengerScreen = false;
 			bool switchToRegister = false;
+			String^ loggedPassengerDni = "";
+
 		private:
+
+		//
+		// Configuracion global de form
+		//
+			void ConfigureForm()
+			{
+				// CENTRAR TODO
+				this->CenterToScreen();
+
+				// ACTIVAR F11
+				this->KeyPreview = true;
+				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				this->MaximizeBox = false; // quitar maximizar
+
+				// QUITAR COSITAS
+				this->MinimizeBox = false;
+				HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
+				HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
+				::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+				::DrawMenuBar(hWnd);
+
+				// CARGAR ICONO
+				try
+				{
+					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+				}
+				catch (...)
+				{
+					// empty	
+				}
+			}
 
 		//
 		// Load Form
@@ -415,18 +433,53 @@ namespace LYNX {
 		// 
 			bool _internalClose = false;
 
-			// btnEntrar
+			// btnEntrarCLICK
 			System::Void btnEnter_Click(System::Object^ sender, System::EventArgs^ e) {
 
-				String^ dni = this->tbDni->Text;
-				String^ name = this->tbNombre->Text;
-				String^ password = this->tbContrasena->Text;
+				// Guardar los txt box como Strings^
+				String^ dniText = this->tbDni->Text->Trim();
+				String^ nameText = this->tbNombre->Text->Trim();
+				String^ passwordText = this->tbContrasena->Text;
 
-				if (dni->Length == 0 || password->Length == 0 || name->Length == 0) {
-					MessageBox::Show("Porfavor llene todos los campos", "Error DNI, Nombre o Contrasena", MessageBoxButtons::OK);
-				return;
+				// Verificar que los espacios no esten vacios
+				if (dniText->Length == 0 || passwordText->Length == 0 || nameText->Length == 0) {
+					MessageBox::Show("Por favor llene todos los campos", "Iniciar Sesion", MessageBoxButtons::OK);
+					return;
 				}
 
+				//Verificar si se pudo o no acceder al gestionador de archivos
+				if (authManager == nullptr) {
+					MessageBox::Show("No se pudo acceder al gestor de usuarios", "Iniciar Sesion", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Converitr con marshal as al tipo de dato que quiero segun un String^
+				std::string dni = msclr::interop::marshal_as<std::string>(dniText);
+				std::string name = msclr::interop::marshal_as<std::string>(nameText);
+				std::string password = msclr::interop::marshal_as<std::string>(passwordText);
+
+				// Hacer validacion de los digitos del dni en el caso no tenga 8 o no sea int
+				if (!authManager->validateDni(dni)) {
+					MessageBox::Show("DNI invalido. Debe tener 8 digitos numericos.", "Iniciar Sesion", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Validar que el usuario exista con el auth managern login user valid
+				if (!authManager->loginUserValid(dni, password)) {
+					MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
+					this->tbContrasena->Clear();
+					return;
+				}
+
+				// Validar si los datos coinciden con un pasajero existente
+				Passenger passenger = authManager->getUserByDni(dni);
+				if (passenger.getDni() == "" || passenger.getName() != name) {
+					MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
+					this->tbContrasena->Clear();
+					return;
+				}
+
+				loggedPassengerDni = dniText;
 				passengerScreen = true;
 				FormsStatus::SaveWindow(this);
 				_internalClose = true;  // marcar como cierre 

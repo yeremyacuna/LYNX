@@ -21,21 +21,24 @@ private:
     // Busca la posicion de un pasajero por DNI
     int indexOfUser(string dni) {
         for (int i = 0; i < passengerList->getSize(); i++)
-            if (passengerList->get(i).getDni() == dni) return i;
+            if (passengerList->get(i).getDni() == dni) 
+                return i;
         return -1;
     }
 
     // Busca la posicion de un conductor por DNI
     int indexOfDriver(string dni) {
         for (int i = 0; i < driverList->getSize(); i++)
-            if (driverList->get(i).getDni() == dni) return i;
+            if (driverList->get(i).getDni() == dni) 
+                return i;
         return -1;
     }
 
     // Si contiene un string
     bool containsString(const vector<string>& lista, const string& valor) {
         for (int i = 0; i < (int)lista.size(); i++) {
-            if (lista[i] == valor) return true;
+            if (lista[i] == valor) 
+                return true;
         }
         return false;
     }
@@ -45,7 +48,8 @@ private:
         int maxId = 0;
         for (int i = 0; i < passengerList->getSize(); i++) {
             int actual = Passenger::extractPassengerNumber(passengerList->get(i).getPassengerId());
-            if (actual > maxId) maxId = actual;
+            if (actual > maxId) 
+                maxId = actual;
         }
         return maxId;
     }
@@ -268,8 +272,10 @@ public:
     // Valida credenciales
     bool loginUserValid(string dni, string password) {
         int i = indexOfUser(dni);
-        if (i == -1) return false;
-        return passengerList->get(i).login(dni, password);
+        if (i == -1) 
+            return false;
+        return 
+            passengerList->get(i).login(dni, password);
     }
 
     // getUserByDni: busca y devuelve el pasajero correspondiente o uno vacio si no existe

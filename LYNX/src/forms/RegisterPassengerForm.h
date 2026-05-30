@@ -1,6 +1,9 @@
 #pragma once
-#include "../library/FormsStatus.h"	
 #include <windows.h>
+#include "../library/FormsStatus.h"	
+#include "../AuthManager.h"
+#include "../TripManager.h"
+#include <msclr/marshal_cppstd.h>
 
 namespace LYNX {
 
@@ -17,32 +20,15 @@ namespace LYNX {
 		RegisterPassengerForm(void)
 		{
 			InitializeComponent();
+			ConfigureForm();
+		}
 
-			// CENTRAR TODO
-			this->CenterToScreen();
-
-			// ACTIVAR F11
-			this->KeyPreview = true;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
-
-			// QUITAR COSITAS
-			this->MinimizeBox = false;
-
-			HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
-			HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
-			::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
-			::DrawMenuBar(hWnd);
-
-			// CARGAR ICONO
-			try
-			{
-				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-			}
-			catch (...)
-			{
-				// empty
-			}
+		RegisterPassengerForm(AuthManager* auth, TripManager* trips)
+		{
+			this->authManager = auth;
+			this->tripManager = trips;
+			InitializeComponent();
+			ConfigureForm();
 		}
 
 	protected:
@@ -55,6 +41,8 @@ namespace LYNX {
 		}
 		// OBJETOS
 	private:
+		AuthManager* authManager = nullptr;
+		TripManager* tripManager = nullptr;
 
 		// COMPONENTES
 	private: System::Windows::Forms::Label^ lblRegistrarse;
@@ -404,6 +392,35 @@ namespace LYNX {
 
 		private:
 
+			void ConfigureForm()
+			{
+				// CENTRAR TODO
+				this->CenterToScreen();
+
+				// ACTIVAR F11
+				this->KeyPreview = true;
+				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				this->MaximizeBox = false;
+
+				// QUITAR COSITAS
+				this->MinimizeBox = false;
+
+				HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
+				HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
+				::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+				::DrawMenuBar(hWnd);
+
+				// CARGAR ICONO
+				try
+				{
+					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+				}
+				catch (...)
+				{
+					// empty
+				}
+			}
+
 		//
 		// Load Form
 		//
@@ -433,19 +450,53 @@ namespace LYNX {
 			// btnRegistrarseCLICK
 			System::Void btnRegistrar_Click(System::Object^ sender, System::EventArgs^ e)
 			{
-				String^ dni = this->tbDni->Text;
-				String^ nombre = this->tbNombre->Text;
-				String^ pass = this->tbContrasena->Text;
-				String^ confirm = this->tbConfirmarContrasena->Text;
-
-				if (dni->Length == 0 || nombre->Length == 0 || pass->Length == 0 || confirm->Length == 0) {
-					MessageBox::Show("Porfavor llene todos los campos", "Error", MessageBoxButtons::OK);
+				// Guardar los txt box como Strings^
+				String^ dniText = this->tbDni->Text->Trim();
+				String^ nombreText = this->tbNombre->Text->Trim();
+				String^ passText = this->tbContrasena->Text;
+				String^ confirmText = this->tbConfirmarContrasena->Text;
+				
+				// Verificar que los espacios no esten vacios
+				if (dniText->Length == 0 || nombreText->Length == 0 || passText->Length == 0 || confirmText->Length == 0) {
+					MessageBox::Show("Por favor llene todos los campos", "Registro", MessageBoxButtons::OK);
 					return;
 				}
 
-				if (String::Compare(pass, confirm) != 0) {
-					MessageBox::Show("Las contrasenas no coinciden", "Error Contrasena", MessageBoxButtons::OK);
+				//Verificar si las contraseñas coinciden
+				if (String::Compare(passText, confirmText) != 0) {
+					MessageBox::Show("Las contrasenas no coinciden", "Registro", MessageBoxButtons::OK);
 					return;
+				}
+
+				//Verificar si se pudo o no acceder al gestionador de archivos
+				if (authManager == nullptr) {
+					MessageBox::Show("No se pudo acceder al gestor de usuarios", "Registro", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Converitr con marshal as al tipo de dato que quiero segun un String^
+				std::string dni = msclr::interop::marshal_as<std::string>(dniText);
+				std::string nombre = msclr::interop::marshal_as<std::string>(nombreText);
+				std::string pass = msclr::interop::marshal_as<std::string>(passText);
+
+				// Hacer validacion de los digitos del dni en el caso no tenga 8 o no sea int
+				if (!authManager->validateDni(dni)) {
+					MessageBox::Show("DNI invalido. Debe tener 8 digitos numericos.", "Registro", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Validar si elk DNI ya se encuentra registrado con dni nombre y contraseña pass en la funcion de authmanager
+				if (!authManager->registerPassenger(nombre, dni, pass)) {
+					MessageBox::Show("El DNI ya esta registrado.", "Registro", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Validar si la cuenta fue creada correctamente y se guardo todo correctamente o no , con save a password binary q devuelve true or false de guardar binario d fmanager
+				if (!authManager->savePasswordsBinary()) {
+					MessageBox::Show("La cuenta fue creada, pero no se pudo actualizar passwords.bin.", "Registro", MessageBoxButtons::OK);
+				}
+				else {
+					MessageBox::Show("Cuenta creada correctamente.", "Registro", MessageBoxButtons::OK);
 				}
 
 				switchToLogin = true;

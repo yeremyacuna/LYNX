@@ -1,6 +1,9 @@
 #pragma once
 #include "../library/FormsStatus.h"	
 
+class AuthManager;
+class TripManager;
+
 namespace LYNX {
 
 	using namespace System;
@@ -16,14 +19,15 @@ namespace LYNX {
 		AdminMenuForm(void)
 		{
 			InitializeComponent();
+			ConfigureForm();
+		}
 
-			// CENTRAR TODO
-			this->CenterToScreen();
-
-			// ACTIVAR F11
-			this->KeyPreview = true;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
+		AdminMenuForm(AuthManager* auth, TripManager* trips)
+		{
+			this->authManager = auth;
+			this->tripManager = trips;
+			InitializeComponent();
+			ConfigureForm();
 		}
 
 	protected:
@@ -64,6 +68,8 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ lblLYNX;
 
 	private:
+		AuthManager* authManager = nullptr;
+		TripManager* tripManager = nullptr;
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
@@ -443,6 +449,17 @@ namespace LYNX {
 #pragma endregion
 
 	private:
+		void ConfigureForm()
+		{
+			// CENTRAR TODO
+			this->CenterToScreen();
+
+			// ACTIVAR F11
+			this->KeyPreview = true;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
+		}
+
 		System::Void previewButton_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			System::Windows::Forms::MessageBox::Show(

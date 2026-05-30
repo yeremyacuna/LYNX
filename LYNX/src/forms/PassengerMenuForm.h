@@ -1,6 +1,9 @@
 #pragma once
 #include "../library/FormsStatus.h"	
 
+class AuthManager;
+class TripManager;
+
 namespace LYNX {
 
 	using namespace System;
@@ -16,24 +19,16 @@ namespace LYNX {
 		PassengerMenuForm(void)
 		{
 			InitializeComponent();
+			ConfigureForm();
+		}
 
-			// CENTRAR TODO
-			this->CenterToScreen();
-
-			// ACTIVAR F11
-			this->KeyPreview = true;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
-
-			// icon
-			try
-			{
-				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-			}
-			catch (...)
-			{
-				// empty	
-			}
+		PassengerMenuForm(AuthManager* auth, TripManager* trips, String^ passengerDni)
+		{
+			this->authManager = auth;
+			this->tripManager = trips;
+			this->loggedPassengerDni = passengerDni;
+			InitializeComponent();
+			ConfigureForm();
 		}
 
 	protected:
@@ -94,6 +89,10 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ lblLYNX;
 
 	private:
+		AuthManager* authManager = nullptr;
+		TripManager* tripManager = nullptr;
+		String^ loggedPassengerDni = "";
+
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -473,7 +472,7 @@ namespace LYNX {
 				static_cast<System::Int32>(static_cast<System::Byte>(70)));
 			this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
 			this->pnlTopBar->Controls->Add(this->lblLYNX);
-			this->pnlTopBar->Location = System::Drawing::Point(2, -2);
+			this->pnlTopBar->Location = System::Drawing::Point(0, -2);
 			this->pnlTopBar->Name = L"pnlTopBar";
 			this->pnlTopBar->Size = System::Drawing::Size(1480, 78);
 			this->pnlTopBar->TabIndex = 12;
@@ -483,19 +482,20 @@ namespace LYNX {
 			this->pictureBoxIcon->BackColor = System::Drawing::Color::Transparent;
 			this->pictureBoxIcon->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->pictureBoxIcon->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->pictureBoxIcon->Location = System::Drawing::Point(22, -27);
+			this->pictureBoxIcon->Location = System::Drawing::Point(20, -27);
 			this->pictureBoxIcon->Name = L"pictureBoxIcon";
 			this->pictureBoxIcon->Size = System::Drawing::Size(75, 129);
 			this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBoxIcon->TabIndex = 3;
 			this->pictureBoxIcon->TabStop = false;
+			this->pictureBoxIcon->Click += gcnew System::EventHandler(this, &PassengerMenuForm::pictureBoxIcon_Click);
 			// 
 			// lblLYNX
 			// 
 			this->lblLYNX->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
 			this->lblLYNX->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->lblLYNX->Location = System::Drawing::Point(91, 18);
+			this->lblLYNX->Location = System::Drawing::Point(89, 18);
 			this->lblLYNX->Name = L"lblLYNX";
 			this->lblLYNX->Size = System::Drawing::Size(84, 40);
 			this->lblLYNX->TabIndex = 0;
@@ -534,6 +534,27 @@ namespace LYNX {
 		}
 #pragma endregion
 	private: System::Void q3Title_Click(System::Object^ sender, System::EventArgs^ e) {	}
+		void ConfigureForm()
+		{
+			// CENTRAR TODO
+			this->CenterToScreen();
+
+			// ACTIVAR F11
+			this->KeyPreview = true;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
+
+			// icon
+			try
+			{
+				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+			}
+			catch (...)
+			{
+				// empty	
+			}
+		}
+
 		//
 		// Full screen function
 		//
@@ -582,10 +603,26 @@ private: System::Void PassengerMenuForm_Load(System::Object^ sender, System::Eve
 	normalState = this->WindowState;
 	FormsStatus::SaveWindow(this);
 
+	// Para Picture Box LYNX
+	this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
+	this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+
 	if (FormsStatus::isFullscreen)
 	{
 		FormsStatus::ApplyWindow(this);
 	}
 }
+	   // pictureLYNXClick
+	   System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e)
+	   {
+		   if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
+		   {
+			   FormsStatus::SaveWindow(this);
+			   FormsStatus::ApplyWindow(FormsStatus::mainMenu);
+			   FormsStatus::mainMenu->Show();
+			   FormsStatus::mainMenu->BringToFront();
+			   this->Hide();
+		   }
+	   }
 };
 }

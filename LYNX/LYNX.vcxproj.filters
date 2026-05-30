@@ -136,6 +136,9 @@
     <None Include="..\.github\workflows\release-exe.yml">
       <Filter>ProjectFiles</Filter>
     </None>
+    <None Include="docs\sync-branches.ps1">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\LYNX_image.png">
