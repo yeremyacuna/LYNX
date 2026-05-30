@@ -1,7 +1,6 @@
 #include <iostream>
 #include "forms/MainMenuForm.h"
-
-
+#include "../src/MainMenu.h"
 
 using std::cout;
 
@@ -11,15 +10,37 @@ using std::cout;
 [System::STAThread]
 int main()
 {
-    System::Windows::Forms::Application::EnableVisualStyles();
+    // Debo cambiar linker Console to variado
 
-    System::Windows::Forms::Application::SetCompatibleTextRenderingDefault(false);
+    std::cout << "1. Consola\n";
+    std::cout << "2. Windows Forms\n";
+    std::cout << "Opcion: ";
+    int opcion; std::cin >> opcion;
 
-    // Crear formulario principal
-    LYNX::FormsStatus::mainMenu = gcnew LYNX::MainMenuForm();
+    if (opcion == 1)
+    {
+        //EJECUTAR APP CONSOLA:
 
-    // Ejecutar aplicación
-    System::Windows::Forms::Application::Run(LYNX::FormsStatus::mainMenu);
+     Menu menu = Menu();
+     menu.LYNXMenu();
+
+    }
+    else if (opcion == 2)
+    {
+        //EJECUTAR APP WINDOWS FORM:
+
+     System::Windows::Forms::Application::EnableVisualStyles();
+
+     System::Windows::Forms::Application::SetCompatibleTextRenderingDefault(false);
+
+     // Crear formulario principal
+     LYNX::FormsStatus::mainMenu = gcnew LYNX::MainMenuForm();
+
+     // Ejecutar aplicación
+     System::Windows::Forms::Application::Run(LYNX::FormsStatus::mainMenu);
+    
+    }
+   
 
     return 0;
 }

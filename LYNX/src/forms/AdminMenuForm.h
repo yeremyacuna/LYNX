@@ -40,13 +40,13 @@ namespace LYNX {
         //  DECLARACION DE CONTROLES
 
         // Barra LYNX
-    private: System::Windows::Forms::Panel^ pnlTopBar;
-    private: System::Windows::Forms::PictureBox^ pictureBoxIcon;
-    private: System::Windows::Forms::Label^ lblLYNX;
+
+
+
 
            // Titulo Panel Administrador
-    private: System::Windows::Forms::Panel^ pnlTitulo;
-    private: System::Windows::Forms::Label^ lblTituloPrincipal;
+
+
 	private:
 		AuthManager* authManager = nullptr;
 		TripManager* tripManager = nullptr;
@@ -88,12 +88,30 @@ namespace LYNX {
     private: System::Windows::Forms::RichTextBox^ rtbListado;
 
            // Panel passwords en binario
-    private: System::Windows::Forms::Panel^ pnlPasswords;
-    private: System::Windows::Forms::Label^ lblTitPasswords;
-    private: System::Windows::Forms::Button^ btnCargarPasswords;
-    private: System::Windows::Forms::RichTextBox^ rtbPasswords;
+
+
+
+
 
            // Panel estadisticas generales
+
+
+
+
+
+
+
+
+
+
+
+
+    private: System::Windows::Forms::Label^ lblTituloPrincipal;
+    private: System::Windows::Forms::Panel^ pnlTitulo;
+    private: System::Windows::Forms::Panel^ pnlTopBar;
+    private: System::Windows::Forms::PictureBox^ pictureBoxIcon;
+    private: System::Windows::Forms::Label^ lblLYNX;
+    private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
     private: System::Windows::Forms::Panel^ pnlEstadisticas;
     private: System::Windows::Forms::Label^ lblTitEstadisticas;
     private: System::Windows::Forms::Label^ lblEstPasajerosReg;
@@ -106,6 +124,29 @@ namespace LYNX {
     private: System::Windows::Forms::Label^ lblEstMontoCola;
     private: System::Windows::Forms::Label^ lblEstViajesCurso;
     private: System::Windows::Forms::Label^ lblEstCola;
+    private: System::Windows::Forms::Panel^ pnlPasswords;
+    private: System::Windows::Forms::Label^ lblTitPasswords;
+    private: System::Windows::Forms::Button^ btnCargarPasswords;
+    private: System::Windows::Forms::RichTextBox^ rtbPasswords;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private: System::ComponentModel::Container^ components;
 
@@ -114,14 +155,6 @@ namespace LYNX {
 #pragma region Windows Form Designer generated code
         void InitializeComponent(void)
         {
-            this->components = (gcnew System::ComponentModel::Container());
-
-            // COMPONENTES
-            this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
-            this->pictureBoxIcon = (gcnew System::Windows::Forms::PictureBox());
-            this->lblLYNX = (gcnew System::Windows::Forms::Label());
-            this->pnlTitulo = (gcnew System::Windows::Forms::Panel());
-            this->lblTituloPrincipal = (gcnew System::Windows::Forms::Label());
             this->pnlTarjetaPasajeros = (gcnew System::Windows::Forms::Panel());
             this->lblTitPasajeros = (gcnew System::Windows::Forms::Label());
             this->lblNumPasajeros = (gcnew System::Windows::Forms::Label());
@@ -149,10 +182,12 @@ namespace LYNX {
             this->btnOrden1 = (gcnew System::Windows::Forms::Button());
             this->btnOrden2 = (gcnew System::Windows::Forms::Button());
             this->rtbListado = (gcnew System::Windows::Forms::RichTextBox());
-            this->pnlPasswords = (gcnew System::Windows::Forms::Panel());
-            this->lblTitPasswords = (gcnew System::Windows::Forms::Label());
-            this->btnCargarPasswords = (gcnew System::Windows::Forms::Button());
-            this->rtbPasswords = (gcnew System::Windows::Forms::RichTextBox());
+            this->lblTituloPrincipal = (gcnew System::Windows::Forms::Label());
+            this->pnlTitulo = (gcnew System::Windows::Forms::Panel());
+            this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
+            this->pictureBoxIcon = (gcnew System::Windows::Forms::PictureBox());
+            this->lblLYNX = (gcnew System::Windows::Forms::Label());
+            this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
             this->pnlEstadisticas = (gcnew System::Windows::Forms::Panel());
             this->lblTitEstadisticas = (gcnew System::Windows::Forms::Label());
             this->lblEstPasajerosReg = (gcnew System::Windows::Forms::Label());
@@ -165,163 +200,137 @@ namespace LYNX {
             this->lblEstMontoCola = (gcnew System::Windows::Forms::Label());
             this->lblEstViajesCurso = (gcnew System::Windows::Forms::Label());
             this->lblEstCola = (gcnew System::Windows::Forms::Label());
-
-            // SuspendLayout para todos los panels
-            this->pnlTopBar->SuspendLayout();
-            this->pnlTitulo->SuspendLayout();
+            this->pnlPasswords = (gcnew System::Windows::Forms::Panel());
+            this->lblTitPasswords = (gcnew System::Windows::Forms::Label());
+            this->btnCargarPasswords = (gcnew System::Windows::Forms::Button());
+            this->rtbPasswords = (gcnew System::Windows::Forms::RichTextBox());
             this->pnlTarjetaPasajeros->SuspendLayout();
             this->pnlTarjetaConductores->SuspendLayout();
             this->pnlTarjetaViajes->SuspendLayout();
             this->pnlBusqueda->SuspendLayout();
             this->pnlResultado->SuspendLayout();
             this->pnlListados->SuspendLayout();
-            this->pnlPasswords->SuspendLayout();
-            this->pnlEstadisticas->SuspendLayout();
+            this->pnlTitulo->SuspendLayout();
+            this->pnlTopBar->SuspendLayout();
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
+            this->tableLayoutPanel1->SuspendLayout();
+            this->pnlEstadisticas->SuspendLayout();
+            this->pnlPasswords->SuspendLayout();
             this->SuspendLayout();
-
             // 
-            // pnlTopBar: barra superior LYNX
-            // Dock Top para expansion con F11
+            // pnlTarjetaPasajeros
             // 
-            this->pnlTopBar->Dock = System::Windows::Forms::DockStyle::Top;
-            this->pnlTopBar->BackColor = System::Drawing::Color::FromArgb(6, 98, 70);
-            this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
-            this->pnlTopBar->Controls->Add(this->lblLYNX);
-            this->pnlTopBar->Location = System::Drawing::Point(0, 0);
-            this->pnlTopBar->Name = L"pnlTopBar";
-            this->pnlTopBar->Size = System::Drawing::Size(1480, 78);
-            this->pnlTopBar->TabIndex = 0;
-
-            // pictureBoxIcon: logo LYNX en la barra
-            this->pictureBoxIcon->BackColor = System::Drawing::Color::Transparent;
-            this->pictureBoxIcon->Location = System::Drawing::Point(22, -27);
-            this->pictureBoxIcon->Name = L"pictureBoxIcon";
-            this->pictureBoxIcon->Size = System::Drawing::Size(75, 129);
-            this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
-            this->pictureBoxIcon->TabIndex = 1;
-            this->pictureBoxIcon->TabStop = false;
-
-            // lblLYNX: nombre de la app en la barra
-            this->lblLYNX->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
-            this->lblLYNX->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
-            this->lblLYNX->Location = System::Drawing::Point(91, 18);
-            this->lblLYNX->Name = L"lblLYNX";
-            this->lblLYNX->Size = System::Drawing::Size(150, 40);
-            this->lblLYNX->TabIndex = 0;
-            this->lblLYNX->Text = L"LYNX";
-
-            // 
-            // pnlTitulo: "Panel Administrativo"
-            // 
-            this->pnlTitulo->Dock = System::Windows::Forms::DockStyle::Top;
-            this->pnlTitulo->BackColor = System::Drawing::Color::FromArgb(24, 28, 34);
-            this->pnlTitulo->Controls->Add(this->lblTituloPrincipal);
-            this->pnlTitulo->Location = System::Drawing::Point(0, 78);
-            this->pnlTitulo->Name = L"pnlTitulo";
-            this->pnlTitulo->Size = System::Drawing::Size(1480, 72);
-            this->pnlTitulo->TabIndex = 1;
-
-            // lblTituloPrincipal
-            this->lblTituloPrincipal->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 24, System::Drawing::FontStyle::Bold));
-            this->lblTituloPrincipal->ForeColor = System::Drawing::Color::White;
-            this->lblTituloPrincipal->Location = System::Drawing::Point(30, 14);
-            this->lblTituloPrincipal->Name = L"lblTituloPrincipal";
-            this->lblTituloPrincipal->Size = System::Drawing::Size(600, 44);
-            this->lblTituloPrincipal->TabIndex = 0;
-            this->lblTituloPrincipal->Text = L"Panel Administrativo";
-
-            // 
-            // TARJETA: Pasajeros
-            // 
+            this->pnlTarjetaPasajeros->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->pnlTarjetaPasajeros->BackColor = System::Drawing::Color::White;
             this->pnlTarjetaPasajeros->Controls->Add(this->lblTitPasajeros);
             this->pnlTarjetaPasajeros->Controls->Add(this->lblNumPasajeros);
-            this->pnlTarjetaPasajeros->Location = System::Drawing::Point(30, 168);
+            this->pnlTarjetaPasajeros->Location = System::Drawing::Point(24, 172);
             this->pnlTarjetaPasajeros->Name = L"pnlTarjetaPasajeros";
             this->pnlTarjetaPasajeros->Size = System::Drawing::Size(180, 100);
             this->pnlTarjetaPasajeros->TabIndex = 2;
-
+            // 
+            // lblTitPasajeros
+            // 
             this->lblTitPasajeros->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 11, System::Drawing::FontStyle::Bold));
-            this->lblTitPasajeros->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
-            this->lblTitPasajeros->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+            this->lblTitPasajeros->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+                static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitPasajeros->Location = System::Drawing::Point(0, 14);
             this->lblTitPasajeros->Name = L"lblTitPasajeros";
             this->lblTitPasajeros->Size = System::Drawing::Size(180, 26);
             this->lblTitPasajeros->TabIndex = 0;
             this->lblTitPasajeros->Text = L"Pasajeros";
-
+            this->lblTitPasajeros->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+            // 
+            // lblNumPasajeros
+            // 
             this->lblNumPasajeros->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 26, System::Drawing::FontStyle::Bold));
-            this->lblNumPasajeros->ForeColor = System::Drawing::Color::FromArgb(33, 181, 109);
-            this->lblNumPasajeros->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+            this->lblNumPasajeros->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
+                static_cast<System::Int32>(static_cast<System::Byte>(109)));
             this->lblNumPasajeros->Location = System::Drawing::Point(0, 46);
             this->lblNumPasajeros->Name = L"lblNumPasajeros";
             this->lblNumPasajeros->Size = System::Drawing::Size(180, 44);
             this->lblNumPasajeros->TabIndex = 1;
             this->lblNumPasajeros->Text = L"0";
-
+            this->lblNumPasajeros->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
             // 
-            // TARJETA: Conductores
+            // pnlTarjetaConductores
             // 
+            this->pnlTarjetaConductores->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->pnlTarjetaConductores->BackColor = System::Drawing::Color::White;
             this->pnlTarjetaConductores->Controls->Add(this->lblTitConductores);
             this->pnlTarjetaConductores->Controls->Add(this->lblNumConductores);
-            this->pnlTarjetaConductores->Location = System::Drawing::Point(225, 168);
+            this->pnlTarjetaConductores->Location = System::Drawing::Point(225, 172);
             this->pnlTarjetaConductores->Name = L"pnlTarjetaConductores";
             this->pnlTarjetaConductores->Size = System::Drawing::Size(180, 100);
             this->pnlTarjetaConductores->TabIndex = 3;
-
+            // 
+            // lblTitConductores
+            // 
             this->lblTitConductores->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 11, System::Drawing::FontStyle::Bold));
-            this->lblTitConductores->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
-            this->lblTitConductores->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+            this->lblTitConductores->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)),
+                static_cast<System::Int32>(static_cast<System::Byte>(27)), static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitConductores->Location = System::Drawing::Point(0, 14);
             this->lblTitConductores->Name = L"lblTitConductores";
             this->lblTitConductores->Size = System::Drawing::Size(180, 26);
             this->lblTitConductores->TabIndex = 0;
             this->lblTitConductores->Text = L"Conductores";
-
+            this->lblTitConductores->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+            // 
+            // lblNumConductores
+            // 
             this->lblNumConductores->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 26, System::Drawing::FontStyle::Bold));
-            this->lblNumConductores->ForeColor = System::Drawing::Color::FromArgb(39, 50, 120);
-            this->lblNumConductores->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+            this->lblNumConductores->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(39)),
+                static_cast<System::Int32>(static_cast<System::Byte>(50)), static_cast<System::Int32>(static_cast<System::Byte>(120)));
             this->lblNumConductores->Location = System::Drawing::Point(0, 46);
             this->lblNumConductores->Name = L"lblNumConductores";
             this->lblNumConductores->Size = System::Drawing::Size(180, 44);
             this->lblNumConductores->TabIndex = 1;
             this->lblNumConductores->Text = L"0";
-
+            this->lblNumConductores->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
             // 
-            // TARJETA: Viajes
+            // pnlTarjetaViajes
             // 
+            this->pnlTarjetaViajes->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->pnlTarjetaViajes->BackColor = System::Drawing::Color::White;
             this->pnlTarjetaViajes->Controls->Add(this->lblTitViajes);
             this->pnlTarjetaViajes->Controls->Add(this->lblNumViajes);
-            this->pnlTarjetaViajes->Location = System::Drawing::Point(420, 168);
+            this->pnlTarjetaViajes->Location = System::Drawing::Point(421, 172);
             this->pnlTarjetaViajes->Name = L"pnlTarjetaViajes";
             this->pnlTarjetaViajes->Size = System::Drawing::Size(180, 100);
             this->pnlTarjetaViajes->TabIndex = 4;
-
+            // 
+            // lblTitViajes
+            // 
             this->lblTitViajes->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 11, System::Drawing::FontStyle::Bold));
-            this->lblTitViajes->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
-            this->lblTitViajes->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-            this->lblTitViajes->Location = System::Drawing::Point(0, 14);
+            this->lblTitViajes->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+                static_cast<System::Int32>(static_cast<System::Byte>(31)));
+            this->lblTitViajes->Location = System::Drawing::Point(4, 14);
             this->lblTitViajes->Name = L"lblTitViajes";
             this->lblTitViajes->Size = System::Drawing::Size(180, 26);
             this->lblTitViajes->TabIndex = 0;
             this->lblTitViajes->Text = L"Viajes";
-
+            this->lblTitViajes->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+            // 
+            // lblNumViajes
+            // 
             this->lblNumViajes->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 26, System::Drawing::FontStyle::Bold));
-            this->lblNumViajes->ForeColor = System::Drawing::Color::FromArgb(57, 107, 239);
-            this->lblNumViajes->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-            this->lblNumViajes->Location = System::Drawing::Point(0, 46);
+            this->lblNumViajes->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
+                static_cast<System::Int32>(static_cast<System::Byte>(239)));
+            this->lblNumViajes->Location = System::Drawing::Point(4, 46);
             this->lblNumViajes->Name = L"lblNumViajes";
             this->lblNumViajes->Size = System::Drawing::Size(180, 44);
             this->lblNumViajes->TabIndex = 1;
             this->lblNumViajes->Text = L"0";
-
+            this->lblNumViajes->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
             // 
             // pnlBusqueda
-            // Tab Pasajero busca por DNI, tab Conductor muestra rating >= 4.0
             // 
+            this->pnlBusqueda->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->pnlBusqueda->BackColor = System::Drawing::Color::White;
             this->pnlBusqueda->Controls->Add(this->lblTitBusqueda);
             this->pnlBusqueda->Controls->Add(this->btnTabPasajero);
@@ -329,24 +338,30 @@ namespace LYNX {
             this->pnlBusqueda->Controls->Add(this->txtDniBuscar);
             this->pnlBusqueda->Controls->Add(this->btnBuscar);
             this->pnlBusqueda->Controls->Add(this->pnlResultado);
-            this->pnlBusqueda->Location = System::Drawing::Point(30, 288);
+            this->pnlBusqueda->Location = System::Drawing::Point(23, 292);
             this->pnlBusqueda->Name = L"pnlBusqueda";
-            this->pnlBusqueda->Size = System::Drawing::Size(580, 330);
+            this->pnlBusqueda->Size = System::Drawing::Size(580, 382);
             this->pnlBusqueda->TabIndex = 5;
-
-            // Titulo del panel busqueda
+            // 
+            // lblTitBusqueda
+            // 
+            this->lblTitBusqueda->AutoSize = true;
             this->lblTitBusqueda->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 13, System::Drawing::FontStyle::Bold));
-            this->lblTitBusqueda->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
+            this->lblTitBusqueda->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+                static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitBusqueda->Location = System::Drawing::Point(15, 14);
             this->lblTitBusqueda->Name = L"lblTitBusqueda";
-            this->lblTitBusqueda->AutoSize = true;
+            this->lblTitBusqueda->Size = System::Drawing::Size(135, 22);
             this->lblTitBusqueda->TabIndex = 0;
             this->lblTitBusqueda->Text = L"Buscar usuario";
-
-            // btnTabPasajero: activo por defecto
-            this->btnTabPasajero->BackColor = System::Drawing::Color::FromArgb(33, 181, 109);
-            this->btnTabPasajero->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+            // 
+            // btnTabPasajero
+            // 
+            this->btnTabPasajero->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
+                static_cast<System::Int32>(static_cast<System::Byte>(109)));
+            this->btnTabPasajero->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnTabPasajero->FlatAppearance->BorderSize = 0;
+            this->btnTabPasajero->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
             this->btnTabPasajero->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9, System::Drawing::FontStyle::Bold));
             this->btnTabPasajero->ForeColor = System::Drawing::Color::White;
             this->btnTabPasajero->Location = System::Drawing::Point(15, 50);
@@ -355,41 +370,47 @@ namespace LYNX {
             this->btnTabPasajero->TabIndex = 1;
             this->btnTabPasajero->Text = L"Pasajero  (DNI)";
             this->btnTabPasajero->UseVisualStyleBackColor = false;
-            this->btnTabPasajero->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnTabPasajero->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnTabPasajero_Click);
-
-            // btnTabConductor: inactivo por defecto
-            this->btnTabConductor->BackColor = System::Drawing::Color::FromArgb(245, 247, 252);
+            // 
+            // btnTabConductor
+            // 
+            this->btnTabConductor->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)), static_cast<System::Int32>(static_cast<System::Byte>(247)),
+                static_cast<System::Int32>(static_cast<System::Byte>(252)));
+            this->btnTabConductor->Cursor = System::Windows::Forms::Cursors::Hand;
+            this->btnTabConductor->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(39)),
+                static_cast<System::Int32>(static_cast<System::Byte>(50)), static_cast<System::Int32>(static_cast<System::Byte>(120)));
             this->btnTabConductor->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-            this->btnTabConductor->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(39, 50, 120);
-            this->btnTabConductor->FlatAppearance->BorderSize = 1;
             this->btnTabConductor->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->btnTabConductor->ForeColor = System::Drawing::Color::FromArgb(39, 50, 120);
+            this->btnTabConductor->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(39)), static_cast<System::Int32>(static_cast<System::Byte>(50)),
+                static_cast<System::Int32>(static_cast<System::Byte>(120)));
             this->btnTabConductor->Location = System::Drawing::Point(185, 50);
             this->btnTabConductor->Name = L"btnTabConductor";
             this->btnTabConductor->Size = System::Drawing::Size(175, 32);
             this->btnTabConductor->TabIndex = 2;
             this->btnTabConductor->Text = L"Conductor  (Rating)";
             this->btnTabConductor->UseVisualStyleBackColor = false;
-            this->btnTabConductor->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnTabConductor->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnTabConductor_Click);
-
-            // txtDniBuscar: campo DNI con un texto gris que desaparece al hacer click, esta simulado con los eventos Enter/Leave
+            // 
+            // txtDniBuscar
+            // 
+            this->txtDniBuscar->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
             this->txtDniBuscar->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10));
             this->txtDniBuscar->ForeColor = System::Drawing::Color::Gray;
             this->txtDniBuscar->Location = System::Drawing::Point(15, 98);
             this->txtDniBuscar->Name = L"txtDniBuscar";
-            this->txtDniBuscar->Size = System::Drawing::Size(400, 28);
+            this->txtDniBuscar->Size = System::Drawing::Size(400, 24);
             this->txtDniBuscar->TabIndex = 3;
             this->txtDniBuscar->Text = L"Ingresa el DNI del pasajero...";
-            this->txtDniBuscar->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
             this->txtDniBuscar->Enter += gcnew System::EventHandler(this, &AdminMenuForm::txtDni_Enter);
             this->txtDniBuscar->Leave += gcnew System::EventHandler(this, &AdminMenuForm::txtDni_Leave);
-
-            // btnBuscar: mismo color que el tab activo (pasajero verde por defecto)
-            this->btnBuscar->BackColor = System::Drawing::Color::FromArgb(33, 181, 109);
-            this->btnBuscar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+            // 
+            // btnBuscar
+            // 
+            this->btnBuscar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
+                static_cast<System::Int32>(static_cast<System::Byte>(109)));
+            this->btnBuscar->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnBuscar->FlatAppearance->BorderSize = 0;
+            this->btnBuscar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
             this->btnBuscar->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9, System::Drawing::FontStyle::Bold));
             this->btnBuscar->ForeColor = System::Drawing::Color::White;
             this->btnBuscar->Location = System::Drawing::Point(425, 98);
@@ -398,40 +419,47 @@ namespace LYNX {
             this->btnBuscar->TabIndex = 4;
             this->btnBuscar->Text = L"Buscar";
             this->btnBuscar->UseVisualStyleBackColor = false;
-            this->btnBuscar->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnBuscar->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnBuscar_Click);
-
-            // pnlResultado: cuadro donde aparece el resultado de la busqueda
-            this->pnlResultado->BackColor = System::Drawing::Color::FromArgb(245, 250, 246);
-            this->pnlResultado->BorderStyle = System::Windows::Forms::BorderStyle::None;
+            // 
+            // pnlResultado
+            // 
+            this->pnlResultado->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)), static_cast<System::Int32>(static_cast<System::Byte>(250)),
+                static_cast<System::Int32>(static_cast<System::Byte>(246)));
             this->pnlResultado->Controls->Add(this->lblResultadoTit);
             this->pnlResultado->Controls->Add(this->lblResultadoInfo);
             this->pnlResultado->Location = System::Drawing::Point(15, 140);
             this->pnlResultado->Name = L"pnlResultado";
             this->pnlResultado->Size = System::Drawing::Size(550, 175);
             this->pnlResultado->TabIndex = 5;
-
+            // 
+            // lblResultadoTit
+            // 
+            this->lblResultadoTit->AutoSize = true;
             this->lblResultadoTit->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
-            this->lblResultadoTit->ForeColor = System::Drawing::Color::FromArgb(6, 98, 70);
+            this->lblResultadoTit->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(6)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
+                static_cast<System::Int32>(static_cast<System::Byte>(70)));
             this->lblResultadoTit->Location = System::Drawing::Point(8, 8);
             this->lblResultadoTit->Name = L"lblResultadoTit";
-            this->lblResultadoTit->AutoSize = true;
+            this->lblResultadoTit->Size = System::Drawing::Size(59, 13);
             this->lblResultadoTit->TabIndex = 0;
             this->lblResultadoTit->Text = L"Resultado:";
-
+            // 
+            // lblResultadoInfo
+            // 
             this->lblResultadoInfo->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblResultadoInfo->ForeColor = System::Drawing::Color::FromArgb(50, 60, 55);
+            this->lblResultadoInfo->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(50)), static_cast<System::Int32>(static_cast<System::Byte>(60)),
+                static_cast<System::Int32>(static_cast<System::Byte>(55)));
             this->lblResultadoInfo->Location = System::Drawing::Point(8, 28);
             this->lblResultadoInfo->Name = L"lblResultadoInfo";
             this->lblResultadoInfo->Size = System::Drawing::Size(535, 140);
             this->lblResultadoInfo->TabIndex = 1;
             this->lblResultadoInfo->Text = L"Ingresa un DNI y presiona Buscar.";
-
             // 
-            // pnlListados: panel con Pasajeros/Conductores/Viajes
-            // "Ordenar por" cambia segun la lista activa
-            // RichTextBox con scroll vertical para los datos
+            // pnlListados
             // 
+            this->pnlListados->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->pnlListados->BackColor = System::Drawing::Color::White;
             this->pnlListados->Controls->Add(this->lblTitListados);
             this->pnlListados->Controls->Add(this->btnListPasajeros);
@@ -441,24 +469,30 @@ namespace LYNX {
             this->pnlListados->Controls->Add(this->btnOrden1);
             this->pnlListados->Controls->Add(this->btnOrden2);
             this->pnlListados->Controls->Add(this->rtbListado);
-            this->pnlListados->Location = System::Drawing::Point(630, 168);
+            this->pnlListados->Location = System::Drawing::Point(623, 172);
             this->pnlListados->Name = L"pnlListados";
-            this->pnlListados->Size = System::Drawing::Size(832, 450);
+            this->pnlListados->Size = System::Drawing::Size(832, 502);
             this->pnlListados->TabIndex = 6;
-
-            // Titulo del panel listados
+            // 
+            // lblTitListados
+            // 
+            this->lblTitListados->AutoSize = true;
             this->lblTitListados->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 13, System::Drawing::FontStyle::Bold));
-            this->lblTitListados->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
+            this->lblTitListados->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+                static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitListados->Location = System::Drawing::Point(15, 12);
             this->lblTitListados->Name = L"lblTitListados";
-            this->lblTitListados->AutoSize = true;
+            this->lblTitListados->Size = System::Drawing::Size(238, 22);
             this->lblTitListados->TabIndex = 0;
             this->lblTitListados->Text = L"Listado de usuarios y viajes";
-
-            // btnListPasajeros: color pasajero activo por defecto
-            this->btnListPasajeros->BackColor = System::Drawing::Color::FromArgb(33, 181, 109);
-            this->btnListPasajeros->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+            // 
+            // btnListPasajeros
+            // 
+            this->btnListPasajeros->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
+                static_cast<System::Int32>(static_cast<System::Byte>(109)));
+            this->btnListPasajeros->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnListPasajeros->FlatAppearance->BorderSize = 0;
+            this->btnListPasajeros->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
             this->btnListPasajeros->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9, System::Drawing::FontStyle::Bold));
             this->btnListPasajeros->ForeColor = System::Drawing::Color::White;
             this->btnListPasajeros->Location = System::Drawing::Point(15, 50);
@@ -467,55 +501,65 @@ namespace LYNX {
             this->btnListPasajeros->TabIndex = 1;
             this->btnListPasajeros->Text = L"Pasajeros";
             this->btnListPasajeros->UseVisualStyleBackColor = false;
-            this->btnListPasajeros->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnListPasajeros->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnListPasajeros_Click);
-
-            // btnListConductores: color conductor inactivo
-            this->btnListConductores->BackColor = System::Drawing::Color::FromArgb(245, 247, 252);
+            // 
+            // btnListConductores
+            // 
+            this->btnListConductores->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)),
+                static_cast<System::Int32>(static_cast<System::Byte>(247)), static_cast<System::Int32>(static_cast<System::Byte>(252)));
+            this->btnListConductores->Cursor = System::Windows::Forms::Cursors::Hand;
+            this->btnListConductores->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(39)),
+                static_cast<System::Int32>(static_cast<System::Byte>(50)), static_cast<System::Int32>(static_cast<System::Byte>(120)));
             this->btnListConductores->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-            this->btnListConductores->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(39, 50, 120);
-            this->btnListConductores->FlatAppearance->BorderSize = 1;
             this->btnListConductores->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->btnListConductores->ForeColor = System::Drawing::Color::FromArgb(39, 50, 120);
+            this->btnListConductores->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(39)),
+                static_cast<System::Int32>(static_cast<System::Byte>(50)), static_cast<System::Int32>(static_cast<System::Byte>(120)));
             this->btnListConductores->Location = System::Drawing::Point(140, 50);
             this->btnListConductores->Name = L"btnListConductores";
             this->btnListConductores->Size = System::Drawing::Size(115, 32);
             this->btnListConductores->TabIndex = 2;
             this->btnListConductores->Text = L"Conductores";
             this->btnListConductores->UseVisualStyleBackColor = false;
-            this->btnListConductores->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnListConductores->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnListConductores_Click);
-
-            // btnListViajes: color admin inactivo
-            this->btnListViajes->BackColor = System::Drawing::Color::FromArgb(241, 245, 255);
+            // 
+            // btnListViajes
+            // 
+            this->btnListViajes->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(241)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+                static_cast<System::Int32>(static_cast<System::Byte>(255)));
+            this->btnListViajes->Cursor = System::Windows::Forms::Cursors::Hand;
+            this->btnListViajes->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)),
+                static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(239)));
             this->btnListViajes->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-            this->btnListViajes->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(57, 107, 239);
-            this->btnListViajes->FlatAppearance->BorderSize = 1;
             this->btnListViajes->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->btnListViajes->ForeColor = System::Drawing::Color::FromArgb(57, 107, 239);
+            this->btnListViajes->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
+                static_cast<System::Int32>(static_cast<System::Byte>(239)));
             this->btnListViajes->Location = System::Drawing::Point(265, 50);
             this->btnListViajes->Name = L"btnListViajes";
             this->btnListViajes->Size = System::Drawing::Size(95, 32);
             this->btnListViajes->TabIndex = 3;
             this->btnListViajes->Text = L"Viajes";
             this->btnListViajes->UseVisualStyleBackColor = false;
-            this->btnListViajes->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnListViajes->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnListViajes_Click);
-
+            // 
             // lblOrdenarPor
+            // 
+            this->lblOrdenarPor->AutoSize = true;
             this->lblOrdenarPor->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblOrdenarPor->ForeColor = System::Drawing::Color::FromArgb(80, 80, 80);
+            this->lblOrdenarPor->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(80)), static_cast<System::Int32>(static_cast<System::Byte>(80)),
+                static_cast<System::Int32>(static_cast<System::Byte>(80)));
             this->lblOrdenarPor->Location = System::Drawing::Point(15, 96);
             this->lblOrdenarPor->Name = L"lblOrdenarPor";
-            this->lblOrdenarPor->AutoSize = true;
+            this->lblOrdenarPor->Size = System::Drawing::Size(74, 14);
             this->lblOrdenarPor->TabIndex = 4;
             this->lblOrdenarPor->Text = L"Ordenar por:";
-
+            // 
             // btnOrden1
-            this->btnOrden1->BackColor = System::Drawing::Color::FromArgb(24, 28, 34);
-            this->btnOrden1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+            // 
+            this->btnOrden1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+                static_cast<System::Int32>(static_cast<System::Byte>(34)));
+            this->btnOrden1->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnOrden1->FlatAppearance->BorderColor = System::Drawing::Color::White;
-            this->btnOrden1->FlatAppearance->BorderSize = 1;
+            this->btnOrden1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
             this->btnOrden1->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
             this->btnOrden1->ForeColor = System::Drawing::Color::White;
             this->btnOrden1->Location = System::Drawing::Point(120, 92);
@@ -524,14 +568,15 @@ namespace LYNX {
             this->btnOrden1->TabIndex = 5;
             this->btnOrden1->Text = L"ID";
             this->btnOrden1->UseVisualStyleBackColor = false;
-            this->btnOrden1->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnOrden1->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnOrden1_Click);
-
+            // 
             // btnOrden2
-            this->btnOrden2->BackColor = System::Drawing::Color::FromArgb(24, 28, 34);
-            this->btnOrden2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+            // 
+            this->btnOrden2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+                static_cast<System::Int32>(static_cast<System::Byte>(34)));
+            this->btnOrden2->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnOrden2->FlatAppearance->BorderColor = System::Drawing::Color::White;
-            this->btnOrden2->FlatAppearance->BorderSize = 1;
+            this->btnOrden2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
             this->btnOrden2->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
             this->btnOrden2->ForeColor = System::Drawing::Color::White;
             this->btnOrden2->Location = System::Drawing::Point(205, 92);
@@ -540,14 +585,16 @@ namespace LYNX {
             this->btnOrden2->TabIndex = 6;
             this->btnOrden2->Text = L"Gasto";
             this->btnOrden2->UseVisualStyleBackColor = false;
-            this->btnOrden2->Cursor = System::Windows::Forms::Cursors::Hand;
             this->btnOrden2->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnOrden2_Click);
-
-            // rtbListado: area scrolleable con los datos listados
-            this->rtbListado->BackColor = System::Drawing::Color::FromArgb(248, 250, 249);
+            // 
+            // rtbListado
+            // 
+            this->rtbListado->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(250)),
+                static_cast<System::Int32>(static_cast<System::Byte>(249)));
             this->rtbListado->BorderStyle = System::Windows::Forms::BorderStyle::None;
             this->rtbListado->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
-            this->rtbListado->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
+            this->rtbListado->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+                static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->rtbListado->Location = System::Drawing::Point(15, 130);
             this->rtbListado->Name = L"rtbListado";
             this->rtbListado->ReadOnly = true;
@@ -555,58 +602,92 @@ namespace LYNX {
             this->rtbListado->Size = System::Drawing::Size(800, 305);
             this->rtbListado->TabIndex = 7;
             this->rtbListado->Text = L"";
-
             // 
-            // pnlPasswords
+            // lblTituloPrincipal
             // 
-            this->pnlPasswords->BackColor = System::Drawing::Color::White;
-            this->pnlPasswords->Controls->Add(this->lblTitPasswords);
-            this->pnlPasswords->Controls->Add(this->btnCargarPasswords);
-            this->pnlPasswords->Controls->Add(this->rtbPasswords);
-            this->pnlPasswords->Location = System::Drawing::Point(30, 638);
-            this->pnlPasswords->Name = L"pnlPasswords";
-            this->pnlPasswords->Size = System::Drawing::Size(580, 210);
-            this->pnlPasswords->TabIndex = 7;
-
-            this->lblTitPasswords->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 13, System::Drawing::FontStyle::Bold));
-            this->lblTitPasswords->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
-            this->lblTitPasswords->Location = System::Drawing::Point(15, 14);
-            this->lblTitPasswords->Name = L"lblTitPasswords";
-            this->lblTitPasswords->AutoSize = true;
-            this->lblTitPasswords->TabIndex = 0;
-            this->lblTitPasswords->Text = L"Passwords en binario";
-
-            // btnCargarPasswords
-            this->btnCargarPasswords->BackColor = System::Drawing::Color::FromArgb(24, 28, 34);
-            this->btnCargarPasswords->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-            this->btnCargarPasswords->FlatAppearance->BorderColor = System::Drawing::Color::White;
-            this->btnCargarPasswords->FlatAppearance->BorderSize = 1;
-            this->btnCargarPasswords->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9, System::Drawing::FontStyle::Bold));
-            this->btnCargarPasswords->ForeColor = System::Drawing::Color::White;
-            this->btnCargarPasswords->Location = System::Drawing::Point(500, 10);
-            this->btnCargarPasswords->Name = L"btnCargarPasswords";
-            this->btnCargarPasswords->Size = System::Drawing::Size(68, 28);
-            this->btnCargarPasswords->TabIndex = 1;
-            this->btnCargarPasswords->Text = L"Cargar";
-            this->btnCargarPasswords->UseVisualStyleBackColor = false;
-            this->btnCargarPasswords->Cursor = System::Windows::Forms::Cursors::Hand;
-            this->btnCargarPasswords->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnCargarPasswords_Click);
-
-            this->rtbPasswords->BackColor = System::Drawing::Color::FromArgb(248, 250, 249);
-            this->rtbPasswords->BorderStyle = System::Windows::Forms::BorderStyle::None;
-            this->rtbPasswords->Font = (gcnew System::Drawing::Font(L"Consolas", 8));
-            this->rtbPasswords->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
-            this->rtbPasswords->Location = System::Drawing::Point(15, 52);
-            this->rtbPasswords->Name = L"rtbPasswords";
-            this->rtbPasswords->ReadOnly = true;
-            this->rtbPasswords->ScrollBars = System::Windows::Forms::RichTextBoxScrollBars::Vertical;
-            this->rtbPasswords->Size = System::Drawing::Size(550, 148);
-            this->rtbPasswords->TabIndex = 2;
-            this->rtbPasswords->Text = L"Presiona 'Cargar' para leer el archivo binario de passwords.";
-
+            this->lblTituloPrincipal->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
+            this->lblTituloPrincipal->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 24, System::Drawing::FontStyle::Bold));
+            this->lblTituloPrincipal->ForeColor = System::Drawing::Color::White;
+            this->lblTituloPrincipal->Location = System::Drawing::Point(30, 14);
+            this->lblTituloPrincipal->Name = L"lblTituloPrincipal";
+            this->lblTituloPrincipal->Size = System::Drawing::Size(600, 44);
+            this->lblTituloPrincipal->TabIndex = 0;
+            this->lblTituloPrincipal->Text = L"Panel Administrativo";
+            // 
+            // pnlTitulo
+            // 
+            this->pnlTitulo->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
+            this->pnlTitulo->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+                static_cast<System::Int32>(static_cast<System::Byte>(34)));
+            this->pnlTitulo->Controls->Add(this->lblTituloPrincipal);
+            this->pnlTitulo->Location = System::Drawing::Point(0, 78);
+            this->pnlTitulo->Name = L"pnlTitulo";
+            this->pnlTitulo->Size = System::Drawing::Size(1480, 72);
+            this->pnlTitulo->TabIndex = 1;
+            // 
+            // pnlTopBar
+            // 
+            this->pnlTopBar->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
+            this->pnlTopBar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(6)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
+                static_cast<System::Int32>(static_cast<System::Byte>(70)));
+            this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
+            this->pnlTopBar->Controls->Add(this->lblLYNX);
+            this->pnlTopBar->Location = System::Drawing::Point(0, 0);
+            this->pnlTopBar->Name = L"pnlTopBar";
+            this->pnlTopBar->Size = System::Drawing::Size(1480, 78);
+            this->pnlTopBar->TabIndex = 9;
+            // 
+            // pictureBoxIcon
+            // 
+            this->pictureBoxIcon->BackColor = System::Drawing::Color::Transparent;
+            this->pictureBoxIcon->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+            this->pictureBoxIcon->Cursor = System::Windows::Forms::Cursors::Hand;
+            this->pictureBoxIcon->Location = System::Drawing::Point(22, -27);
+            this->pictureBoxIcon->Name = L"pictureBoxIcon";
+            this->pictureBoxIcon->Size = System::Drawing::Size(75, 129);
+            this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
+            this->pictureBoxIcon->TabIndex = 3;
+            this->pictureBoxIcon->TabStop = false;
+            this->pictureBoxIcon->Click += gcnew System::EventHandler(this, &AdminMenuForm::pictureBoxIcon_Click);
+            // 
+            // lblLYNX
+            // 
+            this->lblLYNX->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
+            this->lblLYNX->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+                static_cast<System::Int32>(static_cast<System::Byte>(31)));
+            this->lblLYNX->Location = System::Drawing::Point(91, 18);
+            this->lblLYNX->Name = L"lblLYNX";
+            this->lblLYNX->Size = System::Drawing::Size(84, 40);
+            this->lblLYNX->TabIndex = 0;
+            this->lblLYNX->Text = L"LYNX";
+            // 
+            // tableLayoutPanel1
+            // 
+            this->tableLayoutPanel1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
+            this->tableLayoutPanel1->ColumnCount = 2;
+            this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+                40.38462F)));
+            this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+                59.61538F)));
+            this->tableLayoutPanel1->Controls->Add(this->pnlEstadisticas, 1, 0);
+            this->tableLayoutPanel1->Controls->Add(this->pnlPasswords, 0, 0);
+            this->tableLayoutPanel1->Location = System::Drawing::Point(18, 690);
+            this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
+            this->tableLayoutPanel1->RowCount = 1;
+            this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
+            this->tableLayoutPanel1->Size = System::Drawing::Size(1446, 215);
+            this->tableLayoutPanel1->TabIndex = 10;
             // 
             // pnlEstadisticas
             // 
+            this->pnlEstadisticas->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->pnlEstadisticas->BackColor = System::Drawing::Color::White;
             this->pnlEstadisticas->Controls->Add(this->lblTitEstadisticas);
             this->pnlEstadisticas->Controls->Add(this->lblEstPasajerosReg);
@@ -619,118 +700,261 @@ namespace LYNX {
             this->pnlEstadisticas->Controls->Add(this->lblEstMontoCola);
             this->pnlEstadisticas->Controls->Add(this->lblEstViajesCurso);
             this->pnlEstadisticas->Controls->Add(this->lblEstCola);
-            this->pnlEstadisticas->Location = System::Drawing::Point(630, 638);
+            this->pnlEstadisticas->Location = System::Drawing::Point(586, 3);
             this->pnlEstadisticas->Name = L"pnlEstadisticas";
-            this->pnlEstadisticas->Size = System::Drawing::Size(832, 210);
-            this->pnlEstadisticas->TabIndex = 8;
-
+            this->pnlEstadisticas->Size = System::Drawing::Size(857, 209);
+            this->pnlEstadisticas->TabIndex = 9;
+            // 
+            // lblTitEstadisticas
+            // 
+            this->lblTitEstadisticas->AutoSize = true;
             this->lblTitEstadisticas->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 13, System::Drawing::FontStyle::Bold));
-            this->lblTitEstadisticas->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
+            this->lblTitEstadisticas->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)),
+                static_cast<System::Int32>(static_cast<System::Byte>(27)), static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitEstadisticas->Location = System::Drawing::Point(15, 14);
             this->lblTitEstadisticas->Name = L"lblTitEstadisticas";
-            this->lblTitEstadisticas->AutoSize = true;
+            this->lblTitEstadisticas->Size = System::Drawing::Size(196, 22);
             this->lblTitEstadisticas->TabIndex = 0;
             this->lblTitEstadisticas->Text = L"Estadisticas generales";
-
-            // Columna izquierda de estadisticas
-            this->lblEstPasajerosReg->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblEstPasajerosReg->ForeColor = System::Drawing::Color::FromArgb(40, 55, 48);
-            this->lblEstPasajerosReg->Location = System::Drawing::Point(15, 50);
-            this->lblEstPasajerosReg->Name = L"lblEstPasajerosReg";
+            // 
+            // lblEstPasajerosReg
+            // 
+            this->lblEstPasajerosReg->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->lblEstPasajerosReg->AutoSize = true;
+            this->lblEstPasajerosReg->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
+            this->lblEstPasajerosReg->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)),
+                static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
+            this->lblEstPasajerosReg->Location = System::Drawing::Point(17, 44);
+            this->lblEstPasajerosReg->Name = L"lblEstPasajerosReg";
+            this->lblEstPasajerosReg->Size = System::Drawing::Size(149, 14);
             this->lblEstPasajerosReg->TabIndex = 1;
             this->lblEstPasajerosReg->Text = L"Usuarios registrados:       0";
-
-            this->lblEstConductoresReg->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblEstConductoresReg->ForeColor = System::Drawing::Color::FromArgb(40, 55, 48);
-            this->lblEstConductoresReg->Location = System::Drawing::Point(15, 74);
-            this->lblEstConductoresReg->Name = L"lblEstConductoresReg";
+            this->lblEstPasajerosReg->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+            // 
+            // lblEstConductoresReg
+            // 
+            this->lblEstConductoresReg->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->lblEstConductoresReg->AutoSize = true;
+            this->lblEstConductoresReg->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
+            this->lblEstConductoresReg->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)),
+                static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
+            this->lblEstConductoresReg->Location = System::Drawing::Point(17, 68);
+            this->lblEstConductoresReg->Name = L"lblEstConductoresReg";
+            this->lblEstConductoresReg->Size = System::Drawing::Size(160, 14);
             this->lblEstConductoresReg->TabIndex = 2;
             this->lblEstConductoresReg->Text = L"Conductores registrados:    0";
-
-            this->lblEstConductoresDisp->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblEstConductoresDisp->ForeColor = System::Drawing::Color::FromArgb(40, 55, 48);
-            this->lblEstConductoresDisp->Location = System::Drawing::Point(15, 98);
-            this->lblEstConductoresDisp->Name = L"lblEstConductoresDisp";
+            this->lblEstConductoresReg->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+            // 
+            // lblEstConductoresDisp
+            // 
+            this->lblEstConductoresDisp->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->lblEstConductoresDisp->AutoSize = true;
+            this->lblEstConductoresDisp->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
+            this->lblEstConductoresDisp->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)),
+                static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
+            this->lblEstConductoresDisp->Location = System::Drawing::Point(17, 92);
+            this->lblEstConductoresDisp->Name = L"lblEstConductoresDisp";
+            this->lblEstConductoresDisp->Size = System::Drawing::Size(161, 14);
             this->lblEstConductoresDisp->TabIndex = 3;
             this->lblEstConductoresDisp->Text = L"Conductores disponibles:    0";
-
-            this->lblEstViajesEspera->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblEstViajesEspera->ForeColor = System::Drawing::Color::FromArgb(40, 55, 48);
-            this->lblEstViajesEspera->Location = System::Drawing::Point(15, 122);
-            this->lblEstViajesEspera->Name = L"lblEstViajesEspera";
+            this->lblEstConductoresDisp->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+            // 
+            // lblEstViajesEspera
+            // 
+            this->lblEstViajesEspera->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->lblEstViajesEspera->AutoSize = true;
+            this->lblEstViajesEspera->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
+            this->lblEstViajesEspera->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)),
+                static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
+            this->lblEstViajesEspera->Location = System::Drawing::Point(17, 116);
+            this->lblEstViajesEspera->Name = L"lblEstViajesEspera";
+            this->lblEstViajesEspera->Size = System::Drawing::Size(136, 14);
             this->lblEstViajesEspera->TabIndex = 4;
             this->lblEstViajesEspera->Text = L"Viajes en espera:           0";
-
-            this->lblEstMontoCola->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblEstMontoCola->ForeColor = System::Drawing::Color::FromArgb(40, 55, 48);
-            this->lblEstMontoCola->Location = System::Drawing::Point(15, 146);
-            this->lblEstMontoCola->Name = L"lblEstMontoCola";
-            this->lblEstMontoCola->AutoSize = true;
-            this->lblEstMontoCola->TabIndex = 5;
-            this->lblEstMontoCola->Text = L"Monto total en cola:  S/ 0.00";
-
-            this->lblEstCola->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblEstCola->ForeColor = System::Drawing::Color::FromArgb(40, 55, 48);
-            this->lblEstCola->Location = System::Drawing::Point(15, 170);
-            this->lblEstCola->Name = L"lblEstCola";
-            this->lblEstCola->AutoSize = true;
-            this->lblEstCola->TabIndex = 6;
-            this->lblEstCola->Text = L"Cola: [--] Sin viajes en espera";
-
-            // Columna derecha de estadisticas
-            this->lblEstViajesActivos->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblEstViajesActivos->ForeColor = System::Drawing::Color::FromArgb(40, 55, 48);
-            this->lblEstViajesActivos->Location = System::Drawing::Point(430, 50);
-            this->lblEstViajesActivos->Name = L"lblEstViajesActivos";
+            this->lblEstViajesEspera->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+            // 
+            // lblEstViajesActivos
+            // 
+            this->lblEstViajesActivos->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->lblEstViajesActivos->AutoSize = true;
+            this->lblEstViajesActivos->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
+            this->lblEstViajesActivos->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)),
+                static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
+            this->lblEstViajesActivos->Location = System::Drawing::Point(432, 44);
+            this->lblEstViajesActivos->Name = L"lblEstViajesActivos";
+            this->lblEstViajesActivos->Size = System::Drawing::Size(104, 14);
             this->lblEstViajesActivos->TabIndex = 7;
             this->lblEstViajesActivos->Text = L"Viajes activos:     0";
-
-            this->lblEstViajesHistorial->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblEstViajesHistorial->ForeColor = System::Drawing::Color::FromArgb(40, 55, 48);
-            this->lblEstViajesHistorial->Location = System::Drawing::Point(430, 74);
-            this->lblEstViajesHistorial->Name = L"lblEstViajesHistorial";
+            this->lblEstViajesActivos->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+            // 
+            // lblEstViajesHistorial
+            // 
+            this->lblEstViajesHistorial->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->lblEstViajesHistorial->AutoSize = true;
+            this->lblEstViajesHistorial->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
+            this->lblEstViajesHistorial->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)),
+                static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
+            this->lblEstViajesHistorial->Location = System::Drawing::Point(432, 68);
+            this->lblEstViajesHistorial->Name = L"lblEstViajesHistorial";
+            this->lblEstViajesHistorial->Size = System::Drawing::Size(114, 14);
             this->lblEstViajesHistorial->TabIndex = 8;
             this->lblEstViajesHistorial->Text = L"Viajes en historial: 0";
-
-            this->lblEstViajesCurso->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-            this->lblEstViajesCurso->ForeColor = System::Drawing::Color::FromArgb(40, 55, 48);
-            this->lblEstViajesCurso->Location = System::Drawing::Point(430, 98);
-            this->lblEstViajesCurso->Name = L"lblEstViajesCurso";
-            this->lblEstViajesCurso->AutoSize = true;
-            this->lblEstViajesCurso->TabIndex = 9;
-            this->lblEstViajesCurso->Text = L"Viajes en curso:     0";
-
-            // Ganancias en verde
-            this->lblEstGanancias->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
-            this->lblEstGanancias->ForeColor = System::Drawing::Color::FromArgb(6, 98, 70);
-            this->lblEstGanancias->Location = System::Drawing::Point(430, 122);
-            this->lblEstGanancias->Name = L"lblEstGanancias";
+            this->lblEstViajesHistorial->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+            // 
+            // lblEstGanancias
+            // 
+            this->lblEstGanancias->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
             this->lblEstGanancias->AutoSize = true;
+            this->lblEstGanancias->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
+            this->lblEstGanancias->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(6)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
+                static_cast<System::Int32>(static_cast<System::Byte>(70)));
+            this->lblEstGanancias->Location = System::Drawing::Point(432, 116);
+            this->lblEstGanancias->Name = L"lblEstGanancias";
+            this->lblEstGanancias->Size = System::Drawing::Size(193, 17);
             this->lblEstGanancias->TabIndex = 10;
             this->lblEstGanancias->Text = L"Ganancia plataforma:  S/ 0.00";
-
+            this->lblEstGanancias->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
             // 
-            // FORMULARIO
+            // lblEstMontoCola
             // 
-            this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+            this->lblEstMontoCola->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
+            this->lblEstMontoCola->AutoSize = true;
+            this->lblEstMontoCola->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
+            this->lblEstMontoCola->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)), static_cast<System::Int32>(static_cast<System::Byte>(55)),
+                static_cast<System::Int32>(static_cast<System::Byte>(48)));
+            this->lblEstMontoCola->Location = System::Drawing::Point(17, 140);
+            this->lblEstMontoCola->Name = L"lblEstMontoCola";
+            this->lblEstMontoCola->Size = System::Drawing::Size(157, 14);
+            this->lblEstMontoCola->TabIndex = 5;
+            this->lblEstMontoCola->Text = L"Monto total en cola:  S/ 0.00";
+            this->lblEstMontoCola->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+            // 
+            // lblEstViajesCurso
+            // 
+            this->lblEstViajesCurso->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
+            this->lblEstViajesCurso->AutoSize = true;
+            this->lblEstViajesCurso->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
+            this->lblEstViajesCurso->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)),
+                static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
+            this->lblEstViajesCurso->Location = System::Drawing::Point(432, 92);
+            this->lblEstViajesCurso->Name = L"lblEstViajesCurso";
+            this->lblEstViajesCurso->Size = System::Drawing::Size(113, 14);
+            this->lblEstViajesCurso->TabIndex = 9;
+            this->lblEstViajesCurso->Text = L"Viajes en curso:     0";
+            this->lblEstViajesCurso->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+            // 
+            // lblEstCola
+            // 
+            this->lblEstCola->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
+            this->lblEstCola->AutoSize = true;
+            this->lblEstCola->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
+            this->lblEstCola->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)), static_cast<System::Int32>(static_cast<System::Byte>(55)),
+                static_cast<System::Int32>(static_cast<System::Byte>(48)));
+            this->lblEstCola->Location = System::Drawing::Point(17, 164);
+            this->lblEstCola->Name = L"lblEstCola";
+            this->lblEstCola->Size = System::Drawing::Size(164, 14);
+            this->lblEstCola->TabIndex = 6;
+            this->lblEstCola->Text = L"Cola: [--] Sin viajes en espera";
+            this->lblEstCola->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+            // 
+            // pnlPasswords
+            // 
+            this->pnlPasswords->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
+            this->pnlPasswords->BackColor = System::Drawing::Color::White;
+            this->pnlPasswords->Controls->Add(this->lblTitPasswords);
+            this->pnlPasswords->Controls->Add(this->btnCargarPasswords);
+            this->pnlPasswords->Controls->Add(this->rtbPasswords);
+            this->pnlPasswords->Location = System::Drawing::Point(3, 3);
+            this->pnlPasswords->Name = L"pnlPasswords";
+            this->pnlPasswords->Size = System::Drawing::Size(577, 209);
+            this->pnlPasswords->TabIndex = 8;
+            // 
+            // lblTitPasswords
+            // 
+            this->lblTitPasswords->AutoSize = true;
+            this->lblTitPasswords->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 13, System::Drawing::FontStyle::Bold));
+            this->lblTitPasswords->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+                static_cast<System::Int32>(static_cast<System::Byte>(31)));
+            this->lblTitPasswords->Location = System::Drawing::Point(15, 14);
+            this->lblTitPasswords->Name = L"lblTitPasswords";
+            this->lblTitPasswords->Size = System::Drawing::Size(188, 22);
+            this->lblTitPasswords->TabIndex = 0;
+            this->lblTitPasswords->Text = L"Passwords en binario";
+            // 
+            // btnCargarPasswords
+            // 
+            this->btnCargarPasswords->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
+            this->btnCargarPasswords->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)),
+                static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(34)));
+            this->btnCargarPasswords->Cursor = System::Windows::Forms::Cursors::Hand;
+            this->btnCargarPasswords->FlatAppearance->BorderColor = System::Drawing::Color::White;
+            this->btnCargarPasswords->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+            this->btnCargarPasswords->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9, System::Drawing::FontStyle::Bold));
+            this->btnCargarPasswords->ForeColor = System::Drawing::Color::White;
+            this->btnCargarPasswords->Location = System::Drawing::Point(500, 10);
+            this->btnCargarPasswords->Name = L"btnCargarPasswords";
+            this->btnCargarPasswords->Size = System::Drawing::Size(69, 28);
+            this->btnCargarPasswords->TabIndex = 1;
+            this->btnCargarPasswords->Text = L"Cargar";
+            this->btnCargarPasswords->UseVisualStyleBackColor = false;
+            // 
+            // rtbPasswords
+            // 
+            this->rtbPasswords->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+                | System::Windows::Forms::AnchorStyles::Left)
+                | System::Windows::Forms::AnchorStyles::Right));
+            this->rtbPasswords->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(250)),
+                static_cast<System::Int32>(static_cast<System::Byte>(249)));
+            this->rtbPasswords->BorderStyle = System::Windows::Forms::BorderStyle::None;
+            this->rtbPasswords->Font = (gcnew System::Drawing::Font(L"Consolas", 8));
+            this->rtbPasswords->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+                static_cast<System::Int32>(static_cast<System::Byte>(31)));
+            this->rtbPasswords->Location = System::Drawing::Point(15, 52);
+            this->rtbPasswords->Name = L"rtbPasswords";
+            this->rtbPasswords->ReadOnly = true;
+            this->rtbPasswords->ScrollBars = System::Windows::Forms::RichTextBoxScrollBars::Vertical;
+            this->rtbPasswords->Size = System::Drawing::Size(551, 142);
+            this->rtbPasswords->TabIndex = 2;
+            this->rtbPasswords->Text = L"Presiona \'Cargar\' para leer el archivo binario de passwords.";
+            // 
+            // AdminMenuForm
+            // 
+            this->AutoScaleDimensions = System::Drawing::SizeF(7, 14);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-            this->BackColor = System::Drawing::Color::FromArgb(245, 247, 245);
-            this->ClientSize = System::Drawing::Size(1480, 868);
-            this->Controls->Add(this->pnlEstadisticas);
-            this->Controls->Add(this->pnlPasswords);
+            this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)), static_cast<System::Int32>(static_cast<System::Byte>(247)),
+                static_cast<System::Int32>(static_cast<System::Byte>(245)));
+            this->ClientSize = System::Drawing::Size(1480, 920);
+            this->Controls->Add(this->tableLayoutPanel1);
+            this->Controls->Add(this->pnlTopBar);
             this->Controls->Add(this->pnlListados);
             this->Controls->Add(this->pnlBusqueda);
             this->Controls->Add(this->pnlTarjetaViajes);
             this->Controls->Add(this->pnlTarjetaConductores);
             this->Controls->Add(this->pnlTarjetaPasajeros);
             this->Controls->Add(this->pnlTitulo);
-            this->Controls->Add(this->pnlTopBar);
             this->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
             this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
             this->MaximizeBox = false;
@@ -738,21 +962,25 @@ namespace LYNX {
             this->Text = L"LYNX | Panel Administrativo";
             this->Load += gcnew System::EventHandler(this, &AdminMenuForm::AdminMenuForm_Load);
             this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &AdminMenuForm::AdminMenuForm_KeyDown);
-
-            // ResumeLayout para todos los panels
-            this->pnlTopBar->ResumeLayout(false);
-            this->pnlTitulo->ResumeLayout(false);
             this->pnlTarjetaPasajeros->ResumeLayout(false);
             this->pnlTarjetaConductores->ResumeLayout(false);
             this->pnlTarjetaViajes->ResumeLayout(false);
             this->pnlBusqueda->ResumeLayout(false);
+            this->pnlBusqueda->PerformLayout();
             this->pnlResultado->ResumeLayout(false);
+            this->pnlResultado->PerformLayout();
             this->pnlListados->ResumeLayout(false);
-            this->pnlPasswords->ResumeLayout(false);
-            this->pnlEstadisticas->ResumeLayout(false);
+            this->pnlListados->PerformLayout();
+            this->pnlTitulo->ResumeLayout(false);
+            this->pnlTopBar->ResumeLayout(false);
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->EndInit();
+            this->tableLayoutPanel1->ResumeLayout(false);
+            this->pnlEstadisticas->ResumeLayout(false);
+            this->pnlEstadisticas->PerformLayout();
+            this->pnlPasswords->ResumeLayout(false);
+            this->pnlPasswords->PerformLayout();
             this->ResumeLayout(false);
-            this->PerformLayout();
+
         }
 #pragma endregion
 
@@ -775,6 +1003,7 @@ namespace LYNX {
 				L"LYNX"
 			);
 		}
+
         // 
         //  ESTADO INTERNO
         // 
@@ -848,6 +1077,21 @@ namespace LYNX {
                 this->Location = FormsStatus::normalLocation;
                 FormsStatus::isFullscreen = false;
                 this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+            }
+        }
+
+        //
+        // Click functions
+        // 
+            // pictureLYNXClick
+        System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e) {
+            if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
+            {
+                FormsStatus::SaveWindow(this);
+                FormsStatus::ApplyWindow(FormsStatus::mainMenu);
+                FormsStatus::mainMenu->Show();
+                FormsStatus::mainMenu->BringToFront();
+                this->Hide();
             }
         }
 
@@ -1057,5 +1301,6 @@ namespace LYNX {
             rtbPasswords->Text = L"Aqui se mostraran los passwords leidos del archivo binario.";
         }
 
-    };
+        
+};
 }

@@ -105,7 +105,7 @@ namespace LYNX {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->lblRegistrarse->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 28, System::Drawing::FontStyle::Bold));
 			this->lblRegistrarse->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->lblRegistrarse->Location = System::Drawing::Point(526, 320);
+			this->lblRegistrarse->Location = System::Drawing::Point(524, 320);
 			this->lblRegistrarse->Name = L"lblRegistrarse";
 			this->lblRegistrarse->Size = System::Drawing::Size(429, 46);
 			this->lblRegistrarse->TabIndex = 0;
@@ -119,7 +119,7 @@ namespace LYNX {
 			this->lblDatoDNI->AutoSize = true;
 			this->lblDatoDNI->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
 			this->lblDatoDNI->ForeColor = System::Drawing::SystemColors::Control;
-			this->lblDatoDNI->Location = System::Drawing::Point(523, 373);
+			this->lblDatoDNI->Location = System::Drawing::Point(521, 373);
 			this->lblDatoDNI->Name = L"lblDatoDNI";
 			this->lblDatoDNI->Size = System::Drawing::Size(31, 17);
 			this->lblDatoDNI->TabIndex = 1;
@@ -132,7 +132,7 @@ namespace LYNX {
 			this->lblDatoNombre->AutoSize = true;
 			this->lblDatoNombre->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
 			this->lblDatoNombre->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->lblDatoNombre->Location = System::Drawing::Point(523, 426);
+			this->lblDatoNombre->Location = System::Drawing::Point(521, 426);
 			this->lblDatoNombre->Name = L"lblDatoNombre";
 			this->lblDatoNombre->Size = System::Drawing::Size(60, 17);
 			this->lblDatoNombre->TabIndex = 2;
@@ -145,7 +145,7 @@ namespace LYNX {
 			this->lblDatoContrasena->AutoSize = true;
 			this->lblDatoContrasena->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
 			this->lblDatoContrasena->ForeColor = System::Drawing::SystemColors::Control;
-			this->lblDatoContrasena->Location = System::Drawing::Point(523, 479);
+			this->lblDatoContrasena->Location = System::Drawing::Point(521, 479);
 			this->lblDatoContrasena->Name = L"lblDatoContrasena";
 			this->lblDatoContrasena->Size = System::Drawing::Size(81, 17);
 			this->lblDatoContrasena->TabIndex = 3;
@@ -158,7 +158,7 @@ namespace LYNX {
 			this->lblDatoConfirmar->AutoSize = true;
 			this->lblDatoConfirmar->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
 			this->lblDatoConfirmar->ForeColor = System::Drawing::SystemColors::Control;
-			this->lblDatoConfirmar->Location = System::Drawing::Point(523, 532);
+			this->lblDatoConfirmar->Location = System::Drawing::Point(521, 533);
 			this->lblDatoConfirmar->Name = L"lblDatoConfirmar";
 			this->lblDatoConfirmar->Size = System::Drawing::Size(149, 17);
 			this->lblDatoConfirmar->TabIndex = 4;
@@ -169,7 +169,7 @@ namespace LYNX {
 			this->tbDni->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->tbDni->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbDni->Location = System::Drawing::Point(526, 393);
+			this->tbDni->Location = System::Drawing::Point(524, 393);
 			this->tbDni->Name = L"tbDni";
 			this->tbDni->Size = System::Drawing::Size(429, 27);
 			this->tbDni->TabIndex = 5;
@@ -179,7 +179,7 @@ namespace LYNX {
 			this->tbNombre->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->tbNombre->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbNombre->Location = System::Drawing::Point(526, 446);
+			this->tbNombre->Location = System::Drawing::Point(524, 446);
 			this->tbNombre->Name = L"tbNombre";
 			this->tbNombre->Size = System::Drawing::Size(429, 27);
 			this->tbNombre->TabIndex = 6;
@@ -189,7 +189,7 @@ namespace LYNX {
 			this->tbContrasena->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->tbContrasena->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbContrasena->Location = System::Drawing::Point(526, 499);
+			this->tbContrasena->Location = System::Drawing::Point(524, 499);
 			this->tbContrasena->Name = L"tbContrasena";
 			this->tbContrasena->PasswordChar = '*';
 			this->tbContrasena->Size = System::Drawing::Size(429, 27);
@@ -200,7 +200,7 @@ namespace LYNX {
 			this->tbConfirmarContrasena->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->tbConfirmarContrasena->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbConfirmarContrasena->Location = System::Drawing::Point(526, 552);
+			this->tbConfirmarContrasena->Location = System::Drawing::Point(524, 553);
 			this->tbConfirmarContrasena->Name = L"tbConfirmarContrasena";
 			this->tbConfirmarContrasena->PasswordChar = '*';
 			this->tbConfirmarContrasena->Size = System::Drawing::Size(429, 27);
@@ -214,7 +214,7 @@ namespace LYNX {
 				static_cast<System::Int32>(static_cast<System::Byte>(109)));
 			this->btnRegistrar->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnRegistrar->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
-			this->btnRegistrar->Location = System::Drawing::Point(626, 598);
+			this->btnRegistrar->Location = System::Drawing::Point(624, 598);
 			this->btnRegistrar->Name = L"btnRegistrar";
 			this->btnRegistrar->Size = System::Drawing::Size(230, 44);
 			this->btnRegistrar->TabIndex = 9;
@@ -328,7 +328,7 @@ namespace LYNX {
 			this->tlpOptions->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 46.97228F)));
 			this->tlpOptions->Controls->Add(this->lblAviso1, 0, 0);
 			this->tlpOptions->Controls->Add(this->llblAviso2, 1, 0);
-			this->tlpOptions->Location = System::Drawing::Point(526, 657);
+			this->tlpOptions->Location = System::Drawing::Point(524, 657);
 			this->tlpOptions->Name = L"tlpOptions";
 			this->tlpOptions->RowCount = 1;
 			this->tlpOptions->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
@@ -392,6 +392,9 @@ namespace LYNX {
 
 		private:
 
+		//
+		// Configuracion global de form
+		//
 			void ConfigureForm()
 			{
 				// CENTRAR TODO
