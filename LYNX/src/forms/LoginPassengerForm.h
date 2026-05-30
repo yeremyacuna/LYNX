@@ -2,6 +2,8 @@
 #include "PassengerMenuForm.h"
 #include "../library/FormsStatus.h"	
 #include <windows.h>
+#include <msclr/marshal_cppstd.h>
+#include <iostream>
 
 namespace LYNX {
 
@@ -11,6 +13,7 @@ namespace LYNX {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+
 
 	public ref class LoginPassengerForm : public System::Windows::Forms::Form
 	{
@@ -387,11 +390,26 @@ namespace LYNX {
 		public: 
 			bool passengerScreen = false;
 			bool switchToRegister = false;
+			String^ dnis;
+			String^ names;
+			String^ passwords;
+
 		private:
 
 		//
 		// Load Form
 		// 
+			std::string toString(System::String^ textoCLI)
+			{
+				// Si el string de .NET es nulo, retornamos un string nativo vacío para evitar errores
+				if (textoCLI == nullptr) {
+					return "";
+				}
+
+				// msclr::interop::marshal_as realiza la conversión automática y gestiona la memoria
+				return msclr::interop::marshal_as<std::string>(textoCLI);
+			}
+
 			System::Void LoginPassengerForm_Load(System::Object^ sender, System::EventArgs^ e) {
 
 				// Para Picture Box LYNX
@@ -422,10 +440,16 @@ namespace LYNX {
 				String^ name = this->tbNombre->Text;
 				String^ password = this->tbContrasena->Text;
 
+				
+
 				if (dni->Length == 0 || password->Length == 0 || name->Length == 0) {
 					MessageBox::Show("Porfavor llene todos los campos", "Error DNI, Nombre o Contrasena", MessageBoxButtons::OK);
 				return;
 				}
+
+				dnis = dni;
+				names = name;
+				passwords = password;
 
 				passengerScreen = true;
 				FormsStatus::SaveWindow(this);
