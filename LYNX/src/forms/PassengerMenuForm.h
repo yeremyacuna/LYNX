@@ -151,9 +151,10 @@ namespace LYNX {
 				static_cast<System::Int32>(static_cast<System::Byte>(247)));
 			this->historyListView->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->historyListView->HideSelection = false;
-			this->historyListView->Location = System::Drawing::Point(24, 68);
+			this->historyListView->Location = System::Drawing::Point(32, 84);
+			this->historyListView->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->historyListView->Name = L"historyListView";
-			this->historyListView->Size = System::Drawing::Size(610, 164);
+			this->historyListView->Size = System::Drawing::Size(813, 202);
 			this->historyListView->TabIndex = 1;
 			this->historyListView->UseCompatibleStateImageBehavior = false;
 			this->historyListView->View = System::Windows::Forms::View::List;
@@ -163,9 +164,10 @@ namespace LYNX {
 			this->queueTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
 			this->queueTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->queueTitle->Location = System::Drawing::Point(22, 20);
+			this->queueTitle->Location = System::Drawing::Point(29, 25);
+			this->queueTitle->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->queueTitle->Name = L"queueTitle";
-			this->queueTitle->Size = System::Drawing::Size(220, 28);
+			this->queueTitle->Size = System::Drawing::Size(293, 34);
 			this->queueTitle->TabIndex = 0;
 			this->queueTitle->Text = L"Cola de solicitudes";
 			// 
@@ -174,9 +176,10 @@ namespace LYNX {
 			this->vehiclePanel->BackColor = System::Drawing::Color::White;
 			this->vehiclePanel->Controls->Add(this->updateVehicleButton);
 			this->vehiclePanel->Controls->Add(this->maintenancePanel);
-			this->vehiclePanel->Location = System::Drawing::Point(1098, 213);
+			this->vehiclePanel->Location = System::Drawing::Point(1464, 262);
+			this->vehiclePanel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->vehiclePanel->Name = L"vehiclePanel";
-			this->vehiclePanel->Size = System::Drawing::Size(372, 342);
+			this->vehiclePanel->Size = System::Drawing::Size(496, 421);
 			this->vehiclePanel->TabIndex = 9;
 			// 
 			// updateVehicleButton
@@ -186,9 +189,10 @@ namespace LYNX {
 			this->updateVehicleButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->updateVehicleButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->updateVehicleButton->ForeColor = System::Drawing::Color::White;
-			this->updateVehicleButton->Location = System::Drawing::Point(22, 264);
+			this->updateVehicleButton->Location = System::Drawing::Point(29, 325);
+			this->updateVehicleButton->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->updateVehicleButton->Name = L"updateVehicleButton";
-			this->updateVehicleButton->Size = System::Drawing::Size(170, 34);
+			this->updateVehicleButton->Size = System::Drawing::Size(227, 42);
 			this->updateVehicleButton->TabIndex = 4;
 			this->updateVehicleButton->Text = L"Actualizar vehiculo";
 			this->updateVehicleButton->UseVisualStyleBackColor = false;
@@ -199,9 +203,10 @@ namespace LYNX {
 				static_cast<System::Int32>(static_cast<System::Byte>(246)), static_cast<System::Int32>(static_cast<System::Byte>(241)));
 			this->maintenancePanel->Controls->Add(this->maintenanceText);
 			this->maintenancePanel->Controls->Add(this->maintenanceTitle);
-			this->maintenancePanel->Location = System::Drawing::Point(22, 172);
+			this->maintenancePanel->Location = System::Drawing::Point(29, 212);
+			this->maintenancePanel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->maintenancePanel->Name = L"maintenancePanel";
-			this->maintenancePanel->Size = System::Drawing::Size(326, 70);
+			this->maintenancePanel->Size = System::Drawing::Size(435, 86);
 			this->maintenancePanel->TabIndex = 3;
 			// 
 			// maintenanceText
@@ -209,9 +214,10 @@ namespace LYNX {
 			this->maintenanceText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->maintenanceText->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
 				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->maintenanceText->Location = System::Drawing::Point(16, 38);
+			this->maintenanceText->Location = System::Drawing::Point(21, 47);
+			this->maintenanceText->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->maintenanceText->Name = L"maintenanceText";
-			this->maintenanceText->Size = System::Drawing::Size(220, 18);
+			this->maintenanceText->Size = System::Drawing::Size(293, 22);
 			this->maintenanceText->TabIndex = 1;
 			this->maintenanceText->Text = L"-----";
 			// 
@@ -220,9 +226,10 @@ namespace LYNX {
 			this->maintenanceTitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->maintenanceTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
 				static_cast<System::Int32>(static_cast<System::Byte>(36)));
-			this->maintenanceTitle->Location = System::Drawing::Point(16, 14);
+			this->maintenanceTitle->Location = System::Drawing::Point(21, 17);
+			this->maintenanceTitle->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->maintenanceTitle->Name = L"maintenanceTitle";
-			this->maintenanceTitle->Size = System::Drawing::Size(200, 18);
+			this->maintenanceTitle->Size = System::Drawing::Size(267, 22);
 			this->maintenanceTitle->TabIndex = 0;
 			this->maintenanceTitle->Text = L"-----";
 			// 
@@ -230,17 +237,19 @@ namespace LYNX {
 			// 
 			this->historyPanel->BackColor = System::Drawing::Color::White;
 			this->historyPanel->Controls->Add(this->historyListView);
-			this->historyPanel->Location = System::Drawing::Point(808, 587);
+			this->historyPanel->Location = System::Drawing::Point(1077, 722);
+			this->historyPanel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->historyPanel->Name = L"historyPanel";
-			this->historyPanel->Size = System::Drawing::Size(662, 264);
+			this->historyPanel->Size = System::Drawing::Size(883, 325);
 			this->historyPanel->TabIndex = 11;
 			// 
 			// manualPanel
 			// 
 			this->manualPanel->BackColor = System::Drawing::Color::White;
-			this->manualPanel->Location = System::Drawing::Point(48, 587);
+			this->manualPanel->Location = System::Drawing::Point(64, 722);
+			this->manualPanel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->manualPanel->Name = L"manualPanel";
-			this->manualPanel->Size = System::Drawing::Size(728, 264);
+			this->manualPanel->Size = System::Drawing::Size(971, 325);
 			this->manualPanel->TabIndex = 10;
 			// 
 			// topPanel
@@ -252,9 +261,10 @@ namespace LYNX {
 			this->topPanel->Controls->Add(this->onlineChip);
 			this->topPanel->Controls->Add(this->topText);
 			this->topPanel->Controls->Add(this->topTitle);
-			this->topPanel->Location = System::Drawing::Point(24, 55);
+			this->topPanel->Location = System::Drawing::Point(32, 68);
+			this->topPanel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->topPanel->Name = L"topPanel";
-			this->topPanel->Size = System::Drawing::Size(1422, 164);
+			this->topPanel->Size = System::Drawing::Size(1896, 202);
 			this->topPanel->TabIndex = 6;
 			// 
 			// earningsButton
@@ -264,9 +274,10 @@ namespace LYNX {
 			this->earningsButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->earningsButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->earningsButton->ForeColor = System::Drawing::Color::White;
-			this->earningsButton->Location = System::Drawing::Point(1190, 102);
+			this->earningsButton->Location = System::Drawing::Point(1587, 126);
+			this->earningsButton->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->earningsButton->Name = L"earningsButton";
-			this->earningsButton->Size = System::Drawing::Size(170, 40);
+			this->earningsButton->Size = System::Drawing::Size(227, 49);
 			this->earningsButton->TabIndex = 4;
 			this->earningsButton->Text = L"Ver ganancias";
 			this->earningsButton->UseVisualStyleBackColor = false;
@@ -279,9 +290,10 @@ namespace LYNX {
 			this->statusButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->statusButton->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)), static_cast<System::Int32>(static_cast<System::Byte>(25)),
 				static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->statusButton->Location = System::Drawing::Point(1000, 102);
+			this->statusButton->Location = System::Drawing::Point(1333, 126);
+			this->statusButton->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->statusButton->Name = L"statusButton";
-			this->statusButton->Size = System::Drawing::Size(170, 40);
+			this->statusButton->Size = System::Drawing::Size(227, 49);
 			this->statusButton->TabIndex = 3;
 			this->statusButton->Text = L"Cambiar estado";
 			this->statusButton->UseVisualStyleBackColor = false;
@@ -293,9 +305,10 @@ namespace LYNX {
 			this->onlineChip->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->onlineChip->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
 				static_cast<System::Int32>(static_cast<System::Byte>(113)));
-			this->onlineChip->Location = System::Drawing::Point(1192, 24);
+			this->onlineChip->Location = System::Drawing::Point(1589, 30);
+			this->onlineChip->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->onlineChip->Name = L"onlineChip";
-			this->onlineChip->Size = System::Drawing::Size(190, 34);
+			this->onlineChip->Size = System::Drawing::Size(253, 42);
 			this->onlineChip->TabIndex = 2;
 			this->onlineChip->Text = L"Online preview";
 			this->onlineChip->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -305,9 +318,10 @@ namespace LYNX {
 			this->topText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
 			this->topText->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(196)), static_cast<System::Int32>(static_cast<System::Byte>(201)),
 				static_cast<System::Int32>(static_cast<System::Byte>(207)));
-			this->topText->Location = System::Drawing::Point(28, 74);
+			this->topText->Location = System::Drawing::Point(37, 91);
+			this->topText->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->topText->Name = L"topText";
-			this->topText->Size = System::Drawing::Size(620, 36);
+			this->topText->Size = System::Drawing::Size(827, 44);
 			this->topText->TabIndex = 1;
 			this->topText->Text = L"Disponibilidad, ganancias, viajes activos y vehiculo en una sola cabina visual.";
 			// 
@@ -315,18 +329,21 @@ namespace LYNX {
 			// 
 			this->topTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 24, System::Drawing::FontStyle::Bold));
 			this->topTitle->ForeColor = System::Drawing::Color::White;
-			this->topTitle->Location = System::Drawing::Point(28, 28);
+			this->topTitle->Location = System::Drawing::Point(37, 34);
+			this->topTitle->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->topTitle->Name = L"topTitle";
-			this->topTitle->Size = System::Drawing::Size(360, 38);
+			this->topTitle->Size = System::Drawing::Size(480, 47);
 			this->topTitle->TabIndex = 0;
 			this->topTitle->Text = L"Pasajerito";
+			this->topTitle->Click += gcnew System::EventHandler(this, &PassengerMenuForm::topTitle_Click);
 			// 
 			// profilePanel
 			// 
 			this->profilePanel->BackColor = System::Drawing::Color::White;
-			this->profilePanel->Location = System::Drawing::Point(48, 213);
+			this->profilePanel->Location = System::Drawing::Point(64, 262);
+			this->profilePanel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->profilePanel->Name = L"profilePanel";
-			this->profilePanel->Size = System::Drawing::Size(426, 342);
+			this->profilePanel->Size = System::Drawing::Size(568, 421);
 			this->profilePanel->TabIndex = 7;
 			// 
 			// queuePanel
@@ -336,9 +353,10 @@ namespace LYNX {
 			this->queuePanel->Controls->Add(this->acceptButton);
 			this->queuePanel->Controls->Add(this->queueItem3);
 			this->queuePanel->Controls->Add(this->queueTitle);
-			this->queuePanel->Location = System::Drawing::Point(506, 213);
+			this->queuePanel->Location = System::Drawing::Point(675, 262);
+			this->queuePanel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->queuePanel->Name = L"queuePanel";
-			this->queuePanel->Size = System::Drawing::Size(560, 342);
+			this->queuePanel->Size = System::Drawing::Size(747, 421);
 			this->queuePanel->TabIndex = 8;
 			// 
 			// finishButton
@@ -348,9 +366,10 @@ namespace LYNX {
 			this->finishButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->finishButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->finishButton->ForeColor = System::Drawing::Color::White;
-			this->finishButton->Location = System::Drawing::Point(206, 296);
+			this->finishButton->Location = System::Drawing::Point(275, 364);
+			this->finishButton->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->finishButton->Name = L"finishButton";
-			this->finishButton->Size = System::Drawing::Size(170, 34);
+			this->finishButton->Size = System::Drawing::Size(227, 42);
 			this->finishButton->TabIndex = 5;
 			this->finishButton->Text = L"Finalizar viaje";
 			this->finishButton->UseVisualStyleBackColor = false;
@@ -362,9 +381,10 @@ namespace LYNX {
 			this->acceptButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->acceptButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->acceptButton->ForeColor = System::Drawing::Color::White;
-			this->acceptButton->Location = System::Drawing::Point(22, 296);
+			this->acceptButton->Location = System::Drawing::Point(29, 364);
+			this->acceptButton->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->acceptButton->Name = L"acceptButton";
-			this->acceptButton->Size = System::Drawing::Size(170, 34);
+			this->acceptButton->Size = System::Drawing::Size(227, 42);
 			this->acceptButton->TabIndex = 4;
 			this->acceptButton->Text = L"Aceptar solicitud";
 			this->acceptButton->UseVisualStyleBackColor = false;
@@ -376,9 +396,10 @@ namespace LYNX {
 			this->queueItem3->Controls->Add(this->q3Text);
 			this->queueItem3->Controls->Add(this->q3Title);
 			this->queueItem3->Controls->Add(this->q3Dot);
-			this->queueItem3->Location = System::Drawing::Point(22, 216);
+			this->queueItem3->Location = System::Drawing::Point(29, 266);
+			this->queueItem3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->queueItem3->Name = L"queueItem3";
-			this->queueItem3->Size = System::Drawing::Size(512, 58);
+			this->queueItem3->Size = System::Drawing::Size(683, 71);
 			this->queueItem3->TabIndex = 3;
 			// 
 			// q3Text
@@ -386,9 +407,10 @@ namespace LYNX {
 			this->q3Text->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->q3Text->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
 				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->q3Text->Location = System::Drawing::Point(34, 28);
+			this->q3Text->Location = System::Drawing::Point(45, 34);
+			this->q3Text->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->q3Text->Name = L"q3Text";
-			this->q3Text->Size = System::Drawing::Size(340, 18);
+			this->q3Text->Size = System::Drawing::Size(453, 22);
 			this->q3Text->TabIndex = 2;
 			this->q3Text->Text = L"-";
 			// 
@@ -397,9 +419,10 @@ namespace LYNX {
 			this->q3Title->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->q3Title->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
 				static_cast<System::Int32>(static_cast<System::Byte>(36)));
-			this->q3Title->Location = System::Drawing::Point(34, 8);
+			this->q3Title->Location = System::Drawing::Point(45, 10);
+			this->q3Title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->q3Title->Name = L"q3Title";
-			this->q3Title->Size = System::Drawing::Size(160, 18);
+			this->q3Title->Size = System::Drawing::Size(213, 22);
 			this->q3Title->TabIndex = 1;
 			this->q3Title->Text = L"Viaje economico";
 			// 
@@ -407,9 +430,10 @@ namespace LYNX {
 			// 
 			this->q3Dot->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
 				static_cast<System::Int32>(static_cast<System::Byte>(239)));
-			this->q3Dot->Location = System::Drawing::Point(14, 22);
+			this->q3Dot->Location = System::Drawing::Point(19, 27);
+			this->q3Dot->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->q3Dot->Name = L"q3Dot";
-			this->q3Dot->Size = System::Drawing::Size(10, 10);
+			this->q3Dot->Size = System::Drawing::Size(13, 12);
 			this->q3Dot->TabIndex = 0;
 			// 
 			// label4
@@ -418,9 +442,10 @@ namespace LYNX {
 			this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
 				static_cast<System::Int32>(static_cast<System::Byte>(113)));
-			this->label4->Location = System::Drawing::Point(21, 884);
+			this->label4->Location = System::Drawing::Point(28, 1088);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(1443, 34);
+			this->label4->Size = System::Drawing::Size(1924, 42);
 			this->label4->TabIndex = 16;
 			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->label4->Visible = false;
@@ -431,9 +456,10 @@ namespace LYNX {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
 				static_cast<System::Int32>(static_cast<System::Byte>(113)));
-			this->label1->Location = System::Drawing::Point(27, 72);
+			this->label1->Location = System::Drawing::Point(36, 89);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(1443, 34);
+			this->label1->Size = System::Drawing::Size(1924, 42);
 			this->label1->TabIndex = 15;
 			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->label1->Visible = false;
@@ -444,9 +470,10 @@ namespace LYNX {
 			this->lblMarco1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->lblMarco1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
 				static_cast<System::Int32>(static_cast<System::Byte>(113)));
-			this->lblMarco1->Location = System::Drawing::Point(-1, 72);
+			this->lblMarco1->Location = System::Drawing::Point(-1, 89);
+			this->lblMarco1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblMarco1->Name = L"lblMarco1";
-			this->lblMarco1->Size = System::Drawing::Size(28, 850);
+			this->lblMarco1->Size = System::Drawing::Size(37, 1046);
 			this->lblMarco1->TabIndex = 14;
 			this->lblMarco1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->lblMarco1->Visible = false;
@@ -457,9 +484,10 @@ namespace LYNX {
 			this->lblMarco2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->lblMarco2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
 				static_cast<System::Int32>(static_cast<System::Byte>(113)));
-			this->lblMarco2->Location = System::Drawing::Point(1454, 72);
+			this->lblMarco2->Location = System::Drawing::Point(1939, 89);
+			this->lblMarco2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblMarco2->Name = L"lblMarco2";
-			this->lblMarco2->Size = System::Drawing::Size(28, 850);
+			this->lblMarco2->Size = System::Drawing::Size(37, 1046);
 			this->lblMarco2->TabIndex = 13;
 			this->lblMarco2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->lblMarco2->Visible = false;
@@ -472,19 +500,22 @@ namespace LYNX {
 				static_cast<System::Int32>(static_cast<System::Byte>(70)));
 			this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
 			this->pnlTopBar->Controls->Add(this->lblLYNX);
-			this->pnlTopBar->Location = System::Drawing::Point(0, -2);
+			this->pnlTopBar->Location = System::Drawing::Point(3, -2);
+			this->pnlTopBar->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->pnlTopBar->Name = L"pnlTopBar";
-			this->pnlTopBar->Size = System::Drawing::Size(1480, 78);
+			this->pnlTopBar->Size = System::Drawing::Size(1973, 96);
 			this->pnlTopBar->TabIndex = 12;
+			this->pnlTopBar->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &PassengerMenuForm::pnlTopBar_Paint);
 			// 
 			// pictureBoxIcon
 			// 
 			this->pictureBoxIcon->BackColor = System::Drawing::Color::Transparent;
 			this->pictureBoxIcon->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->pictureBoxIcon->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->pictureBoxIcon->Location = System::Drawing::Point(20, -27);
+			this->pictureBoxIcon->Location = System::Drawing::Point(29, -33);
+			this->pictureBoxIcon->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->pictureBoxIcon->Name = L"pictureBoxIcon";
-			this->pictureBoxIcon->Size = System::Drawing::Size(75, 129);
+			this->pictureBoxIcon->Size = System::Drawing::Size(100, 159);
 			this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBoxIcon->TabIndex = 3;
 			this->pictureBoxIcon->TabStop = false;
@@ -495,17 +526,18 @@ namespace LYNX {
 			this->lblLYNX->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
 			this->lblLYNX->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->lblLYNX->Location = System::Drawing::Point(89, 18);
+			this->lblLYNX->Location = System::Drawing::Point(121, 22);
+			this->lblLYNX->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblLYNX->Name = L"lblLYNX";
-			this->lblLYNX->Size = System::Drawing::Size(84, 40);
+			this->lblLYNX->Size = System::Drawing::Size(112, 49);
 			this->lblLYNX->TabIndex = 0;
 			this->lblLYNX->Text = L"LYNX";
 			// 
 			// PassengerMenuForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1480, 920);
+			this->ClientSize = System::Drawing::Size(1924, 1132);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->lblMarco1);
@@ -517,6 +549,7 @@ namespace LYNX {
 			this->Controls->Add(this->topPanel);
 			this->Controls->Add(this->profilePanel);
 			this->Controls->Add(this->queuePanel);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"PassengerMenuForm";
 			this->Text = L"PassengerMenuForm";
 			this->Load += gcnew System::EventHandler(this, &PassengerMenuForm::PassengerMenuForm_Load);
@@ -611,6 +644,10 @@ private: System::Void PassengerMenuForm_Load(System::Object^ sender, System::Eve
 	{
 		FormsStatus::ApplyWindow(this);
 	}
+}
+private: System::Void topTitle_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void pnlTopBar_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 }
 	   // pictureLYNXClick
 	   System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e)

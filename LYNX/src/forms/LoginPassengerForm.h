@@ -102,9 +102,10 @@ namespace LYNX {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->lblIniciarSesion->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 28, System::Drawing::FontStyle::Bold));
 			this->lblIniciarSesion->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->lblIniciarSesion->Location = System::Drawing::Point(526, 348);
+			this->lblIniciarSesion->Location = System::Drawing::Point(701, 428);
+			this->lblIniciarSesion->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblIniciarSesion->Name = L"lblIniciarSesion";
-			this->lblIniciarSesion->Size = System::Drawing::Size(429, 46);
+			this->lblIniciarSesion->Size = System::Drawing::Size(572, 57);
 			this->lblIniciarSesion->TabIndex = 0;
 			this->lblIniciarSesion->Text = L"Iniciar Sesion";
 			this->lblIniciarSesion->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -116,9 +117,10 @@ namespace LYNX {
 			this->lblDatoDNI->AutoSize = true;
 			this->lblDatoDNI->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
 			this->lblDatoDNI->ForeColor = System::Drawing::SystemColors::Control;
-			this->lblDatoDNI->Location = System::Drawing::Point(523, 401);
+			this->lblDatoDNI->Location = System::Drawing::Point(697, 494);
+			this->lblDatoDNI->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblDatoDNI->Name = L"lblDatoDNI";
-			this->lblDatoDNI->Size = System::Drawing::Size(31, 17);
+			this->lblDatoDNI->Size = System::Drawing::Size(38, 21);
 			this->lblDatoDNI->TabIndex = 1;
 			this->lblDatoDNI->Text = L"DNI";
 			// 
@@ -129,9 +131,10 @@ namespace LYNX {
 			this->lblDatoNombre->AutoSize = true;
 			this->lblDatoNombre->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
 			this->lblDatoNombre->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->lblDatoNombre->Location = System::Drawing::Point(523, 454);
+			this->lblDatoNombre->Location = System::Drawing::Point(697, 559);
+			this->lblDatoNombre->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblDatoNombre->Name = L"lblDatoNombre";
-			this->lblDatoNombre->Size = System::Drawing::Size(60, 17);
+			this->lblDatoNombre->Size = System::Drawing::Size(71, 21);
 			this->lblDatoNombre->TabIndex = 2;
 			this->lblDatoNombre->Text = L"Nombre";
 			// 
@@ -142,9 +145,10 @@ namespace LYNX {
 			this->lblDatoContrasena->AutoSize = true;
 			this->lblDatoContrasena->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
 			this->lblDatoContrasena->ForeColor = System::Drawing::SystemColors::Control;
-			this->lblDatoContrasena->Location = System::Drawing::Point(523, 509);
+			this->lblDatoContrasena->Location = System::Drawing::Point(697, 626);
+			this->lblDatoContrasena->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblDatoContrasena->Name = L"lblDatoContrasena";
-			this->lblDatoContrasena->Size = System::Drawing::Size(81, 17);
+			this->lblDatoContrasena->Size = System::Drawing::Size(97, 21);
 			this->lblDatoContrasena->TabIndex = 3;
 			this->lblDatoContrasena->Text = L"Contrasena";
 			// 
@@ -153,9 +157,10 @@ namespace LYNX {
 			this->tbDni->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->tbDni->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbDni->Location = System::Drawing::Point(526, 421);
+			this->tbDni->Location = System::Drawing::Point(701, 518);
+			this->tbDni->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->tbDni->Name = L"tbDni";
-			this->tbDni->Size = System::Drawing::Size(429, 27);
+			this->tbDni->Size = System::Drawing::Size(571, 32);
 			this->tbDni->TabIndex = 4;
 			// 
 			// tbNombre
@@ -163,9 +168,10 @@ namespace LYNX {
 			this->tbNombre->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->tbNombre->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbNombre->Location = System::Drawing::Point(526, 474);
+			this->tbNombre->Location = System::Drawing::Point(701, 583);
+			this->tbNombre->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->tbNombre->Name = L"tbNombre";
-			this->tbNombre->Size = System::Drawing::Size(429, 27);
+			this->tbNombre->Size = System::Drawing::Size(571, 32);
 			this->tbNombre->TabIndex = 5;
 			// 
 			// tbContrasena
@@ -173,11 +179,13 @@ namespace LYNX {
 			this->tbContrasena->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->tbContrasena->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbContrasena->Location = System::Drawing::Point(526, 529);
+			this->tbContrasena->Location = System::Drawing::Point(701, 651);
+			this->tbContrasena->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->tbContrasena->Name = L"tbContrasena";
 			this->tbContrasena->PasswordChar = '*';
-			this->tbContrasena->Size = System::Drawing::Size(429, 27);
+			this->tbContrasena->Size = System::Drawing::Size(571, 32);
 			this->tbContrasena->TabIndex = 6;
+			this->tbContrasena->TextChanged += gcnew System::EventHandler(this, &LoginPassengerForm::tbContrasena_TextChanged);
 			// 
 			// btnEnter
 			// 
@@ -187,9 +195,10 @@ namespace LYNX {
 				static_cast<System::Int32>(static_cast<System::Byte>(109)));
 			this->btnEnter->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnEnter->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
-			this->btnEnter->Location = System::Drawing::Point(665, 572);
+			this->btnEnter->Location = System::Drawing::Point(887, 704);
+			this->btnEnter->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->btnEnter->Name = L"btnEnter";
-			this->btnEnter->Size = System::Drawing::Size(154, 44);
+			this->btnEnter->Size = System::Drawing::Size(205, 54);
 			this->btnEnter->TabIndex = 7;
 			this->btnEnter->Text = L"Ingresar";
 			this->btnEnter->UseVisualStyleBackColor = false;
@@ -199,9 +208,10 @@ namespace LYNX {
 			// 
 			this->lblAviso1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->lblAviso1->ForeColor = System::Drawing::SystemColors::Control;
-			this->lblAviso1->Location = System::Drawing::Point(20, 0);
+			this->lblAviso1->Location = System::Drawing::Point(27, 0);
+			this->lblAviso1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblAviso1->Name = L"lblAviso1";
-			this->lblAviso1->Size = System::Drawing::Size(211, 13);
+			this->lblAviso1->Size = System::Drawing::Size(281, 16);
 			this->lblAviso1->TabIndex = 8;
 			this->lblAviso1->Text = L"No tienes cuenta\?";
 			this->lblAviso1->TextAlign = System::Drawing::ContentAlignment::TopRight;
@@ -209,9 +219,10 @@ namespace LYNX {
 			// llblAviso2
 			// 
 			this->llblAviso2->LinkColor = System::Drawing::Color::White;
-			this->llblAviso2->Location = System::Drawing::Point(237, 0);
+			this->llblAviso2->Location = System::Drawing::Point(316, 0);
+			this->llblAviso2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->llblAviso2->Name = L"llblAviso2";
-			this->llblAviso2->Size = System::Drawing::Size(189, 13);
+			this->llblAviso2->Size = System::Drawing::Size(252, 16);
 			this->llblAviso2->TabIndex = 9;
 			this->llblAviso2->TabStop = true;
 			this->llblAviso2->Text = L"Registrarse";
@@ -226,18 +237,21 @@ namespace LYNX {
 			this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
 			this->pnlTopBar->Controls->Add(this->lblLYNX);
 			this->pnlTopBar->Location = System::Drawing::Point(0, 0);
+			this->pnlTopBar->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->pnlTopBar->Name = L"pnlTopBar";
-			this->pnlTopBar->Size = System::Drawing::Size(1480, 78);
+			this->pnlTopBar->Size = System::Drawing::Size(1973, 96);
 			this->pnlTopBar->TabIndex = 10;
+			this->pnlTopBar->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &LoginPassengerForm::pnlTopBar_Paint);
 			// 
 			// pictureBoxIcon
 			// 
 			this->pictureBoxIcon->BackColor = System::Drawing::Color::Transparent;
 			this->pictureBoxIcon->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->pictureBoxIcon->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->pictureBoxIcon->Location = System::Drawing::Point(22, -27);
+			this->pictureBoxIcon->Location = System::Drawing::Point(29, -33);
+			this->pictureBoxIcon->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->pictureBoxIcon->Name = L"pictureBoxIcon";
-			this->pictureBoxIcon->Size = System::Drawing::Size(75, 129);
+			this->pictureBoxIcon->Size = System::Drawing::Size(100, 159);
 			this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBoxIcon->TabIndex = 3;
 			this->pictureBoxIcon->TabStop = false;
@@ -248,9 +262,10 @@ namespace LYNX {
 			this->lblLYNX->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
 			this->lblLYNX->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->lblLYNX->Location = System::Drawing::Point(91, 18);
+			this->lblLYNX->Location = System::Drawing::Point(121, 22);
+			this->lblLYNX->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblLYNX->Name = L"lblLYNX";
-			this->lblLYNX->Size = System::Drawing::Size(84, 40);
+			this->lblLYNX->Size = System::Drawing::Size(112, 49);
 			this->lblLYNX->TabIndex = 0;
 			this->lblLYNX->Text = L"LYNX";
 			// 
@@ -260,9 +275,10 @@ namespace LYNX {
 			this->lblMarco1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->lblMarco1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
 				static_cast<System::Int32>(static_cast<System::Byte>(113)));
-			this->lblMarco1->Location = System::Drawing::Point(1, 79);
+			this->lblMarco1->Location = System::Drawing::Point(1, 97);
+			this->lblMarco1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblMarco1->Name = L"lblMarco1";
-			this->lblMarco1->Size = System::Drawing::Size(458, 850);
+			this->lblMarco1->Size = System::Drawing::Size(611, 1046);
 			this->lblMarco1->TabIndex = 11;
 			this->lblMarco1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->lblMarco1->Visible = false;
@@ -273,9 +289,10 @@ namespace LYNX {
 			this->lblMarco2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->lblMarco2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
 				static_cast<System::Int32>(static_cast<System::Byte>(113)));
-			this->lblMarco2->Location = System::Drawing::Point(1022, 79);
+			this->lblMarco2->Location = System::Drawing::Point(1363, 97);
+			this->lblMarco2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblMarco2->Name = L"lblMarco2";
-			this->lblMarco2->Size = System::Drawing::Size(458, 850);
+			this->lblMarco2->Size = System::Drawing::Size(611, 1046);
 			this->lblMarco2->TabIndex = 12;
 			this->lblMarco2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->lblMarco2->Visible = false;
@@ -286,9 +303,10 @@ namespace LYNX {
 			this->lblMarco4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->lblMarco4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
 				static_cast<System::Int32>(static_cast<System::Byte>(113)));
-			this->lblMarco4->Location = System::Drawing::Point(450, 79);
+			this->lblMarco4->Location = System::Drawing::Point(600, 97);
+			this->lblMarco4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblMarco4->Name = L"lblMarco4";
-			this->lblMarco4->Size = System::Drawing::Size(595, 213);
+			this->lblMarco4->Size = System::Drawing::Size(793, 262);
 			this->lblMarco4->TabIndex = 13;
 			this->lblMarco4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->lblMarco4->Visible = false;
@@ -299,9 +317,10 @@ namespace LYNX {
 			this->lblMarco3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->lblMarco3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
 				static_cast<System::Int32>(static_cast<System::Byte>(113)));
-			this->lblMarco3->Location = System::Drawing::Point(450, 707);
+			this->lblMarco3->Location = System::Drawing::Point(600, 870);
+			this->lblMarco3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblMarco3->Name = L"lblMarco3";
-			this->lblMarco3->Size = System::Drawing::Size(595, 213);
+			this->lblMarco3->Size = System::Drawing::Size(793, 262);
 			this->lblMarco3->TabIndex = 14;
 			this->lblMarco3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->lblMarco3->Visible = false;
@@ -314,31 +333,33 @@ namespace LYNX {
 			this->tlpOptions->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 45.38308F)));
 			this->tlpOptions->Controls->Add(this->lblAviso1, 0, 0);
 			this->tlpOptions->Controls->Add(this->llblAviso2, 1, 0);
-			this->tlpOptions->Location = System::Drawing::Point(526, 635);
+			this->tlpOptions->Location = System::Drawing::Point(701, 782);
+			this->tlpOptions->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->tlpOptions->Name = L"tlpOptions";
 			this->tlpOptions->RowCount = 1;
 			this->tlpOptions->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tlpOptions->Size = System::Drawing::Size(429, 21);
+			this->tlpOptions->Size = System::Drawing::Size(572, 26);
 			this->tlpOptions->TabIndex = 15;
 			// 
 			// lblBorrar
 			// 
 			this->lblBorrar->AutoSize = true;
 			this->lblBorrar->ForeColor = System::Drawing::Color::Red;
-			this->lblBorrar->Location = System::Drawing::Point(611, 315);
+			this->lblBorrar->Location = System::Drawing::Point(815, 388);
+			this->lblBorrar->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblBorrar->Name = L"lblBorrar";
-			this->lblBorrar->Size = System::Drawing::Size(248, 13);
+			this->lblBorrar->Size = System::Drawing::Size(320, 16);
 			this->lblBorrar->TabIndex = 19;
 			this->lblBorrar->Text = L"Esto es logear para pasajero por ahora (lbl invisible)";
 			this->lblBorrar->Visible = false;
 			// 
 			// LoginPassengerForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
 				static_cast<System::Int32>(static_cast<System::Byte>(34)));
-			this->ClientSize = System::Drawing::Size(1480, 920);
+			this->ClientSize = System::Drawing::Size(1924, 1132);
 			this->Controls->Add(this->lblBorrar);
 			this->Controls->Add(this->tlpOptions);
 			this->Controls->Add(this->lblMarco3);
@@ -354,6 +375,7 @@ namespace LYNX {
 			this->Controls->Add(this->lblDatoNombre);
 			this->Controls->Add(this->lblDatoDNI);
 			this->Controls->Add(this->lblIniciarSesion);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"LoginPassengerForm";
 			this->Text = L"LYNX | Iniciar Sesion";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &LoginPassengerForm::LoginPassengerForm_FormClosing);
@@ -365,6 +387,7 @@ namespace LYNX {
 			this->tlpOptions->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
+
 		}
 
 		// LOGICA y PUBLIC
@@ -601,5 +624,9 @@ namespace LYNX {
 
 			
 
+private: System::Void pnlTopBar_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void tbContrasena_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
