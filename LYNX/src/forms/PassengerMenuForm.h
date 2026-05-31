@@ -105,9 +105,9 @@ namespace LYNX {
 	private: System::Windows::Forms::Button^ btnConfirm;
 	private: System::ComponentModel::Container^ components;
 
-		   // WINDOWS INITIALIZE
+		// WINDOWS INITIALIZE
 	private:
-#pragma region Windows Form Designer generated code
+	#pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
 			this->ActualTripTitle = (gcnew System::Windows::Forms::Label());
@@ -843,279 +843,292 @@ namespace LYNX {
 			this->ResumeLayout(false);
 
 		}
-#pragma endregion
+	#pragma endregion
 
 		// DATOS PUBLICOS DEL PASAJERO LOGUEADO
-	public:
-		String^ dni = "";
-		String^ name = "";
-		String^ password = "";
+		public:
+			String^ dni = "";
+			String^ name = "";
+			String^ password = "";
 
 		// ESTADO INTERNO
-	private:
-		System::Drawing::Size normalSize;
-		System::Drawing::Point normalLocation;
-		System::Windows::Forms::FormWindowState normalState;
+		private:
+			System::Drawing::Size normalSize;
+			System::Drawing::Point normalLocation;
+			System::Windows::Forms::FormWindowState normalState;
 
 		//
 		// Configuracion global del form
 		//
-		void ConfigureForm()
-		{
-			this->CenterToScreen();
-			this->KeyPreview = true;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
+			void ConfigureForm()
+			{
+				this->CenterToScreen();
+				this->KeyPreview = true;
+				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				this->MaximizeBox = false;
 
-			try { this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico"); }
-			catch (...) {}
-		}
+				try { this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico"); }
+				catch (...) {}
+			}
 
 		//
 		// Helpers internos
 		//
 		// Carga los datos del pasajero desde authManager usando el DNI logueado
-		void LoadPassengerData()
-		{
-			if (authManager == nullptr || String::IsNullOrEmpty(loggedPassengerDni)) 
-				return;
+			void LoadPassengerData()
+			{
+				if (authManager == nullptr || String::IsNullOrEmpty(loggedPassengerDni)) 
+					return;
 
-			String^ passengerDni = loggedPassengerDni;
-			std::string dniStr = msclr::interop::marshal_as<std::string>(passengerDni);
+				String^ passengerDni = loggedPassengerDni;
+				std::string dniStr = msclr::interop::marshal_as<std::string>(passengerDni);
 
-			Passenger p = authManager->getUserByDni(dniStr);
+				Passenger p = authManager->getUserByDni(dniStr);
 
-			if (p.getDni() == "") 
-				return;
+				if (p.getDni() == "") 
+					return;
 
-			this->dni = gcnew String(p.getDni().c_str());
-			this->name = gcnew String(p.getName().c_str());
-			this->password = gcnew String(p.getPassword().c_str());
+				this->dni = gcnew String(p.getDni().c_str());
+				this->name = gcnew String(p.getName().c_str());
+				this->password = gcnew String(p.getPassword().c_str());
 
-			// Actualizar UI de perfil
-			this->lblName->Text = name;
-			this->lblDni->Text = dni;
-			this->lblID->Text = gcnew String(p.getPassengerId().c_str());
-			this->lblRating->Text = String::Format("{0:F1}", p.getRating());
-			this->lblNumTrips->Text = gcnew String(std::to_string(p.getTotalTrips()).c_str());
-			this->lblNumSpent->Text = String::Format("S/.{0:F2}", p.getTotalSpent());
-			this->topTitle->Text = L"Bienvenido " + name;
-		}
+				// Actualizar UI de perfil
+				this->lblName->Text = name;
+				this->lblDni->Text = dni;
+				this->lblID->Text = gcnew String(p.getPassengerId().c_str());
+				this->lblRating->Text = String::Format("{0:F1}", p.getRating());
+				this->lblNumTrips->Text = gcnew String(std::to_string(p.getTotalTrips()).c_str());
+				this->lblNumSpent->Text = String::Format("S/.{0:F2}", p.getTotalSpent());
+				this->topTitle->Text = L"Bienvenido " + name;
+			}
 
 		// Muestra el panel de perfil y oculta el de edicion
-		void ShowProfilePanel()
-		{
-			this->lblDni->Visible = true;
-			this->lblName->Visible = true;
-			this->ProfileTitle->Visible = true;
-			this->lblID->Visible = true;
-			this->lblNumSpent->Visible = true;
-			this->lblNumTrips->Visible = true;
-			this->lblSpent->Visible = true;
-			this->lblTrips->Visible = true;
-			this->lblRating->Visible = true;
-			this->btnUpdate->Visible = true;
+			void ShowProfilePanel()
+			{
+				this->lblDni->Visible = true;
+				this->lblName->Visible = true;
+				this->ProfileTitle->Visible = true;
+				this->lblID->Visible = true;
+				this->lblNumSpent->Visible = true;
+				this->lblNumTrips->Visible = true;
+				this->lblSpent->Visible = true;
+				this->lblTrips->Visible = true;
+				this->lblRating->Visible = true;
+				this->btnUpdate->Visible = true;
 
-			this->lblUpdateProfile->Visible = false;
-			this->lblNewName->Visible = false;
-			this->tbNewName->Visible = false;
-			this->lblNewPassword->Visible = false;
-			this->tbNewPassword->Visible = false;
-			this->lblPastPassword->Visible = false;
-			this->tbPastPassword->Visible = false;
-			this->btnConfirm->Visible = false;
-		}
+				this->lblUpdateProfile->Visible = false;
+				this->lblNewName->Visible = false;
+				this->tbNewName->Visible = false;
+				this->lblNewPassword->Visible = false;
+				this->tbNewPassword->Visible = false;
+				this->lblPastPassword->Visible = false;
+				this->tbPastPassword->Visible = false;
+				this->btnConfirm->Visible = false;
+			}
 
 		// Muestra el panel de edicion y oculta el de perfil
-		void ShowEditPanel()
-		{
-			this->lblDni->Visible = false;
-			this->lblName->Visible = false;
-			this->ProfileTitle->Visible = false;
-			this->lblID->Visible = false;
-			this->lblNumSpent->Visible = false;
-			this->lblNumTrips->Visible = false;
-			this->lblSpent->Visible = false;
-			this->lblTrips->Visible = false;
-			this->lblRating->Visible = false;
-			this->btnUpdate->Visible = false;
+			void ShowEditPanel()
+			{
+				this->lblDni->Visible = false;
+				this->lblName->Visible = false;
+				this->ProfileTitle->Visible = false;
+				this->lblID->Visible = false;
+				this->lblNumSpent->Visible = false;
+				this->lblNumTrips->Visible = false;
+				this->lblSpent->Visible = false;
+				this->lblTrips->Visible = false;
+				this->lblRating->Visible = false;
+				this->btnUpdate->Visible = false;
 
-			this->lblUpdateProfile->Visible = true;
-			this->lblNewName->Visible = true;
-			this->tbNewName->Visible = true;
-			this->lblNewPassword->Visible = true;
-			this->tbNewPassword->Visible = true;
-			this->lblPastPassword->Visible = true;
-			this->tbPastPassword->Visible = true;
-			this->btnConfirm->Visible = true;
-		}
+				this->lblUpdateProfile->Visible = true;
+				this->lblNewName->Visible = true;
+				this->tbNewName->Visible = true;
+				this->lblNewPassword->Visible = true;
+				this->tbNewPassword->Visible = true;
+				this->lblPastPassword->Visible = true;
+				this->tbPastPassword->Visible = true;
+				this->btnConfirm->Visible = true;
+			}
 
 		//
 		// Load Form
 		//
-		System::Void PassengerMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
-		{
-			normalSize = this->Size;
-			normalLocation = this->Location;
-			normalState = this->WindowState;
+			System::Void PassengerMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
+			{
+				normalSize = this->Size;
+				normalLocation = this->Location;
+				normalState = this->WindowState;
 
-			// Cargar imagen de la barra LYNX
-			try {
-				this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
-				this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+				// Cargar imagen de la barra LYNX
+				try {
+					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+					this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
+					this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+				}
+				catch (...) {}
+
+				// Cargar datos del pasajero desde authManager
+				LoadPassengerData();
+
+				FormsStatus::SaveWindow(this);
+				if (FormsStatus::isFullscreen) 
+					FormsStatus::ApplyWindow(this);
 			}
-			catch (...) {}
-
-			// Cargar datos del pasajero desde authManager
-			LoadPassengerData();
-
-			FormsStatus::SaveWindow(this);
-			if (FormsStatus::isFullscreen) FormsStatus::ApplyWindow(this);
-		}
 
 		//
 		// Tipo de viaje: seleccion de boton
 		//
-		System::Void btnEconomic_Click(System::Object^ sender, System::EventArgs^ e) {
-			this->btnEconomic->BackColor = System::Drawing::Color::Black;
-			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnStandard->BackColor = System::Drawing::Color::White;
-			this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnPremium->BackColor = System::Drawing::Color::White;
-			this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-		}
+			System::Void btnEconomic_Click(System::Object^ sender, System::EventArgs^ e) {
+				this->btnEconomic->BackColor = System::Drawing::Color::Black;
+				this->btnEconomic->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+				this->btnStandard->BackColor = System::Drawing::Color::White;
+				this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				this->btnPremium->BackColor = System::Drawing::Color::White;
+				this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			}
 
-		System::Void btnStandard_Click(System::Object^ sender, System::EventArgs^ e) {
-			this->btnStandard->BackColor = System::Drawing::Color::Black;
-			this->btnStandard->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnEconomic->BackColor = System::Drawing::Color::White;
-			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnPremium->BackColor = System::Drawing::Color::White;
-			this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-		}
+			System::Void btnStandard_Click(System::Object^ sender, System::EventArgs^ e) {
+				this->btnStandard->BackColor = System::Drawing::Color::Black;
+				this->btnStandard->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+				this->btnEconomic->BackColor = System::Drawing::Color::White;
+				this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				this->btnPremium->BackColor = System::Drawing::Color::White;
+				this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			}
 
-		System::Void btnPremium_Click(System::Object^ sender, System::EventArgs^ e) {
-			this->btnPremium->BackColor = System::Drawing::Color::Black;
-			this->btnPremium->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnStandard->BackColor = System::Drawing::Color::White;
-			this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnEconomic->BackColor = System::Drawing::Color::White;
-			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-		}
+			System::Void btnPremium_Click(System::Object^ sender, System::EventArgs^ e) {
+				this->btnPremium->BackColor = System::Drawing::Color::Black;
+				this->btnPremium->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+				this->btnStandard->BackColor = System::Drawing::Color::White;
+				this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				this->btnEconomic->BackColor = System::Drawing::Color::White;
+				this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			}
 
 		//
 		// Buscar viaje
 		//
-		System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {
-			this->tbOrigin->Text = "";
-			this->tbDestination->Text = "";
-			this->tbDistance->Text = "";
-		}
+			System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {
+				this->tbOrigin->Text = "";
+				this->tbDestination->Text = "";
+				this->tbDistance->Text = "";
+			}
 
-		System::Void btnSearch_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-			this->btnSearch->BackColor = System::Drawing::Color::White;
-			this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-		}
+			System::Void btnSearch_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+				this->btnSearch->BackColor = System::Drawing::Color::White;
+				this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			}
 
-		System::Void btnSearch_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-			this->btnSearch->BackColor = System::Drawing::Color::SeaGreen;
-			this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnSearch->Location = System::Drawing::Point(138, 261);
-		}
+			System::Void btnSearch_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+				this->btnSearch->BackColor = System::Drawing::Color::SeaGreen;
+				this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				this->btnSearch->Location = System::Drawing::Point(138, 261);
+			}
 
-		System::Void btnSearch_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
-			this->btnSearch->BackColor = System::Drawing::Color::Black;
-			this->btnSearch->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnSearch->Location = System::Drawing::Point(138, 264);
-		}
+			System::Void btnSearch_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
+				this->btnSearch->BackColor = System::Drawing::Color::Black;
+				this->btnSearch->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+				this->btnSearch->Location = System::Drawing::Point(138, 264);
+			}
 
 		//
 		// Perfil: mostrar / editar
 		//
-		System::Void btnUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
-			ShowEditPanel();
-		}
-
-		System::Void btnUpdate_MouseEnter(System::Object^ sender, System::EventArgs^ e) {
-			this->btnUpdate->BackColor = System::Drawing::Color::SeaGreen;
-			this->btnUpdate->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnUpdate->Location = System::Drawing::Point(111, 272);
-		}
-
-		System::Void btnUpdate_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
-			this->btnUpdate->BackColor = System::Drawing::Color::Black;
-			this->btnUpdate->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnUpdate->Location = System::Drawing::Point(111, 275);
-		}
-
-		// btnConfirm: valida, actualiza en authManager y refresca UI
-		System::Void btnConfirm_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			String^ newname = this->tbNewName->Text->Trim();
-			String^ newpassword = this->tbNewPassword->Text;
-			String^ pastpassword = this->tbPastPassword->Text;
-
-			// Validar campos vacios
-			if (newname->Length == 0 || newpassword->Length == 0 || pastpassword->Length == 0) {
-				MessageBox::Show("Por favor llene todos los campos", "Actualizar Perfil", MessageBoxButtons::OK);
-				return;
+			System::Void btnUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
+				ShowEditPanel();
 			}
 
-			// Validar contrasena anterior
-			if (pastpassword != password) {
-				MessageBox::Show("Contrasena anterior incorrecta", "Actualizar Perfil", MessageBoxButtons::OK);
-				return;
+			System::Void btnUpdate_MouseEnter(System::Object^ sender, System::EventArgs^ e) {
+				this->btnUpdate->BackColor = System::Drawing::Color::SeaGreen;
+				this->btnUpdate->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				this->btnUpdate->Location = System::Drawing::Point(111, 272);
 			}
 
-			// Actualizar en authManager (persiste en archivo)
-			if (authManager != nullptr) {
-				String^ currentDni = dni;
-				std::string dniStr = msclr::interop::marshal_as<std::string>(currentDni);
-				std::string newNameStr = msclr::interop::marshal_as<std::string>(newname);
-				std::string newPassStr = msclr::interop::marshal_as<std::string>(newpassword);
-				authManager->updatePassengerData(dniStr, newNameStr, newPassStr);
+			System::Void btnUpdate_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
+				this->btnUpdate->BackColor = System::Drawing::Color::Black;
+				this->btnUpdate->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+				this->btnUpdate->Location = System::Drawing::Point(111, 275);
 			}
 
-			// Actualizar variables locales
-			name = newname;
-			password = newpassword;  // contrasena NUEVA, no la vieja
+			// btnConfirm: valida, actualiza en authManager y refresca UI
+			System::Void btnConfirm_Click(System::Object^ sender, System::EventArgs^ e)
+			{
+				String^ newname = this->tbNewName->Text->Trim();
+				String^ newpassword = this->tbNewPassword->Text;
+				String^ pastpassword = this->tbPastPassword->Text;
 
-			// Refrescar UI
-			this->lblName->Text = name;
-			this->topTitle->Text = L"Bienvenido " + name;
+				// Validar campos vacios
+				if (newname->Length == 0 || newpassword->Length == 0 || pastpassword->Length == 0) {
+					MessageBox::Show("Por favor llene todos los campos", "Actualizar Perfil", MessageBoxButtons::OK);
+					return;
+				}
 
-			// Limpiar campos de edicion
-			this->tbNewName->Text = "";
-			this->tbNewPassword->Text = "";
-			this->tbPastPassword->Text = "";
+				// Validar contrasena anterior
+				if (pastpassword != password) {
+					MessageBox::Show("Contrasena anterior incorrecta", "Actualizar Perfil", MessageBoxButtons::OK);
+					return;
+				}
 
-			ShowProfilePanel();
-			MessageBox::Show("Perfil actualizado correctamente", "Actualizar Perfil", MessageBoxButtons::OK);
-		}
+				// Actualizar en authManager (persiste en archivo)
+				if (authManager != nullptr) {
+					String^ currentDni = dni;
+					std::string dniStr = msclr::interop::marshal_as<std::string>(currentDni);
+					std::string newNameStr = msclr::interop::marshal_as<std::string>(newname);
+					std::string newPassStr = msclr::interop::marshal_as<std::string>(newpassword);
+					authManager->updatePassengerData(dniStr, newNameStr, newPassStr);
+				}
+
+				// Actualizar variables locales
+				name = newname;
+				password = newpassword;  // contrasena NUEVA, no la vieja
+
+				// Refrescar UI
+				this->lblName->Text = name;
+				this->topTitle->Text = L"Bienvenido " + name;
+
+				// Limpiar campos de edicion
+				this->tbNewName->Text = "";
+				this->tbNewPassword->Text = "";
+				this->tbPastPassword->Text = "";
+
+				ShowProfilePanel();
+				MessageBox::Show("Perfil actualizado correctamente", "Actualizar Perfil", MessageBoxButtons::OK);
+			}
 
 		//
 		// Viaje actual: paint, aceptar, finalizar
 		//
-		System::Void queuePanel_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {}
+			System::Void queuePanel_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+			}
 
 		//
 		// Fullscreen: F11 activa/desactiva, ESC sale si esta en fullscreen
 		//
-		System::Void PassengerMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
-		{
-			if (e->KeyCode == System::Windows::Forms::Keys::F11)
+			System::Void PassengerMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 			{
-				if (!FormsStatus::isFullscreen)
+				if (e->KeyCode == System::Windows::Forms::Keys::F11)
 				{
-					normalSize = this->Size;
-					normalLocation = this->Location;
-					normalState = this->WindowState;
-					FormsStatus::SaveWindow(this);
-					this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-					this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-					FormsStatus::isFullscreen = true;
+					if (!FormsStatus::isFullscreen)
+					{
+						normalSize = this->Size;
+						normalLocation = this->Location;
+						normalState = this->WindowState;
+						FormsStatus::SaveWindow(this);
+						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+						this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+						FormsStatus::isFullscreen = true;
+					}
+					else
+					{
+						this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+						this->Size = FormsStatus::normalSize;
+						this->Location = FormsStatus::normalLocation;
+						FormsStatus::isFullscreen = false;
+					}
 				}
-				else
+
+				if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
 				{
 					this->WindowState = System::Windows::Forms::FormWindowState::Normal;
 					this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -1125,38 +1138,28 @@ namespace LYNX {
 				}
 			}
 
-			if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
-			{
-				this->WindowState = System::Windows::Forms::FormWindowState::Normal;
-				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-				this->Size = FormsStatus::normalSize;
-				this->Location = FormsStatus::normalLocation;
-				FormsStatus::isFullscreen = false;
-			}
-		}
-
 		//
 		// Click functions
 		//
 		// pictureBoxIcon: volver al menu principal
-		System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
+			System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e)
 			{
-				FormsStatus::SaveWindow(this);
-				FormsStatus::ApplyWindow(FormsStatus::mainMenu);
-				FormsStatus::mainMenu->Show();
-				FormsStatus::mainMenu->BringToFront();
-				this->Hide();
+				if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
+				{
+					FormsStatus::SaveWindow(this);
+					FormsStatus::ApplyWindow(FormsStatus::mainMenu);
+					FormsStatus::mainMenu->Show();
+					FormsStatus::mainMenu->BringToFront();
+					this->Hide();
+				}
 			}
-		}
 		//
 		// Actived Component: es un evento de Windows Forms que se dispara cada vez que el form se convierte en la ventana activa
 		//
-		System::Void PassengerMenuForm_Activated(System::Object^ sender, System::EventArgs^ e) {
-			if (authManager != nullptr)
-				authManager->reloadPassengers();
-			LoadPassengerData();
-		}
+			System::Void PassengerMenuForm_Activated(System::Object^ sender, System::EventArgs^ e) {
+				if (authManager != nullptr)
+					authManager->reloadPassengers();
+				LoadPassengerData();
+			}
 };
 }

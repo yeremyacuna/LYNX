@@ -3,8 +3,7 @@
 #include "../library/FormsStatus.h"
 #include "../AuthManager.h"    
 #include "../TripManager.h" 
-#include <msclr/marshal_cppstd.h>  
-
+#include <msclr/marshal_cppstd.h> 
 
 class AuthManager;
 class TripManager;
@@ -27,6 +26,7 @@ namespace LYNX {
 			ConfigureForm();
 		}
 
+        // falta password
 		AdminMenuForm(AuthManager* auth, TripManager* trips)
 		{
 			this->authManager = auth;
@@ -41,14 +41,13 @@ namespace LYNX {
             if (components) delete components;
         }
 
-        
-
-
+        // OBJETOS
 	private:
 		AuthManager* authManager = nullptr;
 		TripManager* tripManager = nullptr;
 		
 
+        // COMPONENTES
            // Cuadros de conteo
     private: System::Windows::Forms::Panel^ pnlTarjetaPasajeros;
     private: System::Windows::Forms::Label^ lblTitPasajeros;
@@ -114,12 +113,11 @@ namespace LYNX {
     private: System::Windows::Forms::Label^ lblTitPasswords;
     private: System::Windows::Forms::Button^ btnCargarPasswords;
     private: System::Windows::Forms::RichTextBox^ rtbPasswords;
-
     private: System::ComponentModel::Container^ components;
 
-           //  INICIALIZACION DE COMPONENTES
+        // WINDOWS INITIALIZE
     private:
-#pragma region Windows Form Designer generated code
+    #pragma region Windows Form Designer generated code
         void InitializeComponent(void)
         {
             this->pnlTarjetaPasajeros = (gcnew System::Windows::Forms::Panel());
@@ -928,6 +926,7 @@ namespace LYNX {
             this->MaximizeBox = false;
             this->Name = L"AdminMenuForm";
             this->Text = L"LYNX | Panel Administrativo";
+            this->Activated += gcnew System::EventHandler(this, &AdminMenuForm::AdminMenuForm_Activated);
             this->Load += gcnew System::EventHandler(this, &AdminMenuForm::AdminMenuForm_Load);
             this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &AdminMenuForm::AdminMenuForm_KeyDown);
             this->pnlTarjetaPasajeros->ResumeLayout(false);
@@ -950,82 +949,102 @@ namespace LYNX {
             this->ResumeLayout(false);
 
         }
-#pragma endregion
 
-	private:
-		void ConfigureForm()
-		{
-			// CENTRAR TODO
-			this->CenterToScreen();
 
-			// ACTIVAR F11
-			this->KeyPreview = true;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
-		}
+        // LOGICA y PUBLIC
+        #pragma endregion
+        public:
 
-		System::Void previewButton_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			System::Windows::Forms::MessageBox::Show(
-				L"Panel administrativo funcionando correctamente.",
-				L"LYNX"
-			);
-		}
+
+	    private:
+        //
+        // Configuracion global de form
+        //
+			void ConfigureForm()
+			{
+
+                this->CenterToScreen();
+                this->KeyPreview = true;
+                this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+                this->MaximizeBox = false;
+
+                try { this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico"); }
+                catch (...) {}
+			}
+
+
+		    System::Void previewButton_Click(System::Object^ sender, System::EventArgs^ e)
+		    {
+			    System::Windows::Forms::MessageBox::Show(
+				    L"Panel administrativo funcionando correctamente.",
+				    L"LYNX"
+			    );
+		    }
 
         // 
         //  ESTADO INTERNO
-        // 
-    private:
-        bool buscandoPasajero = true;   // tab activo en busqueda
-        int  listaActiva = 0;      // 0=Pasajeros, 1=Conductores, 2=Viajes
+        //
+            bool buscandoPasajero = true;   // tab activo en busqueda
+            int  listaActiva = 0;      // 0=Pasajeros, 1=Conductores, 2=Viajes
 
-        System::Drawing::Size              normalSize;
-        System::Drawing::Point             normalLocation;
-        System::Windows::Forms::FormWindowState normalState;
+            System::Drawing::Size              normalSize;
+            System::Drawing::Point             normalLocation;
+            System::Windows::Forms::FormWindowState normalState;
 
         // 
         //  LOAD
         // 
-    private:
-        System::Void AdminMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
-        {
-            // Cargar imagen del logo en la barra
-            try {
-                this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
-                this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-            }
-            catch (...) {}
+            System::Void AdminMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
+            {
+                normalSize = this->Size;
+                normalLocation = this->Location;
+                normalState = this->WindowState;
 
-            // Para Pantalla Completa
-            normalSize = this->Size;
-            normalLocation = this->Location;
-            normalState = this->WindowState;
-            FormsStatus::SaveWindow(this);
+                // Cargar imagen de la barra LYNX
+                try {
+                    this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+                    this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
+                    this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+                }
+                catch (...) {}
 
-            if (FormsStatus::isFullscreen) {
-                FormsStatus::ApplyWindow(this);
+                // Cargar datos del CONDUCTOR desde authManager
+                //LoadConductorData();
+
+                FormsStatus::SaveWindow(this);
+                if (FormsStatus::isFullscreen) FormsStatus::ApplyWindow(this);
             }
-        }
 
         // 
         //  FULLSCREEN: F11, ESC sale si esta en fullscreen
         // 
-    private:
-        System::Void AdminMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
-        {
-            if (e->KeyCode == System::Windows::Forms::Keys::F11)
+            System::Void AdminMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
             {
-                if (!FormsStatus::isFullscreen)
+                if (e->KeyCode == System::Windows::Forms::Keys::F11)
                 {
-                    normalSize = this->Size;
-                    normalLocation = this->Location;
-                    normalState = this->WindowState;
-                    FormsStatus::SaveWindow(this);
-                    this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-                    this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-                    FormsStatus::isFullscreen = true;
+                    if (!FormsStatus::isFullscreen)
+                    {
+                        normalSize = this->Size;
+                        normalLocation = this->Location;
+                        normalState = this->WindowState;
+                        FormsStatus::SaveWindow(this);
+                        this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+                        this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+                        FormsStatus::isFullscreen = true;
+                    }
+                    else
+                    {
+                        this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+                        this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+                        this->Size = FormsStatus::normalSize;
+                        this->Location = FormsStatus::normalLocation;
+                        FormsStatus::isFullscreen = false;
+                        this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+                    }
                 }
-                else
+
+                // ESC sale del fullscreen
+                if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
                 {
                     this->WindowState = System::Windows::Forms::FormWindowState::Normal;
                     this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -1035,18 +1054,6 @@ namespace LYNX {
                     this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
                 }
             }
-
-            // ESC sale del fullscreen
-            if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
-            {
-                this->WindowState = System::Windows::Forms::FormWindowState::Normal;
-                this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-                this->Size = FormsStatus::normalSize;
-                this->Location = FormsStatus::normalLocation;
-                FormsStatus::isFullscreen = false;
-                this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-            }
-        }
 
         //
         // Click functions
@@ -1260,12 +1267,12 @@ namespace LYNX {
         }
 
         // 
-        //  CARGAR PASSWORDS DESDE ARCHIVO BINARIO
+        //  CARGAR PASSWORDS DESDE ARCHIVO BINARIO (( YA ESTA ; cambiar formato nomas ))
         // 
-    private:
         System::Void btnCargarPasswords_Click(System::Object^ sender, System::EventArgs^ e)
         {
-            if (authManager == nullptr) return;
+            if (authManager == nullptr) 
+                return;
 
             // Generar el binario con los datos actuales
             authManager->savePasswordsBinary();
@@ -1275,15 +1282,22 @@ namespace LYNX {
 
             String^ texto = "";
             for (int i = 0; i < (int)previews.size(); i++) {
+                
                 std::string linea = previews[i].tipo + " | "
                     + previews[i].id + " | "
                     + previews[i].dni + " | "
                     + previews[i].password;
                 texto += gcnew String(linea.c_str()) + "\n";
+
             }
 
             rtbPasswords->Text = texto->Length > 0 ? texto : L"No hay passwords registrados.";
         }
 
+        //
+        // Actived Component: es un evento de Windows Forms que se dispara cada vez que el form se convierte en la ventana activa
+        //
+        System::Void AdminMenuForm_Activated(System::Object^ sender, System::EventArgs^ e) {
+        }
 };
 }

@@ -235,7 +235,7 @@ public:
         syncNextGeneratedIds();
     }
 
-    // FUNCION QUE PASA LA ESTRCUTURA PARA QUE GUARDE DE PASAJERO Y DRIVER
+    // FUNCION QUE PASA LA ESTRCUTURA PARA QUE GUARDE DE PASAJERO Y DRIVER SUS CONTRAS
     // readPasswordsBinary: lee el archivo binario y devuelve una vista amigable
     vector<FileManager::PasswordPreview> readPasswordsBinary() {
         return fileManager->leerPasswordsBIN();

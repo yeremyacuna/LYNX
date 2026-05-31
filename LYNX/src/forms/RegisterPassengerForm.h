@@ -429,6 +429,8 @@ namespace LYNX {
 		//
 			System::Void RegisterPassengerForm_Load(System::Object^ sender, System::EventArgs^ e)
 			{
+
+				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
 				// Para Picture Box LYNX
 				this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
 				this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;

@@ -419,6 +419,7 @@ namespace LYNX {
 		// 
 			System::Void LoginPassengerForm_Load(System::Object^ sender, System::EventArgs^ e) {
 
+				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
 				// Para Picture Box LYNX
 				this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
 				this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
@@ -461,7 +462,7 @@ namespace LYNX {
 					return;
 				}
 
-				// Recargar desde archivo para tener recargados actualmente (FUNDAMENTAL FOREVER)
+				// Recargar desde archivo para tener recargados actualmente (FUNDAMENTAL FOREVER) =====================================================================================
 				authManager->reloadPassengers();
 
 

@@ -64,7 +64,7 @@ PAS-0063|Andrea Ruiz|10284764|andrearu|4|1|42.4
 PAS-0064|Camilo Vega|83746595|camivega|4.5|0|0
 PAS-0065|Maria Vega|56492028|mvega|4.8|0|0
 PAS-0066|Angela Ramos|83746593|angelita|4|3|548.4
-PAS-0067|Maria Herrera|37482922|maherr|4.3|2|890.6
+PAS-0067|Maria Gamarra|37482922|marita|4.3|2|890.6
 PAS-0068|Paula Lozano|86090044|pass068|3.3|0|0
 PAS-0069|Fabian Guerrero|80963082|pass069|4.1|0|0
 PAS-0070|Camila Diaz|90817274|camd|4.1|0|0

@@ -9,7 +9,6 @@
 #include "../library/FormsStatus.h"	
 #include "../AuthManager.h"
 #include "../TripManager.h"
-#include "../../include/FileManager.h"
 
 #include <vector>
 #include <string>
@@ -766,6 +765,8 @@ namespace LYNX {
 				this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
 				this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 
+				
+
 				// Para Pantalla Completa
 				normalSize = this->Size;
 				normalLocation = this->Location;
@@ -776,6 +777,7 @@ namespace LYNX {
 				{
 					FormsStatus::ApplyWindow(this);
 				}
+
 			}
 
 		//
@@ -800,7 +802,7 @@ namespace LYNX {
 			System::Void OpenDriverForm(System::Object^ sender, System::EventArgs^ e)
 			{
 				// Conductor sujeto a cambios ya que no tiene propia Login, falta login register
-				DriverMenuForm^ form = gcnew DriverMenuForm(authManager, tripManager); // Le paso el formulario de constuctor con manejador
+				DriverMenuForm^ form = gcnew DriverMenuForm(authManager, tripManager, " FALTA "); // Le paso el formulario de constuctor con manejador
 				FormsStatus::SaveWindow(this);
 				FormsStatus::ApplyWindow(form);
 				form->Show();
@@ -926,8 +928,15 @@ namespace LYNX {
 		// 
 			// pictureLYNXClick
 			System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e) {
+				
+				//if (FormsStatus::isWithoutF11)
+				//{
+					//InitButtonsStyle();
+				//}
+
 				this->Show();
 				this->BringToFront();
+				
 			}
 
 		
