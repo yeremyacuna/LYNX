@@ -1,6 +1,10 @@
 #pragma once
-#include "../library/FormsStatus.h"
 #include <windows.h>
+#include "../library/FormsStatus.h"
+#include "../AuthManager.h"    
+#include "../TripManager.h" 
+#include <msclr/marshal_cppstd.h>  
+
 
 class AuthManager;
 class TripManager;
@@ -883,6 +887,7 @@ namespace LYNX {
             this->btnCargarPasswords->TabIndex = 1;
             this->btnCargarPasswords->Text = L"Cargar";
             this->btnCargarPasswords->UseVisualStyleBackColor = false;
+            this->btnCargarPasswords->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnCargarPasswords_Click);
             // 
             // rtbPasswords
             // 
@@ -1260,10 +1265,25 @@ namespace LYNX {
     private:
         System::Void btnCargarPasswords_Click(System::Object^ sender, System::EventArgs^ e)
         {
-            // Leer archivo binario de passwords y mostrar cada entrada
-            rtbPasswords->Text = L"Aqui se mostraran los passwords leidos del archivo binario.";
+            if (authManager == nullptr) return;
+
+            // Generar el binario con los datos actuales
+            authManager->savePasswordsBinary();
+
+            // Leer el binario y construir el texto a mostrar
+            auto previews = authManager->readPasswordsBinary();
+
+            String^ texto = "";
+            for (int i = 0; i < (int)previews.size(); i++) {
+                std::string linea = previews[i].tipo + " | "
+                    + previews[i].id + " | "
+                    + previews[i].dni + " | "
+                    + previews[i].password;
+                texto += gcnew String(linea.c_str()) + "\n";
+            }
+
+            rtbPasswords->Text = texto->Length > 0 ? texto : L"No hay passwords registrados.";
         }
 
-        
 };
 }

@@ -454,11 +454,16 @@ namespace LYNX {
 					return;
 				}
 
-				//Verificar si se pudo o no acceder al gestionador de archivos
+
+				// Verificar si se pudo o no acceder al gestionador de archivos
 				if (authManager == nullptr) {
 					MessageBox::Show("No se pudo acceder al gestor de usuarios", "Iniciar Sesion", MessageBoxButtons::OK);
 					return;
 				}
+
+				// Recargar desde archivo para tener recargados actualmente (FUNDAMENTAL FOREVER)
+				authManager->reloadPassengers();
+
 
 				// Converitr con marshal as al tipo de dato que quiero segun un String^
 				std::string dni = msclr::interop::marshal_as<std::string>(dniText);

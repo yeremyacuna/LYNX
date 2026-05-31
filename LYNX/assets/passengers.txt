@@ -100,7 +100,7 @@ PAS-0099|Rosa Condori|37482911|rosa321|4.2|0|0
 PAS-0100|Cristian Mora|83746600|crismora|3.1|5|518.4
 PAS-0101|Diego Torres|37482918|diegot|3.8|1|226.1
 PAS-0102|Angela Perez|83746601|angep|4.6|2|265.2
-PAS-0103|Samuel Rodriguez|70112233|samurod|5|2|73.7
+PAS-0103|Samuel Rodriguez|70112233|samuelrodriguez123|4.2|151|452.9
 PAS-0104|Luis Ramos|37482919|luisram|3.6|0|0
 PAS-0105|Camilita Perez|90817272|camiperez99|4.3|4|421.9
 PAS-0106|Ricardo Flores|19283756|riflores|3.2|0|0

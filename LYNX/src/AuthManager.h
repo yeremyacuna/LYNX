@@ -179,7 +179,8 @@ public:
 
         if (driversChanged || passengersChanged) {
             saveAll();
-        }
+        }else
+            savePasswordsBinary();
     }
 
     // ~AuthManager: libera las estructuras dinamicas principales del modulo
@@ -201,12 +202,14 @@ public:
     void savePassengers() {
         sortPassengersById();
         fileManager->guardarPassengersTXT(exportPassengerVector());
+        fileManager->guardarPasswordsBIN(exportPassengerVector(), exportDriverVector());
     }
 
     // saveDrivers: ordena y guarda la lista de conductores en txt
     void saveDrivers() {
         sortDriversById();
         fileManager->guardarDriversTXT(exportDriverVector());
+        fileManager->guardarPasswordsBIN(exportPassengerVector(), exportDriverVector());
     }
 
     // saveAll: persiste pasajeros y conductores juntos
@@ -219,6 +222,17 @@ public:
     // savePasswordsBinary: genera el archivo binario de passwords para consulta admin
     bool savePasswordsBinary() {
         return fileManager->guardarPasswordsBIN(exportPassengerVector(), exportDriverVector());
+    }
+
+    // reloadPassengers: vuelve a leer el archivo TXT y reemplaza la lista en memoria
+    void reloadPassengers() {
+        passengerList->clear();
+        vector<Passenger> cargados = fileManager->leerPassengersTXT();
+        for (int i = 0; i < (int)cargados.size(); i++)
+            passengerList->pushBack(cargados[i]);
+        sanitizeLoadedPassengers();
+        sortPassengersById();
+        syncNextGeneratedIds();
     }
 
     // FUNCION QUE PASA LA ESTRCUTURA PARA QUE GUARDE DE PASAJERO Y DRIVER

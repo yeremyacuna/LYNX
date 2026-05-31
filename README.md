@@ -42,7 +42,7 @@
 **Estructuras de Datos (include/)**
 - [Node.h](LYNX/include/Node.h)
 - [LinkedList.h](LYNX/include/LinkedList.h)
-- [LinkedDoubleList.h](LYNX/include/LinkedDoubleList.h)
+- [DoublyLinkedList.h](LYNX/include/DoublyLinkedList.h)
 - [Queue.h](LYNX/include/Queue.h)
 - [Stack.h](LYNX/include/Stack.h)
 - [FileManager.h](LYNX/include/FileManager.h)
@@ -60,6 +60,14 @@
 - [User.h](LYNX/src/User.h)
 - [Vehicle.h](LYNX/src/Vehicle.h)
 
+**Formularios Designer (src/forms/)**
+- [AdminMenuForm.h](LYNX/src/forms/AdminMenuForm.h)
+- [DriverMenuForm.h](LYNX/src/forms/DriverMenuForm.h)
+- [PassengerMenuForm.h](LYNX/src/forms/PassengerMenuForm.h)
+- [LoginForm.h](LYNX/src/forms/LoginForm.h)
+- [RegisterForm.h](LYNX/src/forms/RegisterForm.h)
+
+
 ---
 
 ###### Icon
@@ -73,6 +81,7 @@
 
 **Detalles:**
 - **src**: Código fuente y lógica del programa
+- **forms**: Estructura lógica y visual del programa en Windows Forms
 - **include**: Headers de estructuras de datos
 - **assets**: Archivos predeterminados de la aplicación
 - **data**: Archivos generados/usados por el usuario
@@ -99,7 +108,7 @@
 |:-----------|:--------|:------------|
 | **Nodo** | `Node.h` | Estructura base para todas las listas |
 | **Lista Enlazada** | `LinkedList.h` | Lista enlazada simple |
-| **Lista Doble** | `LinkedDoubleList.h` | Lista doblemente enlazada |
+| **Lista Doble** | `DoublyLinkedList.h` | Lista doblemente enlazada |
 | **Cola** | `Queue.h` | Cola FIFO para gestión de turnos |
 | **Pila** | `Stack.h` | Pila LIFO para operaciones |
 
@@ -110,7 +119,7 @@
 ### Componentes Principales
 
 **Gestión de Datos**
-- `FileManager.h`: Persistencia de datos
+- `FileManager.h`: Persistencia de datos .txt . bin
 - `Node.h`: Estructura base
 
 **Autenticación y Usuarios**
@@ -126,6 +135,7 @@
 **Interfaces**
 - `MainMenu.h`: Menú principal
 - `AdministratorMenu.h`: Panel de administración
+- `MainMenuForm.h`: Menú principal de Windows Form
 
 ---
 
