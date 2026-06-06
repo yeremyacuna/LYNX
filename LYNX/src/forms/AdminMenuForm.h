@@ -316,7 +316,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitBusqueda->Location = System::Drawing::Point(15, 14);
             this->lblTitBusqueda->Name = L"lblTitBusqueda";
-            this->lblTitBusqueda->Size = System::Drawing::Size(135, 22);
+            this->lblTitBusqueda->Size = System::Drawing::Size(161, 27);
             this->lblTitBusqueda->TabIndex = 0;
             this->lblTitBusqueda->Text = L"Buscar usuario";
             // 
@@ -363,7 +363,7 @@ namespace LYNX {
             this->txtDniBuscar->ForeColor = System::Drawing::Color::Gray;
             this->txtDniBuscar->Location = System::Drawing::Point(15, 98);
             this->txtDniBuscar->Name = L"txtDniBuscar";
-            this->txtDniBuscar->Size = System::Drawing::Size(400, 24);
+            this->txtDniBuscar->Size = System::Drawing::Size(400, 28);
             this->txtDniBuscar->TabIndex = 3;
             this->txtDniBuscar->Text = L"Ingresa el DNI del pasajero...";
             this->txtDniBuscar->Enter += gcnew System::EventHandler(this, &AdminMenuForm::txtDni_Enter);
@@ -405,7 +405,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(70)));
             this->lblResultadoTit->Location = System::Drawing::Point(8, 8);
             this->lblResultadoTit->Name = L"lblResultadoTit";
-            this->lblResultadoTit->Size = System::Drawing::Size(59, 13);
+            this->lblResultadoTit->Size = System::Drawing::Size(75, 17);
             this->lblResultadoTit->TabIndex = 0;
             this->lblResultadoTit->Text = L"Resultado:";
             // 
@@ -447,7 +447,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitListados->Location = System::Drawing::Point(15, 12);
             this->lblTitListados->Name = L"lblTitListados";
-            this->lblTitListados->Size = System::Drawing::Size(238, 22);
+            this->lblTitListados->Size = System::Drawing::Size(287, 27);
             this->lblTitListados->TabIndex = 0;
             this->lblTitListados->Text = L"Listado de usuarios y viajes";
             // 
@@ -514,7 +514,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(80)));
             this->lblOrdenarPor->Location = System::Drawing::Point(15, 96);
             this->lblOrdenarPor->Name = L"lblOrdenarPor";
-            this->lblOrdenarPor->Size = System::Drawing::Size(74, 14);
+            this->lblOrdenarPor->Size = System::Drawing::Size(90, 18);
             this->lblOrdenarPor->TabIndex = 4;
             this->lblOrdenarPor->Text = L"Ordenar por:";
             // 
@@ -628,6 +628,7 @@ namespace LYNX {
             this->lblLYNX->Size = System::Drawing::Size(84, 40);
             this->lblLYNX->TabIndex = 0;
             this->lblLYNX->Text = L"LYNX";
+            this->lblLYNX->Click += gcnew System::EventHandler(this, &AdminMenuForm::lblLYNX_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -678,7 +679,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(27)), static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitEstadisticas->Location = System::Drawing::Point(15, 14);
             this->lblTitEstadisticas->Name = L"lblTitEstadisticas";
-            this->lblTitEstadisticas->Size = System::Drawing::Size(196, 22);
+            this->lblTitEstadisticas->Size = System::Drawing::Size(235, 27);
             this->lblTitEstadisticas->TabIndex = 0;
             this->lblTitEstadisticas->Text = L"Estadisticas generales";
             // 
@@ -693,7 +694,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstPasajerosReg->Location = System::Drawing::Point(17, 44);
             this->lblEstPasajerosReg->Name = L"lblEstPasajerosReg";
-            this->lblEstPasajerosReg->Size = System::Drawing::Size(149, 14);
+            this->lblEstPasajerosReg->Size = System::Drawing::Size(188, 18);
             this->lblEstPasajerosReg->TabIndex = 1;
             this->lblEstPasajerosReg->Text = L"Usuarios registrados:       0";
             this->lblEstPasajerosReg->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -709,7 +710,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstConductoresReg->Location = System::Drawing::Point(17, 68);
             this->lblEstConductoresReg->Name = L"lblEstConductoresReg";
-            this->lblEstConductoresReg->Size = System::Drawing::Size(160, 14);
+            this->lblEstConductoresReg->Size = System::Drawing::Size(199, 18);
             this->lblEstConductoresReg->TabIndex = 2;
             this->lblEstConductoresReg->Text = L"Conductores registrados:    0";
             this->lblEstConductoresReg->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -725,7 +726,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstConductoresDisp->Location = System::Drawing::Point(17, 92);
             this->lblEstConductoresDisp->Name = L"lblEstConductoresDisp";
-            this->lblEstConductoresDisp->Size = System::Drawing::Size(161, 14);
+            this->lblEstConductoresDisp->Size = System::Drawing::Size(198, 18);
             this->lblEstConductoresDisp->TabIndex = 3;
             this->lblEstConductoresDisp->Text = L"Conductores disponibles:    0";
             this->lblEstConductoresDisp->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -741,7 +742,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstViajesEspera->Location = System::Drawing::Point(17, 116);
             this->lblEstViajesEspera->Name = L"lblEstViajesEspera";
-            this->lblEstViajesEspera->Size = System::Drawing::Size(136, 14);
+            this->lblEstViajesEspera->Size = System::Drawing::Size(174, 18);
             this->lblEstViajesEspera->TabIndex = 4;
             this->lblEstViajesEspera->Text = L"Viajes en espera:           0";
             this->lblEstViajesEspera->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -757,7 +758,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstViajesActivos->Location = System::Drawing::Point(432, 44);
             this->lblEstViajesActivos->Name = L"lblEstViajesActivos";
-            this->lblEstViajesActivos->Size = System::Drawing::Size(104, 14);
+            this->lblEstViajesActivos->Size = System::Drawing::Size(132, 18);
             this->lblEstViajesActivos->TabIndex = 7;
             this->lblEstViajesActivos->Text = L"Viajes activos:     0";
             this->lblEstViajesActivos->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -773,7 +774,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstViajesHistorial->Location = System::Drawing::Point(432, 68);
             this->lblEstViajesHistorial->Name = L"lblEstViajesHistorial";
-            this->lblEstViajesHistorial->Size = System::Drawing::Size(114, 14);
+            this->lblEstViajesHistorial->Size = System::Drawing::Size(143, 18);
             this->lblEstViajesHistorial->TabIndex = 8;
             this->lblEstViajesHistorial->Text = L"Viajes en historial: 0";
             this->lblEstViajesHistorial->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -789,7 +790,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(70)));
             this->lblEstGanancias->Location = System::Drawing::Point(432, 116);
             this->lblEstGanancias->Name = L"lblEstGanancias";
-            this->lblEstGanancias->Size = System::Drawing::Size(193, 17);
+            this->lblEstGanancias->Size = System::Drawing::Size(232, 21);
             this->lblEstGanancias->TabIndex = 10;
             this->lblEstGanancias->Text = L"Ganancia plataforma:  S/ 0.00";
             this->lblEstGanancias->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -805,7 +806,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstMontoCola->Location = System::Drawing::Point(17, 140);
             this->lblEstMontoCola->Name = L"lblEstMontoCola";
-            this->lblEstMontoCola->Size = System::Drawing::Size(157, 14);
+            this->lblEstMontoCola->Size = System::Drawing::Size(191, 18);
             this->lblEstMontoCola->TabIndex = 5;
             this->lblEstMontoCola->Text = L"Monto total en cola:  S/ 0.00";
             this->lblEstMontoCola->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -821,7 +822,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstViajesCurso->Location = System::Drawing::Point(432, 92);
             this->lblEstViajesCurso->Name = L"lblEstViajesCurso";
-            this->lblEstViajesCurso->Size = System::Drawing::Size(113, 14);
+            this->lblEstViajesCurso->Size = System::Drawing::Size(141, 18);
             this->lblEstViajesCurso->TabIndex = 9;
             this->lblEstViajesCurso->Text = L"Viajes en curso:     0";
             this->lblEstViajesCurso->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -837,7 +838,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstCola->Location = System::Drawing::Point(17, 164);
             this->lblEstCola->Name = L"lblEstCola";
-            this->lblEstCola->Size = System::Drawing::Size(164, 14);
+            this->lblEstCola->Size = System::Drawing::Size(205, 18);
             this->lblEstCola->TabIndex = 6;
             this->lblEstCola->Text = L"Cola: [--] Sin viajes en espera";
             this->lblEstCola->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -864,7 +865,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitPasswords->Location = System::Drawing::Point(15, 14);
             this->lblTitPasswords->Name = L"lblTitPasswords";
-            this->lblTitPasswords->Size = System::Drawing::Size(188, 22);
+            this->lblTitPasswords->Size = System::Drawing::Size(225, 27);
             this->lblTitPasswords->TabIndex = 0;
             this->lblTitPasswords->Text = L"Passwords en binario";
             // 
@@ -908,7 +909,7 @@ namespace LYNX {
             // 
             // AdminMenuForm
             // 
-            this->AutoScaleDimensions = System::Drawing::SizeF(7, 14);
+            this->AutoScaleDimensions = System::Drawing::SizeF(8, 18);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)), static_cast<System::Int32>(static_cast<System::Byte>(247)),
                 static_cast<System::Int32>(static_cast<System::Byte>(245)));
@@ -1299,5 +1300,7 @@ namespace LYNX {
         //
         System::Void AdminMenuForm_Activated(System::Object^ sender, System::EventArgs^ e) {
         }
+private: System::Void lblLYNX_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
