@@ -122,3 +122,4 @@ PAS-0121|Pedrito Marmol|77111111|pepe3|5|1|34.025
 PAS-0122|Remers Gonza|12345678|remersalbums|5|0|0
 PAS-0123|Vinicius JR|00001111|vini|5|0|0
 PAS-0124|Alvaro Diaz|14141414|omakase|5|0|0
+PAS-0125|Salvador Rivera|71149147|s|5|16|1659

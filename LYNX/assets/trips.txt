@@ -52,153 +52,170 @@ TRP-10064|San Juan de Miraflores|El Agustino|16.9|2|en_curso|Yeremy Acuna||90817
 TRP-10148|Jockey Plaza|UPC San Isidro|15.9|1|en_curso|Carlos Messi||19283756|03/05/2026
 TRP-10130|Los Olivos|Aeropuerto Jorge Chávez|15.8|2|en_curso|Valeria Cruz||90817265|03/05/2026
 TRP-10165|Villa El Salvador|Parque Kennedy|10.1|1|en_curso|Ricardo Nunez||90817275|08/05/2026
-TRP-10204|New York|Washington|24.9983|2|completado|Gotenk Son|||10/05/2026
-TRP-10160|San Isidro|Plaza Mayor de Lima|71.5|3|completado|Maria Vega||37482917|01/05/2026
-TRP-10203|UPC|PUCP|33|3|completado|Maria Vega|||10/05/2026
-TRP-10201|Monterrico|Santa Anita|34.025|3|completado|Carlos Rivera||77111111|10/05/2026
-TRP-10002|San Borja|Los Olivos|22|2|completado|Valeria Cruz||19283757|07/05/2026
-TRP-10004|Santa Anita|Cercado de Lima|18.1|2|completado|Donald rump||91827365|01/04/2026
-TRP-10005|Pucallpa|Chiclayo|117.8|1|completado|Pedro Flores||83746600|05/05/2026
-TRP-10006|CC La Rambla|La Molina|16.4|2|completado|Carlos Rivera|||09/05/2026
-TRP-10007|San Juan de Miraflores|Clínica Ricardo Palma|19.7|1|completado|Donald rump||19283757|07/05/2026
-TRP-10010|La Molina|Los Olivos|42.4|2|completado|Maria Castillo||10284764|07/05/2026
-TRP-10011|San Martín de Porres|Pueblo Libre|41.1|3|completado|Sofia Vega||71234567|10/04/2026
-TRP-10013|Huaraz|Huánuco|45.1|1|completado|Javier Luna||56492023|25/04/2026
-TRP-10016|Lince|Clínica Ricardo Palma|12.2|1|completado|Camilo Perez||56492029|07/05/2026
-TRP-10017|Hospital Rebagliati|Miraflores|16.4|1|completado|Carlos Medina||91827366|25/03/2026
-TRP-10018|UNMSM|San Borja|9.2|1|completado|Hector Ruiz||56492022|05/04/2026
-TRP-10019|Lima|Pucallpa|53.2|1|completado|Camilo Perez|||01/05/2026
-TRP-10020|Moquegua|Puno|435.2|3|completado|Ana Perez||91827369|15/04/2026
-TRP-10021|Los Olivos|La Molina|25.1|2|completado|Jose Lira||91827370|20/04/2026
-TRP-10023|Puno|Tingo María|109.1|2|cancelado|Maria Vega||73482910|20/04/2026
-TRP-10024|Lince|Real Plaza Salaverry|27.9|2|completado|Javier Luna||83746602|01/04/2026
-TRP-10025|Chiclayo|Madrid|2730|3|completado|Sebastian Mora||37482915|07/05/2026
-TRP-10027|PUCP|Miraflores|21.6|1|cancelado|Lucia Ramos||37482920|08/05/2026
-TRP-10028|Jaén|Arequipa|53.2|1|completado|Yeremy Acuna|||05/05/2026
-TRP-10029|CC Jockey|UPC San Isidro|34.9|2|completado|Maria Dolores||19283753|05/05/2026
-TRP-10030|Arequipa|Abancay|275.4|3|completado|Ana Ruiz|||25/04/2026
-TRP-10031|Terminal Plaza Norte|San Borja|68.3|3|completado|Hector Ruiz|||15/04/2026
-TRP-10032|UNMSM|Comas|32.4|2|completado|Pedro Quispe||91827367|01/05/2026
-TRP-10033|San Martín de Porres|Santa Anita|60.1|3|completado|Sofia Vega||70112233|01/05/2026
-TRP-10034|La Molina|Miraflores|28.7|2|cancelado|Maria Quispe|||09/05/2026
-TRP-10035|Cercado de Lima|La Molina|69.6|3|completado|Sofia Delgado||83746603|28/04/2026
-TRP-10037|Piura|Ayacucho|49.2|1|completado|Pedro Flores||19283752|08/05/2026
-TRP-10038|Puno|Moquegua|90.7|1|completado|Luciana Perez|||05/05/2026
-TRP-10039|Carabayllo|Breña|8.6|1|completado|Ricardo Salas|||15/04/2026
-TRP-10040|Pucallpa|Cerro de Pasco|74.2|1|completado|Ricardo Nunez||38475629|25/03/2026
-TRP-10041|Surquillo|Larco Mar|54.9|3|completado|Kevin Soto||19283751|05/05/2026
-TRP-10046|Mercado Surquillo|Ate Vitarte|13.6|1|completado|Hector Ruiz||70112233|05/04/2026
-TRP-10047|PUCP|La Victoria|72.3|3|completado|Sofia Vega||91827365|08/05/2026
-TRP-10048|Carabayllo|Cercado de Lima|18.2|1|completado|Camilo Perez||37482917|25/04/2026
-TRP-10049|CC La Rambla|Carabayllo|8|1|cancelado|Raul Herrera|||15/04/2026
-TRP-10050|Puno|Paracas|322.5|3|cancelado|Alberto Rojas||56492024|20/04/2026
-TRP-10051|Tarapoto|Ayacucho|416.8|3|completado|Carlos Rivera||83746593|25/04/2026
-TRP-10052|Juliaca|Abancay|511.1|3|completado|Miguel Angel||56473829|01/05/2026
-TRP-10053|Carabayllo|Larco Mar|33.2|2|completado|Carlos Rojas||90817271|28/04/2026
-TRP-10055|Trujillo|Moyobamba|530.8|3|completado|Angela Torres||91827368|07/05/2026
-TRP-10056|Plaza Mayor de Lima|Hospital Almenara|19.9|1|completado|Bruno Castillo||37482916|25/03/2026
-TRP-10059|Chiclayo|Tumbes|50.7|1|completado|Jhon Castillo||91827378|25/04/2026
-TRP-10063|Trujillo|Iquitos|113.2|2|completado|Victor Salazar||83746593|10/04/2026
-TRP-10065|Cusco|Jaén|502.3|3|completado|Ana Ruiz|||10/05/2026
-TRP-10066|Moyobamba|Ferreñafe|289.8|2|completado|Patricia Gomez||90817268|05/04/2026
-TRP-10067|Carabayllo|Terminal Plaza Norte|15.9|2|completado|Javier Soto||91827373|10/04/2026
-TRP-10068|Pucallpa|Madrid|853.5|1|completado|Mario Flores||37482922|10/05/2026
-TRP-10069|Iquitos|Arequipa|60.8|1|completado|Sofia Torres||47291038|03/05/2026
-TRP-10070|Puerto Maldonado|Huaraz|135.5|2|completado|Cristiano Ronaldo||83746599|10/04/2026
-TRP-10071|Abancay|Huánuco|43.2|1|completado|Luis Castillo||83746600|07/05/2026
-TRP-10072|Plaza Mayor de Lima|Real Plaza Salaverry|9.6|1|cancelado|Javier Luna||10284763|10/04/2026
-TRP-10074|Callao|Jockey Plaza|60.5|3|cancelado|Cristiano JR||37482913|10/04/2026
-TRP-10075|Huancayo|Chiclayo|428.9|3|completado|Camila Rios||91827367|05/04/2026
-TRP-10076|Carabayllo|Real Plaza Salaverry|13.2|1|completado|Luis Herrera||56492025|10/05/2026
-TRP-10077|Surquillo|Clínica Ricardo Palma|20.5|1|completado|Victor Salazar||91827369|01/05/2026
-TRP-10079|Trujillo|Ayacucho|110.5|1|completado|Javier Luna||47291038|20/04/2026
-TRP-10080|San Juan de Lurigancho|Villa El Salvador|29.6|2|completado|Sofia Vega||83746592|03/05/2026
-TRP-10081|Pucallpa|Cusco|356.7|3|completado|Lucia Ramos||56492021|10/04/2026
-TRP-10083|Ayacucho|Moquegua|207.9|2|completado|Jhon Castillo||10284767|03/05/2026
-TRP-10084|CC Jockey|San Juan de Miraflores|42.2|3|completado|Rosa Condori||56492024|10/04/2026
-TRP-10086|Lince|Santa Anita|43.3|3|completado|Miguel Angel||56492022|10/05/2026
-TRP-10087|Surco|UNMSM|23.8|2|cancelado|Ana Lucero|||01/04/2026
-TRP-10088|Tingo María|Ayacucho|77.6|1|completado|Kevin Ramos||37482920|10/05/2026
-TRP-10089|Paracas|Tarapoto|45.9|1|completado|Juan Perez||91827367|08/05/2026
-TRP-10090|Comas|Jesús María|31.7|2|completado|Camila Rios||19283759|05/04/2026
-TRP-10091|Villa María del Triunfo|Callao|68.7|3|cancelado|Angela Torres|||20/04/2026
-TRP-10092|Chiclayo|Londres|1989.6|3|completado|Mario Flores||19283755|09/05/2026
-TRP-10093|Miraflores|Carabayllo|50.3|3|completado|Carlos Rivera||83746603|10/05/2026
-TRP-10094|Cajamarca|Trujillo|231.2|2|cancelado|Laura Vega|||20/04/2026
-TRP-10095|PUCP|Los Olivos|17.1|1|cancelado|Ana Torres||91827366|09/05/2026
-TRP-10096|Tingo María|Ayacucho|325.7|3|completado|Miguel Angel||91827375|10/04/2026
-TRP-10098|Real Plaza Salaverry|UNMSM|16.2|1|completado|Pedro Gomez||91827378|20/04/2026
-TRP-10099|Clínica Ricardo Palma|Villa María del Triunfo|20.8|1|completado|Diego Perez||56492025|01/05/2026
-TRP-10100|El Agustino|La Victoria|12.5|1|completado|Sofia Delgado||10284757|03/05/2026
-TRP-10101|Paracas|Moyobamba|247.3|2|completado|Pedro Castillo||56473821|03/05/2026
-TRP-10102|Puerto Maldonado|Cusco|224.7|2|completado|Carlos Messi||19283750|10/05/2026
-TRP-10103|Huánuco|Cajamarca|454|3|completado|Pedro Flores|||08/05/2026
-TRP-10104|Tumbes|Chiclayo|86.4|2|completado|Lucia Ramos||56492023|10/04/2026
-TRP-10105|San Borja|Comas|21.9|1|cancelado|Javier Luna|||09/05/2026
-TRP-10106|CC La Rambla|Rímac|15.1|1|completado|Ana Ruiz||56492023|28/04/2026
-TRP-10107|Larco Mar|Terminal Plaza Norte|18.4|1|completado|Hector Ruiz||83746593|05/05/2026
-TRP-10108|Tarapoto|Tacna|260.5|2|completado|Miguel Angel||90817272|01/04/2026
-TRP-10109|Cajamarca|Tingo María|186.6|2|completado|Patricia Gomez||83746597|01/05/2026
-TRP-10113|Magdalena del Mar|Carabayllo|41.1|2|cancelado|Ricardo Nunez|||28/04/2026
-TRP-10115|Abancay|Tumbes|499|3|completado|Hector Ruiz||10284762|07/05/2026
-TRP-10117|San Isidro|Surco|44.6|3|completado|Donald rump||10284760|03/05/2026
-TRP-10118|Real Plaza Salaverry|Villa El Salvador|37.6|3|completado|Luis Paredes||10284757|20/04/2026
-TRP-10119|San Juan de Miraflores|Clínica Ricardo Palma|41.4|3|completado|Maria Lopez||10284762|25/03/2026
-TRP-10120|La Molina|San Juan de Miraflores|72.5|3|cancelado|Miguel Angel|||15/04/2026
-TRP-10122|Rímac|CC La Rambla|43.3|3|cancelado|Mario Flores||91827367|01/05/2026
-TRP-10124|Huancayo|Juliaca|226.1|3|completado|Mario Flores||37482918|15/04/2026
-TRP-10125|Huánuco|Arequipa|64.7|1|completado|Diego Perez||10284756|03/05/2026
-TRP-10127|Tacna|Moyobamba|287.7|2|cancelado|Carlos Rivera|||10/04/2026
-TRP-10128|La Molina|Chorrillos|18.6|1|completado|Cristiano JR||19283750|01/04/2026
-TRP-10129|Cusco|Ayacucho|82.9|1|completado|Sofia Vega||83746601|20/04/2026
-TRP-10132|Barranco|San Juan de Lurigancho|21.9|1|completado|Lucia Ramos||10284761|25/03/2026
-TRP-10134|Aeropuerto Jorge Chávez|Hospital Almenara|48.4|3|cancelado|Oscar Reyes||10284759|10/04/2026
-TRP-10136|Breña|Ate Vitarte|44|2|cancelado|Sofia Torres|||09/05/2026
-TRP-10137|Cusco|Trujillo|464.7|3|completado|Ricardo Salas||10293847|05/04/2026
-TRP-10138|Santa Anita|Comas|44.8|3|completado|Camila Rios||91827368|10/05/2026
-TRP-10139|Villa El Salvador|Jesús María|17.3|1|completado|Maria Lopez||91827374|03/05/2026
-TRP-10141|Surquillo|Hospital Rebagliati|16.3|1|completado|Jorge Vega||90817272|20/04/2026
-TRP-10142|Clínica Ricardo Palma|San Isidro|32.7|3|completado|Javier Soto||56492025|01/05/2026
-TRP-10143|Trujillo|Ferreñafe|182.3|3|completado|Hector Ruiz||83746601|08/05/2026
-TRP-10144|San Juan de Lurigancho|Independencia|74.8|3|completado|Sofia Torres||91827372|25/04/2026
-TRP-10145|Clínica Ricardo Palma|Mercado Surquillo|69.5|3|completado|Andres Silva||19283747|01/05/2026
-TRP-10146|San Juan de Miraflores|Independencia|27.5|2|completado|Maria Flores||10284763|03/05/2026
-TRP-10147|Tumbes|Trujillo|47.3|1|completado|Elena Vargas||10284763|09/05/2026
-TRP-10149|Cerro de Pasco|Arequipa|293|2|completado|Donald rump||37482912|09/05/2026
-TRP-10152|Mercado Surquillo|CC La Rambla|42|3|completado|Angela Torres||56473829|25/03/2026
-TRP-10153|Tingo María|Moquegua|72.1|1|completado|Ana Lucero||19283746|10/05/2026
-TRP-10154|San Juan de Miraflores|La Victoria|10.2|1|completado|Luis Soto|||05/04/2026
-TRP-10155|Surco|Chorrillos|37.1|3|completado|Pedro Quispe||37482922|05/05/2026
-TRP-10156|Huaraz|Tacna|127.4|2|completado|Daniel Vega||83746602|01/05/2026
-TRP-10157|Hospital Rebagliati|Real Plaza Salaverry|43.9|3|completado|Camila Rios||37482921|10/05/2026
-TRP-10158|Abancay|Tacna|63.2|1|completado|Daniela Flores||56492022|10/04/2026
-TRP-10161|Huaraz|Ayacucho|105.3|2|completado|Luis Soto||83746600|08/05/2026
-TRP-10163|Independencia|Callao|37.4|2|completado|Kevin Ruiz||56473821|09/05/2026
-TRP-10166|UNMSM|Larco Mar|50.2|3|cancelado|Pedro Ruiz|||15/04/2026
-TRP-10167|Hospital Almenara|San Juan de Lurigancho|36.8|3|completado|Carlos Rojas||83746596|15/04/2026
-TRP-10168|Terminal Plaza Norte|La Molina|44|3|completado|Juan Castillo||91827370|03/05/2026
-TRP-10169|Moyobamba|Trujillo|396|3|completado|Javier Luna||83746604|20/04/2026
-TRP-10170|UNMSM|Mercado Surquillo|10.6|1|completado|Sergio Ramos|||08/05/2026
-TRP-10171|La Victoria|San Borja|30.1|2|completado|Luis Castillo||10284759|10/04/2026
-TRP-10172|Chorrillos|San Miguel|46.8|3|completado|Carlos Messi||83746592|05/04/2026
-TRP-10173|Huánuco|Ica|45.3|1|completado|Yeremy Acuna||90817272|05/05/2026
-TRP-10174|Ica|Trujillo|383.1|3|completado|Daniel Vega|||05/05/2026
-TRP-10175|Piura|Huánuco|433.5|3|completado|Valeria Cruz||19283748|01/05/2026
-TRP-10176|Puerto Maldonado|Cerro de Pasco|119.8|1|cancelado|Pedro Castillo|||15/04/2026
-TRP-10177|Surquillo|Callao|38.1|3|completado|Luciana Perez||92837465|07/05/2026
-TRP-10179|Chimbote|Piura|211.4|2|completado|Kevin Ramos||83746600|01/04/2026
-TRP-10181|Huancayo|Tingo María|245.7|3|cancelado|Victor Vega|||25/03/2026
-TRP-10182|Tingo María|Cajamarca|181.6|2|completado|Luis Paredes||90817270|25/04/2026
-TRP-10183|Piura|Jaén|60|1|completado|Andrea Diaz|||25/04/2026
-TRP-10186|Comas|Independencia|44.8|2|completado|Carlos Mendoza|||03/05/2026
-TRP-10187|Andahuaylalas|Piura|205|3|completado|Victor Vega||56492029|10/04/2026
-TRP-10188|Parque Kennedy|Miraflores|70.8|3|completado|Andres Silva||19283758|01/04/2026
-TRP-10189|Jesús María|Callao|40.7|3|completado|Lucia Ramos||83746600|01/05/2026
-TRP-10190|Aeropuerto Jorge Chávez|Parque Kennedy|31.1|2|completado|Maria Vega||83746594|07/05/2026
-TRP-10191|Cercado de Lima|Comas|32.1|2|completado|Ana Perez||19283750|09/05/2026
-TRP-10192|Pucallpa|Miami|793.2|1|completado|Cristiano Ronaldo|||01/05/2026
-TRP-10193|Nazca|Tacna|99.8|1|completado|Hector Ruiz||90817272|03/05/2026
-TRP-10194|Jockey Plaza|La Victoria|36|3|completado|Luis Herrera||19283759|01/04/2026
-TRP-10198|Ica|Tacna|50|1|completado|Javier Soto||10284761|10/04/2026
-TRP-10199|Tumbes|São Paulo|1595.5|2|cancelado|Marco Rojas|||05/05/2026
+TRP-10201|Lima|Callao|100|3|en_curso|Carlos Rivera||83746597|03/05/2026
+TRP-10220|yeremy|gemini|35.5|3|en_curso|Ricardo Nunez|37482911|71149147|07/06/2026
+TRP-10219|Puente Piedra|Los Olivos|39|2|completado|Carlos Rivera|10284767|71149147|07/06/2026
+TRP-10217|Los Angeles|Mexico|38|1|completado|Carlos Rivera|10284767|71149147|07/06/2026
+TRP-10215|Lima|Lunahuana|290.5|3|completado|Carlos Rivera|10284767|71149147|07/06/2026
+TRP-10214|lima|puno|28|2|completado|Ricardo Nunez|37482911|71149147|07/06/2026
+TRP-10212|ayer|manana|5.5|1|completado|Ricardo Nunez|37482911|71149147|07/06/2026
+TRP-10211|Lima|Casa|38|3|completado|Carlos Rivera|10284767|71149147|07/06/2026
+TRP-10209|San Borja|Surco|28|2|completado|Carlos Rivera|10284767|71149147|07/06/2026
+TRP-10207|Lima|Peru1|40.5|1|completado|Carlos Rivera|10284767|71149147|07/06/2026
+TRP-10206|Lima|peru|33|2|completado|Ricardo Nunez|37482911|71149147|07/06/2026
 TRP-10200|Carabayllo|Parque Kennedy|74.8|3|completado|Carlos Rivera||83746597|03/05/2026
+TRP-10199|Tumbes|São Paulo|1595.5|2|cancelado|Marco Rojas|||05/05/2026
+TRP-10198|Ica|Tacna|50|1|completado|Javier Soto||10284761|10/04/2026
+TRP-10194|Jockey Plaza|La Victoria|36|3|completado|Luis Herrera||19283759|01/04/2026
+TRP-10193|Nazca|Tacna|99.8|1|completado|Hector Ruiz||90817272|03/05/2026
+TRP-10192|Pucallpa|Miami|793.2|1|completado|Cristiano Ronaldo|||01/05/2026
+TRP-10191|Cercado de Lima|Comas|32.1|2|completado|Ana Perez||19283750|09/05/2026
+TRP-10190|Aeropuerto Jorge Chávez|Parque Kennedy|31.1|2|completado|Maria Vega||83746594|07/05/2026
+TRP-10189|Jesús María|Callao|40.7|3|completado|Lucia Ramos||83746600|01/05/2026
+TRP-10188|Parque Kennedy|Miraflores|70.8|3|completado|Andres Silva||19283758|01/04/2026
+TRP-10187|Andahuaylalas|Piura|205|3|completado|Victor Vega||56492029|10/04/2026
+TRP-10186|Comas|Independencia|44.8|2|completado|Carlos Mendoza|||03/05/2026
+TRP-10183|Piura|Jaén|60|1|completado|Andrea Diaz|||25/04/2026
+TRP-10182|Tingo María|Cajamarca|181.6|2|completado|Luis Paredes||90817270|25/04/2026
+TRP-10181|Huancayo|Tingo María|245.7|3|cancelado|Victor Vega|||25/03/2026
+TRP-10179|Chimbote|Piura|211.4|2|completado|Kevin Ramos||83746600|01/04/2026
+TRP-10177|Surquillo|Callao|38.1|3|completado|Luciana Perez||92837465|07/05/2026
+TRP-10176|Puerto Maldonado|Cerro de Pasco|119.8|1|cancelado|Pedro Castillo|||15/04/2026
+TRP-10175|Piura|Huánuco|433.5|3|completado|Valeria Cruz||19283748|01/05/2026
+TRP-10174|Ica|Trujillo|383.1|3|completado|Daniel Vega|||05/05/2026
+TRP-10173|Huánuco|Ica|45.3|1|completado|Yeremy Acuna||90817272|05/05/2026
+TRP-10172|Chorrillos|San Miguel|46.8|3|completado|Carlos Messi||83746592|05/04/2026
+TRP-10171|La Victoria|San Borja|30.1|2|completado|Luis Castillo||10284759|10/04/2026
+TRP-10170|UNMSM|Mercado Surquillo|10.6|1|completado|Sergio Ramos|||08/05/2026
+TRP-10169|Moyobamba|Trujillo|396|3|completado|Javier Luna||83746604|20/04/2026
+TRP-10168|Terminal Plaza Norte|La Molina|44|3|completado|Juan Castillo||91827370|03/05/2026
+TRP-10167|Hospital Almenara|San Juan de Lurigancho|36.8|3|completado|Carlos Rojas||83746596|15/04/2026
+TRP-10166|UNMSM|Larco Mar|50.2|3|cancelado|Pedro Ruiz|||15/04/2026
+TRP-10163|Independencia|Callao|37.4|2|completado|Kevin Ruiz||56473821|09/05/2026
+TRP-10161|Huaraz|Ayacucho|105.3|2|completado|Luis Soto||83746600|08/05/2026
+TRP-10158|Abancay|Tacna|63.2|1|completado|Daniela Flores||56492022|10/04/2026
+TRP-10157|Hospital Rebagliati|Real Plaza Salaverry|43.9|3|completado|Camila Rios||37482921|10/05/2026
+TRP-10156|Huaraz|Tacna|127.4|2|completado|Daniel Vega||83746602|01/05/2026
+TRP-10155|Surco|Chorrillos|37.1|3|completado|Pedro Quispe||37482922|05/05/2026
+TRP-10154|San Juan de Miraflores|La Victoria|10.2|1|completado|Luis Soto|||05/04/2026
+TRP-10153|Tingo María|Moquegua|72.1|1|completado|Ana Lucero||19283746|10/05/2026
+TRP-10152|Mercado Surquillo|CC La Rambla|42|3|completado|Angela Torres||56473829|25/03/2026
+TRP-10149|Cerro de Pasco|Arequipa|293|2|completado|Donald rump||37482912|09/05/2026
+TRP-10147|Tumbes|Trujillo|47.3|1|completado|Elena Vargas||10284763|09/05/2026
+TRP-10146|San Juan de Miraflores|Independencia|27.5|2|completado|Maria Flores||10284763|03/05/2026
+TRP-10145|Clínica Ricardo Palma|Mercado Surquillo|69.5|3|completado|Andres Silva||19283747|01/05/2026
+TRP-10144|San Juan de Lurigancho|Independencia|74.8|3|completado|Sofia Torres||91827372|25/04/2026
+TRP-10143|Trujillo|Ferreñafe|182.3|3|completado|Hector Ruiz||83746601|08/05/2026
+TRP-10142|Clínica Ricardo Palma|San Isidro|32.7|3|completado|Javier Soto||56492025|01/05/2026
+TRP-10141|Surquillo|Hospital Rebagliati|16.3|1|completado|Jorge Vega||90817272|20/04/2026
+TRP-10139|Villa El Salvador|Jesús María|17.3|1|completado|Maria Lopez||91827374|03/05/2026
+TRP-10138|Santa Anita|Comas|44.8|3|completado|Camila Rios||91827368|10/05/2026
+TRP-10137|Cusco|Trujillo|464.7|3|completado|Ricardo Salas||10293847|05/04/2026
+TRP-10136|Breña|Ate Vitarte|44|2|cancelado|Sofia Torres|||09/05/2026
+TRP-10134|Aeropuerto Jorge Chávez|Hospital Almenara|48.4|3|cancelado|Oscar Reyes||10284759|10/04/2026
+TRP-10132|Barranco|San Juan de Lurigancho|21.9|1|completado|Lucia Ramos||10284761|25/03/2026
+TRP-10129|Cusco|Ayacucho|82.9|1|completado|Sofia Vega||83746601|20/04/2026
+TRP-10128|La Molina|Chorrillos|18.6|1|completado|Cristiano JR||19283750|01/04/2026
+TRP-10127|Tacna|Moyobamba|287.7|2|cancelado|Carlos Rivera|||10/04/2026
+TRP-10125|Huánuco|Arequipa|64.7|1|completado|Diego Perez||10284756|03/05/2026
+TRP-10124|Huancayo|Juliaca|226.1|3|completado|Mario Flores||37482918|15/04/2026
+TRP-10122|Rímac|CC La Rambla|43.3|3|cancelado|Mario Flores||91827367|01/05/2026
+TRP-10120|La Molina|San Juan de Miraflores|72.5|3|cancelado|Miguel Angel|||15/04/2026
+TRP-10119|San Juan de Miraflores|Clínica Ricardo Palma|41.4|3|completado|Maria Lopez||10284762|25/03/2026
+TRP-10118|Real Plaza Salaverry|Villa El Salvador|37.6|3|completado|Luis Paredes||10284757|20/04/2026
+TRP-10117|San Isidro|Surco|44.6|3|completado|Donald rump||10284760|03/05/2026
+TRP-10115|Abancay|Tumbes|499|3|completado|Hector Ruiz||10284762|07/05/2026
+TRP-10113|Magdalena del Mar|Carabayllo|41.1|2|cancelado|Ricardo Nunez|||28/04/2026
+TRP-10109|Cajamarca|Tingo María|186.6|2|completado|Patricia Gomez||83746597|01/05/2026
+TRP-10108|Tarapoto|Tacna|260.5|2|completado|Miguel Angel||90817272|01/04/2026
+TRP-10107|Larco Mar|Terminal Plaza Norte|18.4|1|completado|Hector Ruiz||83746593|05/05/2026
+TRP-10106|CC La Rambla|Rímac|15.1|1|completado|Ana Ruiz||56492023|28/04/2026
+TRP-10105|San Borja|Comas|21.9|1|cancelado|Javier Luna|||09/05/2026
+TRP-10104|Tumbes|Chiclayo|86.4|2|completado|Lucia Ramos||56492023|10/04/2026
+TRP-10103|Huánuco|Cajamarca|454|3|completado|Pedro Flores|||08/05/2026
+TRP-10102|Puerto Maldonado|Cusco|224.7|2|completado|Carlos Messi||19283750|10/05/2026
+TRP-10101|Paracas|Moyobamba|247.3|2|completado|Pedro Castillo||56473821|03/05/2026
+TRP-10100|El Agustino|La Victoria|12.5|1|completado|Sofia Delgado||10284757|03/05/2026
+TRP-10099|Clínica Ricardo Palma|Villa María del Triunfo|20.8|1|completado|Diego Perez||56492025|01/05/2026
+TRP-10098|Real Plaza Salaverry|UNMSM|16.2|1|completado|Pedro Gomez||91827378|20/04/2026
+TRP-10096|Tingo María|Ayacucho|325.7|3|completado|Miguel Angel||91827375|10/04/2026
+TRP-10095|PUCP|Los Olivos|17.1|1|cancelado|Ana Torres||91827366|09/05/2026
+TRP-10094|Cajamarca|Trujillo|231.2|2|cancelado|Laura Vega|||20/04/2026
+TRP-10093|Miraflores|Carabayllo|50.3|3|completado|Carlos Rivera||83746603|10/05/2026
+TRP-10092|Chiclayo|Londres|1989.6|3|completado|Mario Flores||19283755|09/05/2026
+TRP-10091|Villa María del Triunfo|Callao|68.7|3|cancelado|Angela Torres|||20/04/2026
+TRP-10090|Comas|Jesús María|31.7|2|completado|Camila Rios||19283759|05/04/2026
+TRP-10089|Paracas|Tarapoto|45.9|1|completado|Juan Perez||91827367|08/05/2026
+TRP-10088|Tingo María|Ayacucho|77.6|1|completado|Kevin Ramos||37482920|10/05/2026
+TRP-10087|Surco|UNMSM|23.8|2|cancelado|Ana Lucero|||01/04/2026
+TRP-10086|Lince|Santa Anita|43.3|3|completado|Miguel Angel||56492022|10/05/2026
+TRP-10084|CC Jockey|San Juan de Miraflores|42.2|3|completado|Rosa Condori||56492024|10/04/2026
+TRP-10083|Ayacucho|Moquegua|207.9|2|completado|Jhon Castillo||10284767|03/05/2026
+TRP-10081|Pucallpa|Cusco|356.7|3|completado|Lucia Ramos||56492021|10/04/2026
+TRP-10080|San Juan de Lurigancho|Villa El Salvador|29.6|2|completado|Sofia Vega||83746592|03/05/2026
+TRP-10079|Trujillo|Ayacucho|110.5|1|completado|Javier Luna||47291038|20/04/2026
+TRP-10077|Surquillo|Clínica Ricardo Palma|20.5|1|completado|Victor Salazar||91827369|01/05/2026
+TRP-10076|Carabayllo|Real Plaza Salaverry|13.2|1|completado|Luis Herrera||56492025|10/05/2026
+TRP-10075|Huancayo|Chiclayo|428.9|3|completado|Camila Rios||91827367|05/04/2026
+TRP-10074|Callao|Jockey Plaza|60.5|3|cancelado|Cristiano JR||37482913|10/04/2026
+TRP-10072|Plaza Mayor de Lima|Real Plaza Salaverry|9.6|1|cancelado|Javier Luna||10284763|10/04/2026
+TRP-10071|Abancay|Huánuco|43.2|1|completado|Luis Castillo||83746600|07/05/2026
+TRP-10070|Puerto Maldonado|Huaraz|135.5|2|completado|Cristiano Ronaldo||83746599|10/04/2026
+TRP-10069|Iquitos|Arequipa|60.8|1|completado|Sofia Torres||47291038|03/05/2026
+TRP-10068|Pucallpa|Madrid|853.5|1|completado|Mario Flores||37482922|10/05/2026
+TRP-10067|Carabayllo|Terminal Plaza Norte|15.9|2|completado|Javier Soto||91827373|10/04/2026
+TRP-10066|Moyobamba|Ferreñafe|289.8|2|completado|Patricia Gomez||90817268|05/04/2026
+TRP-10065|Cusco|Jaén|502.3|3|completado|Ana Ruiz|||10/05/2026
+TRP-10063|Trujillo|Iquitos|113.2|2|completado|Victor Salazar||83746593|10/04/2026
+TRP-10059|Chiclayo|Tumbes|50.7|1|completado|Jhon Castillo||91827378|25/04/2026
+TRP-10056|Plaza Mayor de Lima|Hospital Almenara|19.9|1|completado|Bruno Castillo||37482916|25/03/2026
+TRP-10055|Trujillo|Moyobamba|530.8|3|completado|Angela Torres||91827368|07/05/2026
+TRP-10053|Carabayllo|Larco Mar|33.2|2|completado|Carlos Rojas||90817271|28/04/2026
+TRP-10052|Juliaca|Abancay|511.1|3|completado|Miguel Angel||56473829|01/05/2026
+TRP-10051|Tarapoto|Ayacucho|416.8|3|completado|Carlos Rivera||83746593|25/04/2026
+TRP-10050|Puno|Paracas|322.5|3|cancelado|Alberto Rojas||56492024|20/04/2026
+TRP-10049|CC La Rambla|Carabayllo|8|1|cancelado|Raul Herrera|||15/04/2026
+TRP-10048|Carabayllo|Cercado de Lima|18.2|1|completado|Camilo Perez||37482917|25/04/2026
+TRP-10047|PUCP|La Victoria|72.3|3|completado|Sofia Vega||91827365|08/05/2026
+TRP-10046|Mercado Surquillo|Ate Vitarte|13.6|1|completado|Hector Ruiz||70112233|05/04/2026
+TRP-10041|Surquillo|Larco Mar|54.9|3|completado|Kevin Soto||19283751|05/05/2026
+TRP-10040|Pucallpa|Cerro de Pasco|74.2|1|completado|Ricardo Nunez||38475629|25/03/2026
+TRP-10039|Carabayllo|Breña|8.6|1|completado|Ricardo Salas|||15/04/2026
+TRP-10038|Puno|Moquegua|90.7|1|completado|Luciana Perez|||05/05/2026
+TRP-10037|Piura|Ayacucho|49.2|1|completado|Pedro Flores||19283752|08/05/2026
+TRP-10035|Cercado de Lima|La Molina|69.6|3|completado|Sofia Delgado||83746603|28/04/2026
+TRP-10034|La Molina|Miraflores|28.7|2|cancelado|Maria Quispe|||09/05/2026
+TRP-10033|San Martín de Porres|Santa Anita|60.1|3|completado|Sofia Vega||70112233|01/05/2026
+TRP-10032|UNMSM|Comas|32.4|2|completado|Pedro Quispe||91827367|01/05/2026
+TRP-10031|Terminal Plaza Norte|San Borja|68.3|3|completado|Hector Ruiz|||15/04/2026
+TRP-10030|Arequipa|Abancay|275.4|3|completado|Ana Ruiz|||25/04/2026
+TRP-10029|CC Jockey|UPC San Isidro|34.9|2|completado|Maria Dolores||19283753|05/05/2026
+TRP-10028|Jaén|Arequipa|53.2|1|completado|Yeremy Acuna|||05/05/2026
+TRP-10027|PUCP|Miraflores|21.6|1|cancelado|Lucia Ramos||37482920|08/05/2026
+TRP-10025|Chiclayo|Madrid|2730|3|completado|Sebastian Mora||37482915|07/05/2026
+TRP-10024|Lince|Real Plaza Salaverry|27.9|2|completado|Javier Luna||83746602|01/04/2026
+TRP-10023|Puno|Tingo María|109.1|2|cancelado|Maria Vega||73482910|20/04/2026
+TRP-10021|Los Olivos|La Molina|25.1|2|completado|Jose Lira||91827370|20/04/2026
+TRP-10020|Moquegua|Puno|435.2|3|completado|Ana Perez||91827369|15/04/2026
+TRP-10019|Lima|Pucallpa|53.2|1|completado|Camilo Perez|||01/05/2026
+TRP-10018|UNMSM|San Borja|9.2|1|completado|Hector Ruiz||56492022|05/04/2026
+TRP-10017|Hospital Rebagliati|Miraflores|16.4|1|completado|Carlos Medina||91827366|25/03/2026
+TRP-10016|Lince|Clínica Ricardo Palma|12.2|1|completado|Camilo Perez||56492029|07/05/2026
+TRP-10013|Huaraz|Huánuco|45.1|1|completado|Javier Luna||56492023|25/04/2026
+TRP-10011|San Martín de Porres|Pueblo Libre|41.1|3|completado|Sofia Vega||71234567|10/04/2026
+TRP-10010|La Molina|Los Olivos|42.4|2|completado|Maria Castillo||10284764|07/05/2026
+TRP-10007|San Juan de Miraflores|Clínica Ricardo Palma|19.7|1|completado|Donald rump||19283757|07/05/2026
+TRP-10006|CC La Rambla|La Molina|16.4|2|completado|Carlos Rivera|||09/05/2026
+TRP-10005|Pucallpa|Chiclayo|117.8|1|completado|Pedro Flores||83746600|05/05/2026
+TRP-10004|Santa Anita|Cercado de Lima|18.1|2|completado|Donald rump||91827365|01/04/2026
+TRP-10002|San Borja|Los Olivos|22|2|completado|Valeria Cruz||19283757|07/05/2026
+TRP-10201|Monterrico|Santa Anita|34.025|3|completado|Carlos Rivera||77111111|10/05/2026
+TRP-10203|UPC|PUCP|33|3|completado|Maria Vega|||10/05/2026
+TRP-10160|San Isidro|Plaza Mayor de Lima|71.5|3|completado|Maria Vega||37482917|01/05/2026
+TRP-10204|New York|Washington|24.9983|2|completado|Gotenk Son|||10/05/2026
+TRP-10205|s|s|365.5|2|completado|Carlos Rivera|10284767|71149147|07/06/2026
+TRP-10208|Adios|alla|393|3|completado|Ricardo Nunez|37482911|71149147|07/06/2026
+TRP-10210|Lima|Cuzco|278|3|completado|Ricardo Nunez|37482911|71149147|07/06/2026
+TRP-10213|hoy|ayer|8|2|completado|Carlos Rivera|10284767|71149147|07/06/2026
+TRP-10216|Pallar|Frijol|53|1|completado|Ricardo Nunez|37482911|71149147|07/06/2026
+TRP-10218|Surco|San Borja|21|1|completado|Ricardo Nunez|37482911|71149147|07/06/2026

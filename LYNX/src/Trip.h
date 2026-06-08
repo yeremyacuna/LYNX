@@ -84,6 +84,7 @@ public:
     Tipo 3 = Premium    -> S/ 2.50 por km
     Se suma S/ 3.00 de costo base en todos los casos*/
     float calcPrice(int tipo, float km) {
+        setTipe(tipo);
         float tarifa = 0.0f;
         if (tipo == 1) tarifa = 1.20f;
         else if (tipo == 2) tarifa = 1.80f;

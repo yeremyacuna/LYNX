@@ -33,6 +33,7 @@ namespace LYNX {
 			// CONSTRUIR OBJETOS DE MANEJO USERS Y TRIPS
 			authManager = new AuthManager();
 			tripManager = new TripManager();
+			fileManager = new FileManager();
 
 			// CARGAR TODOS LOS VIAJES
 			LoadTripsFromFile();
@@ -75,6 +76,7 @@ namespace LYNX {
 	private:
 		AuthManager* authManager = nullptr;
 		TripManager* tripManager = nullptr;
+		FileManager* fileManager = nullptr;
 		LoginPassengerForm^ formlg = nullptr;
 		RegisterPassengerForm^ formrg = nullptr;
 		PassengerMenuForm^ formpm = nullptr;
@@ -850,7 +852,7 @@ namespace LYNX {
 					if (formpm != nullptr && !formpm->IsDisposed) {
 						delete formpm;
 					}
-					formpm = gcnew PassengerMenuForm(authManager, tripManager, passengerDni);
+					formpm = gcnew PassengerMenuForm(authManager, tripManager, passengerDni, fileManager);
 					FormsStatus::ApplyWindow(formpm);
 					formpm->name = formlg->names;
 					formpm->dni = formlg->dnis;
