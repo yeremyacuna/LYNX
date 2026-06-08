@@ -170,10 +170,9 @@ namespace LYNX {
 			// 
 			// pnlTopBar
 			// 
-			this->pnlTopBar->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(
-				System::Windows::Forms::AnchorStyles::Top |
-				System::Windows::Forms::AnchorStyles::Left |
-				System::Windows::Forms::AnchorStyles::Right);
+			this->pnlTopBar->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->pnlTopBar->BackColor = System::Drawing::Color::FromArgb(6, 98, 70);
 			this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
 			this->pnlTopBar->Controls->Add(this->lblLYNX);
@@ -210,10 +209,9 @@ namespace LYNX {
 			// 
 			// pnlPresentacion-> reemplaza pnlOpciones
 			// 
-			this->pnlPresentacion->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(
-				System::Windows::Forms::AnchorStyles::Top |
-				System::Windows::Forms::AnchorStyles::Left |
-				System::Windows::Forms::AnchorStyles::Right);
+			this->pnlPresentacion->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->pnlPresentacion->BackColor = System::Drawing::Color::FromArgb(24, 28, 34);
 			this->pnlPresentacion->Controls->Add(this->lblBienvenida);
 			this->pnlPresentacion->Controls->Add(this->lblDescripcion);
@@ -451,10 +449,9 @@ namespace LYNX {
 			// 
 			// pnlBarraInferior
 			// 
-			this->pnlBarraInferior->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(
-				System::Windows::Forms::AnchorStyles::Bottom |
-				System::Windows::Forms::AnchorStyles::Left |
-				System::Windows::Forms::AnchorStyles::Right);
+			this->pnlBarraInferior->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->pnlBarraInferior->BackColor = System::Drawing::Color::White;
 			this->pnlBarraInferior->Controls->Add(this->lblNombreProyecto);
 			this->pnlBarraInferior->Controls->Add(this->lblInfoProyecto);
