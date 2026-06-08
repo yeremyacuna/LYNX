@@ -1,5 +1,9 @@
 #pragma once
-#include "../library/FormsStatus.h"	
+#include <windows.h>
+#include "../library/FormsStatus.h"
+#include "../AuthManager.h"
+#include "../TripManager.h"
+#include <msclr/marshal_cppstd.h>
 
 class AuthManager;
 class TripManager;
@@ -22,10 +26,11 @@ namespace LYNX {
 			ConfigureForm();
 		}
 
-		DriverMenuForm(AuthManager* auth, TripManager* trips)
+		DriverMenuForm(AuthManager* auth, TripManager* trips, String^ driverDni)
 		{
 			this->authManager = auth;
 			this->tripManager = trips;
+			this->loggedDriverDni = driverDni;
 			InitializeComponent();
 			ConfigureForm();
 		}
@@ -39,6 +44,13 @@ namespace LYNX {
 			}
 		}
 
+		// OBJETOS
+	private:
+		AuthManager* authManager = nullptr;
+		TripManager* tripManager = nullptr;
+		String^ loggedDriverDni = "";
+
+		// COMPONENTES
 	private: System::Windows::Forms::Panel^ topPanel;
 	private: System::Windows::Forms::Label^ topTitle;
 	private: System::Windows::Forms::Label^ topText;
@@ -101,19 +113,14 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ lblMarco1;
 	private: System::Windows::Forms::Label^ lblMarco2;
-
-
-
-
-	private:
-		AuthManager* authManager = nullptr;
-		TripManager* tripManager = nullptr;
 	private: System::Windows::Forms::PictureBox^ pictureBoxIcon;
 	private: System::Windows::Forms::Label^ lblLYNX;
 	private: System::Windows::Forms::Panel^ pnlTopBar;
-		   System::ComponentModel::Container^ components;
+	private:  System::ComponentModel::Container^ components;
 
-#pragma region Windows Form Designer generated code
+		// WINDOWS INITIALIZE
+	private:
+	#pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
 			this->topPanel = (gcnew System::Windows::Forms::Panel());
@@ -225,7 +232,6 @@ namespace LYNX {
 			this->earningsButton->TabIndex = 4;
 			this->earningsButton->Text = L"Ver ganancias";
 			this->earningsButton->UseVisualStyleBackColor = false;
-			this->earningsButton->Click += gcnew System::EventHandler(this, &DriverMenuForm::ShowPreviewMessage);
 			// 
 			// statusButton
 			// 
@@ -241,7 +247,6 @@ namespace LYNX {
 			this->statusButton->TabIndex = 3;
 			this->statusButton->Text = L"Cambiar estado";
 			this->statusButton->UseVisualStyleBackColor = false;
-			this->statusButton->Click += gcnew System::EventHandler(this, &DriverMenuForm::ShowPreviewMessage);
 			// 
 			// onlineChip
 			// 
@@ -461,7 +466,6 @@ namespace LYNX {
 			this->finishButton->TabIndex = 5;
 			this->finishButton->Text = L"Finalizar viaje";
 			this->finishButton->UseVisualStyleBackColor = false;
-			this->finishButton->Click += gcnew System::EventHandler(this, &DriverMenuForm::ShowPreviewMessage);
 			// 
 			// acceptButton
 			// 
@@ -476,7 +480,6 @@ namespace LYNX {
 			this->acceptButton->TabIndex = 4;
 			this->acceptButton->Text = L"Aceptar solicitud";
 			this->acceptButton->UseVisualStyleBackColor = false;
-			this->acceptButton->Click += gcnew System::EventHandler(this, &DriverMenuForm::ShowPreviewMessage);
 			// 
 			// queueItem3
 			// 
@@ -643,7 +646,6 @@ namespace LYNX {
 			this->updateVehicleButton->TabIndex = 4;
 			this->updateVehicleButton->Text = L"Actualizar vehiculo";
 			this->updateVehicleButton->UseVisualStyleBackColor = false;
-			this->updateVehicleButton->Click += gcnew System::EventHandler(this, &DriverMenuForm::ShowPreviewMessage);
 			// 
 			// maintenancePanel
 			// 
@@ -742,7 +744,6 @@ namespace LYNX {
 			this->registerButton->TabIndex = 9;
 			this->registerButton->Text = L"Registrar";
 			this->registerButton->UseVisualStyleBackColor = false;
-			this->registerButton->Click += gcnew System::EventHandler(this, &DriverMenuForm::ShowPreviewMessage);
 			// 
 			// manualKmBox
 			// 
@@ -941,6 +942,7 @@ namespace LYNX {
 			this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBoxIcon->TabIndex = 3;
 			this->pictureBoxIcon->TabStop = false;
+			this->pictureBoxIcon->Click += gcnew System::EventHandler(this, &DriverMenuForm::pictureBoxIcon_Click);
 			// 
 			// lblLYNX
 			// 
@@ -988,6 +990,7 @@ namespace LYNX {
 			this->Name = L"DriverMenuForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"LYNX | Driver";
+			this->Activated += gcnew System::EventHandler(this, &DriverMenuForm::DriverMenuForm_Activated);
 			this->Load += gcnew System::EventHandler(this, &DriverMenuForm::DriverMenuForm_Load);
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &DriverMenuForm::DriverMenuForm_KeyDown);
 			this->topPanel->ResumeLayout(false);
@@ -1009,51 +1012,94 @@ namespace LYNX {
 			this->ResumeLayout(false);
 
 		}
-#pragma endregion
 
-	private:
-		void ConfigureForm()
-		{
-			// CENTRAR TODO
-			this->CenterToScreen();
+	#pragma endregion
+		// DATOS PUBLICOS DEL PASAJERO LOGUEADO
+		public:
+			String^ dni = "";
+			String^ name = "";
+			String^ password = "";
 
-			// ACTIVAR F11
-			this->KeyPreview = true;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
-		}
 
-		System::Void ShowPreviewMessage(System::Object^ sender, System::EventArgs^ e)
-		{
-			System::Windows::Forms::MessageBox::Show(
-				L"Vista visual del conductor lista. La logica se conectara despues.",
-				L"Driver Preview"
-			);
-		}
+		// LOGICA y PUBLIC
+		#pragma endregion
+		public:
+
+
+		private:
+		//
+		// Configuracion global de form
+		//
+			void ConfigureForm()
+			{
+				this->CenterToScreen();
+				this->KeyPreview = true;
+				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				this->MaximizeBox = false;
+
+				try { this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico"); }
+				catch (...) {}
+			}
+
+		//
+		// Load Form
+		//
+			System::Void DriverMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
+			{
+				normalSize = this->Size;
+				normalLocation = this->Location;
+				normalState = this->WindowState;
+
+				try {
+					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+					this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
+					this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+				}
+				catch (...) {}
+
+				// RefreshDriverPanel();
+
+				FormsStatus::SaveWindow(this);
+
+				if (FormsStatus::isFullscreen)
+				{
+					FormsStatus::ApplyWindow(this);
+				}
+			}
 
 		//
 		// Full screen function
 		//
-		System::Drawing::Size normalSize;
-		System::Drawing::Point normalLocation;
-		System::Windows::Forms::FormWindowState normalState;
+			System::Drawing::Size normalSize;
+			System::Drawing::Point normalLocation;
+			System::Windows::Forms::FormWindowState normalState;
 
-		System::Void DriverMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
-		{
-			if (e->KeyCode == System::Windows::Forms::Keys::F11)
+			System::Void DriverMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 			{
-				if (!FormsStatus::isFullscreen)
+				if (e->KeyCode == System::Windows::Forms::Keys::F11)
 				{
-					normalSize = this->Size;
-					normalLocation = this->Location;
-					normalState = this->WindowState;
-					FormsStatus::SaveWindow(this);
+					if (!FormsStatus::isFullscreen)
+					{
+						normalSize = this->Size;
+						normalLocation = this->Location;
+						normalState = this->WindowState;
+						FormsStatus::SaveWindow(this);
 
-					this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-					this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-					FormsStatus::isFullscreen = true;
+						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+						this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+						FormsStatus::isFullscreen = true;
+					}
+					else
+					{
+						this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+						this->Size = FormsStatus::normalSize;
+						this->Location = FormsStatus::normalLocation;
+						FormsStatus::isFullscreen = false;
+					}
 				}
-				else
+
+				if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
 				{
 					this->WindowState = System::Windows::Forms::FormWindowState::Normal;
 					this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -1063,27 +1109,27 @@ namespace LYNX {
 				}
 			}
 
-			if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
+		//
+		// Click functions
+		//
+		System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
 			{
-				this->WindowState = System::Windows::Forms::FormWindowState::Normal;
-				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-				this->Size = FormsStatus::normalSize;
-				this->Location = FormsStatus::normalLocation;
-				FormsStatus::isFullscreen = false;
+				FormsStatus::SaveWindow(this);
+				FormsStatus::ApplyWindow(FormsStatus::mainMenu);
+				FormsStatus::mainMenu->Show();
+				FormsStatus::mainMenu->BringToFront();
+				this->Hide();
 			}
 		}
 
-		System::Void DriverMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
+		//
+		// Actived Component: se refresca cuando vuelve a primer plano
+		//
+		System::Void DriverMenuForm_Activated(System::Object^ sender, System::EventArgs^ e)
 		{
-			normalSize = this->Size;
-			normalLocation = this->Location;
-			normalState = this->WindowState;
-			FormsStatus::SaveWindow(this);
-
-			if (FormsStatus::isFullscreen)
-			{
-				FormsStatus::ApplyWindow(this);
-			}
+			// RefreshDriverPanel();
 		}
 
 

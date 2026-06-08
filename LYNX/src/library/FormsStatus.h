@@ -10,6 +10,8 @@ namespace LYNX {
         static System::Drawing::Size normalSize = System::Drawing::Size(1496, 959); // guardar size
         static System::Drawing::Point normalLocation = System::Drawing::Point(0, 0);    // guardar locacion 
        
+        static bool isWithoutF11 = false;
+
         // guardar la ventana actual
         static void SaveWindow(System::Windows::Forms::Form^ form)
         {
@@ -40,6 +42,7 @@ namespace LYNX {
                 form->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
                 form->Size = normalSize;
                 form->Location = normalLocation;
+                isWithoutF11 = true;
             }
         }
     };

@@ -419,6 +419,7 @@ namespace LYNX {
 		// 
 			System::Void LoginPassengerForm_Load(System::Object^ sender, System::EventArgs^ e) {
 
+				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
 				// Para Picture Box LYNX
 				this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
 				this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
@@ -454,11 +455,16 @@ namespace LYNX {
 					return;
 				}
 
-				//Verificar si se pudo o no acceder al gestionador de archivos
+
+				// Verificar si se pudo o no acceder al gestionador de archivos
 				if (authManager == nullptr) {
 					MessageBox::Show("No se pudo acceder al gestor de usuarios", "Iniciar Sesion", MessageBoxButtons::OK);
 					return;
 				}
+
+				// Recargar desde archivo para tener recargados actualmente (FUNDAMENTAL FOREVER) =====================================================================================
+				authManager->reloadPassengers();
+
 
 				// Converitr con marshal as al tipo de dato que quiero segun un String^
 				std::string dni = msclr::interop::marshal_as<std::string>(dniText);

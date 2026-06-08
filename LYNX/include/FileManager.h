@@ -419,8 +419,9 @@ public:
             pas.password = miBinario.password;
             listaDelArchivoBin.push_back(pas);
         }
-
+        
         MyFile.close();
+        std::cout << "[OK] " << listaDelArchivoBin.size() << " passwords leidos de: " << rutaPasswordsBin << "\n";
         return listaDelArchivoBin;
     }
 };

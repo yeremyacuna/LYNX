@@ -1154,3 +1154,4 @@ void Menu::LYNXMenu()
     guardarDatos(fileManager, authMgr, tripMgr);
     mostrarMensaje("Hasta la proxima");
 }
+

@@ -1,6 +1,9 @@
 #pragma once
-#include "../library/FormsStatus.h"
 #include <windows.h>
+#include "../library/FormsStatus.h"
+#include "../AuthManager.h"    
+#include "../TripManager.h" 
+#include <msclr/marshal_cppstd.h> 
 
 class AuthManager;
 class TripManager;
@@ -23,6 +26,7 @@ namespace LYNX {
 			ConfigureForm();
 		}
 
+        // falta password
 		AdminMenuForm(AuthManager* auth, TripManager* trips)
 		{
 			this->authManager = auth;
@@ -37,14 +41,13 @@ namespace LYNX {
             if (components) delete components;
         }
 
-        
-
-
+        // OBJETOS
 	private:
 		AuthManager* authManager = nullptr;
 		TripManager* tripManager = nullptr;
 		
 
+        // COMPONENTES
            // Cuadros de conteo
     private: System::Windows::Forms::Panel^ pnlTarjetaPasajeros;
     private: System::Windows::Forms::Label^ lblTitPasajeros;
@@ -110,12 +113,11 @@ namespace LYNX {
     private: System::Windows::Forms::Label^ lblTitPasswords;
     private: System::Windows::Forms::Button^ btnCargarPasswords;
     private: System::Windows::Forms::RichTextBox^ rtbPasswords;
-
     private: System::ComponentModel::Container^ components;
 
-           //  INICIALIZACION DE COMPONENTES
+        // WINDOWS INITIALIZE
     private:
-#pragma region Windows Form Designer generated code
+    #pragma region Windows Form Designer generated code
         void InitializeComponent(void)
         {
             this->pnlTarjetaPasajeros = (gcnew System::Windows::Forms::Panel());
@@ -314,7 +316,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitBusqueda->Location = System::Drawing::Point(15, 14);
             this->lblTitBusqueda->Name = L"lblTitBusqueda";
-            this->lblTitBusqueda->Size = System::Drawing::Size(135, 22);
+            this->lblTitBusqueda->Size = System::Drawing::Size(161, 27);
             this->lblTitBusqueda->TabIndex = 0;
             this->lblTitBusqueda->Text = L"Buscar usuario";
             // 
@@ -361,7 +363,7 @@ namespace LYNX {
             this->txtDniBuscar->ForeColor = System::Drawing::Color::Gray;
             this->txtDniBuscar->Location = System::Drawing::Point(15, 98);
             this->txtDniBuscar->Name = L"txtDniBuscar";
-            this->txtDniBuscar->Size = System::Drawing::Size(400, 24);
+            this->txtDniBuscar->Size = System::Drawing::Size(400, 28);
             this->txtDniBuscar->TabIndex = 3;
             this->txtDniBuscar->Text = L"Ingresa el DNI del pasajero...";
             this->txtDniBuscar->Enter += gcnew System::EventHandler(this, &AdminMenuForm::txtDni_Enter);
@@ -403,7 +405,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(70)));
             this->lblResultadoTit->Location = System::Drawing::Point(8, 8);
             this->lblResultadoTit->Name = L"lblResultadoTit";
-            this->lblResultadoTit->Size = System::Drawing::Size(59, 13);
+            this->lblResultadoTit->Size = System::Drawing::Size(75, 17);
             this->lblResultadoTit->TabIndex = 0;
             this->lblResultadoTit->Text = L"Resultado:";
             // 
@@ -445,7 +447,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitListados->Location = System::Drawing::Point(15, 12);
             this->lblTitListados->Name = L"lblTitListados";
-            this->lblTitListados->Size = System::Drawing::Size(238, 22);
+            this->lblTitListados->Size = System::Drawing::Size(287, 27);
             this->lblTitListados->TabIndex = 0;
             this->lblTitListados->Text = L"Listado de usuarios y viajes";
             // 
@@ -512,7 +514,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(80)));
             this->lblOrdenarPor->Location = System::Drawing::Point(15, 96);
             this->lblOrdenarPor->Name = L"lblOrdenarPor";
-            this->lblOrdenarPor->Size = System::Drawing::Size(74, 14);
+            this->lblOrdenarPor->Size = System::Drawing::Size(90, 18);
             this->lblOrdenarPor->TabIndex = 4;
             this->lblOrdenarPor->Text = L"Ordenar por:";
             // 
@@ -626,6 +628,7 @@ namespace LYNX {
             this->lblLYNX->Size = System::Drawing::Size(84, 40);
             this->lblLYNX->TabIndex = 0;
             this->lblLYNX->Text = L"LYNX";
+            this->lblLYNX->Click += gcnew System::EventHandler(this, &AdminMenuForm::lblLYNX_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -676,7 +679,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(27)), static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitEstadisticas->Location = System::Drawing::Point(15, 14);
             this->lblTitEstadisticas->Name = L"lblTitEstadisticas";
-            this->lblTitEstadisticas->Size = System::Drawing::Size(196, 22);
+            this->lblTitEstadisticas->Size = System::Drawing::Size(235, 27);
             this->lblTitEstadisticas->TabIndex = 0;
             this->lblTitEstadisticas->Text = L"Estadisticas generales";
             // 
@@ -691,7 +694,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstPasajerosReg->Location = System::Drawing::Point(17, 44);
             this->lblEstPasajerosReg->Name = L"lblEstPasajerosReg";
-            this->lblEstPasajerosReg->Size = System::Drawing::Size(149, 14);
+            this->lblEstPasajerosReg->Size = System::Drawing::Size(188, 18);
             this->lblEstPasajerosReg->TabIndex = 1;
             this->lblEstPasajerosReg->Text = L"Usuarios registrados:       0";
             this->lblEstPasajerosReg->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -707,7 +710,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstConductoresReg->Location = System::Drawing::Point(17, 68);
             this->lblEstConductoresReg->Name = L"lblEstConductoresReg";
-            this->lblEstConductoresReg->Size = System::Drawing::Size(160, 14);
+            this->lblEstConductoresReg->Size = System::Drawing::Size(199, 18);
             this->lblEstConductoresReg->TabIndex = 2;
             this->lblEstConductoresReg->Text = L"Conductores registrados:    0";
             this->lblEstConductoresReg->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -723,7 +726,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstConductoresDisp->Location = System::Drawing::Point(17, 92);
             this->lblEstConductoresDisp->Name = L"lblEstConductoresDisp";
-            this->lblEstConductoresDisp->Size = System::Drawing::Size(161, 14);
+            this->lblEstConductoresDisp->Size = System::Drawing::Size(198, 18);
             this->lblEstConductoresDisp->TabIndex = 3;
             this->lblEstConductoresDisp->Text = L"Conductores disponibles:    0";
             this->lblEstConductoresDisp->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -739,7 +742,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstViajesEspera->Location = System::Drawing::Point(17, 116);
             this->lblEstViajesEspera->Name = L"lblEstViajesEspera";
-            this->lblEstViajesEspera->Size = System::Drawing::Size(136, 14);
+            this->lblEstViajesEspera->Size = System::Drawing::Size(174, 18);
             this->lblEstViajesEspera->TabIndex = 4;
             this->lblEstViajesEspera->Text = L"Viajes en espera:           0";
             this->lblEstViajesEspera->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -755,7 +758,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstViajesActivos->Location = System::Drawing::Point(432, 44);
             this->lblEstViajesActivos->Name = L"lblEstViajesActivos";
-            this->lblEstViajesActivos->Size = System::Drawing::Size(104, 14);
+            this->lblEstViajesActivos->Size = System::Drawing::Size(132, 18);
             this->lblEstViajesActivos->TabIndex = 7;
             this->lblEstViajesActivos->Text = L"Viajes activos:     0";
             this->lblEstViajesActivos->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -771,7 +774,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstViajesHistorial->Location = System::Drawing::Point(432, 68);
             this->lblEstViajesHistorial->Name = L"lblEstViajesHistorial";
-            this->lblEstViajesHistorial->Size = System::Drawing::Size(114, 14);
+            this->lblEstViajesHistorial->Size = System::Drawing::Size(143, 18);
             this->lblEstViajesHistorial->TabIndex = 8;
             this->lblEstViajesHistorial->Text = L"Viajes en historial: 0";
             this->lblEstViajesHistorial->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -787,7 +790,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(70)));
             this->lblEstGanancias->Location = System::Drawing::Point(432, 116);
             this->lblEstGanancias->Name = L"lblEstGanancias";
-            this->lblEstGanancias->Size = System::Drawing::Size(193, 17);
+            this->lblEstGanancias->Size = System::Drawing::Size(232, 21);
             this->lblEstGanancias->TabIndex = 10;
             this->lblEstGanancias->Text = L"Ganancia plataforma:  S/ 0.00";
             this->lblEstGanancias->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -803,7 +806,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstMontoCola->Location = System::Drawing::Point(17, 140);
             this->lblEstMontoCola->Name = L"lblEstMontoCola";
-            this->lblEstMontoCola->Size = System::Drawing::Size(157, 14);
+            this->lblEstMontoCola->Size = System::Drawing::Size(191, 18);
             this->lblEstMontoCola->TabIndex = 5;
             this->lblEstMontoCola->Text = L"Monto total en cola:  S/ 0.00";
             this->lblEstMontoCola->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -819,7 +822,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(55)), static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstViajesCurso->Location = System::Drawing::Point(432, 92);
             this->lblEstViajesCurso->Name = L"lblEstViajesCurso";
-            this->lblEstViajesCurso->Size = System::Drawing::Size(113, 14);
+            this->lblEstViajesCurso->Size = System::Drawing::Size(141, 18);
             this->lblEstViajesCurso->TabIndex = 9;
             this->lblEstViajesCurso->Text = L"Viajes en curso:     0";
             this->lblEstViajesCurso->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -835,7 +838,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(48)));
             this->lblEstCola->Location = System::Drawing::Point(17, 164);
             this->lblEstCola->Name = L"lblEstCola";
-            this->lblEstCola->Size = System::Drawing::Size(164, 14);
+            this->lblEstCola->Size = System::Drawing::Size(205, 18);
             this->lblEstCola->TabIndex = 6;
             this->lblEstCola->Text = L"Cola: [--] Sin viajes en espera";
             this->lblEstCola->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -862,7 +865,7 @@ namespace LYNX {
                 static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblTitPasswords->Location = System::Drawing::Point(15, 14);
             this->lblTitPasswords->Name = L"lblTitPasswords";
-            this->lblTitPasswords->Size = System::Drawing::Size(188, 22);
+            this->lblTitPasswords->Size = System::Drawing::Size(225, 27);
             this->lblTitPasswords->TabIndex = 0;
             this->lblTitPasswords->Text = L"Passwords en binario";
             // 
@@ -883,6 +886,7 @@ namespace LYNX {
             this->btnCargarPasswords->TabIndex = 1;
             this->btnCargarPasswords->Text = L"Cargar";
             this->btnCargarPasswords->UseVisualStyleBackColor = false;
+            this->btnCargarPasswords->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnCargarPasswords_Click);
             // 
             // rtbPasswords
             // 
@@ -905,7 +909,7 @@ namespace LYNX {
             // 
             // AdminMenuForm
             // 
-            this->AutoScaleDimensions = System::Drawing::SizeF(7, 14);
+            this->AutoScaleDimensions = System::Drawing::SizeF(8, 18);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)), static_cast<System::Int32>(static_cast<System::Byte>(247)),
                 static_cast<System::Int32>(static_cast<System::Byte>(245)));
@@ -923,6 +927,7 @@ namespace LYNX {
             this->MaximizeBox = false;
             this->Name = L"AdminMenuForm";
             this->Text = L"LYNX | Panel Administrativo";
+            this->Activated += gcnew System::EventHandler(this, &AdminMenuForm::AdminMenuForm_Activated);
             this->Load += gcnew System::EventHandler(this, &AdminMenuForm::AdminMenuForm_Load);
             this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &AdminMenuForm::AdminMenuForm_KeyDown);
             this->pnlTarjetaPasajeros->ResumeLayout(false);
@@ -945,82 +950,102 @@ namespace LYNX {
             this->ResumeLayout(false);
 
         }
-#pragma endregion
 
-	private:
-		void ConfigureForm()
-		{
-			// CENTRAR TODO
-			this->CenterToScreen();
 
-			// ACTIVAR F11
-			this->KeyPreview = true;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
-		}
+        // LOGICA y PUBLIC
+        #pragma endregion
+        public:
 
-		System::Void previewButton_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			System::Windows::Forms::MessageBox::Show(
-				L"Panel administrativo funcionando correctamente.",
-				L"LYNX"
-			);
-		}
+
+	    private:
+        //
+        // Configuracion global de form
+        //
+			void ConfigureForm()
+			{
+
+                this->CenterToScreen();
+                this->KeyPreview = true;
+                this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+                this->MaximizeBox = false;
+
+                try { this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico"); }
+                catch (...) {}
+			}
+
+
+		    System::Void previewButton_Click(System::Object^ sender, System::EventArgs^ e)
+		    {
+			    System::Windows::Forms::MessageBox::Show(
+				    L"Panel administrativo funcionando correctamente.",
+				    L"LYNX"
+			    );
+		    }
 
         // 
         //  ESTADO INTERNO
-        // 
-    private:
-        bool buscandoPasajero = true;   // tab activo en busqueda
-        int  listaActiva = 0;      // 0=Pasajeros, 1=Conductores, 2=Viajes
+        //
+            bool buscandoPasajero = true;   // tab activo en busqueda
+            int  listaActiva = 0;      // 0=Pasajeros, 1=Conductores, 2=Viajes
 
-        System::Drawing::Size              normalSize;
-        System::Drawing::Point             normalLocation;
-        System::Windows::Forms::FormWindowState normalState;
+            System::Drawing::Size              normalSize;
+            System::Drawing::Point             normalLocation;
+            System::Windows::Forms::FormWindowState normalState;
 
         // 
         //  LOAD
         // 
-    private:
-        System::Void AdminMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
-        {
-            // Cargar imagen del logo en la barra
-            try {
-                this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
-                this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-            }
-            catch (...) {}
+            System::Void AdminMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
+            {
+                normalSize = this->Size;
+                normalLocation = this->Location;
+                normalState = this->WindowState;
 
-            // Para Pantalla Completa
-            normalSize = this->Size;
-            normalLocation = this->Location;
-            normalState = this->WindowState;
-            FormsStatus::SaveWindow(this);
+                // Cargar imagen de la barra LYNX
+                try {
+                    this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+                    this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
+                    this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+                }
+                catch (...) {}
 
-            if (FormsStatus::isFullscreen) {
-                FormsStatus::ApplyWindow(this);
+                // Cargar datos del CONDUCTOR desde authManager
+                //LoadConductorData();
+
+                FormsStatus::SaveWindow(this);
+                if (FormsStatus::isFullscreen) FormsStatus::ApplyWindow(this);
             }
-        }
 
         // 
         //  FULLSCREEN: F11, ESC sale si esta en fullscreen
         // 
-    private:
-        System::Void AdminMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
-        {
-            if (e->KeyCode == System::Windows::Forms::Keys::F11)
+            System::Void AdminMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
             {
-                if (!FormsStatus::isFullscreen)
+                if (e->KeyCode == System::Windows::Forms::Keys::F11)
                 {
-                    normalSize = this->Size;
-                    normalLocation = this->Location;
-                    normalState = this->WindowState;
-                    FormsStatus::SaveWindow(this);
-                    this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-                    this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-                    FormsStatus::isFullscreen = true;
+                    if (!FormsStatus::isFullscreen)
+                    {
+                        normalSize = this->Size;
+                        normalLocation = this->Location;
+                        normalState = this->WindowState;
+                        FormsStatus::SaveWindow(this);
+                        this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+                        this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+                        FormsStatus::isFullscreen = true;
+                    }
+                    else
+                    {
+                        this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+                        this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+                        this->Size = FormsStatus::normalSize;
+                        this->Location = FormsStatus::normalLocation;
+                        FormsStatus::isFullscreen = false;
+                        this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+                    }
                 }
-                else
+
+                // ESC sale del fullscreen
+                if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
                 {
                     this->WindowState = System::Windows::Forms::FormWindowState::Normal;
                     this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -1030,18 +1055,6 @@ namespace LYNX {
                     this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
                 }
             }
-
-            // ESC sale del fullscreen
-            if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
-            {
-                this->WindowState = System::Windows::Forms::FormWindowState::Normal;
-                this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-                this->Size = FormsStatus::normalSize;
-                this->Location = FormsStatus::normalLocation;
-                FormsStatus::isFullscreen = false;
-                this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-            }
-        }
 
         //
         // Click functions
@@ -1255,15 +1268,39 @@ namespace LYNX {
         }
 
         // 
-        //  CARGAR PASSWORDS DESDE ARCHIVO BINARIO
+        //  CARGAR PASSWORDS DESDE ARCHIVO BINARIO (( YA ESTA ; cambiar formato nomas ))
         // 
-    private:
         System::Void btnCargarPasswords_Click(System::Object^ sender, System::EventArgs^ e)
         {
-            // Leer archivo binario de passwords y mostrar cada entrada
-            rtbPasswords->Text = L"Aqui se mostraran los passwords leidos del archivo binario.";
+            if (authManager == nullptr) 
+                return;
+
+            // Generar el binario con los datos actuales
+            authManager->savePasswordsBinary();
+
+            // Leer el binario y construir el texto a mostrar
+            auto previews = authManager->readPasswordsBinary();
+
+            String^ texto = "";
+            for (int i = 0; i < (int)previews.size(); i++) {
+                
+                std::string linea = previews[i].tipo + " | "
+                    + previews[i].id + " | "
+                    + previews[i].dni + " | "
+                    + previews[i].password;
+                texto += gcnew String(linea.c_str()) + "\n";
+
+            }
+
+            rtbPasswords->Text = texto->Length > 0 ? texto : L"No hay passwords registrados.";
         }
 
-        
+        //
+        // Actived Component: es un evento de Windows Forms que se dispara cada vez que el form se convierte en la ventana activa
+        //
+        System::Void AdminMenuForm_Activated(System::Object^ sender, System::EventArgs^ e) {
+        }
+private: System::Void lblLYNX_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
