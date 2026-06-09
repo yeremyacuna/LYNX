@@ -6,8 +6,6 @@
 #include "../../include/Stack.h"
 #include <msclr/marshal_cppstd.h>
 
-#include <string>
-
 class AuthManager;
 class TripManager;
 class FileManager;
@@ -64,12 +62,6 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ topTitle;
 	private: System::Windows::Forms::Panel^ profilePanel;
 	private: System::Windows::Forms::Panel^ queuePanel;
-
-
-
-
-
-
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ lblMarco1;
@@ -99,7 +91,6 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ lblSpent;
 	private: System::Windows::Forms::Label^ lblID;
 	private: System::Windows::Forms::Label^ lblRating;
-
 	private: System::Windows::Forms::Label^ lblDni;
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::Label^ lblUpdateProfile;
@@ -121,9 +112,7 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ lblPriceNum;
 	private: System::Windows::Forms::Label^ lblPrice;
 	private: System::Windows::Forms::Label^ lblOriginDestination;
-
 	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
-
 	private: System::ComponentModel::Container^ components;
 
 		// WINDOWS INITIALIZE
@@ -1054,16 +1043,17 @@ namespace LYNX {
 				this->lblRating->Visible = false;
 				this->btnUpdate->Visible = false;
 
-			this->lblUpdateProfile->Visible = true;
-			this->lblNewName->Visible = true;
-			this->tbNewName->Visible = true;
-			this->lblNewPassword->Visible = true;
-			this->tbNewPassword->Visible = true;
-			this->lblPastPassword->Visible = true;
-			this->tbPastPassword->Visible = true;
-			this->btnConfirm->Visible = true;
+				this->lblUpdateProfile->Visible = true;
+				this->lblNewName->Visible = true;
+				this->tbNewName->Visible = true;
+				this->lblNewPassword->Visible = true;
+				this->tbNewPassword->Visible = true;
+				this->lblPastPassword->Visible = true;
+				this->tbPastPassword->Visible = true;
+				this->btnConfirm->Visible = true;
 		}
 		
+		// Buscar viaje activo de un pasajero
 			Trip buscarViajeActivoDePasajero(TripManager& tripMgr, const string& dni)
 			{
 				for (int i = 0; i < tripMgr.getActiveTrips().getSize(); i++) {
@@ -1094,63 +1084,64 @@ namespace LYNX {
 				// Cargar datos del pasajero desde authManager
 				LoadPassengerData();
 
-			FormsStatus::SaveWindow(this);
-			if (FormsStatus::isFullscreen) FormsStatus::ApplyWindow(this);
-
-			
-			Trip activeT;
-			String^ a = this->dni;
-			/*
-			while ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
-				String^ o = gcnew System::String(activeT.getOrigin().c_str());
-				String^ d = gcnew System::String(activeT.getDestination().c_str());
-				float price = activeT.getPrice();
-
-				this->lblOriginDestination->Text = o + " -> " + d;
-				this->lblPrice->Text = L"S/." + price;
-				this->lblOriginDestination->Visible = false;
-				this->lblPrice->Visible = true;
-
-				//tripManager->finishTrip(activeT.getTripId(), *authManager);
-			}*/
-			//tripManager->createTrip(msclr::interop::marshal_as<std::string>(origin), msclr::interop::marshal_as<std::string>(destination), type, distance, msclr::interop::marshal_as<std::string>());
+				FormsStatus::SaveWindow(this);
+				if (FormsStatus::isFullscreen)
+					FormsStatus::ApplyWindow(this);
 
 
-			if ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
-				String^ o = gcnew System::String(activeT.getOrigin().c_str());
-				String^ d = gcnew System::String(activeT.getDestination().c_str());
-				float price = activeT.getPrice();
+				Trip activeT;
+				String^ a = this->dni;
+				/*
+				while ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
+					String^ o = gcnew System::String(activeT.getOrigin().c_str());
+					String^ d = gcnew System::String(activeT.getDestination().c_str());
+					float price = activeT.getPrice();
 
-				this->lblOriginDestination->Text = o + " -> " + d;
-				this->lblPriceNum->Text = L"S/." + price;
-				this->lblOriginDestination->Visible = true;
-				switch (activeT.getTipe()) {
-				case 1:
-					this->lblTypeTripText->Text = "Economico";
-					this->lblTypeTripText->ForeColor = System::Drawing::Color::LightGreen;
-					break;
-				case 2:
-					this->lblTypeTripText->Text = "Standard";
-					this->lblTypeTripText->ForeColor = System::Drawing::Color::LightSteelBlue;
-					break;
-				case 3:
-					this->lblTypeTripText->Text = "Premium";
-					this->lblTypeTripText->ForeColor = System::Drawing::Color::Goldenrod;
-					break;
+					this->lblOriginDestination->Text = o + " -> " + d;
+					this->lblPrice->Text = L"S/." + price;
+					this->lblOriginDestination->Visible = false;
+					this->lblPrice->Visible = true;
+
+					//tripManager->finishTrip(activeT.getTripId(), *authManager);
+					}*/
+					//tripManager->createTrip(msclr::interop::marshal_as<std::string>(origin), msclr::interop::marshal_as<std::string>(destination), type, distance, msclr::interop::marshal_as<std::string>());
+
+
+				if ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
+					String^ o = gcnew System::String(activeT.getOrigin().c_str());
+					String^ d = gcnew System::String(activeT.getDestination().c_str());
+					float price = activeT.getPrice();
+
+					this->lblOriginDestination->Text = o + " -> " + d;
+					this->lblPriceNum->Text = L"S/." + price;
+					this->lblOriginDestination->Visible = true;
+					switch (activeT.getTipe()) {
+					case 1:
+						this->lblTypeTripText->Text = "Economico";
+						this->lblTypeTripText->ForeColor = System::Drawing::Color::LightGreen;
+						break;
+					case 2:
+						this->lblTypeTripText->Text = "Standard";
+						this->lblTypeTripText->ForeColor = System::Drawing::Color::LightSteelBlue;
+						break;
+					case 3:
+						this->lblTypeTripText->Text = "Premium";
+						this->lblTypeTripText->ForeColor = System::Drawing::Color::Goldenrod;
+						break;
+					}
+					this->lblPrice->Visible = true;
+					this->lblPriceNum->Visible = true;
+					this->lblTypeTrip->Visible = true;
+					this->lblTypeTripText->Visible = true;
+					this->ActualTripTitle->Visible = true;
+
+					this->lblNoTrip->Visible = false;
 				}
-				this->lblPrice->Visible = true;
-				this->lblPriceNum->Visible = true;
-				this->lblTypeTrip->Visible = true;
-				this->lblTypeTripText->Visible = true;
-				this->ActualTripTitle->Visible = true;
 
-				this->lblNoTrip->Visible = false;
-			}
+				this->flowLayoutPanel1->Controls->Clear();
 
-			this->flowLayoutPanel1->Controls->Clear();
-
-			// Extraemos el vector con el historial del pasajero mediante la pila sin destruirla
-			std::vector<Trip> historial = exportarHistoryTrips(*tripManager); 
+				// Extraemos el vector con el historial del pasajero mediante la pila sin destruirla
+				std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
 
 				// Filtramos e insertamos los viajes en el panel
 				for (size_t i = 0; i < historial.size(); i++) {
@@ -1159,8 +1150,8 @@ namespace LYNX {
 						AgregarBloqueHistorial(historial[i]);
 					}
 				}
-		
-		}
+
+			}
 
 		//
 		// Tipo de viaje: seleccion de boton
@@ -1279,29 +1270,24 @@ namespace LYNX {
 			this->btnPremium->BackColor = System::Drawing::Color::White;
 			this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			
-
-
-			
-
-
 		}
 
-			System::Void btnSearch_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-				this->btnSearch->BackColor = System::Drawing::Color::White;
-				this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			}
+		System::Void btnSearch_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+			this->btnSearch->BackColor = System::Drawing::Color::White;
+			this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+		}
 
-			System::Void btnSearch_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-				this->btnSearch->BackColor = System::Drawing::Color::SeaGreen;
-				this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-				this->btnSearch->Location = System::Drawing::Point(138, 261);
-			}
+		System::Void btnSearch_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+			this->btnSearch->BackColor = System::Drawing::Color::SeaGreen;
+			this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->btnSearch->Location = System::Drawing::Point(138, 261);
+		}
 
-			System::Void btnSearch_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
-				this->btnSearch->BackColor = System::Drawing::Color::Black;
-				this->btnSearch->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-				this->btnSearch->Location = System::Drawing::Point(138, 264);
-			}
+		System::Void btnSearch_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
+			this->btnSearch->BackColor = System::Drawing::Color::Black;
+			this->btnSearch->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnSearch->Location = System::Drawing::Point(138, 264);
+		}
 
 		//
 		// Perfil: mostrar / editar
@@ -1476,167 +1462,173 @@ namespace LYNX {
 			authMgr.saveAll();
 			fileManager.guardarTripsTXT(exportarTodosLosTrips(tripMgr));
 		}
-	private: System::Void btnAccept_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->lblFoundDriver->Visible = false;
-		this->lblDriverName->Visible = false;
-		this->lblDriverDni->Visible = false;
-		this->btnAccept->Visible = false;
-		this->btnDecline->Visible = false;
-
-		String^ dnii = dni;
-		String^ o = origin;
-		String^ d = destination;
-		String^ dn = driverName;
-		String^ dd = driverDni;
-
-		Trip activeT;
-		while ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(dnii))).getTripId() != "") {
-			tripManager->finishTrip(activeT.getTripId(), *authManager);
-		}
-		tripManager->createTrip(msclr::interop::marshal_as<std::string>(o), msclr::interop::marshal_as<std::string>(d), originalType, distance, msclr::interop::marshal_as<std::string>(dn), msclr::interop::marshal_as<std::string>(dd), msclr::interop::marshal_as<std::string>(dnii), fechaActual());
-		if (!msclr::interop::marshal_as<std::string>(dd).empty()) {
-			tripManager->assignDriver(msclr::interop::marshal_as<std::string>(dd), *authManager);
-			guardarDatos(*fileManager, *authManager, *tripManager);
-		}
-		else {
-			guardarDatos(*fileManager, *authManager, *tripManager);
-		}
+	
 		
-		//o = gcnew System::String(activeT.getOrigin().c_str());
-		//d = gcnew System::String(activeT.getDestination().c_str());
+		
+		System::Void btnAccept_Click(System::Object^ sender, System::EventArgs^ e) {
+			this->lblFoundDriver->Visible = false;
+			this->lblDriverName->Visible = false;
+			this->lblDriverDni->Visible = false;
+			this->btnAccept->Visible = false;
+			this->btnDecline->Visible = false;
 
-		this->lblOriginDestination->Text = o + " -> " + d;
-		this->lblPriceNum->Text = L"S/." + calcPrice(originalType, distance);
-		this->lblOriginDestination->Visible = true;
-		switch (originalType) {
-		case 1:
-			this->lblTypeTripText->Text = "Economico";
-			break;
-		case 2:
-			this->lblTypeTripText->Text = "Standard";
-			break;
-		case 3:
-			this->lblTypeTripText->Text = "Premium";
-			break;
+			String^ dnii = dni;
+			String^ o = origin;
+			String^ d = destination;
+			String^ dn = driverName;
+			String^ dd = driverDni;
+
+			Trip activeT;
+			while ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(dnii))).getTripId() != "") {
+				tripManager->finishTrip(activeT.getTripId(), *authManager);
+			}
+			tripManager->createTrip(msclr::interop::marshal_as<std::string>(o), msclr::interop::marshal_as<std::string>(d), originalType, distance, msclr::interop::marshal_as<std::string>(dn), msclr::interop::marshal_as<std::string>(dd), msclr::interop::marshal_as<std::string>(dnii), fechaActual());
+			if (!msclr::interop::marshal_as<std::string>(dd).empty()) {
+				tripManager->assignDriver(msclr::interop::marshal_as<std::string>(dd), *authManager);
+				guardarDatos(*fileManager, *authManager, *tripManager);
+			}
+			else {
+				guardarDatos(*fileManager, *authManager, *tripManager);
+			}
+		
+			//o = gcnew System::String(activeT.getOrigin().c_str());
+			//d = gcnew System::String(activeT.getDestination().c_str());
+
+			this->lblOriginDestination->Text = o + " -> " + d;
+			this->lblPriceNum->Text = L"S/." + calcPrice(originalType, distance);
+			this->lblOriginDestination->Visible = true;
+			switch (originalType) {
+			case 1:
+				this->lblTypeTripText->Text = "Economico";
+				break;
+			case 2:
+				this->lblTypeTripText->Text = "Standard";
+				break;
+			case 3:
+				this->lblTypeTripText->Text = "Premium";
+				break;
+			}
+			this->lblPrice->Visible = true;
+			this->lblPriceNum->Visible = true;
+			this->lblTypeTrip->Visible = true;
+			this->lblTypeTripText->Visible = true;
+			this->ActualTripTitle->Visible = true;
+
 		}
-		this->lblPrice->Visible = true;
-		this->lblPriceNum->Visible = true;
-		this->lblTypeTrip->Visible = true;
-		this->lblTypeTripText->Visible = true;
-		this->ActualTripTitle->Visible = true;
 
-	}
-private: System::Void btnDecline_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->lblFoundDriver->Visible = false;
-	this->lblDriverName->Visible = false;
-	this->lblDriverDni->Visible = false;
-	this->btnAccept->Visible = false;
-	this->btnDecline->Visible = false;
 
-	Trip activeT;
-	String^ a = this->dni;
+		System::Void btnDecline_Click(System::Object^ sender, System::EventArgs^ e) {
+			this->lblFoundDriver->Visible = false;
+			this->lblDriverName->Visible = false;
+			this->lblDriverDni->Visible = false;
+			this->btnAccept->Visible = false;
+			this->btnDecline->Visible = false;
 
-	if ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
-		String^ o = gcnew System::String(activeT.getOrigin().c_str());
-		String^ d = gcnew System::String(activeT.getDestination().c_str());
-		float price = activeT.getPrice();
+			Trip activeT;
+			String^ a = this->dni;
 
-		this->lblOriginDestination->Text = o + " -> " + d;
-		this->lblPriceNum->Text = L"S/." + price;
-		this->lblOriginDestination->Visible = true;
-		switch (activeT.getTipe()) {
-		case 1:
-			this->lblTypeTripText->Text = "Economico";
-			this->lblTypeTripText->ForeColor = System::Drawing::Color::LightGreen;
+			if ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
+				String^ o = gcnew System::String(activeT.getOrigin().c_str());
+				String^ d = gcnew System::String(activeT.getDestination().c_str());
+				float price = activeT.getPrice();
+
+				this->lblOriginDestination->Text = o + " -> " + d;
+				this->lblPriceNum->Text = L"S/." + price;
+				this->lblOriginDestination->Visible = true;
+				switch (activeT.getTipe()) {
+				case 1:
+					this->lblTypeTripText->Text = "Economico";
+					this->lblTypeTripText->ForeColor = System::Drawing::Color::LightGreen;
 			
-			break;
-		case 2:
-			this->lblTypeTripText->Text = "Standard";
-			this->lblTypeTripText->ForeColor = System::Drawing::Color::LightSteelBlue;
-			break;
-		case 3:
-			this->lblTypeTripText->Text = "Premium";
-			this->lblTypeTripText->ForeColor = System::Drawing::Color::Goldenrod;
-			break;
+					break;
+				case 2:
+					this->lblTypeTripText->Text = "Standard";
+					this->lblTypeTripText->ForeColor = System::Drawing::Color::LightSteelBlue;
+					break;
+				case 3:
+					this->lblTypeTripText->Text = "Premium";
+					this->lblTypeTripText->ForeColor = System::Drawing::Color::Goldenrod;
+					break;
+				}
+				this->lblPrice->Visible = true;
+				this->lblPriceNum->Visible = true;
+				this->lblTypeTrip->Visible = true;
+				this->lblTypeTripText->Visible = true;
+				this->ActualTripTitle->Visible = true;
+
+				this->lblNoTrip->Visible = false;
+			}
+			else {
+				this->lblNoTrip->Visible = true;
+			}
+
+		}	
+
+
+
+		System::Void queueItem3_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 		}
-		this->lblPrice->Visible = true;
-		this->lblPriceNum->Visible = true;
-		this->lblTypeTrip->Visible = true;
-		this->lblTypeTripText->Visible = true;
-		this->ActualTripTitle->Visible = true;
+		void AgregarBloqueHistorial(const Trip& trip)
+		{
+			// 1. Crear el Panel Fila contenedor del item
+			Panel^ itemPanel = gcnew Panel();
+			itemPanel->BackColor = System::Drawing::Color::FromArgb(244, 246, 241); // Tu color grisáceo claro 
+			itemPanel->Size = System::Drawing::Size(1330, 58); // Ancho adaptable al scrollbar y alto estándar 
+			itemPanel->Margin = System::Windows::Forms::Padding(0, 0, 0, 8); // Margen inferior de separación
 
-		this->lblNoTrip->Visible = false;
-	}
-	else {
-		this->lblNoTrip->Visible = true;
-	}
+			// 2. Crear el cuadrito azul decorativo a la izquierda
 
-}
-private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void queueItem3_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-}
-	   void AgregarBloqueHistorial(const Trip& trip)
-	   {
-		   // 1. Crear el Panel Fila contenedor del item
-		   Panel^ itemPanel = gcnew Panel();
-		   itemPanel->BackColor = System::Drawing::Color::FromArgb(244, 246, 241); // Tu color grisáceo claro 
-		   itemPanel->Size = System::Drawing::Size(1330, 58); // Ancho adaptable al scrollbar y alto estándar 
-		   itemPanel->Margin = System::Windows::Forms::Padding(0, 0, 0, 8); // Margen inferior de separación
+			Panel^ Cuadradito = gcnew Panel();
+			Cuadradito->Location = System::Drawing::Point(14, 22);
+			Cuadradito->Size = System::Drawing::Size(10, 10);
 
-		   // 2. Crear el cuadrito azul decorativo a la izquierda
+			switch (trip.getTipe()) {
+			case 1:
+				Cuadradito->BackColor = System::Drawing::Color::LightGreen;
+				break;
+			case 2:
+				Cuadradito->BackColor = System::Drawing::Color::LightSteelBlue;
+				break;
+			case 3:
+				Cuadradito->BackColor = System::Drawing::Color::Goldenrod;
+				break;
+			default:
+				Cuadradito->BackColor = System::Drawing::Color::Blue;
+				break;
+			}
 
-		   Panel^ Cuadradito = gcnew Panel();
-		   Cuadradito->Location = System::Drawing::Point(14, 22);
-		   Cuadradito->Size = System::Drawing::Size(10, 10);
-		   
-		   switch (trip.getTipe()) {
-		   case 1:
-			   Cuadradito->BackColor = System::Drawing::Color::LightGreen;
-			   break;
-		   case 2:
-			   Cuadradito->BackColor = System::Drawing::Color::LightSteelBlue;
-			   break;
-		   case 3:
-			   Cuadradito->BackColor = System::Drawing::Color::Goldenrod;
-			   break;
-		   default: 
-			   Cuadradito->BackColor = System::Drawing::Color::Blue;
-			   break;
-		   }
-		   
-		   
-		   
 
-		   // 3. Crear el Texto de Ruta (Origen -> Destino)
-		   Label^ lblRuta = gcnew Label();
-		   lblRuta->Font = gcnew System::Drawing::Font(L"Bahnschrift", 14, System::Drawing::FontStyle::Bold);
-		   lblRuta->ForeColor = System::Drawing::Color::FromArgb(28, 31, 36);
-		   lblRuta->Location = System::Drawing::Point(34, 16);
-		   lblRuta->AutoSize = true;
+			// 3. Crear el Texto de Ruta (Origen -> Destino)
+			Label^ lblRuta = gcnew Label();
+			lblRuta->Font = gcnew System::Drawing::Font(L"Bahnschrift", 14, System::Drawing::FontStyle::Bold);
+			lblRuta->ForeColor = System::Drawing::Color::FromArgb(28, 31, 36);
+			lblRuta->Location = System::Drawing::Point(34, 16);
+			lblRuta->AutoSize = true;
 
-		   // Conversión de datos nativos a administrados para la UI
-		   String^ origenCLI = gcnew String(trip.getOrigin().c_str()); 
-			   String^ destinoCLI = gcnew String(trip.getDestination().c_str()); 
-			   lblRuta->Text = origenCLI + L" -> " + destinoCLI;
+			// Conversión de datos nativos a administrados para la UI
+			String^ origenCLI = gcnew String(trip.getOrigin().c_str());
+			String^ destinoCLI = gcnew String(trip.getDestination().c_str());
+			lblRuta->Text = origenCLI + L" -> " + destinoCLI;
 
-		   // 4. Crear el Texto del Precio (A la derecha)
-		   Label^ lblPrecioItem = gcnew Label();
-		   lblPrecioItem->Font = gcnew System::Drawing::Font(L"Bahnschrift", 14, System::Drawing::FontStyle::Bold);
-		   lblPrecioItem->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
-		   lblPrecioItem->Size = System::Drawing::Size(150, 25);
-		   lblPrecioItem->Location = System::Drawing::Point(1150, 16); // Posición lateral derecha
-		   lblPrecioItem->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
-		   lblPrecioItem->Text = L"S/." + trip.getPrice().ToString("F2"); // Muestra con dos decimales de moneda
+			// 4. Crear el Texto del Precio (A la derecha)
+			Label^ lblPrecioItem = gcnew Label();
+			lblPrecioItem->Font = gcnew System::Drawing::Font(L"Bahnschrift", 14, System::Drawing::FontStyle::Bold);
+			lblPrecioItem->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
+			lblPrecioItem->Size = System::Drawing::Size(150, 25);
+			lblPrecioItem->Location = System::Drawing::Point(1150, 16); // Posición lateral derecha
+			lblPrecioItem->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
+			lblPrecioItem->Text = L"S/." + trip.getPrice().ToString("F2"); // Muestra con dos decimales de moneda
 
-		   // 5. Armar la jerarquía de los controles
-		   itemPanel->Controls->Add(Cuadradito);
-		   itemPanel->Controls->Add(lblRuta);
-		   itemPanel->Controls->Add(lblPrecioItem);
+			// 5. Armar la jerarquía de los controles
+			itemPanel->Controls->Add(Cuadradito);
+			itemPanel->Controls->Add(lblRuta);
+			itemPanel->Controls->Add(lblPrecioItem);
 
-		   // 6. Meter el bloque final dentro del FlowLayoutPanel inteligente
-		   this->flowLayoutPanel1->Controls->Add(itemPanel);
-	   }
+			// 6. Meter el bloque final dentro del FlowLayoutPanel inteligente
+			this->flowLayoutPanel1->Controls->Add(itemPanel);
+		}
+
+
 	   // pictureBoxIcon: volver al menu principal
 	   System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e)
 	   {
@@ -1651,6 +1643,7 @@ private: System::Void queueItem3_Paint(System::Object^ sender, System::Windows::
 		   }
 		   
 	   }
+
 	   //
 	   // Actived Component: es un evento de Windows Forms que se dispara cada vez que el form se convierte en la ventana activa
 	   //
