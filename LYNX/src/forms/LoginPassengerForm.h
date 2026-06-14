@@ -21,15 +21,21 @@ namespace LYNX {
 	public:
 		LoginPassengerForm(void) 
 		{
+			this->loginStyle = 1;
 			InitializeComponent();
+			ApplyLoginStyle();
 			ConfigureForm();
 		}
 
-		LoginPassengerForm(AuthManager* auth, TripManager* trips)
+		LoginPassengerForm(AuthManager* auth, TripManager* trips, int style)
 		{
 			this->authManager = auth;
 			this->tripManager = trips;
+			this->loginStyle = NormalizeLoginStyle(style);
 			InitializeComponent();
+			ApplyLoginStyle();
+
+			// ok
 			ConfigureForm();
 		}
 	
@@ -46,6 +52,7 @@ namespace LYNX {
 	private:
 		AuthManager* authManager = nullptr;
 		TripManager* tripManager = nullptr;
+		int loginStyle = 1;
 		
 		// COMPONENTES
 	private: System::Windows::Forms::Label^ lblIniciarSesion;
@@ -66,7 +73,7 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ lblMarco4;
 	private: System::Windows::Forms::Label^ lblMarco3;
 	private: System::Windows::Forms::TableLayoutPanel^ tlpOptions;
-	private: System::Windows::Forms::Label^ lblBorrar;
+
 	private: System::ComponentModel::Container^ components;
 		
 		// WINDOWS INITIALIZE
@@ -92,7 +99,6 @@ namespace LYNX {
 			this->lblMarco4 = (gcnew System::Windows::Forms::Label());
 			this->lblMarco3 = (gcnew System::Windows::Forms::Label());
 			this->tlpOptions = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->lblBorrar = (gcnew System::Windows::Forms::Label());
 			this->pnlTopBar->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
 			this->tlpOptions->SuspendLayout();
@@ -323,17 +329,6 @@ namespace LYNX {
 			this->tlpOptions->Size = System::Drawing::Size(429, 21);
 			this->tlpOptions->TabIndex = 15;
 			// 
-			// lblBorrar
-			// 
-			this->lblBorrar->AutoSize = true;
-			this->lblBorrar->ForeColor = System::Drawing::Color::Red;
-			this->lblBorrar->Location = System::Drawing::Point(596, 315);
-			this->lblBorrar->Name = L"lblBorrar";
-			this->lblBorrar->Size = System::Drawing::Size(248, 13);
-			this->lblBorrar->TabIndex = 19;
-			this->lblBorrar->Text = L"Esto es logear para pasajero por ahora (lbl invisible)";
-			this->lblBorrar->Visible = false;
-			// 
 			// LoginPassengerForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -341,7 +336,6 @@ namespace LYNX {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
 				static_cast<System::Int32>(static_cast<System::Byte>(34)));
 			this->ClientSize = System::Drawing::Size(1480, 920);
-			this->Controls->Add(this->lblBorrar);
 			this->Controls->Add(this->tlpOptions);
 			this->Controls->Add(this->lblMarco3);
 			this->Controls->Add(this->lblMarco4);
@@ -374,14 +368,55 @@ namespace LYNX {
 		#pragma endregion
 		public: 
 			bool passengerScreen = false;
+			bool driverScreen = false;
+			bool adminScreen = false;
+
 			bool switchToRegister = false;
+
 			String^ loggedPassengerDni = "";
+			String^ loggedDriverDni = "";
+			String^ loggedAdminDni = "";
 
 			String^ dnis;
 			String^ names;
 			String^ passwords;
 
+			int GetLoginStyle()
+			{
+				return loginStyle;
+			}
+
 		private:
+
+		//
+		// Style login: 1 pasajero, 2 conductor, 3 administrador
+		//
+			int NormalizeLoginStyle(int style)
+			{
+				if (style < 1 || style > 3)
+				{
+					return 1;
+				}
+
+				return style;
+			}
+
+			// names de logins change
+			void ApplyLoginStyle()
+			{
+				if (loginStyle == 2)
+				{
+					this->Text = L"LYNX | Iniciar Sesion Conductor";
+				}
+				else if (loginStyle == 3)
+				{
+					this->Text = L"LYNX | Iniciar Sesion Administrador";
+				}
+				else
+				{
+					this->Text = L"LYNX | Iniciar Sesion Pasajero";
+				}
+			}
 
 		//
 		// Configuracion global de form
@@ -443,7 +478,27 @@ namespace LYNX {
 
 			// btnEntrarCLICK
 			System::Void btnEnter_Click(System::Object^ sender, System::EventArgs^ e) {
+				if (loginStyle == 1)
+				{
+					LoginPassenger();
+					return;
+				}
+				
+				if (loginStyle == 2)
+				{
+					LoginDriver();
+					return;
+				}
 
+				if (loginStyle == 3)
+				{
+					LoginAdmin();
+					return;
+				}
+			}
+
+			void LoginPassenger()
+			{
 				// Guardar los txt box como Strings^
 				String^ dniText = this->tbDni->Text->Trim();
 				String^ nameText = this->tbNombre->Text->Trim();
@@ -498,18 +553,100 @@ namespace LYNX {
 				passwords = passwordText;
 
 				loggedPassengerDni = dniText;
-				passengerScreen = true;
+				passengerScreen = true; 
 				FormsStatus::SaveWindow(this);
-				_internalClose = true;  // marcar como cierre 
-				this->Close();
+				_internalClose = true;
+				this->Hide();
+				// this->Close();
 			}
+
+			void LoginDriver()
+			{
+				// Guardar los txt box como Strings^
+				String^ dniText = this->tbDni->Text->Trim();
+				String^ nameText = this->tbNombre->Text->Trim();
+				String^ passwordText = this->tbContrasena->Text;
+
+				// Verificar que los espacios no esten vacios
+				if (dniText->Length == 0 || passwordText->Length == 0 || nameText->Length == 0) {
+					MessageBox::Show("Por favor llene todos los campos", "Iniciar Sesion", MessageBoxButtons::OK);
+					return;
+				}
+
+
+				// Verificar si se pudo o no acceder al gestionador de archivos
+				if (authManager == nullptr) {
+					MessageBox::Show("No se pudo acceder al gestor de usuarios", "Iniciar Sesion", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Recargar desde archivo para tener recargados actualmente (FUNDAMENTAL FOREVER) =====================================================================================
+				authManager->reloadDrivers();
+
+
+				// Converitr con marshal as al tipo de dato que quiero segun un String^
+				std::string dni = msclr::interop::marshal_as<std::string>(dniText);
+				std::string name = msclr::interop::marshal_as<std::string>(nameText);
+				std::string password = msclr::interop::marshal_as<std::string>(passwordText);
+
+				// Hacer validacion de los digitos del dni en el caso no tenga 8 o no sea int
+				if (!authManager->validateDni(dni)) {
+					MessageBox::Show("DNI invalido. Debe tener 8 digitos numericos.", "Iniciar Sesion", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Validar que el usuario exista con el auth managern login user valid
+				if (!authManager->loginDriverValid(dni, password)) {
+					MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
+					this->tbContrasena->Clear();
+					return;
+				}
+
+				// Validar si los datos coinciden con un pasajero existente
+				Driver driver = authManager->getDriverByDni(dni);
+				if (driver.getDni() == "" || driver.getName() != name) {
+					MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
+					this->tbContrasena->Clear();
+					return;
+				}
+
+				// variables de recuerdo e informacion para la prox pantalla (check)
+				dnis = dniText;
+				names = nameText;
+				passwords = passwordText;
+
+				loggedDriverDni = dniText;
+				driverScreen = true;
+				FormsStatus::SaveWindow(this);
+				_internalClose = true;
+				this->Hide();
+				// this->Close();
+			}
+
+			void LoginAdmin()
+			{
+				MessageBox::Show("Login de administrador pendiente de implementar.", "Iniciar Sesion", MessageBoxButtons::OK);
+			}
+
+
+
+
+
+
+
+
+
+
+
 
 			// linkerlabelClick
 			System::Void llRegister_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 				this->switchToRegister = true;
 				FormsStatus::SaveWindow(this);
-				_internalClose = true;  // marcar como cierre 
-				this->Close();
+				_internalClose = true;
+				this->Hide();
+
+				// this->Close();
 			}
 
 			// pictureLYNXClick

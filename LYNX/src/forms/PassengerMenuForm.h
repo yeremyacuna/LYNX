@@ -49,8 +49,9 @@ namespace LYNX {
 	private:
 		AuthManager* authManager = nullptr;
 		TripManager* tripManager = nullptr;
-		String^ loggedPassengerDni = "";
 		FileManager* fileManager = nullptr;
+
+		String^ loggedPassengerDni = "";
 	
 		// COMPONENTES
 	private: System::Windows::Forms::Label^ ActualTripTitle;

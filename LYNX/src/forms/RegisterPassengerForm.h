@@ -23,11 +23,15 @@ namespace LYNX {
 			ConfigureForm();
 		}
 
-		RegisterPassengerForm(AuthManager* auth, TripManager* trips)
+		RegisterPassengerForm(AuthManager* auth, TripManager* trips, int style)
 		{
 			this->authManager = auth;
 			this->tripManager = trips;
+			this->registerStyle = NormalizeRegisterStyle(style);
 			InitializeComponent();
+			ApplyRegisterStyle();
+
+			// ok
 			ConfigureForm();
 		}
 
@@ -43,6 +47,8 @@ namespace LYNX {
 	private:
 		AuthManager* authManager = nullptr;
 		TripManager* tripManager = nullptr;
+		int registerStyle = 1;
+
 
 		// COMPONENTES
 	private: System::Windows::Forms::Label^ lblRegistrarse;
@@ -388,10 +394,46 @@ namespace LYNX {
 		#pragma endregion
 		public:
 			bool passengerScreen = false;
+			bool driverScreen = false;
+
 			bool switchToLogin = false;
+
+			int GetRegisterStyle()
+			{
+				return registerStyle;
+			}
 
 		private:
 
+		//
+		// Style register: 1 pasajero, 2 conductor, 3 administrador
+		//
+			int NormalizeRegisterStyle(int style)
+			{
+				if (style < 1 || style > 3)
+				{
+					return 1;
+				}
+
+				return style;
+			}
+
+			// names de registers change
+			void ApplyRegisterStyle()
+			{
+				if (registerStyle == 2)
+				{
+					this->Text = L"LYNX | Registarse Conductor";
+				}
+				else if (registerStyle == 3)
+				{
+					this->Text = L"LYNX | Registarse Administrador";
+				}
+				else
+				{
+					this->Text = L"LYNX | Registarse Pasajero";
+				}
+			}
 		//
 		// Configuracion global de form
 		//
@@ -455,12 +497,40 @@ namespace LYNX {
 			// btnRegistrarseCLICK
 			System::Void btnRegistrar_Click(System::Object^ sender, System::EventArgs^ e)
 			{
+				if (registerStyle == 1)
+				{
+					RegisterPassenger();
+					return;
+				}
+				
+				if (registerStyle == 2)
+				{
+					RegisterDriver();
+					return;
+				}
+
+				if (registerStyle == 3)
+				{
+					// admins nuevos no se pueden registrar :p
+					RegisterAdmin();
+					return;
+				}
+			}
+
+
+
+
+
+
+
+
+			void RegisterPassenger() {
 				// Guardar los txt box como Strings^
 				String^ dniText = this->tbDni->Text->Trim();
 				String^ nombreText = this->tbNombre->Text->Trim();
 				String^ passText = this->tbContrasena->Text;
 				String^ confirmText = this->tbConfirmarContrasena->Text;
-				
+
 				// Verificar que los espacios no esten vacios
 				if (dniText->Length == 0 || nombreText->Length == 0 || passText->Length == 0 || confirmText->Length == 0) {
 					MessageBox::Show("Por favor llene todos los campos", "Registro", MessageBoxButtons::OK);
@@ -507,8 +577,83 @@ namespace LYNX {
 				switchToLogin = true;
 				FormsStatus::SaveWindow(this);
 				_internalClose = true;
-				this->Close();
+				//this->Close();
+				this->Hide();
 			}
+
+
+			void RegisterDriver() {
+				// Guardar los txt box como Strings^
+				String^ dniText = this->tbDni->Text->Trim();
+				String^ nombreText = this->tbNombre->Text->Trim();
+				String^ passText = this->tbContrasena->Text;
+				String^ confirmText = this->tbConfirmarContrasena->Text;
+				// ===============================================================================================
+				// ===============================================================================================
+				// ===============================================================================================
+				// ===============================================================================================
+				Vehicle vehicle;
+
+				// Verificar que los espacios no esten vacios
+				if (dniText->Length == 0 || nombreText->Length == 0 || passText->Length == 0 || confirmText->Length == 0) {
+					MessageBox::Show("Por favor llene todos los campos", "Registro", MessageBoxButtons::OK);
+					return;
+				}
+
+				//Verificar si las contraseñas coinciden
+				if (String::Compare(passText, confirmText) != 0) {
+					MessageBox::Show("Las contrasenas no coinciden", "Registro", MessageBoxButtons::OK);
+					return;
+				}
+
+				//Verificar si se pudo o no acceder al gestionador de archivos
+				if (authManager == nullptr) {
+					MessageBox::Show("No se pudo acceder al gestor de usuarios", "Registro", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Converitr con marshal as al tipo de dato que quiero segun un String^
+				std::string dni = msclr::interop::marshal_as<std::string>(dniText);
+				std::string nombre = msclr::interop::marshal_as<std::string>(nombreText);
+				std::string pass = msclr::interop::marshal_as<std::string>(passText);
+
+				// Hacer validacion de los digitos del dni en el caso no tenga 8 o no sea int
+				if (!authManager->validateDni(dni)) {
+					MessageBox::Show("DNI invalido. Debe tener 8 digitos numericos.", "Registro", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Validar si elk DNI ya se encuentra registrado con dni nombre y contraseña pass en la funcion de authmanager
+				if (!authManager->registerDriver(nombre, dni, pass, vehicle)) {
+					MessageBox::Show("El DNI ya esta registrado.", "Registro", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Validar si la cuenta fue creada correctamente y se guardo todo correctamente o no , con save a password binary q devuelve true or false de guardar binario d fmanager
+				if (!authManager->savePasswordsBinary()) {
+					MessageBox::Show("La cuenta fue creada, pero no se pudo actualizar passwords.bin.", "Registro", MessageBoxButtons::OK);
+				}
+				else {
+					MessageBox::Show("Cuenta creada correctamente.", "Registro", MessageBoxButtons::OK);
+				}
+
+				switchToLogin = true;
+				FormsStatus::SaveWindow(this);
+				_internalClose = true;
+				//this->Close();
+				this->Hide();
+			}
+
+
+			void RegisterAdmin() {}
+
+
+
+
+
+
+
+
 
 			// linkerlabelClick
 			System::Void llblAviso2_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e)
@@ -516,7 +661,8 @@ namespace LYNX {
 				this->switchToLogin = true;
 				FormsStatus::SaveWindow(this);
 				_internalClose = true;
-				this->Close();
+				//this->Close();
+				this->Hide();
 			}
 
 			// pictureLYNXClick

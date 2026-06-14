@@ -21,7 +21,7 @@ private:
     // Busca la posicion de un pasajero por DNI
     int indexOfUser(string dni) {
         for (int i = 0; i < passengerList->getSize(); i++)
-            if (passengerList->get(i).getDni() == dni) 
+            if (passengerList->get(i).getDni() == dni)
                 return i;
         return -1;
     }
@@ -29,7 +29,7 @@ private:
     // Busca la posicion de un conductor por DNI
     int indexOfDriver(string dni) {
         for (int i = 0; i < driverList->getSize(); i++)
-            if (driverList->get(i).getDni() == dni) 
+            if (driverList->get(i).getDni() == dni)
                 return i;
         return -1;
     }
@@ -37,7 +37,7 @@ private:
     // Si contiene un string
     bool containsString(const vector<string>& lista, const string& valor) {
         for (int i = 0; i < (int)lista.size(); i++) {
-            if (lista[i] == valor) 
+            if (lista[i] == valor)
                 return true;
         }
         return false;
@@ -48,7 +48,7 @@ private:
         int maxId = 0;
         for (int i = 0; i < passengerList->getSize(); i++) {
             int actual = Passenger::extractPassengerNumber(passengerList->get(i).getPassengerId());
-            if (actual > maxId) 
+            if (actual > maxId)
                 maxId = actual;
         }
         return maxId;
@@ -156,6 +156,51 @@ private:
         return changed;
     }
 
+    // Reasigna IDs secuencialmente sin huecos (PAS-0001, 0002, 0003...)
+    // Debe llamarse DESPUES de sortPassengersById()
+    bool compactPassengerIds() {
+        bool changed = false;
+
+        for (int i = 0; i < passengerList->getSize(); i++) {
+            Passenger p = passengerList->get(i);
+            int expectedId = i + 1;  // posición 0 → PAS-0001, posición 1 → PAS-0002...
+            int currentId = Passenger::extractPassengerNumber(p.getPassengerId());
+
+            if (currentId != expectedId) {
+                Passenger::syncNextPassengerId(expectedId);
+                p.setPassengerId(Passenger::generateNextPassengerId());
+                passengerList->remove(i);
+                passengerList->insert(i, p);
+                changed = true;
+            }
+        }
+
+        // Dejar el contador apuntando al siguiente disponible
+        Passenger::syncNextPassengerId(passengerList->getSize() + 1);
+        return changed;
+    }
+
+    bool compactDriverIds() {
+        bool changed = false;
+
+        for (int i = 0; i < driverList->getSize(); i++) {
+            Driver d = driverList->get(i);
+            int expectedId = i + 1;
+            int currentId = Driver::extractDriverNumber(d.getDriverId());
+
+            if (currentId != expectedId) {
+                Driver::syncNextDriverId(expectedId);
+                d.setDriverId(Driver::generateNextDriverId());
+                driverList->remove(i);
+                driverList->insert(i, d);
+                changed = true;
+            }
+        }
+
+        Driver::syncNextDriverId(driverList->getSize() + 1);
+        return changed;
+    }
+
 public:
     // construye todo solo de pasejero y drivers
     // al iniciar, carga desde archivos, limpia datos repetidos y reordena ids
@@ -175,12 +220,15 @@ public:
 
         sortDriversById();
         sortPassengersById();
+
+        bool driversCompacted = compactDriverIds();
+        bool passengersCompacted = compactPassengerIds();
+
         syncNextGeneratedIds();
 
-        if (driversChanged || passengersChanged) {
+        if (driversChanged || passengersChanged || driversCompacted || passengersCompacted) {
             saveAll();
-        }else
-            savePasswordsBinary();
+        }
     }
 
     // ~AuthManager: libera las estructuras dinamicas principales del modulo
@@ -217,6 +265,11 @@ public:
     {
         savePassengers();
         saveDrivers();
+        sortPassengersById();
+        sortDriversById();
+        fileManager->guardarPassengersTXT(exportPassengerVector());
+        fileManager->guardarDriversTXT(exportDriverVector());
+        fileManager->guardarPasswordsBIN(exportPassengerVector(), exportDriverVector());
     }
 
     // savePasswordsBinary: genera el archivo binario de passwords para consulta admin
@@ -232,6 +285,19 @@ public:
             passengerList->pushBack(cargados[i]);
         sanitizeLoadedPassengers();
         sortPassengersById();
+        compactPassengerIds();
+        syncNextGeneratedIds();
+    }
+    
+    void reloadDrivers()
+    {
+        driverList->clear();
+        vector<Driver> cargados = fileManager->leerDriversTXT();
+        for (int i = 0; i < (int)cargados.size(); i++)
+            driverList->pushBack(cargados[i]);
+        sanitizeLoadedDrivers();
+        sortDriversById();
+        compactDriverIds();
         syncNextGeneratedIds();
     }
 

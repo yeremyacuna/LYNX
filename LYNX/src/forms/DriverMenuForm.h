@@ -26,10 +26,11 @@ namespace LYNX {
 			ConfigureForm();
 		}
 
-		DriverMenuForm(AuthManager* auth, TripManager* trips, String^ driverDni)
+		DriverMenuForm(AuthManager* auth, TripManager* trips, String^ driverDni, FileManager* file)
 		{
 			this->authManager = auth;
 			this->tripManager = trips;
+			this->fileManager = file;
 			this->loggedDriverDni = driverDni;
 			InitializeComponent();
 			ConfigureForm();
@@ -48,6 +49,8 @@ namespace LYNX {
 	private:
 		AuthManager* authManager = nullptr;
 		TripManager* tripManager = nullptr;
+		FileManager* fileManager = nullptr;
+
 		String^ loggedDriverDni = "";
 
 		// COMPONENTES
@@ -989,7 +992,7 @@ namespace LYNX {
 			this->MinimumSize = System::Drawing::Size(1280, 818);
 			this->Name = L"DriverMenuForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"LYNX | Driver";
+			this->Text = L"LYNX | Conductor";
 			this->Activated += gcnew System::EventHandler(this, &DriverMenuForm::DriverMenuForm_Activated);
 			this->Load += gcnew System::EventHandler(this, &DriverMenuForm::DriverMenuForm_Load);
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &DriverMenuForm::DriverMenuForm_KeyDown);

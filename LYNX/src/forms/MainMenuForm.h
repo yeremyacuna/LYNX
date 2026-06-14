@@ -37,8 +37,8 @@ namespace LYNX {
 			// CARGAR TODOS LOS VIAJES
 			LoadTripsFromFile();
 
-			formlg = gcnew LoginPassengerForm(authManager, tripManager);
-			formrg = gcnew RegisterPassengerForm(authManager, tripManager);
+			formlg = gcnew LoginPassengerForm(authManager, tripManager, 1);
+			formrg = gcnew RegisterPassengerForm(authManager, tripManager, 1);
 
 			// CENTRAR TODO
 			this->CenterToScreen();
@@ -68,6 +68,7 @@ namespace LYNX {
 			}
 			delete authManager;
 			delete tripManager;
+			delete fileManager;
 		}
 
 		// OBJETOS
@@ -75,9 +76,16 @@ namespace LYNX {
 		AuthManager* authManager = nullptr;
 		TripManager* tripManager = nullptr;
 		FileManager* fileManager = nullptr;
+
 		LoginPassengerForm^ formlg = nullptr;
 		RegisterPassengerForm^ formrg = nullptr;
+
 		PassengerMenuForm^ formpm = nullptr;
+		DriverMenuForm^ formdrimenu = nullptr;
+		AdminMenuForm^ formadminmenu = nullptr;
+
+		int currentLoginStyle = 1;
+		int currentRegisterStyle = 1;
 
 		// COMPONENTES
 		// Barra superior LYNX
@@ -124,7 +132,7 @@ namespace LYNX {
 
 		   // WINDOWS INITIALIZE
 	private:
-#pragma region Windows Form Designer generated code
+	#pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
@@ -526,7 +534,7 @@ namespace LYNX {
 		}
 
 		// LOGICA
-#pragma endregion
+	#pragma endregion
 	private:
 
 		//
@@ -534,12 +542,10 @@ namespace LYNX {
 		//
 		void LoadTripsFromFile()
 		{
-			if (tripManager == nullptr)
-				return;
-
-			FileManager fileManager;
-			std::vector<Trip> trips = fileManager.leerTripsTXT();
-
+			if (fileManager == nullptr || tripManager == nullptr) return; 
+			if (fileManager == nullptr) return;
+			std::vector<Trip> trips = fileManager->leerTripsTXT(); 
+			
 			for (int i = 0; i < (int)trips.size(); i++)
 			{
 				std::string status = trips[i].getStatus();
@@ -593,41 +599,47 @@ namespace LYNX {
 		// btnAbrirPasajeroClick
 		System::Void OpenPassengerForm(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (formlg == nullptr || formlg->IsDisposed) {
-				delete formlg;
-				formlg = gcnew LoginPassengerForm(authManager, tripManager); // Le paso el formulario de constuctor LOGIN con manejador
+			menuLoginOptions(1);
+		}
+
+		// btnAbrirConductorClick
+		System::Void OpenDriverForm(System::Object^ sender, System::EventArgs^ e)
+		{
+			menuLoginOptions(2);
+		}
+
+		// btnAbrirAdministradorClick
+		System::Void OpenAdminForm(System::Object^ sender, System::EventArgs^ e)
+		{
+			menuLoginOptions(3);
+		}
+
+		//
+		// Funcion General
+		//
+		void menuLoginOptions(int style)
+		{
+			if (style < 1 || style > 3)
+			{
+				style = 1;
 			}
+
+			currentLoginStyle = style;
+			currentRegisterStyle = currentLoginStyle;
+
+			if (formlg != nullptr && !formlg->IsDisposed)
+			{
+				delete formlg;
+			}
+
+			formlg = gcnew LoginPassengerForm(authManager, tripManager, currentLoginStyle);
 			FormsStatus::SaveWindow(this);
 			FormsStatus::ApplyWindow(formlg);
 			formlg->Show();
 			formlg->BringToFront();
 			this->Hide(); // ocultar MainMenu
 		}
-
-		// btnAbrirConductorClick
-		System::Void OpenDriverForm(System::Object^ sender, System::EventArgs^ e)
-		{
-			// Conductor sujeto a cambios ya que no tiene propia Login, falta login register
-			DriverMenuForm^ form = gcnew DriverMenuForm(authManager, tripManager, " FALTA "); // Le paso el formulario de constuctor con manejador
-			FormsStatus::SaveWindow(this);
-			FormsStatus::ApplyWindow(form);
-			form->Show();
-			form->BringToFront();
-			this->Hide(); // ocultar MainMenu
-		}
-
-		// btnAbrirAdministradorClick
-		System::Void OpenAdminForm(System::Object^ sender, System::EventArgs^ e)
-		{
-			// ADMIN sujeto a cambios ya que no tiene propia Login, falta login register
-			AdminMenuForm^ form = gcnew AdminMenuForm(authManager, tripManager); // Le paso el formulario de constuctor con manejador
-			FormsStatus::SaveWindow(this);
-			FormsStatus::ApplyWindow(form);
-			form->Show();
-			form->BringToFront();
-			this->Hide(); // ocultar MainMenu
-		}
-
+		
 		//
 		// Hover functions: cambia color del boton al pasar el mouse
 		//
@@ -679,46 +691,75 @@ namespace LYNX {
 		// 
 		System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (formlg->switchToRegister) {
+			if (formlg != nullptr && !formlg->IsDisposed && formlg->switchToRegister) {
 				formlg->switchToRegister = false;
-				if (formrg == nullptr || formrg->IsDisposed) {
-					formrg = gcnew RegisterPassengerForm(authManager, tripManager); // Verifica y crea
-				}
+
+				// Siempre recrear con el estilo actual
+				if (formrg != nullptr && !formrg->IsDisposed)
+					delete formrg;
+
+				formrg = gcnew RegisterPassengerForm(authManager, tripManager, currentRegisterStyle);
 				FormsStatus::ApplyWindow(formrg);
-				formrg->Show(); // Muestra
+				formrg->Show();
 			}
 
-			if (formrg->switchToLogin) {
+			if (formrg != nullptr && !formrg->IsDisposed && formrg->switchToLogin) {
 				formrg->switchToLogin = false;
 				if (formlg == nullptr || formlg->IsDisposed) {
-					formlg = gcnew LoginPassengerForm(authManager, tripManager); // Verifica y crea
+					formlg = gcnew LoginPassengerForm(authManager, tripManager, currentLoginStyle); // Verifica y crea
 				}
 				FormsStatus::ApplyWindow(formlg);
 				formlg->Show();  // Muestra
 			}
 
-			if (formlg->passengerScreen || formrg->passengerScreen) // Comprueba si alguna pantalla pasajero esta abierta o no
+			if (formlg != nullptr && !formlg->IsDisposed && formlg->passengerScreen)
 			{
-				String^ passengerDni = formlg->loggedPassengerDni;
 				formlg->passengerScreen = false;
-				formrg->passengerScreen = false;
-				if (formpm != nullptr && !formpm->IsDisposed) {
-					delete formpm;
-				}
+
+				String^ passengerDni = formlg->loggedPassengerDni;
+
+				if (formpm != nullptr && !formpm->IsDisposed) delete formpm;
+
 				formpm = gcnew PassengerMenuForm(authManager, tripManager, passengerDni, fileManager);
 				FormsStatus::ApplyWindow(formpm);
 				formpm->name = formlg->names;
 				formpm->dni = formlg->dnis;
 				formpm->password = formlg->passwords;
 				formpm->Show();
+				formpm->BringToFront(); 
+				formlg->Hide();         
 			}
+
+			if (formlg != nullptr && !formlg->IsDisposed && formlg->driverScreen)
+			{
+				formlg->driverScreen = false;
+
+				String^ driverDni = formlg->loggedDriverDni;
+
+				if (formpm != nullptr && !formpm->IsDisposed) delete formdrimenu;
+
+				formdrimenu = gcnew DriverMenuForm(authManager, tripManager, driverDni, fileManager);
+				FormsStatus::ApplyWindow(formdrimenu);
+				formdrimenu->name = formlg->names;
+				formdrimenu->dni = formlg->dnis;
+				formdrimenu->password = formlg->passwords;
+				formdrimenu->Show();
+				formdrimenu->BringToFront();
+				formlg->Hide();
+			}
+
+			//if (formlg->passengerScreen || formrg->passengerScreen) // Comprueba si alguna pantalla pasajero esta abierta o no
+			//{
+				//String^ passengerDni = formlg->loggedPassengerDni;
+				//formlg->passengerScreen = false;
+			//}
 		}
 
 		//
 		// Full screen function
 		// 
-		System::Drawing::Size              normalSize;
-		System::Drawing::Point             normalLocation;
+		System::Drawing::Size normalSize;
+		System::Drawing::Point normalLocation;
 		System::Windows::Forms::FormWindowState normalState;
 
 		System::Void MainMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
