@@ -1089,23 +1089,10 @@ namespace LYNX {
 					FormsStatus::ApplyWindow(this);
 
 
+
+				//Verificar si hay un viaje activo para mostrarlo en pantalla
 				Trip activeT;
 				String^ a = this->dni;
-				/*
-				while ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
-					String^ o = gcnew System::String(activeT.getOrigin().c_str());
-					String^ d = gcnew System::String(activeT.getDestination().c_str());
-					float price = activeT.getPrice();
-
-					this->lblOriginDestination->Text = o + " -> " + d;
-					this->lblPrice->Text = L"S/." + price;
-					this->lblOriginDestination->Visible = false;
-					this->lblPrice->Visible = true;
-
-					//tripManager->finishTrip(activeT.getTripId(), *authManager);
-					}*/
-					//tripManager->createTrip(msclr::interop::marshal_as<std::string>(origin), msclr::interop::marshal_as<std::string>(destination), type, distance, msclr::interop::marshal_as<std::string>());
-
 
 				if ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
 					String^ o = gcnew System::String(activeT.getOrigin().c_str());
@@ -1138,6 +1125,7 @@ namespace LYNX {
 					this->lblNoTrip->Visible = false;
 				}
 
+				//Gemini me ayudo con esto JAJAJJA, es para lo que es el layout del historial
 				this->flowLayoutPanel1->Controls->Clear();
 
 				// Extraemos el vector con el historial del pasajero mediante la pila sin destruirla
@@ -1156,138 +1144,150 @@ namespace LYNX {
 		//
 		// Tipo de viaje: seleccion de boton
 		//
-		System::Void btnEconomic_Click(System::Object^ sender, System::EventArgs^ e) {
-			this->btnEconomic->BackColor = System::Drawing::Color::Black;
-			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnStandard->BackColor = System::Drawing::Color::White;
-			this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnPremium->BackColor = System::Drawing::Color::White;
-			this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			type = 1;
-		}
+			//Cambiar el color del boton economico y los demas los pone en predeterminado, aparte de asignar el valor al tipo
+			System::Void btnEconomic_Click(System::Object^ sender, System::EventArgs^ e) {
+				this->btnEconomic->BackColor = System::Drawing::Color::Black;
+				this->btnEconomic->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+				this->btnStandard->BackColor = System::Drawing::Color::White;
+				this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				this->btnPremium->BackColor = System::Drawing::Color::White;
+				this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				type = 1;
+			}
 
-		System::Void btnStandard_Click(System::Object^ sender, System::EventArgs^ e) {
-			this->btnStandard->BackColor = System::Drawing::Color::Black;
-			this->btnStandard->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnEconomic->BackColor = System::Drawing::Color::White;
-			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnPremium->BackColor = System::Drawing::Color::White;
-			this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			type = 2;
-		}
+			//Cambiar el color del boton standard y los demas los pone en predeterminado, aparte de asignar el valor al tipo
+			System::Void btnStandard_Click(System::Object^ sender, System::EventArgs^ e) {
+				this->btnStandard->BackColor = System::Drawing::Color::Black;
+				this->btnStandard->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+				this->btnEconomic->BackColor = System::Drawing::Color::White;
+				this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				this->btnPremium->BackColor = System::Drawing::Color::White;
+				this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				type = 2;
+			}
 
-		System::Void btnPremium_Click(System::Object^ sender, System::EventArgs^ e) {
-			this->btnPremium->BackColor = System::Drawing::Color::Black;
-			this->btnPremium->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnStandard->BackColor = System::Drawing::Color::White;
-			this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnEconomic->BackColor = System::Drawing::Color::White;
-			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			type = 3;
-		}
+			//Cambiar el color del boton premium y los demas los pone en predeterminado, aparte de asignar el valor al tipo
+			System::Void btnPremium_Click(System::Object^ sender, System::EventArgs^ e) {
+				this->btnPremium->BackColor = System::Drawing::Color::Black;
+				this->btnPremium->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+				this->btnStandard->BackColor = System::Drawing::Color::White;
+				this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				this->btnEconomic->BackColor = System::Drawing::Color::White;
+				this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				type = 3;
+			}
 
 		//
 		// Buscar viaje
 		//
 
-		private:
-			String^ origin;
-			String^ destination;
-			String^ driverName;
-			String^ driverDni;
-			string fechaActual()
-			{
-				std::time_t now = std::time(nullptr);
-				std::tm localTime{};
-				localtime_s(&localTime, &now);
-				char buffer[16];
-				std::strftime(buffer, sizeof(buffer), "%d/%m/%Y", &localTime);
-				return buffer;
-			}
-			float calcPrice(int tipo, float km) {
-				float tarifa = 0.0f;
-				int price=0;
-				if (tipo == 1) tarifa = 1.20f;
-				else if (tipo == 2) tarifa = 1.80f;
-				else                tarifa = 2.50f;
-				price = tarifa * km + 3.0f;
-				return price;
-			}
+			private:
+				String^ origin;
+				String^ destination;
+				String^ driverName;
+				String^ driverDni;
+				string fechaActual()
+				{
+					std::time_t now = std::time(nullptr);
+					std::tm localTime{};
+					localtime_s(&localTime, &now);
+					char buffer[16];
+					std::strftime(buffer, sizeof(buffer), "%d/%m/%Y", &localTime);
+					return buffer;
+				}
+				float calcPrice(int tipo, float km) {
+					float tarifa = 0.0f;
+					float price=0;
+
+					if (tipo == 1) tarifa = 1.20f;
+					else if (tipo == 2) tarifa = 1.80f;
+					else tarifa = 2.50f;
+
+					price = tarifa * km + 3.0f;
+
+					return price;
+				}
+
 			int type=0;
 			int originalType = 0;
 			float distance = 0;
 			private:
 
-		System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {
-			origin = this->tbOrigin->Text->Trim();
-			destination = this->tbDestination->Text->Trim();
+				//buscar viaje
+				System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {
+					origin = this->tbOrigin->Text->Trim();
+					destination = this->tbDestination->Text->Trim();
 
-			if (this->tbDistance->Text == "" || this->tbDestination->Text == "" || this->tbOrigin->Text == "" || type == 0) {
-				return;
+					//si esta vacio retorna (podria ponerse una alerta)
+					if (this->tbDistance->Text == "" || this->tbDestination->Text == "" || this->tbOrigin->Text == "" || type == 0) {
+						return;
+					}
+					//Busca al mejor conductor
+					distance = std::stof(msclr::interop::marshal_as<std::string>(this->tbDistance->Text->Trim()));
+
+					AuthManager auth;
+					string bestDriverDni = tripManager->matchBestDriver(auth);
+					Driver bestDriver = auth.getDriverByDni(bestDriverDni);
+					string bestDriverName = bestDriver.getName();
+
+					driverName = gcnew System::String(bestDriverName.c_str());
+					driverDni = gcnew System::String(bestDriverDni.c_str());
+
+					//Basicamente muestra todo lo que es el conductor encontrado y quita lo demas que estaba en la pantalla de viaje en curso
+					this->lblDriverName->Text = gcnew System::String(bestDriverName.c_str());;
+					this->lblDriverDni->Text = L"DNI: " + gcnew System::String(bestDriverDni.c_str());;
+
+					this->lblFoundDriver->Visible = true;
+					this->lblDriverName->Visible = true;
+					this->lblDriverDni->Visible = true;
+					this->btnAccept->Visible = true;
+					this->btnDecline->Visible = true;
+
+					this->lblNoTrip->Visible = false;
+
+					this->ActualTripTitle->Visible = false;
+					this->lblPrice->Visible = false;
+					this->lblPriceNum->Visible = false;
+					this->lblTypeTrip->Visible = false;
+					this->lblTypeTripText->Visible = false;
+					this->ActualTripTitle->Visible = false;
+					this->lblOriginDestination->Visible = false;
+
+					//limpia el apartado de solicitar viaje
+					this->tbOrigin->Text = "";
+					this->tbDestination->Text = "";
+					this->tbDistance->Text = "";
+					//asigna variable del tipo de viaje para guardarla y usarla en otras funciones
+					originalType = type;
+					type = 0;
+					//Todos los botones a su color predeterminado
+					this->btnStandard->BackColor = System::Drawing::Color::White;
+					this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+					this->btnEconomic->BackColor = System::Drawing::Color::White;
+					this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+					this->btnPremium->BackColor = System::Drawing::Color::White;
+					this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+
+				}
+
+
+		//Animacion para el boton de buscar
+			System::Void btnSearch_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+				this->btnSearch->BackColor = System::Drawing::Color::White;
+				this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			}
-			
-			distance= std::stoi(msclr::interop::marshal_as<std::string>(this->tbDistance->Text->Trim()));
-			AuthManager auth;
-			string bestDriverDni=tripManager->matchBestDriver(auth);
-			Driver bestDriver = auth.getDriverByDni(bestDriverDni);
-			string bestDriverName = bestDriver.getName();
 
-			driverName = gcnew System::String(bestDriverName.c_str());
-			driverDni = gcnew System::String(bestDriverDni.c_str());
+			System::Void btnSearch_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+				this->btnSearch->BackColor = System::Drawing::Color::SeaGreen;
+				this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+				this->btnSearch->Location = System::Drawing::Point(138, 261);
+			}
 
-
-			this->lblDriverName->Text = gcnew System::String(bestDriverName.c_str());;
-			this->lblDriverDni->Text = L"DNI: "+ gcnew System::String(bestDriverDni.c_str());;
-			
-
-			
-
-			this->lblFoundDriver->Visible = true;
-			this->lblDriverName->Visible = true;
-			this->lblDriverDni->Visible = true;
-			this->btnAccept->Visible = true;
-			this->btnDecline->Visible = true;
-
-			this->lblNoTrip->Visible = false;
-
-			this->ActualTripTitle->Visible = false;
-			this->lblPrice->Visible = false;
-			this->lblPriceNum->Visible = false;
-			this->lblTypeTrip->Visible = false;
-			this->lblTypeTripText->Visible = false;
-			this->ActualTripTitle->Visible = false;
-			this->lblOriginDestination->Visible = false;
-
-			this->tbOrigin->Text = "";
-			this->tbDestination->Text = "";
-			this->tbDistance->Text = "";
-			originalType = type;
-			type = 0;
-			this->btnStandard->BackColor = System::Drawing::Color::White;
-			this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnEconomic->BackColor = System::Drawing::Color::White;
-			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnPremium->BackColor = System::Drawing::Color::White;
-			this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			
-		}
-
-		System::Void btnSearch_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-			this->btnSearch->BackColor = System::Drawing::Color::White;
-			this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-		}
-
-		System::Void btnSearch_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-			this->btnSearch->BackColor = System::Drawing::Color::SeaGreen;
-			this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnSearch->Location = System::Drawing::Point(138, 261);
-		}
-
-		System::Void btnSearch_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
-			this->btnSearch->BackColor = System::Drawing::Color::Black;
-			this->btnSearch->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnSearch->Location = System::Drawing::Point(138, 264);
-		}
+			System::Void btnSearch_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
+				this->btnSearch->BackColor = System::Drawing::Color::Black;
+				this->btnSearch->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+				this->btnSearch->Location = System::Drawing::Point(138, 264);
+			}
 
 		//
 		// Perfil: mostrar / editar
@@ -1295,7 +1295,7 @@ namespace LYNX {
 			System::Void btnUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
 				ShowEditPanel();
 			}
-
+			//Animacion para el boton de Actualizar
 			System::Void btnUpdate_MouseEnter(System::Object^ sender, System::EventArgs^ e) {
 				this->btnUpdate->BackColor = System::Drawing::Color::SeaGreen;
 				this->btnUpdate->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
@@ -1356,7 +1356,8 @@ namespace LYNX {
 		//
 		// Viaje actual: paint, aceptar, finalizar
 		//
-			System::Void queuePanel_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+			System::Void queuePanel_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e)
+			{
 			}
 
 		//
@@ -1403,6 +1404,7 @@ namespace LYNX {
 
 		// topTitle: sin accion (placeholder)
 		System::Void topTitle_Click(System::Object^ sender, System::EventArgs^ e) {}
+
 		public:
 		vector<Trip> exportarWaitingTrips(TripManager& tripMgr)
 		{
@@ -1462,22 +1464,25 @@ namespace LYNX {
 			authMgr.saveAll();
 			fileManager.guardarTripsTXT(exportarTodosLosTrips(tripMgr));
 		}
-	
-		
-		
+
+
 		System::Void btnAccept_Click(System::Object^ sender, System::EventArgs^ e) {
+			//limpia toda la pantalla de conductor encontrado
 			this->lblFoundDriver->Visible = false;
 			this->lblDriverName->Visible = false;
 			this->lblDriverDni->Visible = false;
 			this->btnAccept->Visible = false;
-			this->btnDecline->Visible = false;
+			this->btnDecline->Visible = false; \
 
+
+			//Asigna variables para usarlas
 			String^ dnii = dni;
 			String^ o = origin;
 			String^ d = destination;
 			String^ dn = driverName;
 			String^ dd = driverDni;
 
+			//La misma logica que en la consola, buscar su ultimo viaje para completarlo y asi que solo halla uno en curso
 			Trip activeT;
 			while ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(dnii))).getTripId() != "") {
 				tripManager->finishTrip(activeT.getTripId(), *authManager);
@@ -1490,10 +1495,8 @@ namespace LYNX {
 			else {
 				guardarDatos(*fileManager, *authManager, *tripManager);
 			}
-		
-			//o = gcnew System::String(activeT.getOrigin().c_str());
-			//d = gcnew System::String(activeT.getDestination().c_str());
 
+			//Muestra el viaje en curso 
 			this->lblOriginDestination->Text = o + " -> " + d;
 			this->lblPriceNum->Text = L"S/." + calcPrice(originalType, distance);
 			this->lblOriginDestination->Visible = true;
@@ -1518,6 +1521,7 @@ namespace LYNX {
 
 
 		System::Void btnDecline_Click(System::Object^ sender, System::EventArgs^ e) {
+			//Limpia la pantalla de conductor encontrado
 			this->lblFoundDriver->Visible = false;
 			this->lblDriverName->Visible = false;
 			this->lblDriverDni->Visible = false;
@@ -1527,6 +1531,7 @@ namespace LYNX {
 			Trip activeT;
 			String^ a = this->dni;
 
+			//Hace lo mismo que al cargar el formulario, busca el viaje que este en curso para mostrarlo en pantalla ya que fue cancelado el que se solicito
 			if ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
 				String^ o = gcnew System::String(activeT.getOrigin().c_str());
 				String^ d = gcnew System::String(activeT.getDestination().c_str());
@@ -1539,7 +1544,7 @@ namespace LYNX {
 				case 1:
 					this->lblTypeTripText->Text = "Economico";
 					this->lblTypeTripText->ForeColor = System::Drawing::Color::LightGreen;
-			
+
 					break;
 				case 2:
 					this->lblTypeTripText->Text = "Standard";
@@ -1558,16 +1563,14 @@ namespace LYNX {
 
 				this->lblNoTrip->Visible = false;
 			}
+			//Si no hay muestra que no hay viaje en curso
 			else {
 				this->lblNoTrip->Visible = true;
 			}
 
-		}	
-
-
-
-		System::Void queueItem3_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 		}
+
+		//Layout hecho por gemini
 		void AgregarBloqueHistorial(const Trip& trip)
 		{
 			// 1. Crear el Panel Fila contenedor del item
