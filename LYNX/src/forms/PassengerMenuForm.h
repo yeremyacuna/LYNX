@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <windows.h>
 #include "../library/FormsStatus.h"
 #include "../AuthManager.h"
@@ -52,7 +52,7 @@ namespace LYNX {
 		FileManager* fileManager = nullptr;
 
 		String^ loggedPassengerDni = "";
-	
+
 		// COMPONENTES
 	private: System::Windows::Forms::Label^ ActualTripTitle;
 	private: System::Windows::Forms::Panel^ vehiclePanel;
@@ -116,9 +116,9 @@ namespace LYNX {
 	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
 	private: System::ComponentModel::Container^ components;
 
-		// WINDOWS INITIALIZE
+		   // WINDOWS INITIALIZE
 	private:
-	#pragma region Windows Form Designer generated code
+#pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
 			this->ActualTripTitle = (gcnew System::Windows::Forms::Label());
@@ -226,6 +226,7 @@ namespace LYNX {
 			this->vehiclePanel->Location = System::Drawing::Point(1074, 213);
 			this->vehiclePanel->Name = L"vehiclePanel";
 			this->vehiclePanel->Size = System::Drawing::Size(377, 342);
+			this->vehiclePanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->vehiclePanel->TabIndex = 9;
 			// 
 			// btnConfirm
@@ -453,6 +454,7 @@ namespace LYNX {
 			this->manualPanel->Location = System::Drawing::Point(33, 580);
 			this->manualPanel->Name = L"manualPanel";
 			this->manualPanel->Size = System::Drawing::Size(1418, 301);
+			this->manualPanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) | System::Windows::Forms::AnchorStyles::Left) | System::Windows::Forms::AnchorStyles::Right));
 			this->manualPanel->TabIndex = 10;
 			// 
 			// flowLayoutPanel1
@@ -461,6 +463,7 @@ namespace LYNX {
 			this->flowLayoutPanel1->Location = System::Drawing::Point(13, 43);
 			this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
 			this->flowLayoutPanel1->Size = System::Drawing::Size(1387, 244);
+			this->flowLayoutPanel1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) | System::Windows::Forms::AnchorStyles::Left) | System::Windows::Forms::AnchorStyles::Right));
 			this->flowLayoutPanel1->TabIndex = 17;
 			// 
 			// HistoryTitle
@@ -484,6 +487,7 @@ namespace LYNX {
 			this->topPanel->Location = System::Drawing::Point(30, 84);
 			this->topPanel->Name = L"topPanel";
 			this->topPanel->Size = System::Drawing::Size(1422, 103);
+			this->topPanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
 			this->topPanel->TabIndex = 6;
 			// 
 			// statusButton
@@ -543,6 +547,7 @@ namespace LYNX {
 			this->profilePanel->Location = System::Drawing::Point(33, 213);
 			this->profilePanel->Name = L"profilePanel";
 			this->profilePanel->Size = System::Drawing::Size(426, 342);
+			this->profilePanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left));
 			this->profilePanel->TabIndex = 7;
 			// 
 			// lblTripType
@@ -699,6 +704,7 @@ namespace LYNX {
 			this->queuePanel->Location = System::Drawing::Point(483, 213);
 			this->queuePanel->Name = L"queuePanel";
 			this->queuePanel->Size = System::Drawing::Size(560, 342);
+			this->queuePanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left) | System::Windows::Forms::AnchorStyles::Right));
 			this->queuePanel->TabIndex = 8;
 			this->queuePanel->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &PassengerMenuForm::queuePanel_Paint);
 			// 
@@ -890,6 +896,7 @@ namespace LYNX {
 			this->pnlTopBar->Location = System::Drawing::Point(0, 0);
 			this->pnlTopBar->Name = L"pnlTopBar";
 			this->pnlTopBar->Size = System::Drawing::Size(1517, 78);
+			this->pnlTopBar->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
 			this->pnlTopBar->TabIndex = 12;
 			// 
 			// pictureBoxIcon
@@ -947,448 +954,438 @@ namespace LYNX {
 			this->ResumeLayout(false);
 
 		}
-	#pragma endregion
+#pragma endregion
 
 		// DATOS PUBLICOS DEL PASAJERO LOGUEADO
-		public:
-			String^ dni = "";
-			String^ name = "";
-			String^ password = "";
+	public:
+		String^ dni = "";
+		String^ name = "";
+		String^ password = "";
 
 		// ESTADO INTERNO
-		private:
-			System::Drawing::Size normalSize;
-			System::Drawing::Point normalLocation;
-			System::Windows::Forms::FormWindowState normalState;
+	private:
+		System::Drawing::Size normalSize;
+		System::Drawing::Point normalLocation;
+		System::Windows::Forms::FormWindowState normalState;
 
 		//
 		// Configuracion global del form
 		//
-			void ConfigureForm()
-			{
-				this->CenterToScreen();
-				this->KeyPreview = true;
-				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-				this->MaximizeBox = false;
+		void ConfigureForm()
+		{
+			this->CenterToScreen();
+			this->KeyPreview = true;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
 
-				try { this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico"); }
-				catch (...) {}
-			}
+			try { this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico"); }
+			catch (...) {}
+		}
 
 		//
 		// Helpers internos
 		//
 		// Carga los datos del pasajero desde authManager usando el DNI logueado
-			void LoadPassengerData()
-			{
-				if (authManager == nullptr || String::IsNullOrEmpty(loggedPassengerDni)) 
-					return;
+		void LoadPassengerData()
+		{
+			if (authManager == nullptr || String::IsNullOrEmpty(loggedPassengerDni))
+				return;
 
-				String^ passengerDni = loggedPassengerDni;
-				std::string dniStr = msclr::interop::marshal_as<std::string>(passengerDni);
+			String^ passengerDni = loggedPassengerDni;
+			std::string dniStr = msclr::interop::marshal_as<std::string>(passengerDni);
 
-				Passenger p = authManager->getUserByDni(dniStr);
+			Passenger p = authManager->getUserByDni(dniStr);
 
-				if (p.getDni() == "") 
-					return;
+			if (p.getDni() == "")
+				return;
 
-				this->dni = gcnew String(p.getDni().c_str());
-				this->name = gcnew String(p.getName().c_str());
-				this->password = gcnew String(p.getPassword().c_str());
+			this->dni = gcnew String(p.getDni().c_str());
+			this->name = gcnew String(p.getName().c_str());
+			this->password = gcnew String(p.getPassword().c_str());
 
-				// Actualizar UI de perfil
-				this->lblName->Text = name;
-				this->lblDni->Text = dni;
-				this->lblID->Text = gcnew String(p.getPassengerId().c_str());
-				this->lblRating->Text = String::Format("{0:F1}", p.getRating());
-				this->lblNumTrips->Text = gcnew String(std::to_string(p.getTotalTrips()).c_str());
-				this->lblNumSpent->Text = String::Format("S/.{0:F2}", p.getTotalSpent());
-				this->topTitle->Text = L"Bienvenido " + name;
-			}
+			// Actualizar UI de perfil
+			this->lblName->Text = name;
+			this->lblDni->Text = dni;
+			this->lblID->Text = gcnew String(p.getPassengerId().c_str());
+			this->lblRating->Text = String::Format("{0:F1}", p.getRating());
+			this->lblNumTrips->Text = gcnew String(std::to_string(p.getTotalTrips()).c_str());
+			this->lblNumSpent->Text = String::Format("S/.{0:F2}", p.getTotalSpent());
+			this->topTitle->Text = L"Bienvenido " + name;
+		}
 
 		// Muestra el panel de perfil y oculta el de edicion
-			void ShowProfilePanel()
-			{
-				this->lblDni->Visible = true;
-				this->lblName->Visible = true;
-				this->ProfileTitle->Visible = true;
-				this->lblID->Visible = true;
-				this->lblNumSpent->Visible = true;
-				this->lblNumTrips->Visible = true;
-				this->lblSpent->Visible = true;
-				this->lblTrips->Visible = true;
-				this->lblRating->Visible = true;
-				this->btnUpdate->Visible = true;
+		void ShowProfilePanel()
+		{
+			this->lblDni->Visible = true;
+			this->lblName->Visible = true;
+			this->ProfileTitle->Visible = true;
+			this->lblID->Visible = true;
+			this->lblNumSpent->Visible = true;
+			this->lblNumTrips->Visible = true;
+			this->lblSpent->Visible = true;
+			this->lblTrips->Visible = true;
+			this->lblRating->Visible = true;
+			this->btnUpdate->Visible = true;
 
-				this->lblUpdateProfile->Visible = false;
-				this->lblNewName->Visible = false;
-				this->tbNewName->Visible = false;
-				this->lblNewPassword->Visible = false;
-				this->tbNewPassword->Visible = false;
-				this->lblPastPassword->Visible = false;
-				this->tbPastPassword->Visible = false;
-				this->btnConfirm->Visible = false;
-			}
+			this->lblUpdateProfile->Visible = false;
+			this->lblNewName->Visible = false;
+			this->tbNewName->Visible = false;
+			this->lblNewPassword->Visible = false;
+			this->tbNewPassword->Visible = false;
+			this->lblPastPassword->Visible = false;
+			this->tbPastPassword->Visible = false;
+			this->btnConfirm->Visible = false;
+		}
 
 		// Muestra el panel de edicion y oculta el de perfil
-			void ShowEditPanel()
-			{
-				this->lblDni->Visible = false;
-				this->lblName->Visible = false;
-				this->ProfileTitle->Visible = false;
-				this->lblID->Visible = false;
-				this->lblNumSpent->Visible = false;
-				this->lblNumTrips->Visible = false;
-				this->lblSpent->Visible = false;
-				this->lblTrips->Visible = false;
-				this->lblRating->Visible = false;
-				this->btnUpdate->Visible = false;
+		void ShowEditPanel()
+		{
+			this->lblDni->Visible = false;
+			this->lblName->Visible = false;
+			this->ProfileTitle->Visible = false;
+			this->lblID->Visible = false;
+			this->lblNumSpent->Visible = false;
+			this->lblNumTrips->Visible = false;
+			this->lblSpent->Visible = false;
+			this->lblTrips->Visible = false;
+			this->lblRating->Visible = false;
+			this->btnUpdate->Visible = false;
 
-				this->lblUpdateProfile->Visible = true;
-				this->lblNewName->Visible = true;
-				this->tbNewName->Visible = true;
-				this->lblNewPassword->Visible = true;
-				this->tbNewPassword->Visible = true;
-				this->lblPastPassword->Visible = true;
-				this->tbPastPassword->Visible = true;
-				this->btnConfirm->Visible = true;
+			this->lblUpdateProfile->Visible = true;
+			this->lblNewName->Visible = true;
+			this->tbNewName->Visible = true;
+			this->lblNewPassword->Visible = true;
+			this->tbNewPassword->Visible = true;
+			this->lblPastPassword->Visible = true;
+			this->tbPastPassword->Visible = true;
+			this->btnConfirm->Visible = true;
 		}
-		
+
 		// Buscar viaje activo de un pasajero
-			Trip buscarViajeActivoDePasajero(TripManager& tripMgr, const string& dni)
-			{
-				for (int i = 0; i < tripMgr.getActiveTrips().getSize(); i++) {
-					Trip t = tripMgr.getActiveTrips().get(i);
-					if (t.getPassengerDni() == dni) return t;
-				}
-				return Trip();
+		Trip buscarViajeActivoDePasajero(TripManager& tripMgr, const string& dni)
+		{
+			for (int i = 0; i < tripMgr.getActiveTrips().getSize(); i++) {
+				Trip t = tripMgr.getActiveTrips().get(i);
+				if (t.getPassengerDni() == dni) return t;
 			}
-		
-			
+			return Trip();
+		}
+
+
 		//
 		// Load Form
 		//
-			System::Void PassengerMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
-			{
-				normalSize = this->Size;
-				normalLocation = this->Location;
-				normalState = this->WindowState;
+		System::Void PassengerMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
+		{
+			normalSize = this->Size;
+			normalLocation = this->Location;
+			normalState = this->WindowState;
 
-				// Cargar imagen de la barra LYNX
-				try {
-					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-					this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
-					this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-				}
-				catch (...) {}
-
-				// Cargar datos del pasajero desde authManager
-				LoadPassengerData();
-
-				FormsStatus::SaveWindow(this);
-				if (FormsStatus::isFullscreen)
-					FormsStatus::ApplyWindow(this);
-
-
-
-				//Verificar si hay un viaje activo para mostrarlo en pantalla
-				Trip activeT;
-				String^ a = this->dni;
-
-				if ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
-					String^ o = gcnew System::String(activeT.getOrigin().c_str());
-					String^ d = gcnew System::String(activeT.getDestination().c_str());
-					float price = activeT.getPrice();
-
-					this->lblOriginDestination->Text = o + " -> " + d;
-					this->lblPriceNum->Text = L"S/." + price;
-					this->lblOriginDestination->Visible = true;
-					switch (activeT.getTipe()) {
-					case 1:
-						this->lblTypeTripText->Text = "Economico";
-						this->lblTypeTripText->ForeColor = System::Drawing::Color::LightGreen;
-						break;
-					case 2:
-						this->lblTypeTripText->Text = "Standard";
-						this->lblTypeTripText->ForeColor = System::Drawing::Color::LightSteelBlue;
-						break;
-					case 3:
-						this->lblTypeTripText->Text = "Premium";
-						this->lblTypeTripText->ForeColor = System::Drawing::Color::Goldenrod;
-						break;
-					}
-					this->lblPrice->Visible = true;
-					this->lblPriceNum->Visible = true;
-					this->lblTypeTrip->Visible = true;
-					this->lblTypeTripText->Visible = true;
-					this->ActualTripTitle->Visible = true;
-
-					this->lblNoTrip->Visible = false;
-				}
-
-				//Gemini me ayudo con esto JAJAJJA, es para lo que es el layout del historial
-				this->flowLayoutPanel1->Controls->Clear();
-
-				// Extraemos el vector con el historial del pasajero mediante la pila sin destruirla
-				std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
-
-				// Filtramos e insertamos los viajes en el panel
-				for (size_t i = 0; i < historial.size(); i++) {
-					// Solo mostramos en el historial los viajes que le pertenecen al DNI del pasajero logueado
-					if (historial[i].getPassengerDni() == msclr::interop::marshal_as<std::string>(a)) {
-						AgregarBloqueHistorial(historial[i]);
-					}
-				}
-
+			// Cargar imagen de la barra LYNX
+			try {
+				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+				this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
+				this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			}
+			catch (...) {}
+
+			// Cargar datos del pasajero desde authManager
+			LoadPassengerData();
+
+			FormsStatus::SaveWindow(this);
+			if (FormsStatus::isFullscreen)
+				FormsStatus::ApplyWindow(this);
+
+
+
+			//Verificar si hay un viaje activo para mostrarlo en pantalla
+			Trip activeT;
+			String^ a = this->dni;
+
+			if ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(a))).getTripId() != "") {
+				String^ o = gcnew System::String(activeT.getOrigin().c_str());
+				String^ d = gcnew System::String(activeT.getDestination().c_str());
+				float price = activeT.getPrice();
+
+				this->lblOriginDestination->Text = o + " -> " + d;
+				this->lblPriceNum->Text = L"S/." + price;
+				this->lblOriginDestination->Visible = true;
+				switch (activeT.getTipe()) {
+				case 1:
+					this->lblTypeTripText->Text = "Economico";
+					this->lblTypeTripText->ForeColor = System::Drawing::Color::LightGreen;
+					break;
+				case 2:
+					this->lblTypeTripText->Text = "Standard";
+					this->lblTypeTripText->ForeColor = System::Drawing::Color::LightSteelBlue;
+					break;
+				case 3:
+					this->lblTypeTripText->Text = "Premium";
+					this->lblTypeTripText->ForeColor = System::Drawing::Color::Goldenrod;
+					break;
+				}
+				this->lblPrice->Visible = true;
+				this->lblPriceNum->Visible = true;
+				this->lblTypeTrip->Visible = true;
+				this->lblTypeTripText->Visible = true;
+				this->ActualTripTitle->Visible = true;
+
+				this->lblNoTrip->Visible = false;
+			}
+
+			//Gemini me ayudo con esto JAJAJJA, es para lo que es el layout del historial
+			this->flowLayoutPanel1->Controls->Clear();
+
+			// Extraemos el vector con el historial del pasajero mediante la pila sin destruirla
+			std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
+
+			// Filtramos e insertamos los viajes en el panel
+			for (size_t i = 0; i < historial.size(); i++) {
+				// Solo mostramos en el historial los viajes que le pertenecen al DNI del pasajero logueado
+				if (historial[i].getPassengerDni() == msclr::interop::marshal_as<std::string>(a)) {
+					AgregarBloqueHistorial(historial[i]);
+				}
+			}
+
+		}
 
 		//
 		// Tipo de viaje: seleccion de boton
 		//
 			//Cambiar el color del boton economico y los demas los pone en predeterminado, aparte de asignar el valor al tipo
-			System::Void btnEconomic_Click(System::Object^ sender, System::EventArgs^ e) {
-				this->btnEconomic->BackColor = System::Drawing::Color::Black;
-				this->btnEconomic->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-				this->btnStandard->BackColor = System::Drawing::Color::White;
-				this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-				this->btnPremium->BackColor = System::Drawing::Color::White;
-				this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-				type = 1;
-			}
+		System::Void btnEconomic_Click(System::Object^ sender, System::EventArgs^ e) {
+			this->btnEconomic->BackColor = System::Drawing::Color::Black;
+			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnStandard->BackColor = System::Drawing::Color::White;
+			this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->btnPremium->BackColor = System::Drawing::Color::White;
+			this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			type = 1;
+		}
 
-			//Cambiar el color del boton standard y los demas los pone en predeterminado, aparte de asignar el valor al tipo
-			System::Void btnStandard_Click(System::Object^ sender, System::EventArgs^ e) {
-				this->btnStandard->BackColor = System::Drawing::Color::Black;
-				this->btnStandard->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-				this->btnEconomic->BackColor = System::Drawing::Color::White;
-				this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-				this->btnPremium->BackColor = System::Drawing::Color::White;
-				this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-				type = 2;
-			}
+		//Cambiar el color del boton standard y los demas los pone en predeterminado, aparte de asignar el valor al tipo
+		System::Void btnStandard_Click(System::Object^ sender, System::EventArgs^ e) {
+			this->btnStandard->BackColor = System::Drawing::Color::Black;
+			this->btnStandard->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnEconomic->BackColor = System::Drawing::Color::White;
+			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->btnPremium->BackColor = System::Drawing::Color::White;
+			this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			type = 2;
+		}
 
-			//Cambiar el color del boton premium y los demas los pone en predeterminado, aparte de asignar el valor al tipo
-			System::Void btnPremium_Click(System::Object^ sender, System::EventArgs^ e) {
-				this->btnPremium->BackColor = System::Drawing::Color::Black;
-				this->btnPremium->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-				this->btnStandard->BackColor = System::Drawing::Color::White;
-				this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-				this->btnEconomic->BackColor = System::Drawing::Color::White;
-				this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-				type = 3;
-			}
+		//Cambiar el color del boton premium y los demas los pone en predeterminado, aparte de asignar el valor al tipo
+		System::Void btnPremium_Click(System::Object^ sender, System::EventArgs^ e) {
+			this->btnPremium->BackColor = System::Drawing::Color::Black;
+			this->btnPremium->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnStandard->BackColor = System::Drawing::Color::White;
+			this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->btnEconomic->BackColor = System::Drawing::Color::White;
+			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			type = 3;
+		}
 
 		//
 		// Buscar viaje
 		//
 
-			private:
-				String^ origin;
-				String^ destination;
-				String^ driverName;
-				String^ driverDni;
-				string fechaActual()
-				{
-					std::time_t now = std::time(nullptr);
-					std::tm localTime{};
-					localtime_s(&localTime, &now);
-					char buffer[16];
-					std::strftime(buffer, sizeof(buffer), "%d/%m/%Y", &localTime);
-					return buffer;
-				}
-				float calcPrice(int tipo, float km) {
-					float tarifa = 0.0f;
-					float price=0;
+	private:
+		String^ origin;
+		String^ destination;
+		String^ driverName;
+		String^ driverDni;
+		string fechaActual()
+		{
+			std::time_t now = std::time(nullptr);
+			std::tm localTime{};
+			localtime_s(&localTime, &now);
+			char buffer[16];
+			std::strftime(buffer, sizeof(buffer), "%d/%m/%Y", &localTime);
+			return buffer;
+		}
+		float calcPrice(int tipo, float km) {
+			float tarifa = 0.0f;
+			float price = 0;
 
-					if (tipo == 1) tarifa = 1.20f;
-					else if (tipo == 2) tarifa = 1.80f;
-					else tarifa = 2.50f;
+			if (tipo == 1) tarifa = 1.20f;
+			else if (tipo == 2) tarifa = 1.80f;
+			else tarifa = 2.50f;
 
-					price = tarifa * km + 3.0f;
+			price = tarifa * km + 3.0f;
 
-					return price;
-				}
+			return price;
+		}
 
-			int type=0;
-			int originalType = 0;
-			float distance = 0;
-			private:
+		int type = 0;
+		int originalType = 0;
+		float distance = 0;
+	private:
 
-				//buscar viaje
-				System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {
-					origin = this->tbOrigin->Text->Trim();
-					destination = this->tbDestination->Text->Trim();
+		//buscar viaje
+		System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {
+			origin = this->tbOrigin->Text->Trim();
+			destination = this->tbDestination->Text->Trim();
 
-					//si esta vacio retorna (podria ponerse una alerta)
-					if (this->tbDistance->Text == "" || this->tbDestination->Text == "" || this->tbOrigin->Text == "" || type == 0) {
-						return;
-					}
-					//Busca al mejor conductor
-					distance = std::stof(msclr::interop::marshal_as<std::string>(this->tbDistance->Text->Trim()));
+			//si esta vacio retorna (podria ponerse una alerta)
+			if (this->tbDistance->Text == "" || this->tbDestination->Text == "" || this->tbOrigin->Text == "" || type == 0) {
+				return;
+			}
+			//Busca al mejor conductor
+			distance = std::stof(msclr::interop::marshal_as<std::string>(this->tbDistance->Text->Trim()));
 
-					AuthManager auth;
-					string bestDriverDni = tripManager->matchBestDriver(auth);
-					Driver bestDriver = auth.getDriverByDni(bestDriverDni);
-					string bestDriverName = bestDriver.getName();
+			AuthManager auth;
+			string bestDriverDni = tripManager->matchBestDriver(auth);
+			Driver bestDriver = auth.getDriverByDni(bestDriverDni);
+			string bestDriverName = bestDriver.getName();
 
-					driverName = gcnew System::String(bestDriverName.c_str());
-					driverDni = gcnew System::String(bestDriverDni.c_str());
+			driverName = gcnew System::String(bestDriverName.c_str());
+			driverDni = gcnew System::String(bestDriverDni.c_str());
 
-					//Basicamente muestra todo lo que es el conductor encontrado y quita lo demas que estaba en la pantalla de viaje en curso
-					this->lblDriverName->Text = gcnew System::String(bestDriverName.c_str());;
-					this->lblDriverDni->Text = L"DNI: " + gcnew System::String(bestDriverDni.c_str());;
+			//Basicamente muestra todo lo que es el conductor encontrado y quita lo demas que estaba en la pantalla de viaje en curso
+			this->lblDriverName->Text = gcnew System::String(bestDriverName.c_str());;
+			this->lblDriverDni->Text = L"DNI: " + gcnew System::String(bestDriverDni.c_str());;
 
-					this->lblFoundDriver->Visible = true;
-					this->lblDriverName->Visible = true;
-					this->lblDriverDni->Visible = true;
-					this->btnAccept->Visible = true;
-					this->btnDecline->Visible = true;
+			this->lblFoundDriver->Visible = true;
+			this->lblDriverName->Visible = true;
+			this->lblDriverDni->Visible = true;
+			this->btnAccept->Visible = true;
+			this->btnDecline->Visible = true;
 
-					this->lblNoTrip->Visible = false;
+			this->lblNoTrip->Visible = false;
 
-					this->ActualTripTitle->Visible = false;
-					this->lblPrice->Visible = false;
-					this->lblPriceNum->Visible = false;
-					this->lblTypeTrip->Visible = false;
-					this->lblTypeTripText->Visible = false;
-					this->ActualTripTitle->Visible = false;
-					this->lblOriginDestination->Visible = false;
+			this->ActualTripTitle->Visible = false;
+			this->lblPrice->Visible = false;
+			this->lblPriceNum->Visible = false;
+			this->lblTypeTrip->Visible = false;
+			this->lblTypeTripText->Visible = false;
+			this->ActualTripTitle->Visible = false;
+			this->lblOriginDestination->Visible = false;
 
-					//limpia el apartado de solicitar viaje
-					this->tbOrigin->Text = "";
-					this->tbDestination->Text = "";
-					this->tbDistance->Text = "";
-					//asigna variable del tipo de viaje para guardarla y usarla en otras funciones
-					originalType = type;
-					type = 0;
-					//Todos los botones a su color predeterminado
-					this->btnStandard->BackColor = System::Drawing::Color::White;
-					this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-					this->btnEconomic->BackColor = System::Drawing::Color::White;
-					this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-					this->btnPremium->BackColor = System::Drawing::Color::White;
-					this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			//limpia el apartado de solicitar viaje
+			this->tbOrigin->Text = "";
+			this->tbDestination->Text = "";
+			this->tbDistance->Text = "";
+			//asigna variable del tipo de viaje para guardarla y usarla en otras funciones
+			originalType = type;
+			type = 0;
+			//Todos los botones a su color predeterminado
+			this->btnStandard->BackColor = System::Drawing::Color::White;
+			this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->btnEconomic->BackColor = System::Drawing::Color::White;
+			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->btnPremium->BackColor = System::Drawing::Color::White;
+			this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 
-				}
+		}
 
 
 		//Animacion para el boton de buscar
-			System::Void btnSearch_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-				this->btnSearch->BackColor = System::Drawing::Color::White;
-				this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			}
+		System::Void btnSearch_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+			this->btnSearch->BackColor = System::Drawing::Color::White;
+			this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+		}
 
-			System::Void btnSearch_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-				this->btnSearch->BackColor = System::Drawing::Color::SeaGreen;
-				this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-				this->btnSearch->Location = System::Drawing::Point(138, 261);
-			}
+		System::Void btnSearch_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+			this->btnSearch->BackColor = System::Drawing::Color::SeaGreen;
+			this->btnSearch->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->btnSearch->Location = System::Drawing::Point(138, 261);
+		}
 
-			System::Void btnSearch_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
-				this->btnSearch->BackColor = System::Drawing::Color::Black;
-				this->btnSearch->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-				this->btnSearch->Location = System::Drawing::Point(138, 264);
-			}
+		System::Void btnSearch_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
+			this->btnSearch->BackColor = System::Drawing::Color::Black;
+			this->btnSearch->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnSearch->Location = System::Drawing::Point(138, 264);
+		}
 
 		//
 		// Perfil: mostrar / editar
 		//
-			System::Void btnUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
-				ShowEditPanel();
+		System::Void btnUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
+			ShowEditPanel();
+		}
+		//Animacion para el boton de Actualizar
+		System::Void btnUpdate_MouseEnter(System::Object^ sender, System::EventArgs^ e) {
+			this->btnUpdate->BackColor = System::Drawing::Color::SeaGreen;
+			this->btnUpdate->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->btnUpdate->Location = System::Drawing::Point(111, 272);
+		}
+
+		System::Void btnUpdate_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
+			this->btnUpdate->BackColor = System::Drawing::Color::Black;
+			this->btnUpdate->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnUpdate->Location = System::Drawing::Point(111, 275);
+		}
+
+		// btnConfirm: valida, actualiza en authManager y refresca UI
+		System::Void btnConfirm_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			String^ newname = this->tbNewName->Text->Trim();
+			String^ newpassword = this->tbNewPassword->Text;
+			String^ pastpassword = this->tbPastPassword->Text;
+
+			// Validar campos vacios
+			if (newname->Length == 0 || newpassword->Length == 0 || pastpassword->Length == 0) {
+				MessageBox::Show("Por favor llene todos los campos", "Actualizar Perfil", MessageBoxButtons::OK);
+				return;
 			}
-			//Animacion para el boton de Actualizar
-			System::Void btnUpdate_MouseEnter(System::Object^ sender, System::EventArgs^ e) {
-				this->btnUpdate->BackColor = System::Drawing::Color::SeaGreen;
-				this->btnUpdate->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-				this->btnUpdate->Location = System::Drawing::Point(111, 272);
+
+			// Validar contrasena anterior
+			if (pastpassword != password) {
+				MessageBox::Show("Contrasena anterior incorrecta", "Actualizar Perfil", MessageBoxButtons::OK);
+				return;
 			}
 
-			System::Void btnUpdate_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
-				this->btnUpdate->BackColor = System::Drawing::Color::Black;
-				this->btnUpdate->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-				this->btnUpdate->Location = System::Drawing::Point(111, 275);
+			// Actualizar en authManager (persiste en archivo)
+			if (authManager != nullptr) {
+				String^ currentDni = dni;
+				std::string dniStr = msclr::interop::marshal_as<std::string>(currentDni);
+				std::string newNameStr = msclr::interop::marshal_as<std::string>(newname);
+				std::string newPassStr = msclr::interop::marshal_as<std::string>(newpassword);
+				authManager->updatePassengerData(dniStr, newNameStr, newPassStr);
 			}
 
-			// btnConfirm: valida, actualiza en authManager y refresca UI
-			System::Void btnConfirm_Click(System::Object^ sender, System::EventArgs^ e)
-			{
-				String^ newname = this->tbNewName->Text->Trim();
-				String^ newpassword = this->tbNewPassword->Text;
-				String^ pastpassword = this->tbPastPassword->Text;
+			// Actualizar variables locales
+			name = newname;
+			password = newpassword;  // contrasena NUEVA, no la vieja
 
-				// Validar campos vacios
-				if (newname->Length == 0 || newpassword->Length == 0 || pastpassword->Length == 0) {
-					MessageBox::Show("Por favor llene todos los campos", "Actualizar Perfil", MessageBoxButtons::OK);
-					return;
-				}
+			// Refrescar UI
+			this->lblName->Text = name;
+			this->topTitle->Text = L"Bienvenido " + name;
 
-				// Validar contrasena anterior
-				if (pastpassword != password) {
-					MessageBox::Show("Contrasena anterior incorrecta", "Actualizar Perfil", MessageBoxButtons::OK);
-					return;
-				}
+			// Limpiar campos de edicion
+			this->tbNewName->Text = "";
+			this->tbNewPassword->Text = "";
+			this->tbPastPassword->Text = "";
 
-				// Actualizar en authManager (persiste en archivo)
-				if (authManager != nullptr) {
-					String^ currentDni = dni;
-					std::string dniStr = msclr::interop::marshal_as<std::string>(currentDni);
-					std::string newNameStr = msclr::interop::marshal_as<std::string>(newname);
-					std::string newPassStr = msclr::interop::marshal_as<std::string>(newpassword);
-					authManager->updatePassengerData(dniStr, newNameStr, newPassStr);
-				}
-
-				// Actualizar variables locales
-				name = newname;
-				password = newpassword;  // contrasena NUEVA, no la vieja
-
-				// Refrescar UI
-				this->lblName->Text = name;
-				this->topTitle->Text = L"Bienvenido " + name;
-
-				// Limpiar campos de edicion
-				this->tbNewName->Text = "";
-				this->tbNewPassword->Text = "";
-				this->tbPastPassword->Text = "";
-
-				ShowProfilePanel();
-				MessageBox::Show("Perfil actualizado correctamente", "Actualizar Perfil", MessageBoxButtons::OK);
-			}
+			ShowProfilePanel();
+			MessageBox::Show("Perfil actualizado correctamente", "Actualizar Perfil", MessageBoxButtons::OK);
+		}
 
 		//
 		// Viaje actual: paint, aceptar, finalizar
 		//
-			System::Void queuePanel_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e)
-			{
-			}
+		System::Void queuePanel_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e)
+		{
+		}
 
 		//
 		// Fullscreen: F11 activa/desactiva, ESC sale si esta en fullscreen
 		//
-			System::Void PassengerMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+		System::Void PassengerMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+		{
+			if (e->KeyCode == System::Windows::Forms::Keys::F11)
 			{
-				if (e->KeyCode == System::Windows::Forms::Keys::F11)
+				if (!FormsStatus::isFullscreen)
 				{
-					if (!FormsStatus::isFullscreen)
-					{
-						normalSize = this->Size;
-						normalLocation = this->Location;
-						normalState = this->WindowState;
-						FormsStatus::SaveWindow(this);
-						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-						this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-						FormsStatus::isFullscreen = true;
-					}
-					else
-					{
-						this->WindowState = System::Windows::Forms::FormWindowState::Normal;
-						this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-						this->Size = FormsStatus::normalSize;
-						this->Location = FormsStatus::normalLocation;
-						FormsStatus::isFullscreen = false;
-					}
+					normalSize = this->Size;
+					normalLocation = this->Location;
+					normalState = this->WindowState;
+					FormsStatus::SaveWindow(this);
+					this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+					this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+					FormsStatus::isFullscreen = true;
 				}
-
-				if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
+				else
 				{
 					this->WindowState = System::Windows::Forms::FormWindowState::Normal;
 					this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -1398,22 +1395,32 @@ namespace LYNX {
 				}
 			}
 
+			if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
+			{
+				this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				this->Size = FormsStatus::normalSize;
+				this->Location = FormsStatus::normalLocation;
+				FormsStatus::isFullscreen = false;
+			}
+		}
+
 		//
 		// Click functions
 		//
-		
+
 
 		// topTitle: sin accion (placeholder)
 		System::Void topTitle_Click(System::Object^ sender, System::EventArgs^ e) {}
 
-		public:
+	public:
 		vector<Trip> exportarWaitingTrips(TripManager& tripMgr)
 		{
 			vector<Trip> lista;
 			auto waitingQueue = tripMgr.getWaitingQueue();
 
 			while (!waitingQueue.isEmpty()) {
-				Trip t = waitingQueue.getFront(); 
+				Trip t = waitingQueue.getFront();
 				lista.push_back(t);
 				waitingQueue.dequeue();
 			}
@@ -1476,8 +1483,8 @@ namespace LYNX {
 			this->btnDecline->Visible = false; \
 
 
-			//Asigna variables para usarlas
-			String^ dnii = dni;
+				//Asigna variables para usarlas
+				String^ dnii = dni;
 			String^ o = origin;
 			String^ d = destination;
 			String^ dn = driverName;
@@ -1576,9 +1583,9 @@ namespace LYNX {
 		{
 			// 1. Crear el Panel Fila contenedor del item
 			Panel^ itemPanel = gcnew Panel();
-			itemPanel->BackColor = System::Drawing::Color::FromArgb(244, 246, 241); // Tu color grisáceo claro 
-			itemPanel->Size = System::Drawing::Size(1330, 58); // Ancho adaptable al scrollbar y alto estándar 
-			itemPanel->Margin = System::Windows::Forms::Padding(0, 0, 0, 8); // Margen inferior de separación
+			itemPanel->BackColor = System::Drawing::Color::FromArgb(244, 246, 241); // Tu color grisaceo claro 
+			itemPanel->Size = System::Drawing::Size(1330, 58); // Ancho adaptable al scrollbar y alto estandar 
+			itemPanel->Margin = System::Windows::Forms::Padding(0, 0, 0, 8); // Margen inferior de separacion
 
 			// 2. Crear el cuadrito azul decorativo a la izquierda
 
@@ -1609,7 +1616,7 @@ namespace LYNX {
 			lblRuta->Location = System::Drawing::Point(34, 16);
 			lblRuta->AutoSize = true;
 
-			// Conversión de datos nativos a administrados para la UI
+			// Conversion de datos nativos a administrados para la UI
 			String^ origenCLI = gcnew String(trip.getOrigin().c_str());
 			String^ destinoCLI = gcnew String(trip.getDestination().c_str());
 			lblRuta->Text = origenCLI + L" -> " + destinoCLI;
@@ -1619,11 +1626,11 @@ namespace LYNX {
 			lblPrecioItem->Font = gcnew System::Drawing::Font(L"Bahnschrift", 14, System::Drawing::FontStyle::Bold);
 			lblPrecioItem->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
 			lblPrecioItem->Size = System::Drawing::Size(150, 25);
-			lblPrecioItem->Location = System::Drawing::Point(1150, 16); // Posición lateral derecha
+			lblPrecioItem->Location = System::Drawing::Point(1150, 16); // Posicion lateral derecha
 			lblPrecioItem->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			lblPrecioItem->Text = L"S/." + trip.getPrice().ToString("F2"); // Muestra con dos decimales de moneda
 
-			// 5. Armar la jerarquía de los controles
+			// 5. Armar la jerarquia de los controles
 			itemPanel->Controls->Add(Cuadradito);
 			itemPanel->Controls->Add(lblRuta);
 			itemPanel->Controls->Add(lblPrecioItem);
@@ -1633,30 +1640,30 @@ namespace LYNX {
 		}
 
 
-	   // pictureBoxIcon: volver al menu principal
-	   System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e)
-	   {
-		   
-		   if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
-		   {
-			   FormsStatus::SaveWindow(this);
-			   FormsStatus::ApplyWindow(FormsStatus::mainMenu);
-			   FormsStatus::mainMenu->Show();
-			   FormsStatus::mainMenu->BringToFront();
-			   this->Hide();
-		   }
-		   
-	   }
+		// pictureBoxIcon: volver al menu principal
+		System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e)
+		{
 
-	   //
-	   // Actived Component: es un evento de Windows Forms que se dispara cada vez que el form se convierte en la ventana activa
-	   //
-	   System::Void PassengerMenuForm_Activated(System::Object^ sender, System::EventArgs^ e) {
-		   
-		   if (authManager != nullptr)
-			   authManager->reloadPassengers();
-		   LoadPassengerData();
-		   
-	   }
-};
+			if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
+			{
+				FormsStatus::SaveWindow(this);
+				FormsStatus::ApplyWindow(FormsStatus::mainMenu);
+				FormsStatus::mainMenu->Show();
+				FormsStatus::mainMenu->BringToFront();
+				this->Hide();
+			}
+
+		}
+
+		//
+		// Actived Component: es un evento de Windows Forms que se dispara cada vez que el form se convierte en la ventana activa
+		//
+		System::Void PassengerMenuForm_Activated(System::Object^ sender, System::EventArgs^ e) {
+
+			if (authManager != nullptr)
+				authManager->reloadPassengers();
+			LoadPassengerData();
+
+		}
+	};
 }
