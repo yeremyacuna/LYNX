@@ -24,6 +24,8 @@ namespace LYNX {
 		{
 			InitializeComponent();
 			ConfigureForm();
+
+			
 		}
 
 		DriverMenuForm(AuthManager* auth, TripManager* trips, String^ driverDni, FileManager* file)
@@ -32,6 +34,8 @@ namespace LYNX {
 			this->tripManager = trips;
 			this->fileManager = file;
 			this->loggedDriverDni = driverDni;
+
+			
 			InitializeComponent();
 			ConfigureForm();
 		}
@@ -52,6 +56,8 @@ namespace LYNX {
 		FileManager* fileManager = nullptr;
 
 		String^ loggedDriverDni = "";
+
+		
 
 		// COMPONENTES
 	private: System::Windows::Forms::Panel^ topPanel;

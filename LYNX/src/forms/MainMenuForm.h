@@ -39,6 +39,7 @@ namespace LYNX {
 
 			formlg = gcnew LoginPassengerForm(authManager, tripManager, 1);
 			formrg = gcnew RegisterPassengerForm(authManager, tripManager, 1);
+			formvr = gcnew VehicleRegisterForm(authManager, tripManager);
 
 			// CENTRAR TODO
 			this->CenterToScreen();
@@ -83,6 +84,7 @@ namespace LYNX {
 		PassengerMenuForm^ formpm = nullptr;
 		DriverMenuForm^ formdrimenu = nullptr;
 		AdminMenuForm^ formadminmenu = nullptr;
+		VehicleRegisterForm^ formvr = nullptr;
 
 		int currentLoginStyle = 1;
 		int currentRegisterStyle = 1;
@@ -701,6 +703,45 @@ namespace LYNX {
 				formrg = gcnew RegisterPassengerForm(authManager, tripManager, currentRegisterStyle);
 				FormsStatus::ApplyWindow(formrg);
 				formrg->Show();
+			}
+
+			if (formrg != nullptr && !formrg->IsDisposed && formrg->switchToLogin) {
+				formrg->switchToLogin = false;
+				if (formlg == nullptr || formlg->IsDisposed) {
+					formlg = gcnew LoginPassengerForm(authManager, tripManager, currentLoginStyle); // Verifica y crea
+				}
+				FormsStatus::ApplyWindow(formlg);
+				formlg->Show();  // Muestra
+			}
+
+			if (formrg != nullptr && !formrg->IsDisposed && formrg->switchToVehicle) {
+				formrg->switchToVehicle = false;
+				if (formvr == nullptr || formvr->IsDisposed) {
+					formvr = gcnew VehicleRegisterForm(authManager, tripManager); // Verifica y crea
+				}
+				formvr->name = formrg->name;
+				formvr->dni = formrg->pass;
+				formvr->pass = formrg->pass;
+				FormsStatus::ApplyWindow(formvr);
+				formvr->Show();  // Muestra
+			}
+
+			if (formvr != nullptr && !formvr->IsDisposed && formvr->switchToRegister) {
+				formvr->switchToRegister = false;
+				if (formlg == nullptr || formlg->IsDisposed) {
+					formlg = gcnew LoginPassengerForm(authManager, tripManager, currentLoginStyle); // Verifica y crea
+				}
+				FormsStatus::ApplyWindow(formlg);
+				formlg->Show();  // Muestra
+			}
+
+			if (formvr != nullptr && !formvr->IsDisposed && formvr->switchToLogin) {
+				formvr->switchToLogin = false;
+				if (formrg == nullptr || formrg->IsDisposed) {
+					formrg = gcnew RegisterPassengerForm(authManager, tripManager, currentLoginStyle); // Verifica y crea
+				}
+				FormsStatus::ApplyWindow(formrg);
+				formrg->Show();  // Muestra
 			}
 
 			if (formrg != nullptr && !formrg->IsDisposed && formrg->switchToLogin) {
