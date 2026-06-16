@@ -62,7 +62,7 @@ namespace LYNX {
 		// COMPONENTES
 	private: System::Windows::Forms::Panel^ topPanel;
 	private: System::Windows::Forms::Label^ topTitle;
-	private: System::Windows::Forms::Label^ topText;
+
 	private: System::Windows::Forms::Label^ onlineChip;
 	private: System::Windows::Forms::Button^ statusButton;
 	private: System::Windows::Forms::Button^ earningsButton;
@@ -136,7 +136,6 @@ namespace LYNX {
 			this->earningsButton = (gcnew System::Windows::Forms::Button());
 			this->statusButton = (gcnew System::Windows::Forms::Button());
 			this->onlineChip = (gcnew System::Windows::Forms::Label());
-			this->topText = (gcnew System::Windows::Forms::Label());
 			this->topTitle = (gcnew System::Windows::Forms::Label());
 			this->profilePanel = (gcnew System::Windows::Forms::Panel());
 			this->lastTripPanel = (gcnew System::Windows::Forms::Panel());
@@ -221,11 +220,10 @@ namespace LYNX {
 			this->topPanel->Controls->Add(this->earningsButton);
 			this->topPanel->Controls->Add(this->statusButton);
 			this->topPanel->Controls->Add(this->onlineChip);
-			this->topPanel->Controls->Add(this->topText);
 			this->topPanel->Controls->Add(this->topTitle);
-			this->topPanel->Location = System::Drawing::Point(28, 131);
+			this->topPanel->Location = System::Drawing::Point(25, 109);
 			this->topPanel->Name = L"topPanel";
-			this->topPanel->Size = System::Drawing::Size(1422, 164);
+			this->topPanel->Size = System::Drawing::Size(1422, 97);
 			this->topPanel->TabIndex = 0;
 			// 
 			// earningsButton
@@ -271,22 +269,11 @@ namespace LYNX {
 			this->onlineChip->Text = L"Online";
 			this->onlineChip->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
-			// topText
-			// 
-			this->topText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
-			this->topText->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(196)), static_cast<System::Int32>(static_cast<System::Byte>(201)),
-				static_cast<System::Int32>(static_cast<System::Byte>(207)));
-			this->topText->Location = System::Drawing::Point(28, 74);
-			this->topText->Name = L"topText";
-			this->topText->Size = System::Drawing::Size(620, 36);
-			this->topText->TabIndex = 1;
-			this->topText->Text = L"Disponibilidad, ganancias, viajes activos y vehiculo.";
-			// 
 			// topTitle
 			// 
 			this->topTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 24, System::Drawing::FontStyle::Bold));
 			this->topTitle->ForeColor = System::Drawing::Color::White;
-			this->topTitle->Location = System::Drawing::Point(28, 28);
+			this->topTitle->Location = System::Drawing::Point(25, 24);
 			this->topTitle->Name = L"topTitle";
 			this->topTitle->Size = System::Drawing::Size(360, 38);
 			this->topTitle->TabIndex = 0;
