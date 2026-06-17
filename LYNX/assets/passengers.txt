@@ -71,7 +71,7 @@ PAS-0070|Camila Diaz|90817274|camd|4.1|0|0
 PAS-0071|Angela Diaz|10284759|angied|4.6|1|30.1
 PAS-0072|Maria Torres|56492026|matorres|4.8|0|0
 PAS-0073|Paola Medina|37482910|paola12|4.3|0|0
-PAS-0074|Miguel Ruiz|91827373|miguelr|4.4|1|15.9
+PAS-0074|Mario Edu|91827373|mariobros|4.4|1|15.9
 PAS-0075|Samuel Rodriguez|73482910|samuelx|4.7|0|0
 PAS-0076|Luciana Herrera|37482920|luch|4.9|1|77.6
 PAS-0077|Fernanda Gomez|56492025|fergomez|4.7|3|66.7
@@ -110,5 +110,6 @@ PAS-0109|Fernando Diaz|90817273|ferdiaz|3.7|0|0
 PAS-0110|Pepe Marmol|77111111|pepemarm|5|1|34.025
 PAS-0111|Remers Gonza|12345678|remersalbums|5|0|0
 PAS-0112|Vinicius JR|00001111|vini|5|0|0
-PAS-0113|Salvadorcito Rivera|71149147|globyy|5|16|1659
+PAS-0113|Salvadorcito Rivera|71149147|globyy|5|17|1694.5
 PAS-0114|Michael Olise|89456421|bayern11|5|1|364747
+PAS-0115|Lamine Tamal|45465486|barzzza123|1.3|99|145.54

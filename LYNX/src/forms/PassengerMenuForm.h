@@ -63,13 +63,13 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ topTitle;
 	private: System::Windows::Forms::Panel^ profilePanel;
 	private: System::Windows::Forms::Panel^ queuePanel;
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ lblMarco1;
-	private: System::Windows::Forms::Label^ lblMarco2;
-	private: System::Windows::Forms::Panel^ pnlTopBar;
-	private: System::Windows::Forms::PictureBox^ pictureBoxIcon;
-	private: System::Windows::Forms::Label^ lblLYNX;
+
+
+
+
+
+
+
 	private: System::Windows::Forms::Label^ RequestTripTitle;
 	private: System::Windows::Forms::Label^ ProfileTitle;
 	private: System::Windows::Forms::Label^ HistoryTitle;
@@ -113,7 +113,15 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ lblPriceNum;
 	private: System::Windows::Forms::Label^ lblPrice;
 	private: System::Windows::Forms::Label^ lblOriginDestination;
-	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
+	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPnlHistorialDeViajes;
+
+	private: System::Windows::Forms::PictureBox^ pictureBoxIcon;
+	private: System::Windows::Forms::Label^ lblLYNX;
+	private: System::Windows::Forms::Panel^ pnlTopBar;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ label3;
+
 	private: System::ComponentModel::Container^ components;
 
 		// WINDOWS INITIALIZE
@@ -126,10 +134,6 @@ namespace LYNX {
 			this->btnConfirm = (gcnew System::Windows::Forms::Button());
 			this->tbPastPassword = (gcnew System::Windows::Forms::TextBox());
 			this->lblPastPassword = (gcnew System::Windows::Forms::Label());
-			this->lblNewPassword = (gcnew System::Windows::Forms::Label());
-			this->lblNewName = (gcnew System::Windows::Forms::Label());
-			this->tbNewPassword = (gcnew System::Windows::Forms::TextBox());
-			this->tbNewName = (gcnew System::Windows::Forms::TextBox());
 			this->lblUpdateProfile = (gcnew System::Windows::Forms::Label());
 			this->lblRating = (gcnew System::Windows::Forms::Label());
 			this->lblDni = (gcnew System::Windows::Forms::Label());
@@ -142,8 +146,12 @@ namespace LYNX {
 			this->lblName = (gcnew System::Windows::Forms::Label());
 			this->btnUpdate = (gcnew System::Windows::Forms::Button());
 			this->ProfileTitle = (gcnew System::Windows::Forms::Label());
+			this->tbNewName = (gcnew System::Windows::Forms::TextBox());
+			this->lblNewName = (gcnew System::Windows::Forms::Label());
+			this->lblNewPassword = (gcnew System::Windows::Forms::Label());
+			this->tbNewPassword = (gcnew System::Windows::Forms::TextBox());
 			this->manualPanel = (gcnew System::Windows::Forms::Panel());
-			this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
+			this->flowLayoutPnlHistorialDeViajes = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			this->HistoryTitle = (gcnew System::Windows::Forms::Label());
 			this->topPanel = (gcnew System::Windows::Forms::Panel());
 			this->statusButton = (gcnew System::Windows::Forms::Button());
@@ -174,20 +182,19 @@ namespace LYNX {
 			this->lblDriverDni = (gcnew System::Windows::Forms::Label());
 			this->lblDriverName = (gcnew System::Windows::Forms::Label());
 			this->lblFoundDriver = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->lblMarco1 = (gcnew System::Windows::Forms::Label());
-			this->lblMarco2 = (gcnew System::Windows::Forms::Label());
-			this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
 			this->pictureBoxIcon = (gcnew System::Windows::Forms::PictureBox());
 			this->lblLYNX = (gcnew System::Windows::Forms::Label());
+			this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->vehiclePanel->SuspendLayout();
 			this->manualPanel->SuspendLayout();
 			this->topPanel->SuspendLayout();
 			this->profilePanel->SuspendLayout();
 			this->queuePanel->SuspendLayout();
-			this->pnlTopBar->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
+			this->pnlTopBar->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// ActualTripTitle
@@ -203,14 +210,11 @@ namespace LYNX {
 			// 
 			// vehiclePanel
 			// 
+			this->vehiclePanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->vehiclePanel->BackColor = System::Drawing::Color::White;
 			this->vehiclePanel->Controls->Add(this->btnConfirm);
 			this->vehiclePanel->Controls->Add(this->tbPastPassword);
 			this->vehiclePanel->Controls->Add(this->lblPastPassword);
-			this->vehiclePanel->Controls->Add(this->lblNewPassword);
-			this->vehiclePanel->Controls->Add(this->lblNewName);
-			this->vehiclePanel->Controls->Add(this->tbNewPassword);
-			this->vehiclePanel->Controls->Add(this->tbNewName);
 			this->vehiclePanel->Controls->Add(this->lblUpdateProfile);
 			this->vehiclePanel->Controls->Add(this->lblRating);
 			this->vehiclePanel->Controls->Add(this->lblDni);
@@ -223,9 +227,13 @@ namespace LYNX {
 			this->vehiclePanel->Controls->Add(this->lblName);
 			this->vehiclePanel->Controls->Add(this->btnUpdate);
 			this->vehiclePanel->Controls->Add(this->ProfileTitle);
-			this->vehiclePanel->Location = System::Drawing::Point(1074, 213);
+			this->vehiclePanel->Controls->Add(this->tbNewName);
+			this->vehiclePanel->Controls->Add(this->lblNewName);
+			this->vehiclePanel->Controls->Add(this->lblNewPassword);
+			this->vehiclePanel->Controls->Add(this->tbNewPassword);
+			this->vehiclePanel->Location = System::Drawing::Point(1074, 209);
 			this->vehiclePanel->Name = L"vehiclePanel";
-			this->vehiclePanel->Size = System::Drawing::Size(377, 342);
+			this->vehiclePanel->Size = System::Drawing::Size(406, 387);
 			this->vehiclePanel->TabIndex = 9;
 			// 
 			// btnConfirm
@@ -234,22 +242,25 @@ namespace LYNX {
 			this->btnConfirm->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnConfirm->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
 			this->btnConfirm->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnConfirm->Location = System::Drawing::Point(111, 275);
+			this->btnConfirm->Location = System::Drawing::Point(143, 275);
 			this->btnConfirm->Name = L"btnConfirm";
 			this->btnConfirm->Size = System::Drawing::Size(154, 44);
 			this->btnConfirm->TabIndex = 27;
 			this->btnConfirm->Text = L"Confirmar";
+			this->btnConfirm->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->btnConfirm->UseVisualStyleBackColor = false;
 			this->btnConfirm->Visible = false;
 			this->btnConfirm->Click += gcnew System::EventHandler(this, &PassengerMenuForm::btnConfirm_Click);
 			// 
 			// tbPastPassword
 			// 
+			this->tbPastPassword->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->tbPastPassword->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbPastPassword->Location = System::Drawing::Point(14, 183);
+			this->tbPastPassword->Location = System::Drawing::Point(14, 186);
 			this->tbPastPassword->Name = L"tbPastPassword";
 			this->tbPastPassword->PasswordChar = '*';
-			this->tbPastPassword->Size = System::Drawing::Size(345, 27);
+			this->tbPastPassword->Size = System::Drawing::Size(379, 27);
 			this->tbPastPassword->TabIndex = 38;
 			this->tbPastPassword->Visible = false;
 			// 
@@ -265,68 +276,26 @@ namespace LYNX {
 			this->lblPastPassword->Text = L"Contrasena Previa";
 			this->lblPastPassword->Visible = false;
 			// 
-			// lblNewPassword
-			// 
-			this->lblNewPassword->AutoSize = true;
-			this->lblNewPassword->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
-			this->lblNewPassword->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->lblNewPassword->Location = System::Drawing::Point(13, 102);
-			this->lblNewPassword->Name = L"lblNewPassword";
-			this->lblNewPassword->Size = System::Drawing::Size(125, 17);
-			this->lblNewPassword->TabIndex = 27;
-			this->lblNewPassword->Text = L"Nueva Contrasena";
-			this->lblNewPassword->Visible = false;
-			// 
-			// lblNewName
-			// 
-			this->lblNewName->AutoSize = true;
-			this->lblNewName->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
-			this->lblNewName->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->lblNewName->Location = System::Drawing::Point(12, 45);
-			this->lblNewName->Name = L"lblNewName";
-			this->lblNewName->Size = System::Drawing::Size(105, 17);
-			this->lblNewName->TabIndex = 27;
-			this->lblNewName->Text = L"Nuevo Nombre";
-			this->lblNewName->Visible = false;
-			// 
-			// tbNewPassword
-			// 
-			this->tbNewPassword->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbNewPassword->Location = System::Drawing::Point(14, 124);
-			this->tbNewPassword->Name = L"tbNewPassword";
-			this->tbNewPassword->PasswordChar = '*';
-			this->tbNewPassword->Size = System::Drawing::Size(345, 27);
-			this->tbNewPassword->TabIndex = 36;
-			this->tbNewPassword->Visible = false;
-			// 
-			// tbNewName
-			// 
-			this->tbNewName->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
-			this->tbNewName->Location = System::Drawing::Point(14, 65);
-			this->tbNewName->Name = L"tbNewName";
-			this->tbNewName->Size = System::Drawing::Size(345, 27);
-			this->tbNewName->TabIndex = 27;
-			this->tbNewName->Visible = false;
-			// 
 			// lblUpdateProfile
 			// 
 			this->lblUpdateProfile->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
 			this->lblUpdateProfile->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->lblUpdateProfile->Location = System::Drawing::Point(13, 4);
+			this->lblUpdateProfile->Location = System::Drawing::Point(12, 4);
 			this->lblUpdateProfile->Name = L"lblUpdateProfile";
 			this->lblUpdateProfile->Size = System::Drawing::Size(220, 28);
 			this->lblUpdateProfile->TabIndex = 27;
 			this->lblUpdateProfile->Text = L"Actualizar Perfil";
 			this->lblUpdateProfile->Visible = false;
 			// 
-			// lblStars
+			// lblRating
 			// 
+			this->lblRating->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->lblRating->AutoSize = true;
 			this->lblRating->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
 			this->lblRating->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->lblRating->Location = System::Drawing::Point(309, 4);
-			this->lblRating->Name = L"lblStars";
+			this->lblRating->Location = System::Drawing::Point(343, 4);
+			this->lblRating->Name = L"lblRating";
 			this->lblRating->Size = System::Drawing::Size(50, 33);
 			this->lblRating->TabIndex = 35;
 			this->lblRating->Text = L"5.0";
@@ -336,7 +305,7 @@ namespace LYNX {
 			this->lblDni->AutoSize = true;
 			this->lblDni->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 13, System::Drawing::FontStyle::Bold));
 			this->lblDni->ForeColor = System::Drawing::SystemColors::ControlDark;
-			this->lblDni->Location = System::Drawing::Point(11, 83);
+			this->lblDni->Location = System::Drawing::Point(11, 89);
 			this->lblDni->Name = L"lblDni";
 			this->lblDni->Size = System::Drawing::Size(40, 22);
 			this->lblDni->TabIndex = 34;
@@ -357,7 +326,7 @@ namespace LYNX {
 			this->lblNumSpent->AutoSize = true;
 			this->lblNumSpent->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
 			this->lblNumSpent->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->lblNumSpent->Location = System::Drawing::Point(245, 183);
+			this->lblNumSpent->Location = System::Drawing::Point(235, 183);
 			this->lblNumSpent->Name = L"lblNumSpent";
 			this->lblNumSpent->Size = System::Drawing::Size(62, 33);
 			this->lblNumSpent->TabIndex = 32;
@@ -379,7 +348,7 @@ namespace LYNX {
 			this->lblSpent->AutoSize = true;
 			this->lblSpent->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
 			this->lblSpent->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->lblSpent->Location = System::Drawing::Point(219, 150);
+			this->lblSpent->Location = System::Drawing::Point(224, 150);
 			this->lblSpent->Name = L"lblSpent";
 			this->lblSpent->Size = System::Drawing::Size(113, 33);
 			this->lblSpent->TabIndex = 30;
@@ -390,7 +359,7 @@ namespace LYNX {
 			this->lblID->AutoSize = true;
 			this->lblID->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
 			this->lblID->ForeColor = System::Drawing::SystemColors::ControlDark;
-			this->lblID->Location = System::Drawing::Point(12, 45);
+			this->lblID->Location = System::Drawing::Point(12, 43);
 			this->lblID->Name = L"lblID";
 			this->lblID->Size = System::Drawing::Size(21, 17);
 			this->lblID->TabIndex = 29;
@@ -401,7 +370,7 @@ namespace LYNX {
 			this->lblTrips->AutoSize = true;
 			this->lblTrips->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
 			this->lblTrips->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->lblTrips->Location = System::Drawing::Point(47, 150);
+			this->lblTrips->Location = System::Drawing::Point(48, 150);
 			this->lblTrips->Name = L"lblTrips";
 			this->lblTrips->Size = System::Drawing::Size(87, 33);
 			this->lblTrips->TabIndex = 28;
@@ -412,7 +381,7 @@ namespace LYNX {
 			this->lblName->AutoSize = true;
 			this->lblName->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
 			this->lblName->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->lblName->Location = System::Drawing::Point(8, 55);
+			this->lblName->Location = System::Drawing::Point(8, 56);
 			this->lblName->Name = L"lblName";
 			this->lblName->Size = System::Drawing::Size(113, 33);
 			this->lblName->TabIndex = 27;
@@ -420,11 +389,13 @@ namespace LYNX {
 			// 
 			// btnUpdate
 			// 
+			this->btnUpdate->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->btnUpdate->BackColor = System::Drawing::Color::Black;
 			this->btnUpdate->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnUpdate->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
 			this->btnUpdate->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnUpdate->Location = System::Drawing::Point(111, 275);
+			this->btnUpdate->Location = System::Drawing::Point(147, 275);
 			this->btnUpdate->Name = L"btnUpdate";
 			this->btnUpdate->Size = System::Drawing::Size(154, 44);
 			this->btnUpdate->TabIndex = 27;
@@ -445,23 +416,75 @@ namespace LYNX {
 			this->ProfileTitle->TabIndex = 6;
 			this->ProfileTitle->Text = L"Perfil";
 			// 
+			// tbNewName
+			// 
+			this->tbNewName->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->tbNewName->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbNewName->Location = System::Drawing::Point(14, 65);
+			this->tbNewName->Name = L"tbNewName";
+			this->tbNewName->Size = System::Drawing::Size(379, 27);
+			this->tbNewName->TabIndex = 27;
+			this->tbNewName->Visible = false;
+			// 
+			// lblNewName
+			// 
+			this->lblNewName->AutoSize = true;
+			this->lblNewName->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
+			this->lblNewName->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->lblNewName->Location = System::Drawing::Point(12, 45);
+			this->lblNewName->Name = L"lblNewName";
+			this->lblNewName->Size = System::Drawing::Size(105, 17);
+			this->lblNewName->TabIndex = 27;
+			this->lblNewName->Text = L"Nuevo Nombre";
+			this->lblNewName->Visible = false;
+			// 
+			// lblNewPassword
+			// 
+			this->lblNewPassword->AutoSize = true;
+			this->lblNewPassword->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
+			this->lblNewPassword->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->lblNewPassword->Location = System::Drawing::Point(13, 102);
+			this->lblNewPassword->Name = L"lblNewPassword";
+			this->lblNewPassword->Size = System::Drawing::Size(125, 17);
+			this->lblNewPassword->TabIndex = 27;
+			this->lblNewPassword->Text = L"Nueva Contrasena";
+			this->lblNewPassword->Visible = false;
+			// 
+			// tbNewPassword
+			// 
+			this->tbNewPassword->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->tbNewPassword->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbNewPassword->Location = System::Drawing::Point(14, 124);
+			this->tbNewPassword->Name = L"tbNewPassword";
+			this->tbNewPassword->PasswordChar = '*';
+			this->tbNewPassword->Size = System::Drawing::Size(379, 27);
+			this->tbNewPassword->TabIndex = 36;
+			this->tbNewPassword->Visible = false;
+			// 
 			// manualPanel
 			// 
+			this->manualPanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->manualPanel->BackColor = System::Drawing::Color::White;
-			this->manualPanel->Controls->Add(this->flowLayoutPanel1);
+			this->manualPanel->Controls->Add(this->flowLayoutPnlHistorialDeViajes);
 			this->manualPanel->Controls->Add(this->HistoryTitle);
-			this->manualPanel->Location = System::Drawing::Point(33, 580);
+			this->manualPanel->Location = System::Drawing::Point(0, 614);
 			this->manualPanel->Name = L"manualPanel";
-			this->manualPanel->Size = System::Drawing::Size(1418, 301);
+			this->manualPanel->Size = System::Drawing::Size(1480, 308);
 			this->manualPanel->TabIndex = 10;
 			// 
-			// flowLayoutPanel1
+			// flowLayoutPnlHistorialDeViajes
 			// 
-			this->flowLayoutPanel1->AutoScroll = true;
-			this->flowLayoutPanel1->Location = System::Drawing::Point(13, 43);
-			this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
-			this->flowLayoutPanel1->Size = System::Drawing::Size(1387, 244);
-			this->flowLayoutPanel1->TabIndex = 17;
+			this->flowLayoutPnlHistorialDeViajes->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->flowLayoutPnlHistorialDeViajes->AutoScroll = true;
+			this->flowLayoutPnlHistorialDeViajes->Location = System::Drawing::Point(15, 43);
+			this->flowLayoutPnlHistorialDeViajes->Name = L"flowLayoutPnlHistorialDeViajes";
+			this->flowLayoutPnlHistorialDeViajes->Size = System::Drawing::Size(1436, 251);
+			this->flowLayoutPnlHistorialDeViajes->TabIndex = 17;
 			// 
 			// HistoryTitle
 			// 
@@ -476,14 +499,16 @@ namespace LYNX {
 			// 
 			// topPanel
 			// 
+			this->topPanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->topPanel->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(39)));
 			this->topPanel->Controls->Add(this->statusButton);
 			this->topPanel->Controls->Add(this->onlineChip);
 			this->topPanel->Controls->Add(this->topTitle);
-			this->topPanel->Location = System::Drawing::Point(30, 84);
+			this->topPanel->Location = System::Drawing::Point(0, 91);
 			this->topPanel->Name = L"topPanel";
-			this->topPanel->Size = System::Drawing::Size(1422, 103);
+			this->topPanel->Size = System::Drawing::Size(1480, 103);
 			this->topPanel->TabIndex = 6;
 			// 
 			// statusButton
@@ -503,12 +528,14 @@ namespace LYNX {
 			// 
 			// onlineChip
 			// 
+			this->onlineChip->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->onlineChip->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(38)), static_cast<System::Int32>(static_cast<System::Byte>(54)),
 				static_cast<System::Int32>(static_cast<System::Byte>(43)));
 			this->onlineChip->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->onlineChip->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
 				static_cast<System::Int32>(static_cast<System::Byte>(113)));
-			this->onlineChip->Location = System::Drawing::Point(1187, 32);
+			this->onlineChip->Location = System::Drawing::Point(1271, 32);
 			this->onlineChip->Name = L"onlineChip";
 			this->onlineChip->Size = System::Drawing::Size(190, 34);
 			this->onlineChip->TabIndex = 2;
@@ -540,9 +567,9 @@ namespace LYNX {
 			this->profilePanel->Controls->Add(this->tbDestination);
 			this->profilePanel->Controls->Add(this->tbOrigin);
 			this->profilePanel->Controls->Add(this->RequestTripTitle);
-			this->profilePanel->Location = System::Drawing::Point(33, 213);
+			this->profilePanel->Location = System::Drawing::Point(0, 209);
 			this->profilePanel->Name = L"profilePanel";
-			this->profilePanel->Size = System::Drawing::Size(426, 342);
+			this->profilePanel->Size = System::Drawing::Size(426, 387);
 			this->profilePanel->TabIndex = 7;
 			// 
 			// lblTripType
@@ -683,6 +710,8 @@ namespace LYNX {
 			// 
 			// queuePanel
 			// 
+			this->queuePanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->queuePanel->BackColor = System::Drawing::Color::White;
 			this->queuePanel->Controls->Add(this->lblTypeTripText);
 			this->queuePanel->Controls->Add(this->lblTypeTrip);
@@ -696,9 +725,9 @@ namespace LYNX {
 			this->queuePanel->Controls->Add(this->lblDriverName);
 			this->queuePanel->Controls->Add(this->lblFoundDriver);
 			this->queuePanel->Controls->Add(this->ActualTripTitle);
-			this->queuePanel->Location = System::Drawing::Point(483, 213);
+			this->queuePanel->Location = System::Drawing::Point(471, 209);
 			this->queuePanel->Name = L"queuePanel";
-			this->queuePanel->Size = System::Drawing::Size(560, 342);
+			this->queuePanel->Size = System::Drawing::Size(560, 387);
 			this->queuePanel->TabIndex = 8;
 			this->queuePanel->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &PassengerMenuForm::queuePanel_Paint);
 			// 
@@ -845,56 +874,10 @@ namespace LYNX {
 			this->lblFoundDriver->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->lblFoundDriver->Visible = false;
 			// 
-			// label4
-			// 
-			this->label4->BackColor = System::Drawing::Color::Red;
-			this->label4->Location = System::Drawing::Point(21, 884);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(1443, 34);
-			this->label4->TabIndex = 16;
-			this->label4->Visible = false;
-			// 
-			// label1
-			// 
-			this->label1->BackColor = System::Drawing::Color::Red;
-			this->label1->Location = System::Drawing::Point(21, 72);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(1443, 14);
-			this->label1->TabIndex = 15;
-			this->label1->Visible = false;
-			// 
-			// lblMarco1
-			// 
-			this->lblMarco1->BackColor = System::Drawing::Color::Red;
-			this->lblMarco1->Location = System::Drawing::Point(-1, 72);
-			this->lblMarco1->Name = L"lblMarco1";
-			this->lblMarco1->Size = System::Drawing::Size(28, 850);
-			this->lblMarco1->TabIndex = 14;
-			this->lblMarco1->Visible = false;
-			// 
-			// lblMarco2
-			// 
-			this->lblMarco2->BackColor = System::Drawing::Color::Red;
-			this->lblMarco2->Location = System::Drawing::Point(1454, 72);
-			this->lblMarco2->Name = L"lblMarco2";
-			this->lblMarco2->Size = System::Drawing::Size(28, 850);
-			this->lblMarco2->TabIndex = 13;
-			this->lblMarco2->Visible = false;
-			// 
-			// pnlTopBar
-			// 
-			this->pnlTopBar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(6)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
-				static_cast<System::Int32>(static_cast<System::Byte>(70)));
-			this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
-			this->pnlTopBar->Controls->Add(this->lblLYNX);
-			this->pnlTopBar->Location = System::Drawing::Point(0, 0);
-			this->pnlTopBar->Name = L"pnlTopBar";
-			this->pnlTopBar->Size = System::Drawing::Size(1517, 78);
-			this->pnlTopBar->TabIndex = 12;
-			// 
 			// pictureBoxIcon
 			// 
 			this->pictureBoxIcon->BackColor = System::Drawing::Color::Transparent;
+			this->pictureBoxIcon->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->pictureBoxIcon->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->pictureBoxIcon->Location = System::Drawing::Point(22, -27);
 			this->pictureBoxIcon->Name = L"pictureBoxIcon";
@@ -915,15 +898,54 @@ namespace LYNX {
 			this->lblLYNX->TabIndex = 0;
 			this->lblLYNX->Text = L"LYNX";
 			// 
+			// pnlTopBar
+			// 
+			this->pnlTopBar->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->pnlTopBar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(6)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
+				static_cast<System::Int32>(static_cast<System::Byte>(70)));
+			this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
+			this->pnlTopBar->Controls->Add(this->lblLYNX);
+			this->pnlTopBar->Location = System::Drawing::Point(0, 0);
+			this->pnlTopBar->Name = L"pnlTopBar";
+			this->pnlTopBar->Size = System::Drawing::Size(1480, 78);
+			this->pnlTopBar->TabIndex = 17;
+			// 
+			// label1
+			// 
+			this->label1->BackColor = System::Drawing::Color::Red;
+			this->label1->Location = System::Drawing::Point(0, 193);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(1480, 14);
+			this->label1->TabIndex = 18;
+			this->label1->Visible = false;
+			// 
+			// label2
+			// 
+			this->label2->BackColor = System::Drawing::Color::Red;
+			this->label2->Location = System::Drawing::Point(0, 77);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(1480, 14);
+			this->label2->TabIndex = 19;
+			this->label2->Visible = false;
+			// 
+			// label3
+			// 
+			this->label3->BackColor = System::Drawing::Color::Red;
+			this->label3->Location = System::Drawing::Point(0, 599);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(1480, 14);
+			this->label3->TabIndex = 20;
+			this->label3->Visible = false;
+			// 
 			// PassengerMenuForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1480, 920);
-			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->lblMarco1);
-			this->Controls->Add(this->lblMarco2);
 			this->Controls->Add(this->pnlTopBar);
 			this->Controls->Add(this->vehiclePanel);
 			this->Controls->Add(this->manualPanel);
@@ -942,8 +964,8 @@ namespace LYNX {
 			this->profilePanel->ResumeLayout(false);
 			this->profilePanel->PerformLayout();
 			this->queuePanel->ResumeLayout(false);
-			this->pnlTopBar->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->EndInit();
+			this->pnlTopBar->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -1127,7 +1149,7 @@ namespace LYNX {
 				}
 
 				//Gemini me ayudo con esto JAJAJJA, es para lo que es el layout del historial
-				this->flowLayoutPanel1->Controls->Clear();
+				this->flowLayoutPnlHistorialDeViajes->Controls->Clear();
 
 				// Extraemos el vector con el historial del pasajero mediante la pila sin destruirla
 				std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
@@ -1629,7 +1651,7 @@ namespace LYNX {
 			itemPanel->Controls->Add(lblPrecioItem);
 
 			// 6. Meter el bloque final dentro del FlowLayoutPanel inteligente
-			this->flowLayoutPanel1->Controls->Add(itemPanel);
+			this->flowLayoutPnlHistorialDeViajes->Controls->Add(itemPanel);
 		}
 
 
@@ -1658,5 +1680,7 @@ namespace LYNX {
 		   LoadPassengerData();
 		   
 	   }
+	   
+	   
 };
 }

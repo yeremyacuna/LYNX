@@ -7,7 +7,7 @@ DRV-0006|Kevin Soto|56492018|pass6|2.4|0|20|90|L2M-121|Suzuki|Alto|Gris|2016
 DRV-0007|Juan Perez|48291037|pass7|4.2|1|120|450|K3L-901|Toyota|Corolla|Blanco|2020
 DRV-0008|Juan Castillo|56473824|pass8|3|1|160|390|A8B-232|Nissan|Versa|Negro|2019
 DRV-0009|Hector Ruiz|19283749|pass9|2.8|0|60|170|E4F-010|Hyundai|i10|Gris|2018
-DRV-0010|Ricardo Nunez|37482911|pass10|4.8|0|709|1842.6|O5P-454|Mercedes|C200|Negro|2022
+DRV-0010|Ricardo Nunez|37482911|pass10|4.8|1|709|1842.6|O5P-454|Mercedes|C200|Negro|2022
 DRV-0011|Pedro Quispe|45678901|pass123|5|0|1|166.8|B3K-447|Toyota|Corolla|Plata|2022
 DRV-0012|Pedro Castillo|91827365|pass12|4|1|150|400|G6H-666|Mazda|3|Rojo|2020
 DRV-0013|Maria Quispe|83746597|pass13|3.8|0|90|250|S9T-454|Hyundai|Tucson|Azul|2019
@@ -100,4 +100,4 @@ DRV-0099|Gotenk Son|11111456|son123|5|0|2|65.4983|AS2333|Toyota|Bayash|Plata|202
 DRV-0100|Jhon Castillo|10284761|pass84|3.1|1|130|320|T1U-565|Kia|Sportage|Negro|2021
 DRV-0101|Kevin Soto|90817273|pass24|3.5|1|190|450|U2V-232|Toyota|Corolla|Blanco|2021
 DRV-0102|s|12345678|s|5|0|1|60.5|s|s|s|s|2009
-DRV-0103|Carna Lito|77879789|carnalitops1|5|1|0|0|||||0
+DRV-0103|Carna Lito|77879789|carnalitops1|5|0|1|512.052|||||0
