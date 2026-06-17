@@ -99,5 +99,4 @@ DRV-0098|Laura Vega|10284759|pass100|4.7|1|901|1011|G6H-232|Audi|Q3|Plata|2023
 DRV-0099|Gotenk Son|11111456|son123|5|0|2|65.4983|AS2333|Toyota|Bayash|Plata|2023
 DRV-0100|Jhon Castillo|10284761|pass84|3.1|1|130|320|T1U-565|Kia|Sportage|Negro|2021
 DRV-0101|Kevin Soto|90817273|pass24|3.5|1|190|450|U2V-232|Toyota|Corolla|Blanco|2021
-DRV-0102|s|12345678|s|5|0|1|60.5|s|s|s|s|2009
-DRV-0103|Carna Lito|77879789|carnalitops1|5|0|1|512.052|||||0
+DRV-0104|Keiko Fujimori|45689722|fuji.com|5|1|0|0|NPS-PE8|Nissan|Capot|Gray|2006

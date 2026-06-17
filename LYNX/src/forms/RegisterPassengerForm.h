@@ -4,6 +4,7 @@
 #include "../AuthManager.h"
 #include "../TripManager.h"
 #include <msclr/marshal_cppstd.h>
+#include "VehicleRegisterForm.h"
 
 namespace LYNX {
 
@@ -30,7 +31,7 @@ namespace LYNX {
 			this->registerStyle = NormalizeRegisterStyle(style);
 			InitializeComponent();
 			ApplyRegisterStyle();
-
+			
 			// ok
 			ConfigureForm();
 		}
@@ -49,7 +50,7 @@ namespace LYNX {
 		TripManager* tripManager = nullptr;
 		int registerStyle = 1;
 
-
+		
 		// COMPONENTES
 	private: System::Windows::Forms::Label^ lblRegistrarse;
 	private: System::Windows::Forms::Label^ lblDatoDNI;
@@ -71,7 +72,6 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ lblMarco4;
 	private: System::Windows::Forms::Label^ lblMarco3;
 	private: System::Windows::Forms::TableLayoutPanel^ tlpOptions;
-	private: System::Windows::Forms::Label^ lblBorrar;
 	private: System::ComponentModel::Container^ components;
 
 		   // WINDOWS INITIALIZE
@@ -99,7 +99,6 @@ namespace LYNX {
 			this->lblMarco4 = (gcnew System::Windows::Forms::Label());
 			this->lblMarco3 = (gcnew System::Windows::Forms::Label());
 			this->tlpOptions = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->lblBorrar = (gcnew System::Windows::Forms::Label());
 			this->pnlTopBar->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
 			this->tlpOptions->SuspendLayout();
@@ -341,17 +340,6 @@ namespace LYNX {
 			this->tlpOptions->Size = System::Drawing::Size(429, 21);
 			this->tlpOptions->TabIndex = 17;
 			// 
-			// lblBorrar
-			// 
-			this->lblBorrar->AutoSize = true;
-			this->lblBorrar->ForeColor = System::Drawing::Color::Red;
-			this->lblBorrar->Location = System::Drawing::Point(623, 307);
-			this->lblBorrar->Name = L"lblBorrar";
-			this->lblBorrar->Size = System::Drawing::Size(256, 13);
-			this->lblBorrar->TabIndex = 18;
-			this->lblBorrar->Text = L"Esto es registrar para pasajero por ahora (lbl invisible)";
-			this->lblBorrar->Visible = false;
-			// 
 			// RegisterPassengerForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -359,7 +347,6 @@ namespace LYNX {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
 				static_cast<System::Int32>(static_cast<System::Byte>(34)));
 			this->ClientSize = System::Drawing::Size(1480, 920);
-			this->Controls->Add(this->lblBorrar);
 			this->Controls->Add(this->tlpOptions);
 			this->Controls->Add(this->lblMarco3);
 			this->Controls->Add(this->lblMarco4);
@@ -396,7 +383,12 @@ namespace LYNX {
 			bool passengerScreen = false;
 			bool driverScreen = false;
 
+			bool switchToVehicle = false;
 			bool switchToLogin = false;
+
+			String^ name;
+			String^ dni;
+			String^ pass;
 
 			int GetRegisterStyle()
 			{
@@ -613,46 +605,46 @@ namespace LYNX {
 				}
 
 				// Converitr con marshal as al tipo de dato que quiero segun un String^
-				std::string dni = msclr::interop::marshal_as<std::string>(dniText);
+				std::string dnii = msclr::interop::marshal_as<std::string>(dniText);
 				std::string nombre = msclr::interop::marshal_as<std::string>(nombreText);
-				std::string pass = msclr::interop::marshal_as<std::string>(passText);
+				std::string passs = msclr::interop::marshal_as<std::string>(passText);
 
 				// Hacer validacion de los digitos del dni en el caso no tenga 8 o no sea int
-				if (!authManager->validateDni(dni)) {
+				if (!authManager->validateDni(dnii)) {
 					MessageBox::Show("DNI invalido. Debe tener 8 digitos numericos.", "Registro", MessageBoxButtons::OK);
 					return;
 				}
 
-				// Validar si elk DNI ya se encuentra registrado con dni nombre y contraseña pass en la funcion de authmanager
-				if (!authManager->registerDriver(nombre, dni, pass, vehicle)) {
-					MessageBox::Show("El DNI ya esta registrado.", "Registro", MessageBoxButtons::OK);
-					return;
-				}
+				// Validar si el DNI ya se encuentra registrado con dni nombre y contraseña pass en la funcion de authmanager
+				//if (!authManager->registerDriver(nombre, dni, pass, vehicle)) {
+				//	MessageBox::Show("El DNI ya esta registrado.", "Registro", MessageBoxButtons::OK);
+				//	return;
+				//}
 
 				// Validar si la cuenta fue creada correctamente y se guardo todo correctamente o no , con save a password binary q devuelve true or false de guardar binario d fmanager
+				
 				if (!authManager->savePasswordsBinary()) {
 					MessageBox::Show("La cuenta fue creada, pero no se pudo actualizar passwords.bin.", "Registro", MessageBoxButtons::OK);
 				}
 				else {
 					MessageBox::Show("Cuenta creada correctamente.", "Registro", MessageBoxButtons::OK);
 				}
-
-				switchToLogin = true;
+				
+				switchToVehicle = true;
+				
 				FormsStatus::SaveWindow(this);
 				_internalClose = true;
 				//this->Close();
-				this->Hide();
+
+				name = nombreText;
+				dni = dniText;
+				pass = passText;
+				
+				this->Hide(); // ocultar MainMenu
 			}
 
 
 			void RegisterAdmin() {}
-
-
-
-
-
-
-
 
 
 			// linkerlabelClick

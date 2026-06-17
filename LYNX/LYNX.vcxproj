@@ -144,6 +144,9 @@
     <ClInclude Include="src\forms\RegisterPassengerForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="src\forms\VehicleRegisterForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="src\library\FormsStatus.h" />
     <ClInclude Include="src\MainMenu.h" />
     <ClInclude Include="src\Passenger.h" />
@@ -159,6 +162,7 @@
     <ClCompile Include="src\forms\MainMenuForm.cpp" />
     <ClCompile Include="src\forms\PassengerMenuForm.cpp" />
     <ClCompile Include="src\forms\RegisterPassengerForm.cpp" />
+    <ClCompile Include="src\forms\VehicleRegisterForm.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\RegisterPassengerForm.resx">
       <DependentUpon>src\forms\RegisterPassengerForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\VehicleRegisterForm.resx">
+      <DependentUpon>src\forms\VehicleRegisterForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
