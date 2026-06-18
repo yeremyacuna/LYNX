@@ -212,7 +212,6 @@ namespace LYNX {
 			// 
 			this->vehiclePanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->vehiclePanel->BackColor = System::Drawing::Color::White;
-			this->vehiclePanel->Controls->Add(this->btnConfirm);
 			this->vehiclePanel->Controls->Add(this->tbPastPassword);
 			this->vehiclePanel->Controls->Add(this->lblPastPassword);
 			this->vehiclePanel->Controls->Add(this->lblUpdateProfile);
@@ -231,6 +230,7 @@ namespace LYNX {
 			this->vehiclePanel->Controls->Add(this->lblNewName);
 			this->vehiclePanel->Controls->Add(this->lblNewPassword);
 			this->vehiclePanel->Controls->Add(this->tbNewPassword);
+			this->vehiclePanel->Controls->Add(this->btnConfirm);
 			this->vehiclePanel->Location = System::Drawing::Point(1074, 209);
 			this->vehiclePanel->Name = L"vehiclePanel";
 			this->vehiclePanel->Size = System::Drawing::Size(406, 387);

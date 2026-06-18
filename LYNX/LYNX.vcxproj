@@ -181,6 +181,7 @@
   <ItemGroup>
     <Text Include="assets\drivers.txt" />
     <Text Include="assets\passengers.txt" />
+    <Text Include="assets\passwords.txt" />
     <Text Include="assets\trips.txt" />
     <Text Include="docs\ReadmeCourse.txt" />
   </ItemGroup>

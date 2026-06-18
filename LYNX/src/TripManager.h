@@ -112,7 +112,7 @@ public:
             t.setDriverDni("");
         }
         waitingQueue.enqueue(t);
-        cout << "  [OK] Viaje " << t.getTripId() << " creado | S/ " << t.getPrice() << "\n";
+        cout << "   [EXITOSO] Viaje " << t.getTripId() << " creado | S/ " << t.getPrice() << "\n";
         return t;
     }
 
@@ -122,7 +122,7 @@ public:
         if (waitingQueue.isEmpty()) { cout << "  [!] No hay viajes en espera.\n"; return false; }
         Driver d = auth.getDriverByDni(driverDni);
         if (d.getDni() == "" || !d.getIsAvailable()) {
-            cout << "  [!] Conductor invalido o no disponible.\n";
+            cout << "   [!] Conductor invalido o no disponible.\n";
             return false;
         }
 
@@ -133,7 +133,7 @@ public:
         t.setStatus("en_curso");
         activeTrips.pushBack(t);
         auth.driverAcceptRide(driverDni, t.getPrice());
-        cout << "  [OK] Viaje " << t.getTripId() << " asignado.\n";
+        cout << "   [EXITOSO] Viaje " << t.getTripId() << " asignado.\n";
         return true;
     }
 
@@ -144,7 +144,7 @@ public:
         waitingQueue.dequeue();
         t.setStatus("cancelado");
         history.push(t);
-        cout << "  [XX] Viaje " << t.getTripId() << " cancelado.\n";
+        cout << "   [ERROR] Viaje " << t.getTripId() << " cancelado.\n";
     }
 
     // finishTrip: mueve un viaje activo al historial como completado
@@ -160,11 +160,11 @@ public:
                 }
                 history.push(t);
                 activeTrips.remove(i);
-                cout << "  [OK] Viaje " << tripId << " completado.\n";
+                cout << "   [EXITOSO] Viaje " << tripId << " completado.\n";
                 return true;
             }
         }
-        cout << "  [!] Viaje no encontrado en activos.\n";
+        cout << "   [!] Viaje no encontrado en activos.\n";
         return false;
     }
 

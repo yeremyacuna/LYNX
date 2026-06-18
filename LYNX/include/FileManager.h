@@ -22,6 +22,7 @@ private:
     char separador; // separador de atributos de cada clase en el TXT = |
     string rutaDrivers;
     string rutaPassengers;
+    string rutaAdmins;
     string rutaTrips;
     string rutaPasswordsBin;
 
@@ -51,13 +52,17 @@ private:
 
     string boolAString(bool valor) // convierte bool a 1 o 0 para guardar en txt
     {
-        if (valor) return "1";
+        if (valor) 
+            return "1";
+
         return "0";
     }
 
     bool stringABool(string texto) // convierte "1" o "0" leido del txt de vuelta a bool
     {
-        if (texto == "1") return true;
+        if (texto == "1") 
+            return true;
+
         return false;
     }
 
@@ -85,6 +90,7 @@ public:
         separador = '|';
         rutaDrivers = "assets/drivers.txt";
         rutaPassengers = "assets/passengers.txt";
+        rutaAdmins = "assets/admins.txt";
         rutaTrips = "assets/trips.txt";
         rutaPasswordsBin = "assets/passwords.bin";
     }
@@ -95,6 +101,7 @@ public:
         separador = _separador;
         rutaDrivers = "assets/drivers.txt";
         rutaPassengers = "assets/passengers.txt";
+        rutaAdmins = "assets/admins.txt";
         rutaTrips = "assets/trips.txt";
         rutaPasswordsBin = "assets/passwords.bin";
     }
@@ -103,6 +110,8 @@ public:
     {
 
     }
+
+
 
     //  Formato de cada linea en drivers.txt:
     //  driverId|name|dni|password|rating|isAvailable|totalTrips|totalEarnings|plate|brand|model|color|year
@@ -137,7 +146,7 @@ public:
         }
 
         MyFile.close();
-        std::cout << "Drivers guardados correctamente: " << rutaDrivers << "\n";
+        std::cout << "[OK] Drivers guardados correctamente: " << rutaDrivers << "\n";
         return true;
     }
 
@@ -424,4 +433,39 @@ public:
         std::cout << "[OK] " << listaDelArchivoBin.size() << " passwords leidos de: " << rutaPasswordsBin << "\n";
         return listaDelArchivoBin;
     }
+
+    bool guardarPasswordsTXT() {
+
+        vector<PasswordPreview> lista = leerPasswordsBIN();
+
+        std::ofstream MyFile("assets/passwords.txt");
+
+        if (!MyFile.is_open()) {
+            std::cout << "[ERROR] No se pudo crear el TXT de: passwords.bin\n";
+            return false;
+        }
+
+        bool saltoAgregado = false;
+
+        for (const PasswordPreview& p : lista) 
+        {
+            if (!saltoAgregado && p.tipo == "Driver") {
+                MyFile << "\n";
+                saltoAgregado = true;
+            }
+
+            MyFile << p.tipo << "-"
+                << p.id << "-"
+                << p.dni << "-"
+                << p.password
+                << "\n";
+        }
+
+        MyFile.close();
+
+        std::cout << "[OK] TXT generado desde el passwords.bin\n";
+
+        return true;
+    }
+
 };

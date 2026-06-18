@@ -242,6 +242,7 @@ public:
     LinkedList<Passenger>*& getPassengerList() { return passengerList; }
     LinkedList<Passenger>*& getUserList() { return passengerList; }
     LinkedList<Driver>*& getDriverList() { return driverList; }
+
     int getTotalUsers() { return passengerList->getSize(); }
     int getTotalDrivers() { return driverList->getSize(); }
 
@@ -249,27 +250,32 @@ public:
     // savePassengers: ordena y guarda la lista de pasajeros en txt
     void savePassengers() {
         sortPassengersById();
-        fileManager->guardarPassengersTXT(exportPassengerVector());
-        fileManager->guardarPasswordsBIN(exportPassengerVector(), exportDriverVector());
+        vector<Passenger> pasajeros = exportPassengerVector();
+        fileManager->guardarPassengersTXT(pasajeros);
+        fileManager->guardarPasswordsBIN(pasajeros, exportDriverVector());
+        fileManager->guardarPasswordsTXT();
     }
 
     // saveDrivers: ordena y guarda la lista de conductores en txt
     void saveDrivers() {
         sortDriversById();
-        fileManager->guardarDriversTXT(exportDriverVector());
-        fileManager->guardarPasswordsBIN(exportPassengerVector(), exportDriverVector());
+        vector<Driver> drivers = exportDriverVector();
+        fileManager->guardarDriversTXT(drivers);
+        fileManager->guardarPasswordsBIN(exportPassengerVector(), drivers);
+        fileManager->guardarPasswordsTXT();
     }
 
     // saveAll: persiste pasajeros y conductores juntos
     void saveAll() // guardar ambos pasajero y conductor
     {
-        savePassengers();
-        saveDrivers();
         sortPassengersById();
         sortDriversById();
-        fileManager->guardarPassengersTXT(exportPassengerVector());
-        fileManager->guardarDriversTXT(exportDriverVector());
-        fileManager->guardarPasswordsBIN(exportPassengerVector(), exportDriverVector());
+        vector<Passenger> pasajeros = exportPassengerVector();
+        vector<Driver> drivers = exportDriverVector();
+        fileManager->guardarPassengersTXT(pasajeros);
+        fileManager->guardarDriversTXT(drivers);
+        fileManager->guardarPasswordsBIN(pasajeros, drivers);
+        fileManager->guardarPasswordsTXT();
     }
 
     // savePasswordsBinary: genera el archivo binario de passwords para consulta admin
@@ -283,10 +289,14 @@ public:
         vector<Passenger> cargados = fileManager->leerPassengersTXT();
         for (int i = 0; i < (int)cargados.size(); i++)
             passengerList->pushBack(cargados[i]);
-        sanitizeLoadedPassengers();
+
+        bool a = sanitizeLoadedPassengers();
         sortPassengersById();
-        compactPassengerIds();
+        bool b = compactPassengerIds();
         syncNextGeneratedIds();
+
+        if (a || b) 
+            saveAll();
     }
     
     void reloadDrivers()
@@ -295,10 +305,14 @@ public:
         vector<Driver> cargados = fileManager->leerDriversTXT();
         for (int i = 0; i < (int)cargados.size(); i++)
             driverList->pushBack(cargados[i]);
-        sanitizeLoadedDrivers();
+
+        bool a = sanitizeLoadedDrivers();
         sortDriversById();
-        compactDriverIds();
+        bool b = compactDriverIds();
         syncNextGeneratedIds();
+
+        if (a || b)
+            saveAll();
     }
 
     // FUNCION QUE PASA LA ESTRCUTURA PARA QUE GUARDE DE PASAJERO Y DRIVER SUS CONTRAS
@@ -326,6 +340,10 @@ public:
         }
         return drivers;
     }
+
+
+
+
 
     // PASAJEROS
     // userExists: verifica si ya existe un pasajero con ese DNI
@@ -522,6 +540,11 @@ public:
         if (driverList->get(indice).getIsAvailable()) return 1 + resto;
         return resto;
     }
+
+
+
+
+
 
     // sortDriversByRating: ordena conductores de mayor a menor rating usando Shell Sort
     void sortDriversByRating() {
