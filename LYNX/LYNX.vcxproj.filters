@@ -167,5 +167,9 @@
     <Text Include="docs\ReadmeCourse.txt">
       <Filter>docs</Filter>
     </Text>
+    <Text Include="file.txt" />
+    <Text Include="assets\passwords.txt">
+      <Filter>assets</Filter>
+    </Text>
   </ItemGroup>
 </Project>

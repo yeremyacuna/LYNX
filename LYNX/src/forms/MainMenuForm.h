@@ -693,98 +693,142 @@ namespace LYNX {
 		// 
 		System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e)
 		{
+			// Revisa si el form de login existe, no fue destruido, y pidio cambiar a pantalla de registro
 			if (formlg != nullptr && !formlg->IsDisposed && formlg->switchToRegister) {
-				formlg->switchToRegister = false;
+				formlg->switchToRegister = false; // apaga la bandera para no repetir esta accion en el siguiente tick
 
 				// Siempre recrear con el estilo actual
+				// Si ya existia un form de registro previo (no destruido), lo elimina antes de crear uno nuevo
 				if (formrg != nullptr && !formrg->IsDisposed)
 					delete formrg;
 
+				// Crea el form de registro nuevo con el estilo de registro actual (pasajero/conductor/admin)
 				formrg = gcnew RegisterPassengerForm(authManager, tripManager, currentRegisterStyle);
-				FormsStatus::ApplyWindow(formrg);
+				FormsStatus::ApplyWindow(formrg); // aplica el estado de ventana (normal o pantalla completa) guardado
 				formrg->Show();
+				// Nota: aqui no se oculta el form de login ni se hace BringToFront, a diferencia de otros bloques
 			}
 
+			// Revisa si el form de register existe, no fue destruido, y pidio volver a login
 			if (formrg != nullptr && !formrg->IsDisposed && formrg->switchToLogin) {
 				formrg->switchToLogin = false;
+
 				if (formlg == nullptr || formlg->IsDisposed) {
 					formlg = gcnew LoginPassengerForm(authManager, tripManager, currentLoginStyle); // Verifica y crea
 				}
+
 				FormsStatus::ApplyWindow(formlg);
 				formlg->Show();  // Muestra
 			}
 
+			// Revisa si el form de register existe, no fue destruido, y pidio cambiar a pantalla de vehicle
 			if (formrg != nullptr && !formrg->IsDisposed && formrg->switchToVehicle) {
 				formrg->switchToVehicle = false;
+
 				if (formvr == nullptr || formvr->IsDisposed) {
 					formvr = gcnew VehicleRegisterForm(authManager, tripManager); // Verifica y crea
 				}
+
+				// Copia los datos ya ingresados en el registro de pasajero (nombre, dni, password)
+				// hacia el form de vehiculo, para no pedirlos de nuevo
 				formvr->name = formrg->name;
 				formvr->dni = formrg->dni;
 				formvr->pass = formrg->pass;
-				FormsStatus::ApplyWindow(formvr);
+				FormsStatus::ApplyWindow(formvr);  // aplica el estado de ventana guardado
 				formvr->Show();  // Muestra
 			}
 
+			// Revisa si el form de vehiculo existe, no fue destruido, y pidio volver al registro
 			if (formvr != nullptr && !formvr->IsDisposed && formvr->switchToRegister) {
 				formvr->switchToRegister = false;
-				if (formlg == nullptr || formlg->IsDisposed) {
-					formlg = gcnew LoginPassengerForm(authManager, tripManager, currentLoginStyle); // Verifica y crea
-				}
-				FormsStatus::ApplyWindow(formlg);
-				formlg->Show();  // Muestra
-			}
-
-			if (formvr != nullptr && !formvr->IsDisposed && formvr->switchToLogin) {
-				formvr->switchToLogin = false;
+				
+				// Solo crea el form de login si no existe uno valido
 				if (formrg == nullptr || formrg->IsDisposed) {
 					formrg = gcnew RegisterPassengerForm(authManager, tripManager, currentLoginStyle); // Verifica y crea
 				}
-				FormsStatus::ApplyWindow(formrg);
+
+				FormsStatus::ApplyWindow(formrg);  // aplica el estado de ventana guardado
 				formrg->Show();  // Muestra
 			}
 
+			// Revisa si el form de vehiculo existe, no fue destruido, y pidio volver a login
+			if (formvr != nullptr && !formvr->IsDisposed && formvr->switchToLogin) {
+				formvr->switchToLogin = false;
+
+				// Solo crea el form de registro si no existe uno valido
+				if (formlg == nullptr || formlg->IsDisposed) {
+					formlg = gcnew LoginPassengerForm(authManager, tripManager, currentLoginStyle); // Verifica y crea
+				}
+
+				FormsStatus::ApplyWindow(formlg);   // aplica el estado de ventana guardado
+				formlg->Show();  // Muestra
+			}
+
+			// Revisa si el form de login existe, no fue destruido, y el login de pasajero fue exitoso
 			if (formlg != nullptr && !formlg->IsDisposed && formlg->passengerScreen)
 			{
 				formlg->passengerScreen = false;
 
-				String^ passengerDni = formlg->loggedPassengerDni;
-
+				String^ passengerDni = formlg->loggedPassengerDni; // recupera el dni del pasajero que inicio sesion
+				
+				// Si ya existia un menu de pasajero previo (no destruido), lo elimina antes de crear uno nuevo
 				if (formpm != nullptr && !formpm->IsDisposed) delete formpm;
 
+				// Crea el menu de pasajero pasandole el dni que inicio sesion
 				formpm = gcnew PassengerMenuForm(authManager, tripManager, passengerDni, fileManager);
-				FormsStatus::ApplyWindow(formpm);
+				FormsStatus::ApplyWindow(formpm);// aplica el estado de ventana guardado
+
+				// Copia nombre, dni y password recordados desde el form de login hacia el menu de pasajero
 				formpm->name = formlg->names;
 				formpm->dni = formlg->dnis;
 				formpm->password = formlg->passwords;
 				formpm->Show();
+
 				formpm->BringToFront(); 
 				formlg->Hide();         
 			}
 
+			// Revisa si el form de login existe, no fue destruido, y el login de conductor fue exitoso
 			if (formlg != nullptr && !formlg->IsDisposed && formlg->driverScreen)
 			{
 				formlg->driverScreen = false;
 
-				String^ driverDni = formlg->loggedDriverDni;
+				String^ driverDni = formlg->loggedDriverDni; // recupera el dni del driver que inicio sesion
 
-				if (formpm != nullptr && !formpm->IsDisposed) delete formdrimenu;
+				if (formdrimenu != nullptr && !formdrimenu->IsDisposed) delete formdrimenu;
 
+				// Crea el menu de conductor pasandole el dni que inicio sesion
 				formdrimenu = gcnew DriverMenuForm(authManager, tripManager, driverDni, fileManager);
-				FormsStatus::ApplyWindow(formdrimenu);
+				FormsStatus::ApplyWindow(formdrimenu);// aplica el estado de ventana guardado
+
+				// Copia nombre, dni y password recordados desde el form de login hacia el menu de conductor
 				formdrimenu->name = formlg->names;
 				formdrimenu->dni = formlg->dnis;
 				formdrimenu->password = formlg->passwords;
 				formdrimenu->Show();
+
 				formdrimenu->BringToFront();
 				formlg->Hide();
 			}
 
-			//if (formlg->passengerScreen || formrg->passengerScreen) // Comprueba si alguna pantalla pasajero esta abierta o no
-			//{
-				//String^ passengerDni = formlg->loggedPassengerDni;
-				//formlg->passengerScreen = false;
-			//}
+			// Revisa si el form de login existe, no fue destruido, y el login de admin fue exitoso
+			if (formlg != nullptr && !formlg->IsDisposed && formlg->adminScreen)
+			{
+				formlg->adminScreen = false;
+
+				if (formadminmenu != nullptr && !formadminmenu->IsDisposed) delete formadminmenu;
+
+				// Crea el menu de admin
+				formadminmenu = gcnew AdminMenuForm(authManager, tripManager);
+				FormsStatus::ApplyWindow(formadminmenu);
+
+				//formadminmenu->
+				//formadminmenu->
+				formadminmenu->Show();
+
+				formadminmenu->BringToFront();
+				formlg->Hide();
+			}
 		}
 
 		//

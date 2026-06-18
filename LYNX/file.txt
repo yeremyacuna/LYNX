@@ -1,0 +1,266 @@
+**Idea General**
+
+No necesitas clase `Admin`. Puedes manejarlo con un `struct` simple, por ejemplo:
+
+```cpp
+struct AdminCredential {
+    string username;
+    string password;
+};
+```
+
+Eso lo puedes poner en `FileManager.h`, parecido a tu `PasswordPreview`.
+
+El archivo sería:
+
+```txt
+admin|admin123
+root|root123
+adminLynx7|passSol44
+controlMesa2|verde899
+...
+```
+
+Las primeras 2 líneas son fijas. Las otras 28 se regeneran cada vez que ejecutas el programa.
+
+**Paso 1: En FileManager.h**
+
+En [FileManager.h](C:/Users/Usuario/Documents/Trabajo%20Estructura%20de%20Datos%20Avanzados/LYNX/include/FileManager.h:82), cerca de `PasswordPreview`, crea:
+
+```cpp
+struct AdminCredential {
+    string username;
+    string password;
+};
+```
+
+Luego crea una función para guardar:
+
+```cpp
+bool guardarAdminsTXT(const vector<AdminCredential>& admins)
+{
+    std::ofstream MyFile(rutaAdmins);
+
+    if (!MyFile.is_open()) {
+        std::cout << "[ERROR] No se pudo abrir el archivo: " << rutaAdmins << "\n";
+        return false;
+    }
+
+    for (int i = 0; i < (int)admins.size(); i++) {
+        MyFile << admins[i].username << separador
+               << admins[i].password << "\n";
+    }
+
+    MyFile.close();
+    return true;
+}
+```
+
+Y una función para leer:
+
+```cpp
+vector<AdminCredential> leerAdminsTXT()
+{
+    vector<AdminCredential> admins;
+    std::ifstream MyFile(rutaAdmins);
+
+    if (!MyFile.is_open()) {
+        std::ofstream crearArchivo(rutaAdmins);
+        crearArchivo.close();
+        return admins;
+    }
+
+    string linea;
+    while (std::getline(MyFile, linea)) {
+        if (linea.empty()) continue;
+
+        vector<string> p = dividirLinea(linea);
+
+        if ((int)p.size() < 2) continue;
+
+        AdminCredential admin;
+        admin.username = p[0];
+        admin.password = p[1];
+
+        admins.push_back(admin);
+    }
+
+    MyFile.close();
+    return admins;
+}
+```
+
+**Paso 2: Generar admins aleatorios**
+
+También en `FileManager.h`, crea una función tipo:
+
+```cpp
+bool generarAdminsTXT()
+{
+    vector<AdminCredential> admins;
+
+    admins.push_back({ "tuUsuarioFijo", "tuPasswordFijo" });
+    admins.push_back({ "admin", "admin123" });
+
+    vector<string> nombres = {
+        "lynx", "control", "root", "sistema", "panel", "master"
+    };
+
+    vector<string> passwords = {
+        "verde", "ruta", "clave", "taxi", "seguro", "admin"
+    };
+
+    srand((unsigned int)time(nullptr));
+
+    for (int i = 0; i < 28; i++) {
+        string username = nombres[rand() % nombres.size()] + to_string(rand() % 900 + 100);
+        string password = passwords[rand() % passwords.size()] + to_string(rand() % 9000 + 1000);
+
+        admins.push_back({ username, password });
+    }
+
+    return guardarAdminsTXT(admins);
+}
+```
+
+Para eso necesitarías incluir arriba:
+
+```cpp
+#include <cstdlib>
+#include <ctime>
+```
+
+Ojo: como usas `time(nullptr)`, cada ejecución genera valores diferentes. Las dos primeras líneas no cambian porque las pones manualmente antes del random.
+
+**Paso 3: En AuthManager.h**
+
+En [AuthManager.h](C:/Users/Usuario/Documents/Trabajo%20Estructura%20de%20Datos%20Avanzados/LYNX/src/AuthManager.h:17), agrega una estructura para guardar admins en memoria. Como quieres linked list:
+
+```cpp
+LinkedList<FileManager::AdminCredential>* adminList = new LinkedList<FileManager::AdminCredential>();
+```
+
+En el constructor de `AuthManager`, antes o después de cargar passengers/drivers, llamas:
+
+```cpp
+fileManager->generarAdminsTXT();
+
+vector<FileManager::AdminCredential> adminsCargados = fileManager->leerAdminsTXT();
+for (int i = 0; i < (int)adminsCargados.size(); i++) {
+    adminList->pushBack(adminsCargados[i]);
+}
+```
+
+Importante: esto debe pasar **una vez al iniciar el programa**, no cada vez que intentas loguearte. Si lo regeneras en cada login, las credenciales cambian mientras el programa está abierto y te vuelves loco probando.
+
+En el destructor:
+
+```cpp
+delete adminList;
+```
+
+**Paso 4: Validar admin desde AuthManager**
+
+Agrega una función simple:
+
+```cpp
+bool loginAdminValid(string username, string password)
+{
+    for (int i = 0; i < adminList->getSize(); i++) {
+        FileManager::AdminCredential admin = adminList->get(i);
+
+        if (admin.username == username && admin.password == password) {
+            return true;
+        }
+    }
+
+    return false;
+}
+```
+
+Si quieres también getters:
+
+```cpp
+string getAdminUsername(int index)
+{
+    if (index < 0 || index >= adminList->getSize()) return "";
+    return adminList->get(index).username;
+}
+
+string getAdminPassword(int index)
+{
+    if (index < 0 || index >= adminList->getSize()) return "";
+    return adminList->get(index).password;
+}
+```
+
+**Paso 5: LoginAdmin en el formulario**
+
+En [LoginPassengerForm.h](C:/Users/Usuario/Documents/Trabajo%20Estructura%20de%20Datos%20Avanzados/LYNX/src/forms/LoginPassengerForm.h:629), tu `LoginAdmin()` ya no debería usar DNI.
+
+Sería:
+
+```cpp
+void LoginAdmin()
+{
+    String^ userText = this->tbNombre->Text->Trim();
+    String^ passwordText = this->tbContrasena->Text;
+
+    if (userText->Length == 0 || passwordText->Length == 0) {
+        MessageBox::Show("Por favor llene todos los campos", "Iniciar Sesion", MessageBoxButtons::OK);
+        return;
+    }
+
+    std::string username = msclr::interop::marshal_as<std::string>(userText);
+    std::string password = msclr::interop::marshal_as<std::string>(passwordText);
+
+    if (!authManager->loginAdminValid(username, password)) {
+        MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
+        this->tbContrasena->Clear();
+        return;
+    }
+
+    users = userText;
+    passwords = passwordText;
+
+    adminScreen = true;
+    FormsStatus::SaveWindow(this);
+    _internalClose = true;
+    this->Hide();
+}
+```
+
+**Paso 6: AdminMenuForm**
+
+Si `AdminMenuForm` solo necesita listar/ver usuarios y viajes, ya está bien con:
+
+```cpp
+AdminMenuForm(AuthManager* auth, TripManager* trips)
+```
+
+Pero si también quieres que el admin menu lea archivos directamente, puedes pasarle `FileManager*` también. Aunque sinceramente, en tu diseño es mejor que `AdminMenuForm` use `AuthManager`, y que `AuthManager` use `FileManager`. Así no mezclas tanto la UI con archivos.
+
+Quedaría más limpio así:
+
+```cpp
+AdminMenuForm(AuthManager* auth, TripManager* trips)
+```
+
+Y desde admin llamas funciones de `authManager`.
+
+**Orden correcto del flujo**
+
+1. Inicia programa.
+2. Se crea `MainMenuForm`.
+3. Se crea `AuthManager`.
+4. `AuthManager` llama a `fileManager->generarAdminsTXT()`.
+5. Se crea/reescribe `assets/admins.txt`.
+6. Se leen esos admins.
+7. Se guardan en `adminList`.
+8. Usuario abre login admin.
+9. Login admin pide solo usuario y contraseña.
+10. `LoginAdmin()` llama a `authManager->loginAdminValid(username, password)`.
+11. Si coincide, activa `adminScreen = true`.
+12. `timer1_Tick` abre `AdminMenuForm`.
+
+Tu idea está bien: no necesitas una clase `Admin` completa. Para este caso basta con `struct AdminCredential`, archivo `.txt`, una linked list en `AuthManager`, y una función `loginAdminValid`.

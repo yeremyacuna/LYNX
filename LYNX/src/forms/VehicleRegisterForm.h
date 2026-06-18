@@ -363,6 +363,7 @@ namespace LYNX {
 		public:
 			bool switchToLogin = false;
 			bool switchToRegister = false;
+
 			String^ name;
 			String^ pass;
 			String^ dni;

@@ -644,7 +644,9 @@ namespace LYNX {
 			}
 
 
-			void RegisterAdmin() {}
+			void RegisterAdmin() {
+				MessageBox::Show("No se permite registrar administradores desde la aplicacion.", "Registro", MessageBoxButtons::OK);
+			}
 
 
 			// linkerlabelClick

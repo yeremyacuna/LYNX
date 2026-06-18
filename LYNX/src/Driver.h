@@ -6,7 +6,6 @@
 #include <sstream>
 #include <iomanip>
 
-
 using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string; 
 using std::ostream;
 

@@ -184,6 +184,7 @@
     <Text Include="assets\passwords.txt" />
     <Text Include="assets\trips.txt" />
     <Text Include="docs\ReadmeCourse.txt" />
+    <Text Include="file.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
