@@ -179,12 +179,12 @@
     <Image Include="resources\LYNX_image.png" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="assets\admins.txt" />
     <Text Include="assets\drivers.txt" />
     <Text Include="assets\passengers.txt" />
     <Text Include="assets\passwords.txt" />
     <Text Include="assets\trips.txt" />
     <Text Include="docs\ReadmeCourse.txt" />
-    <Text Include="file.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

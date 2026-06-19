@@ -93,8 +93,8 @@ namespace LYNX {
 			this->lblFrame4 = (gcnew System::Windows::Forms::Label());
 			this->lblFrame3 = (gcnew System::Windows::Forms::Label());
 			this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
-			this->lblLYNX = (gcnew System::Windows::Forms::Label());
 			this->pictureBoxIcon = (gcnew System::Windows::Forms::PictureBox());
+			this->lblLYNX = (gcnew System::Windows::Forms::Label());
 			this->pnlTopBar->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
 			this->SuspendLayout();
@@ -295,6 +295,19 @@ namespace LYNX {
 			this->pnlTopBar->Size = System::Drawing::Size(1480, 78);
 			this->pnlTopBar->TabIndex = 19;
 			// 
+			// pictureBoxIcon
+			// 
+			this->pictureBoxIcon->BackColor = System::Drawing::Color::Transparent;
+			this->pictureBoxIcon->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->pictureBoxIcon->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->pictureBoxIcon->Location = System::Drawing::Point(22, -27);
+			this->pictureBoxIcon->Name = L"pictureBoxIcon";
+			this->pictureBoxIcon->Size = System::Drawing::Size(75, 129);
+			this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
+			this->pictureBoxIcon->TabIndex = 4;
+			this->pictureBoxIcon->TabStop = false;
+			this->pictureBoxIcon->Click += gcnew System::EventHandler(this, &VehicleRegisterForm::pictureBoxIcon_Click);
+			// 
 			// lblLYNX
 			// 
 			this->lblLYNX->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(6)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
@@ -307,18 +320,6 @@ namespace LYNX {
 			this->lblLYNX->Size = System::Drawing::Size(84, 40);
 			this->lblLYNX->TabIndex = 17;
 			this->lblLYNX->Text = L"LYNX";
-			// 
-			// pictureBoxIcon
-			// 
-			this->pictureBoxIcon->BackColor = System::Drawing::Color::Transparent;
-			this->pictureBoxIcon->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->pictureBoxIcon->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->pictureBoxIcon->Location = System::Drawing::Point(22, -27);
-			this->pictureBoxIcon->Name = L"pictureBoxIcon";
-			this->pictureBoxIcon->Size = System::Drawing::Size(75, 129);
-			this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
-			this->pictureBoxIcon->TabIndex = 4;
-			this->pictureBoxIcon->TabStop = false;
 			// 
 			// VehicleRegisterForm
 			// 
@@ -604,5 +605,6 @@ namespace LYNX {
 			   ::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
 			   ::DrawMenuBar(hWnd);
 		   }
+			
 };
 }

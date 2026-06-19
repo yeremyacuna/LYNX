@@ -106,7 +106,7 @@ PAS-0105|Ricardo Kalle|19283756|vamopa|3.2|0|2222.46
 PAS-0106|Valeria Castillo|83746602|valec|4.7|2|155.3
 PAS-0107|Javier Medina|10284765|javimed|3.5|0|0
 PAS-0108|Fernando Diaz|90817273|ferdiaz|3.7|0|0
-PAS-0109|Pepe Marmol|77111111|pepemarm|5|1|34.025
+PAS-0109|Pepe Marmol|77111111|pepemarm|5|2|247.025
 PAS-0110|Remers Gonza|12345678|remersalbums|5|0|0
 PAS-0111|Vinicius JR|00001111|vini|5|0|0
 PAS-0112|Salvadorcito Rivera|71149147|globyy|5|17|1694.5

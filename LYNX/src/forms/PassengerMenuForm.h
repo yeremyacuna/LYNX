@@ -131,7 +131,6 @@ namespace LYNX {
 		{
 			this->ActualTripTitle = (gcnew System::Windows::Forms::Label());
 			this->vehiclePanel = (gcnew System::Windows::Forms::Panel());
-			this->btnConfirm = (gcnew System::Windows::Forms::Button());
 			this->tbPastPassword = (gcnew System::Windows::Forms::TextBox());
 			this->lblPastPassword = (gcnew System::Windows::Forms::Label());
 			this->lblUpdateProfile = (gcnew System::Windows::Forms::Label());
@@ -150,6 +149,7 @@ namespace LYNX {
 			this->lblNewName = (gcnew System::Windows::Forms::Label());
 			this->lblNewPassword = (gcnew System::Windows::Forms::Label());
 			this->tbNewPassword = (gcnew System::Windows::Forms::TextBox());
+			this->btnConfirm = (gcnew System::Windows::Forms::Button());
 			this->manualPanel = (gcnew System::Windows::Forms::Panel());
 			this->flowLayoutPnlHistorialDeViajes = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			this->HistoryTitle = (gcnew System::Windows::Forms::Label());
@@ -235,22 +235,6 @@ namespace LYNX {
 			this->vehiclePanel->Name = L"vehiclePanel";
 			this->vehiclePanel->Size = System::Drawing::Size(406, 387);
 			this->vehiclePanel->TabIndex = 9;
-			// 
-			// btnConfirm
-			// 
-			this->btnConfirm->BackColor = System::Drawing::Color::Black;
-			this->btnConfirm->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->btnConfirm->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
-			this->btnConfirm->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnConfirm->Location = System::Drawing::Point(143, 275);
-			this->btnConfirm->Name = L"btnConfirm";
-			this->btnConfirm->Size = System::Drawing::Size(154, 44);
-			this->btnConfirm->TabIndex = 27;
-			this->btnConfirm->Text = L"Confirmar";
-			this->btnConfirm->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
-			this->btnConfirm->UseVisualStyleBackColor = false;
-			this->btnConfirm->Visible = false;
-			this->btnConfirm->Click += gcnew System::EventHandler(this, &PassengerMenuForm::btnConfirm_Click);
 			// 
 			// tbPastPassword
 			// 
@@ -462,6 +446,22 @@ namespace LYNX {
 			this->tbNewPassword->Size = System::Drawing::Size(379, 27);
 			this->tbNewPassword->TabIndex = 36;
 			this->tbNewPassword->Visible = false;
+			// 
+			// btnConfirm
+			// 
+			this->btnConfirm->BackColor = System::Drawing::Color::Black;
+			this->btnConfirm->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnConfirm->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
+			this->btnConfirm->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnConfirm->Location = System::Drawing::Point(143, 275);
+			this->btnConfirm->Name = L"btnConfirm";
+			this->btnConfirm->Size = System::Drawing::Size(154, 44);
+			this->btnConfirm->TabIndex = 27;
+			this->btnConfirm->Text = L"Confirmar";
+			this->btnConfirm->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
+			this->btnConfirm->UseVisualStyleBackColor = false;
+			this->btnConfirm->Visible = false;
+			this->btnConfirm->Click += gcnew System::EventHandler(this, &PassengerMenuForm::btnConfirm_Click);
 			// 
 			// manualPanel
 			// 

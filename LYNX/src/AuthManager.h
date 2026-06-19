@@ -17,6 +17,7 @@ private:
     LinkedList<Passenger>* passengerList = new LinkedList<Passenger>();
     LinkedList<Driver>* driverList = new LinkedList<Driver>();
     FileManager* fileManager = new FileManager();
+    LinkedList<FileManager::AdminPreview>* adminList = new LinkedList<FileManager::AdminPreview>();
 
     // Busca la posicion de un pasajero por DNI
     int indexOfUser(string dni) {
@@ -30,6 +31,24 @@ private:
     int indexOfDriver(string dni) {
         for (int i = 0; i < driverList->getSize(); i++)
             if (driverList->get(i).getDni() == dni)
+                return i;
+        return -1;
+    }
+
+    // Busca la posicion de un admin por ID
+    int indexOfAdmin(string id)
+    {
+        for ( int i = 0; i < adminList->getSize(); i++)
+            if (adminList->get(i).id == id)
+                return i;
+        return -1;
+    }
+
+    // Busca la posicion de un admin por ID
+    int nameOfAdmin(string username)
+    {
+        for (int i = 0; i < adminList->getSize(); i++)
+            if (adminList->get(i).username == username)
                 return i;
         return -1;
     }
@@ -205,6 +224,12 @@ public:
     // construye todo solo de pasejero y drivers
     // al iniciar, carga desde archivos, limpia datos repetidos y reordena ids
     AuthManager() {
+        fileManager->generarAdminsTXT();
+        vector<FileManager::AdminPreview> adminsCargados = fileManager->leerAdminsTXT();
+        for (int i = 0; i < (int)adminsCargados.size(); i++) {
+            adminList->pushBack(adminsCargados[i]);
+        }
+
         vector<Driver> driversCargados = fileManager->leerDriversTXT();
         for (int i = 0; i < (int)driversCargados.size(); i++) {
             driverList->pushBack(driversCargados[i]);
@@ -236,6 +261,7 @@ public:
         delete passengerList;
         delete driverList;
         delete fileManager;
+        delete adminList;
     }
 
     // getters: exponen las listas y contadores globales de usuarios y conductores
@@ -495,6 +521,44 @@ public:
             if (driverList->get(i).getIsAvailable())
                 return driverList->get(i).getDni();
         return "";
+    }
+
+    // ADMINS
+    bool adminExists(string id) { return indexOfAdmin(id) != -1; }
+
+    // Valida credenciales
+    bool loginAdminValid(string id, string username, string password) {
+        int i = indexOfAdmin(id);
+
+        if (i == -1) {
+            return false;
+        }
+
+        FileManager::AdminPreview admin = adminList->get(i);
+
+        if (admin.username == username && admin.password == password) {
+            return true; // Credenciales correctas
+        }
+        return false;
+    }
+
+    // getters
+    FileManager::AdminPreview getAdminID(string id)
+    {
+        int i = indexOfAdmin(id);
+        if (i == -1) 
+            return FileManager::AdminPreview();
+
+        return adminList->get(i);
+    }
+
+    FileManager::AdminPreview getAdminUsername(string username)
+    {
+        int i = nameOfAdmin(username);
+        if (i == -1)
+            return FileManager::AdminPreview();
+
+        return adminList->get(i);
     }
 
     //  LAMBDAS
