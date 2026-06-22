@@ -381,6 +381,8 @@ namespace LYNX {
 			String^ names;
 			String^ passwords;
 
+			String^ users;
+
 			int GetLoginStyle()
 			{
 				return loginStyle;
@@ -411,6 +413,23 @@ namespace LYNX {
 				else if (loginStyle == 3)
 				{
 					this->Text = L"LYNX | Iniciar Sesion Administrador";
+					this->tlpOptions->Visible = false;
+					this->lblAviso1->Visible = false;
+					this->llblAviso2->Visible = false;
+
+					this->lblDatoDNI->Visible = false;
+					this->tbDni->Visible = false;
+
+					this->lblDatoNombre->Text = L"Nombre de usuario";
+					this->lblDatoContrasena->Text = L"Contrasena";
+
+					this->lblDatoNombre->Location = System::Drawing::Point(508, 421);
+					this->tbNombre->Location = System::Drawing::Point(511, 441);
+
+					this->lblDatoContrasena->Location = System::Drawing::Point(508, 494);
+					this->tbContrasena->Location = System::Drawing::Point(511, 514);
+
+					this->btnEnter->Location = System::Drawing::Point(650, 575);
 				}
 				else
 				{
@@ -625,7 +644,57 @@ namespace LYNX {
 
 			void LoginAdmin()
 			{
-				MessageBox::Show("Login de administrador pendiente de implementar.", "Iniciar Sesion", MessageBoxButtons::OK);
+				// Guardar los txt box como Strings^
+				String^ userText = this->tbNombre->Text->Trim();
+				String^ passwordText = this->tbContrasena->Text;
+
+				// Verificar que los espacios no esten vacios
+				if (userText->Length == 0 || passwordText->Length == 0) {
+					MessageBox::Show("Por favor llene todos los campos", "Iniciar Sesion", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Verificar si se pudo o no acceder al gestionador de archivos
+				if (authManager == nullptr) {
+					MessageBox::Show("No se pudo acceder al gestor de admins", "Iniciar Sesion", MessageBoxButtons::OK);
+					return;
+				}
+
+				// Recargar desde archivo para tener recargados actualmente (FUNDAMENTAL FOREVER) =====================================================================================
+				// authManager->reloadDrivers();
+
+
+				// Converitr con marshal as al tipo de dato que quiero segun un String^
+				std::string dni = msclr::interop::marshal_as<std::string>(userText);
+				std::string password = msclr::interop::marshal_as<std::string>(passwordText);
+
+				/*
+				// Validar que el usuario exista con el auth managern login user valid
+				if (!authManager->loginDriverValid(dni, password)) {
+					MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
+					this->tbContrasena->Clear();
+					return;
+				}
+
+				// Validar si los datos coinciden con un pasajero existente
+				Driver driver = authManager->getDriverByDni(dni);
+				if (driver.getDni() == "" || driver.getName() != name) {
+					MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
+					this->tbContrasena->Clear();
+					return;
+				}*/
+
+				// variables de recuerdo e informacion para la prox pantalla (check)
+				users = userText;
+				passwords = passwordText;
+
+				loggedAdminDni = "";
+				adminScreen = true;
+
+				FormsStatus::SaveWindow(this);
+				_internalClose = true;
+				this->Hide();
+				// this->Close();
 			}
 
 

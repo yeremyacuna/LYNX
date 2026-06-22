@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../src/Driver.h"
 #include "../src/Passenger.h"
 #include "../src/Trip.h"
@@ -22,6 +24,7 @@ private:
     char separador; // separador de atributos de cada clase en el TXT = |
     string rutaDrivers;
     string rutaPassengers;
+    string rutaAdmins;
     string rutaTrips;
     string rutaPasswordsBin;
 
@@ -51,13 +54,17 @@ private:
 
     string boolAString(bool valor) // convierte bool a 1 o 0 para guardar en txt
     {
-        if (valor) return "1";
+        if (valor) 
+            return "1";
+
         return "0";
     }
 
     bool stringABool(string texto) // convierte "1" o "0" leido del txt de vuelta a bool
     {
-        if (texto == "1") return true;
+        if (texto == "1") 
+            return true;
+
         return false;
     }
 
@@ -81,10 +88,17 @@ public:
         string password;
     };
 
+    struct AdminPreview {
+        string id;
+        string username;
+        string password;
+    };
+
     FileManager() {
         separador = '|';
         rutaDrivers = "assets/drivers.txt";
         rutaPassengers = "assets/passengers.txt";
+        rutaAdmins = "assets/admins.txt";
         rutaTrips = "assets/trips.txt";
         rutaPasswordsBin = "assets/passwords.bin";
     }
@@ -95,6 +109,7 @@ public:
         separador = _separador;
         rutaDrivers = "assets/drivers.txt";
         rutaPassengers = "assets/passengers.txt";
+        rutaAdmins = "assets/admins.txt";
         rutaTrips = "assets/trips.txt";
         rutaPasswordsBin = "assets/passwords.bin";
     }
@@ -103,6 +118,8 @@ public:
     {
 
     }
+
+
 
     //  Formato de cada linea en drivers.txt:
     //  driverId|name|dni|password|rating|isAvailable|totalTrips|totalEarnings|plate|brand|model|color|year
@@ -137,7 +154,7 @@ public:
         }
 
         MyFile.close();
-        std::cout << "Drivers guardados correctamente: " << rutaDrivers << "\n";
+        std::cout << "[OK] Drivers guardados correctamente: " << rutaDrivers << "\n";
         return true;
     }
 
@@ -424,4 +441,153 @@ public:
         std::cout << "[OK] " << listaDelArchivoBin.size() << " passwords leidos de: " << rutaPasswordsBin << "\n";
         return listaDelArchivoBin;
     }
+
+    bool guardarPasswordsTXT() {
+
+        vector<PasswordPreview> lista = leerPasswordsBIN();
+
+        std::ofstream MyFile("assets/passwords.txt");
+
+        if (!MyFile.is_open()) {
+            std::cout << "[ERROR] No se pudo crear el TXT de: passwords.bin\n";
+            return false;
+        }
+
+        bool saltoAgregado = false;
+
+        for (const PasswordPreview& p : lista) 
+        {
+            if (!saltoAgregado && p.tipo == "Driver") {
+                MyFile << "\n";
+                saltoAgregado = true;
+            }
+
+            MyFile << p.tipo << "-"
+                << p.id << "-"
+                << p.dni << "-"
+                << p.password
+                << "\n";
+        }
+
+        MyFile.close();
+
+        std::cout << "[OK] TXT generado desde el passwords.bin\n";
+
+        return true;
+    }
+
+
+    //  Formato de cada linea en admin.txt:
+    //  adminId|username|password
+
+    bool guardarAdminsTXT(const vector<AdminPreview>& listaDeAdmins) // Guardar a nuevo  registrado
+    {
+        // Abriendo el archivo o creando si no existe:
+        std::ofstream MyFile(rutaAdmins);      // MyFile: como esta con ofstream, sirve para escribir
+
+        if (!MyFile.is_open()) {
+            std::cout << "[ERROR] No se pudo abrir el archivo: " << rutaAdmins << "\n";
+            return false;
+        }
+
+        for (int i = 0; i < (int)listaDeAdmins.size(); i++) {
+            const AdminPreview& ap = listaDeAdmins[i];
+
+            MyFile << ap.id << separador << ap.username << separador 
+                << ap.password << "\n";
+        }
+
+        MyFile.close();
+        std::cout << "[OK] Admins guardados correctamente: " << rutaAdmins << "\n";
+        return true;
+    }
+
+    vector<AdminPreview> leerAdminsTXT() {
+
+        vector<AdminPreview> listaDeAdmins;
+        std::ifstream MyFile(rutaAdmins);   // MyFile: como esta con ifstream, sirve para leer
+
+        if (!MyFile.is_open()) {
+
+            std::ofstream crearArchivo(rutaAdmins); // crea si no existe o no lo abre o no lee
+            crearArchivo.close();   // crea y cierra
+
+            MyFile.open(rutaAdmins);
+
+            std::cout << "[ALERTA] El archivo se acaba de crear: " << rutaAdmins << "\n";
+            return listaDeAdmins;
+        }
+
+        std::string linea;
+        while (std::getline(MyFile, linea))
+        {
+            if (linea.empty())
+                continue;
+
+            vector<string> p = dividirLinea(linea);
+
+            if ((int)p.size() < 3) 
+            {
+                std::cout << "[PELIGRO] Linea incompleta, se omite.\n";
+                continue;
+            }
+
+            AdminPreview admin;
+            admin.id = p[0];
+            admin.username = p[1];
+            admin.password = p[2];
+
+            listaDeAdmins.push_back(admin);
+        }
+
+        MyFile.close();
+        std::cout << "[OK] " << listaDeAdmins.size() << " admins leidos de: " << rutaAdmins << "\n";
+        return listaDeAdmins;
+    }
+
+    string generarIdAdmin(int contador) {
+        std::ostringstream oss;
+        // Rellena con '0' a la izquierda hasta tener un ancho de 2 caracteres numéricos
+        oss << "ADM-" << std::setfill('0') << std::setw(2) << contador;
+        return oss.str();
+    }
+
+    bool generarAdminsTXT()
+    {
+        srand((unsigned int)time(nullptr));
+
+        string userNames[] = {"lynx", "control", "root", "sistema", "panel", "master"};
+        string passwords[] = { "verde", "ruta", "clave", "taxi", "seguro", "admin" };
+
+        // Calculamos la cantidad real de elementos en los arreglos
+        int numUserNames = sizeof(userNames) / sizeof(userNames[0]);
+        int numPasswords = sizeof(passwords) / sizeof(passwords[0]);
+
+        std::vector<AdminPreview> listaDeAdmins;
+
+        listaDeAdmins.push_back({"ADM-01","Yeremy","admin777"});
+        listaDeAdmins.push_back({ "ADM-02","Salvador","hola123" });
+        listaDeAdmins.push_back({ "ADM-03","Melissa","hola123" });
+
+        int idContador = 4;
+
+        for (int i = 0; i < 29; i++) {
+            // generar el ID secuencial 
+            string id = generarIdAdmin(idContador);
+
+            // usar la variable con el tamaño del arreglo para el rand()
+            string username = userNames[rand() % numUserNames] + to_string(rand() % 900 + 100);
+            string password = passwords[rand() % numPasswords] + to_string(rand() % 9000 + 1000);
+
+            // enviar los 3 parametros requeridos
+            listaDeAdmins.push_back({ id, username, password });
+
+            // Aumentar el contador para la siguiente iteración
+            idContador++;
+        }
+
+        return guardarAdminsTXT(listaDeAdmins);
+
+    }
+
 };

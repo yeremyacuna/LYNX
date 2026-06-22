@@ -22,7 +22,6 @@ namespace LYNX {
 		{
 			InitializeComponent();
 			ConfigureForm();
-			
 		}
 
 		RegisterPassengerForm(AuthManager* auth, TripManager* trips, int style)
@@ -73,7 +72,6 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ lblMarco4;
 	private: System::Windows::Forms::Label^ lblMarco3;
 	private: System::Windows::Forms::TableLayoutPanel^ tlpOptions;
-
 	private: System::ComponentModel::Container^ components;
 
 		   // WINDOWS INITIALIZE
@@ -384,6 +382,7 @@ namespace LYNX {
 		public:
 			bool passengerScreen = false;
 			bool driverScreen = false;
+
 			bool switchToVehicle = false;
 			bool switchToLogin = false;
 
@@ -616,41 +615,38 @@ namespace LYNX {
 					return;
 				}
 
-				// Validar si elk DNI ya se encuentra registrado con dni nombre y contraseña pass en la funcion de authmanager
-				
+				// Validar si el DNI ya se encuentra registrado con dni nombre y contraseña pass en la funcion de authmanager
+				//if (!authManager->registerDriver(nombre, dni, pass, vehicle)) {
+				//	MessageBox::Show("El DNI ya esta registrado.", "Registro", MessageBoxButtons::OK);
+				//	return;
+				//}
 
 				// Validar si la cuenta fue creada correctamente y se guardo todo correctamente o no , con save a password binary q devuelve true or false de guardar binario d fmanager
-				/*
+				
 				if (!authManager->savePasswordsBinary()) {
 					MessageBox::Show("La cuenta fue creada, pero no se pudo actualizar passwords.bin.", "Registro", MessageBoxButtons::OK);
 				}
 				else {
 					MessageBox::Show("Cuenta creada correctamente.", "Registro", MessageBoxButtons::OK);
 				}
-				*/
-
+				
+				switchToVehicle = true;
 				
 				FormsStatus::SaveWindow(this);
 				_internalClose = true;
 				//this->Close();
 
-				
 				name = nombreText;
 				dni = dniText;
 				pass = passText;
-				switchToVehicle = true;
+				
 				this->Hide(); // ocultar MainMenu
 			}
 
 
-			void RegisterAdmin() {}
-
-
-
-
-
-
-
+			void RegisterAdmin() {
+				MessageBox::Show("No se permite registrar administradores desde la aplicacion.", "Registro", MessageBoxButtons::OK);
+			}
 
 
 			// linkerlabelClick

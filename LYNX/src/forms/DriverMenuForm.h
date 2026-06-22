@@ -24,8 +24,6 @@ namespace LYNX {
 		{
 			InitializeComponent();
 			ConfigureForm();
-
-			
 		}
 
 		DriverMenuForm(AuthManager* auth, TripManager* trips, String^ driverDni, FileManager* file)
@@ -62,7 +60,6 @@ namespace LYNX {
 		// COMPONENTES
 	private: System::Windows::Forms::Panel^ topPanel;
 	private: System::Windows::Forms::Label^ topTitle;
-
 	private: System::Windows::Forms::Label^ onlineChip;
 	private: System::Windows::Forms::Button^ statusButton;
 	private: System::Windows::Forms::Button^ earningsButton;

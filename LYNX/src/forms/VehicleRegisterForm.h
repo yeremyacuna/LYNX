@@ -15,9 +15,6 @@ namespace LYNX {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for VehicleRegisterForm
-	/// </summary>
 	public ref class VehicleRegisterForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -26,9 +23,6 @@ namespace LYNX {
 
 			InitializeComponent();
 			ConfigureForm();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 		VehicleRegisterForm(AuthManager* auth, TripManager* trips)
@@ -38,15 +32,9 @@ namespace LYNX {
 			
 			InitializeComponent();
 			ConfigureForm();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~VehicleRegisterForm()
 		{
 			if (components)
@@ -55,66 +43,37 @@ namespace LYNX {
 			}
 		}
 
+		// OBJETOS
 	private:
 		AuthManager* authManager = nullptr;
 		TripManager* tripManager = nullptr;
-		
-	private: System::Windows::Forms::Label^ lblVehicle;
-	protected:
 
+		// COMPONENTES
+	private: System::Windows::Forms::Label^ lblVehicle;
 	private: System::Windows::Forms::Label^ lblDataPlate;
 	private: System::Windows::Forms::Label^ lblDataBrand;
 	private: System::Windows::Forms::Label^ lblDataModel;
 	private: System::Windows::Forms::Label^ lblDataColour;
 	private: System::Windows::Forms::Label^ lblDataYear;
 	private: System::Windows::Forms::TextBox^ tbBrand;
-
-	protected:
-
-	protected:
-
-
-
-
-
-
 	private: System::Windows::Forms::TextBox^ tbPlate;
 	private: System::Windows::Forms::TextBox^ tbModel;
 	private: System::Windows::Forms::TextBox^ tbColour;
 	private: System::Windows::Forms::TextBox^ tbYear;
 	private: System::Windows::Forms::Button^ btnRegister;
-
-
-
-
-
-
-
 	private: System::Windows::Forms::Label^ lblFrame2;
-
 	private: System::Windows::Forms::Label^ lblFrame1;
 	private: System::Windows::Forms::Label^ lblFrame4;
-
-
 	private: System::Windows::Forms::Label^ lblFrame3;
 	private: System::Windows::Forms::Panel^ pnlTopBar;
-	private: System::Windows::Forms::PictureBox^ pictureBoxIcon;
+
 	private: System::Windows::Forms::Label^ lblLYNX;
-
-
-
-
+	private: System::Windows::Forms::PictureBox^ pictureBoxIcon;
+	private: System::ComponentModel::Container^ components;
+		   
+		   // WINDOWS INITIALIZE
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container ^components;
-
-#pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
+		#pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
 			this->lblVehicle = (gcnew System::Windows::Forms::Label());
@@ -136,6 +95,7 @@ namespace LYNX {
 			this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
 			this->pictureBoxIcon = (gcnew System::Windows::Forms::PictureBox());
 			this->lblLYNX = (gcnew System::Windows::Forms::Label());
+			this->pnlTopBar->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -329,6 +289,7 @@ namespace LYNX {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->pnlTopBar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(6)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
 				static_cast<System::Int32>(static_cast<System::Byte>(70)));
+			this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
 			this->pnlTopBar->Location = System::Drawing::Point(0, 0);
 			this->pnlTopBar->Name = L"pnlTopBar";
 			this->pnlTopBar->Size = System::Drawing::Size(1480, 78);
@@ -343,7 +304,7 @@ namespace LYNX {
 			this->pictureBoxIcon->Name = L"pictureBoxIcon";
 			this->pictureBoxIcon->Size = System::Drawing::Size(75, 129);
 			this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
-			this->pictureBoxIcon->TabIndex = 18;
+			this->pictureBoxIcon->TabIndex = 4;
 			this->pictureBoxIcon->TabStop = false;
 			this->pictureBoxIcon->Click += gcnew System::EventHandler(this, &VehicleRegisterForm::pictureBoxIcon_Click);
 			// 
@@ -368,7 +329,6 @@ namespace LYNX {
 				static_cast<System::Int32>(static_cast<System::Byte>(34)));
 			this->ClientSize = System::Drawing::Size(1480, 920);
 			this->Controls->Add(this->lblLYNX);
-			this->Controls->Add(this->pictureBoxIcon);
 			this->Controls->Add(this->pnlTopBar);
 			this->Controls->Add(this->lblFrame3);
 			this->Controls->Add(this->lblFrame4);
@@ -391,12 +351,16 @@ namespace LYNX {
 			this->Load += gcnew System::EventHandler(this, &VehicleRegisterForm::VehicleRegisterForm_Load);
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &VehicleRegisterForm::VehicleRegisterForm_KeyDown);
 			this->Resize += gcnew System::EventHandler(this, &VehicleRegisterForm::VehicleRegisterForm_Resize);
+			this->pnlTopBar->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
-#pragma endregion
+
+
+		// LOGICA y PUBLIC
+		#pragma endregion
 		public:
 			//Variables para ir al Login o al Register
 			bool switchToLogin = false;
@@ -406,56 +370,62 @@ namespace LYNX {
 			String^ name;
 			String^ pass;
 			String^ dni;
-			private:
-		void ConfigureForm()
-		{
-			// CENTRAR TODO
-			this->CenterToScreen();
 
-			// ACTIVAR F11
-			this->KeyPreview = true;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
-
-			// QUITAR COSITAS
-			this->MinimizeBox = false;
-
-			HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
-			HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
-			::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
-			::DrawMenuBar(hWnd);
-
-			// CARGAR ICONO
-			try
+		private:
+		//
+		// Configuracion global de form
+		//
+			void ConfigureForm()
 			{
+				// CENTRAR TODO
+				this->CenterToScreen();
+
+				// ACTIVAR F11
+				this->KeyPreview = true;
+				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				this->MaximizeBox = false;
+
+				// QUITAR COSITAS
+				this->MinimizeBox = false;
+
+				HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
+				HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
+				::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+				::DrawMenuBar(hWnd);
+
+				// CARGAR ICONO
+				try
+				{
+					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+				}
+				catch (...)
+				{
+					// empty
+				}
+			}
+		//
+		// Load Form
+		//
+			System::Void VehicleRegisterForm_Load(System::Object^ sender, System::EventArgs^ e) {
+
 				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+				// Para Picture Box LYNX
+				this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
+				this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+
+				// Para Pantalla Completa
+				normalSize = this->Size;
+				normalLocation = this->Location;
+				normalState = this->WindowState;
+				FormsStatus::SaveWindow(this);
+
+				if (FormsStatus::isFullscreen)
+				{
+					FormsStatus::ApplyWindow(this);
+				}
 			}
-			catch (...)
-			{
-				// empty
-			}
-		}
-	private: System::Void VehicleRegisterForm_Load(System::Object^ sender, System::EventArgs^ e) {
-		this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-		// Para Picture Box LYNX
-		this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
-		this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 
-		// Para Pantalla Completa
-		normalSize = this->Size;
-		normalLocation = this->Location;
-		normalState = this->WindowState;
-		FormsStatus::SaveWindow(this);
-
-		if (FormsStatus::isFullscreen)
-		{
-			FormsStatus::ApplyWindow(this);
-		}
-	}
-		   System::Drawing::Size normalSize;
-		   System::Drawing::Point normalLocation;
-		   System::Windows::Forms::FormWindowState normalState;
-
+		// ?
 		   bool isNaNString(const std::string& str) {
 			   std::istringstream iss(str);
 			   double num;
@@ -463,44 +433,51 @@ namespace LYNX {
 			   return !(iss >> num && iss.eof());
 		   }
 
-	private: System::Void btnRegister_Click(System::Object^ sender, System::EventArgs^ e) {
-		// Guardar los txt box como Strings^
-		String^ plateText = this->tbPlate->Text->Trim();
-		String^ brandText = this->tbBrand->Text->Trim();
-		String^ modelText = this->tbModel->Text;
-		String^ colourText = this->tbColour->Text;
-		String^ yearText = this->tbYear->Text;
-		// ===============================================================================================
-		// ===============================================================================================
-		// ===============================================================================================
-		// ===============================================================================================
-		//Crea el objeto de vehiculo para ser asignado al txt
-		Vehicle vehicle;
+		 //
+		 // Click functions
+		 //
+		   System::Void btnRegister_Click(System::Object^ sender, System::EventArgs^ e) {
+			   // Guardar los txt box como Strings^
+			   String^ plateText = this->tbPlate->Text->Trim();
+			   String^ brandText = this->tbBrand->Text->Trim();
+			   String^ modelText = this->tbModel->Text;
+			   String^ colourText = this->tbColour->Text;
+			   String^ yearText = this->tbYear->Text;
+			   // ===============================================================================================
+			   // ===============================================================================================
+			   // ===============================================================================================
+			   // ===============================================================================================
+			   Vehicle vehicle;
 
-		// Verificar que los espacios no esten vacios
-		if (plateText->Length == 0 || brandText->Length == 0 || modelText->Length == 0 || colourText->Length == 0 || yearText->Length == 0) {
-			MessageBox::Show("Por favor llene todos los campos", "Registro", MessageBoxButtons::OK);
-			return;
-		}
+			   // Verificar que los espacios no esten vacios
+			   if (plateText->Length == 0 || brandText->Length == 0 || modelText->Length == 0 || colourText->Length == 0 || yearText->Length == 0) {
+				   MessageBox::Show("Por favor llene todos los campos", "Registro", MessageBoxButtons::OK);
+				   return;
+			   }
 
-		//Verificar si se pudo o no acceder al gestionador de archivos
-		if (authManager == nullptr) {
-			MessageBox::Show("No se pudo acceder al gestor de usuarios", "Registro", MessageBoxButtons::OK);
-			return;
-		}
-		
-		//Verifica si el campo del anio es un numero
-		if (isNaNString(msclr::interop::marshal_as<std::string>(yearText))) {
-			MessageBox::Show("Anio invalido. Debe ser un numero entero", "Registro", MessageBoxButtons::OK);
-			return;
-		}
+			   //Verificar si se pudo o no acceder al gestionador de archivos
+			   if (authManager == nullptr) {
+				   MessageBox::Show("No se pudo acceder al gestor de usuarios", "Registro", MessageBoxButtons::OK);
+				   return;
+			   }
 
-		// Convertir con marshal as al tipo de dato que quiero segun un String^
-		std::string plate = msclr::interop::marshal_as<std::string>(plateText);
-		std::string brand = msclr::interop::marshal_as<std::string>(brandText);
-		std::string model = msclr::interop::marshal_as<std::string>(modelText);
-		std::string colour = msclr::interop::marshal_as<std::string>(colourText);
-		int year = std::stoi(msclr::interop::marshal_as<std::string>(yearText));
+			   if (isNaNString(msclr::interop::marshal_as<std::string>(yearText))) {
+				   MessageBox::Show("Anio invalido. Debe ser un numero entero", "Registro", MessageBoxButtons::OK);
+				   return;
+			   }
+
+			   // Converitr con marshal as al tipo de dato que quiero segun un String^
+			   std::string plate = msclr::interop::marshal_as<std::string>(plateText);
+			   std::string brand = msclr::interop::marshal_as<std::string>(brandText);
+			   std::string model = msclr::interop::marshal_as<std::string>(modelText);
+			   std::string colour = msclr::interop::marshal_as<std::string>(colourText);
+			   int year = std::stoi(msclr::interop::marshal_as<std::string>(yearText));
+
+			   this->tbBrand->Text = "";
+			   this->tbYear->Text = "";
+			   this->tbModel->Text = "";
+			   this->tbPlate->Text = "";
+			   this->tbColour->Text = "";
 
 		//Vaciar los campos
 		this->tbBrand->Text = "";
@@ -515,6 +492,11 @@ namespace LYNX {
 			MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
 			return;
 		}
+			   // Hacer validacion del anio si es un numero o es mayor al 2000
+			   if (year < 2000 || year >2026) {
+				   MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
+				   return;
+			   }
 
 		//guarda los valores en el objeto vehiculo
 		vehicle.setPlate(plate);
@@ -529,102 +511,116 @@ namespace LYNX {
 		String^ p = pass;
 
 
-		// Validar si el DNI ya se encuentra registrado con dni nombre y contraseña pass en la funcion de authmanager
-		if (!authManager->registerDriver(msclr::interop::marshal_as<std::string>(n), msclr::interop::marshal_as<std::string>(d), msclr::interop::marshal_as<std::string>(p), vehicle)) {
-			MessageBox::Show("El DNI ya esta registrado.", "Registro", MessageBoxButtons::OK);
-			FormsStatus::SaveWindow(this);
-			//this->Close();
-			this->Hide();
-			switchToRegister = true;
-			return;
-		}
+			   // Validar si el DNI ya se encuentra registrado con dni nombre y contraseña pass en la funcion de authmanager
+			   if (!authManager->registerDriver(msclr::interop::marshal_as<std::string>(n), msclr::interop::marshal_as<std::string>(d), msclr::interop::marshal_as<std::string>(p), vehicle)) {
+				   MessageBox::Show("El DNI ya esta registrado.", "Registro", MessageBoxButtons::OK);
+				   FormsStatus::SaveWindow(this);
+				   //this->Close();
+				   this->Hide();
+				   switchToRegister = true;
+				   return;
+			   }
 
-		// Validar si la cuenta fue creada correctamente y se guardo todo correctamente o no , con save a password binary q devuelve true or false de guardar binario d fmanager
-		if (!authManager->savePasswordsBinary()) {
-			MessageBox::Show("La cuenta fue creada, pero no se pudo actualizar passwords.bin.", "Registro", MessageBoxButtons::OK);
-		}
-		else {
-			MessageBox::Show("Cuenta creada correctamente.", "Registro", MessageBoxButtons::OK);
-		}
+			   // Validar si la cuenta fue creada correctamente y se guardo todo correctamente o no , con save a password binary q devuelve true or false de guardar binario d fmanager
+			   if (!authManager->savePasswordsBinary()) {
+				   MessageBox::Show("La cuenta fue creada, pero no se pudo actualizar passwords.bin.", "Registro", MessageBoxButtons::OK);
+			   }
+			   else {
+				   MessageBox::Show("Cuenta creada correctamente.", "Registro", MessageBoxButtons::OK);
+			   }
 
-		FormsStatus::SaveWindow(this);
-		//this->Close();
-		this->Hide();
-		switchToLogin = true;
-	}
-private: System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
-	{
-		FormsStatus::SaveWindow(this);
-		FormsStatus::ApplyWindow(FormsStatus::mainMenu);
-		FormsStatus::mainMenu->Show();
-		FormsStatus::mainMenu->BringToFront();
-		this->Hide();
-	}
-}
-private: System::Void VehicleRegisterForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
-	if (e->KeyCode == System::Windows::Forms::Keys::F11)
-	{
-		if (!FormsStatus::isFullscreen)
-		{
-			// Guardar estado actual
-			normalSize = this->Size;
-			normalLocation = this->Location;
-			normalState = this->WindowState;
+			   FormsStatus::SaveWindow(this);
+			   //this->Close();
+			   this->Hide();
+			   switchToLogin = true;
+		   }
 
-			FormsStatus::SaveWindow(this);
+		   System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e) {
+			   if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
+			   {
+				   FormsStatus::SaveWindow(this);
+				   FormsStatus::ApplyWindow(FormsStatus::mainMenu);
+				   FormsStatus::mainMenu->Show();
+				   FormsStatus::mainMenu->BringToFront();
+				   this->Hide();
+			   }
+		   }
 
-			// Entrar a fullscreen
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+		//
+		// Full screen function
+		//
+		   System::Drawing::Size normalSize;
+		   System::Drawing::Point normalLocation;
+		   System::Windows::Forms::FormWindowState normalState;
 
-			FormsStatus::isFullscreen = true;
-		}
-		else
-		{
-			// Restaurar volver a fixedSingle, no sizable
-			this->WindowState = System::Windows::Forms::FormWindowState::Normal;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Size = FormsStatus::normalSize;
-			this->Location = FormsStatus::normalLocation;
+		   System::Void VehicleRegisterForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+			   if (e->KeyCode == System::Windows::Forms::Keys::F11)
+			   {
+				   if (!FormsStatus::isFullscreen)
+				   {
+					   // Guardar estado actual
+					   normalSize = this->Size;
+					   normalLocation = this->Location;
+					   normalState = this->WindowState;
 
-			FormsStatus::isFullscreen = false;
+					   FormsStatus::SaveWindow(this);
 
-			// DESACTIVAR CLOSE BOTTON
-			HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
-			HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
-			::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
-			::DrawMenuBar(hWnd);
+					   // Entrar a fullscreen
+					   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+					   this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 
-			this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-		}
-	}
+					   FormsStatus::isFullscreen = true;
+				   }
+				   else
+				   {
+					   // Restaurar volver a fixedSingle, no sizable
+					   this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+					   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+					   this->Size = FormsStatus::normalSize;
+					   this->Location = FormsStatus::normalLocation;
 
-	// ESC sale del fullscreen
-	if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
-	{
-		this->WindowState = System::Windows::Forms::FormWindowState::Normal;
-		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-		this->Size = FormsStatus::normalSize;
-		this->Location = FormsStatus::normalLocation;
+					   FormsStatus::isFullscreen = false;
 
-		FormsStatus::isFullscreen = false;
+					   // DESACTIVAR CLOSE BOTTON
+					   HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
+					   HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
+					   ::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+					   ::DrawMenuBar(hWnd);
 
-		// DESACTIVAR CLOSE BOTTON
-		HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
-		HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
-		::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
-		::DrawMenuBar(hWnd);
+					   this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+				   }
+			   }
 
-		this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-	}
-}
-private: System::Void VehicleRegisterForm_Resize(System::Object^ sender, System::EventArgs^ e) {
-	// DESACTIVAR CLOSE BUTTON
-	HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
-	HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
-	::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
-	::DrawMenuBar(hWnd);
-}
+			   // ESC sale del fullscreen
+			   if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
+			   {
+				   this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+				   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				   this->Size = FormsStatus::normalSize;
+				   this->Location = FormsStatus::normalLocation;
+
+				   FormsStatus::isFullscreen = false;
+
+				   // DESACTIVAR CLOSE BOTTON
+				   HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
+				   HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
+				   ::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+				   ::DrawMenuBar(hWnd);
+
+				   this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+			   }
+		   }
+
+		//
+		// Register resize
+		// 
+		   System::Void VehicleRegisterForm_Resize(System::Object^ sender, System::EventArgs^ e) {
+			   // DESACTIVAR CLOSE BUTTON
+			   HWND hWnd = static_cast<HWND>(this->Handle.ToPointer());
+			   HMENU hMenu = ::GetSystemMenu(hWnd, FALSE);
+			   ::EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+			   ::DrawMenuBar(hWnd);
+		   }
+			
 };
 }
