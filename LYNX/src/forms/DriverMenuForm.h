@@ -221,7 +221,7 @@ namespace LYNX {
 			this->topPanel->Controls->Add(this->statusButton);
 			this->topPanel->Controls->Add(this->onlineChip);
 			this->topPanel->Controls->Add(this->topTitle);
-			this->topPanel->Location = System::Drawing::Point(25, 109);
+			this->topPanel->Location = System::Drawing::Point(28, 108);
 			this->topPanel->Name = L"topPanel";
 			this->topPanel->Size = System::Drawing::Size(1422, 97);
 			this->topPanel->TabIndex = 0;
@@ -420,7 +420,7 @@ namespace LYNX {
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
 			this->profileName->Location = System::Drawing::Point(22, 62);
 			this->profileName->Name = L"profileName";
-			this->profileName->Size = System::Drawing::Size(430, 36);
+			this->profileName->Size = System::Drawing::Size(401, 36);
 			this->profileName->TabIndex = 1;
 			this->profileName->Text = L"Salvador Rivera Chavez";
 			// 
@@ -429,11 +429,11 @@ namespace LYNX {
 			this->profileTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
 			this->profileTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->profileTitle->Location = System::Drawing::Point(22, 20);
+			this->profileTitle->Location = System::Drawing::Point(5, 7);
 			this->profileTitle->Name = L"profileTitle";
 			this->profileTitle->Size = System::Drawing::Size(180, 28);
 			this->profileTitle->TabIndex = 0;
-			this->profileTitle->Text = L"Perfil activo";
+			this->profileTitle->Text = L"Perfil";
 			// 
 			// queuePanel
 			// 
@@ -968,8 +968,7 @@ namespace LYNX {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(18)), static_cast<System::Int32>(static_cast<System::Byte>(55)),
-				static_cast<System::Int32>(static_cast<System::Byte>(100)));
+			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(1480, 920);
 			this->Controls->Add(this->pnlTopBar);
 			this->Controls->Add(this->label4);
@@ -1045,6 +1044,31 @@ namespace LYNX {
 				normalSize = this->Size;
 				normalLocation = this->Location;
 				normalState = this->WindowState;
+
+				if (authManager == nullptr || String::IsNullOrEmpty(loggedDriverDni))
+					return;
+
+				String^ driverDni = loggedDriverDni;
+				std::string dniStr = msclr::interop::marshal_as<std::string>(driverDni);
+
+				Driver d = authManager->getDriverByDni(dniStr);
+				String^ n= gcnew System::String(d.getName().c_str());
+				String^ id = gcnew System::String(d.getDriverId().c_str());
+				float profit = d.getNetEarnings();
+				float rating=d.getRating();
+				String^ model = gcnew System::String(d.getVehicle().getModel().c_str());
+				String^ brand = gcnew System::String(d.getVehicle().getBrand().c_str());
+				String^ plate = gcnew System::String(d.getVehicle().getPlate().c_str());
+				String^ colour = gcnew System::String(d.getVehicle().getColor().c_str());
+				int year = d.getVehicle().getYear();
+
+				this->profileName->Text = n;
+				this->profileInfo->Text = "Driver ID: " + id + " | Lima metropolitana";
+				this->metric1Value->Text = "S/ " + profit;
+				this->metric2Value->Text =""+ rating;
+				this->vehicleName->Text = brand;
+				this->vehicleText->Text = "Placa" + plate + " | " + model + " | " + colour + " | " + year;
+
 
 				try {
 					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");

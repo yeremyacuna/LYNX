@@ -398,8 +398,11 @@ namespace LYNX {
 		}
 #pragma endregion
 		public:
+			//Variables para ir al Login o al Register
 			bool switchToLogin = false;
 			bool switchToRegister = false;
+
+			//Campos del Register
 			String^ name;
 			String^ pass;
 			String^ dni;
@@ -471,6 +474,7 @@ namespace LYNX {
 		// ===============================================================================================
 		// ===============================================================================================
 		// ===============================================================================================
+		//Crea el objeto de vehiculo para ser asignado al txt
 		Vehicle vehicle;
 
 		// Verificar que los espacios no esten vacios
@@ -484,19 +488,21 @@ namespace LYNX {
 			MessageBox::Show("No se pudo acceder al gestor de usuarios", "Registro", MessageBoxButtons::OK);
 			return;
 		}
-
+		
+		//Verifica si el campo del anio es un numero
 		if (isNaNString(msclr::interop::marshal_as<std::string>(yearText))) {
 			MessageBox::Show("Anio invalido. Debe ser un numero entero", "Registro", MessageBoxButtons::OK);
 			return;
 		}
 
-		// Converitr con marshal as al tipo de dato que quiero segun un String^
+		// Convertir con marshal as al tipo de dato que quiero segun un String^
 		std::string plate = msclr::interop::marshal_as<std::string>(plateText);
 		std::string brand = msclr::interop::marshal_as<std::string>(brandText);
 		std::string model = msclr::interop::marshal_as<std::string>(modelText);
 		std::string colour = msclr::interop::marshal_as<std::string>(colourText);
 		int year = std::stoi(msclr::interop::marshal_as<std::string>(yearText));
 
+		//Vaciar los campos
 		this->tbBrand->Text = "";
 		this->tbYear->Text = "";
 		this->tbModel->Text = "";
@@ -504,18 +510,20 @@ namespace LYNX {
 		this->tbColour->Text = "";
 		
 
-		// Hacer validacion del anio si es un numero o es mayor al 2000
+		// Hacer validacion del anio si es un numero o es mayor al 2000 o menor al actual ( 2026 )
 		if (year<2000 || year >2026) {
 			MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
 			return;
 		}
 
+		//guarda los valores en el objeto vehiculo
 		vehicle.setPlate(plate);
 		vehicle.setBrand(brand);
 		vehicle.setModel(model);
 		vehicle.setColor(colour);
 		vehicle.setYear(year);
 
+		//obtiene los campos del register para guardarlos
 		String^ n = name;
 		String^ d = dni;
 		String^ p = pass;
