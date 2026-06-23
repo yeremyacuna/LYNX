@@ -33,6 +33,7 @@ namespace LYNX {
 			authManager = new AuthManager();
 			tripManager = new TripManager();
 			fileManager = new FileManager();
+			
 
 			// CARGAR TODOS LOS VIAJES
 			LoadTripsFromFile();
@@ -40,6 +41,12 @@ namespace LYNX {
 			formlg = gcnew LoginPassengerForm(authManager, tripManager, 1);
 			formrg = gcnew RegisterPassengerForm(authManager, tripManager, 1);
 			formvr = gcnew VehicleRegisterForm(authManager, tripManager);
+
+
+
+			this->adminId = adminId;
+			this->adminUsername = adminUsername;
+
 
 			// CENTRAR TODO
 			this->CenterToScreen();
@@ -85,6 +92,9 @@ namespace LYNX {
 		DriverMenuForm^ formdrimenu = nullptr;
 		AdminMenuForm^ formadminmenu = nullptr;
 		VehicleRegisterForm^ formvr = nullptr;
+
+		String^ adminId;
+		String^ adminUsername;
 
 		int currentLoginStyle = 1;
 		int currentRegisterStyle = 1;
@@ -819,7 +829,12 @@ namespace LYNX {
 				if (formadminmenu != nullptr && !formadminmenu->IsDisposed) delete formadminmenu;
 
 				// Crea el menu de admin
-				formadminmenu = gcnew AdminMenuForm(authManager, tripManager);
+				formadminmenu = gcnew AdminMenuForm(
+					authManager,
+					tripManager,
+					formlg->loggedAdminId,
+					formlg->loggedAdminUsername
+				);
 				FormsStatus::ApplyWindow(formadminmenu);
 
 				//formadminmenu->

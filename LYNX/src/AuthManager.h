@@ -44,13 +44,29 @@ private:
         return -1;
     }
 
-    // Busca la posicion de un admin por ID
+    // Busca la posicion de un admin por username
     int nameOfAdmin(string username)
     {
         for (int i = 0; i < adminList->getSize(); i++)
             if (adminList->get(i).username == username)
                 return i;
         return -1;
+    }
+
+    // Retorna el numero del id del admin correspondiente 
+    int extractAdminID(string adminId)
+    {
+        size_t pos = adminId.find("-");
+        if (pos == string::npos) return 0;
+
+        string numberPart = adminId.substr(pos + 1);
+
+        try {
+            return std::stoi(numberPart);
+        }
+        catch (...) {
+            return 0;
+        }
     }
 
     // Si contiene un string
@@ -83,10 +99,27 @@ private:
         return maxId;
     }
 
+    // El maximo de admins segun su id
+    int maxAdminIdNumber()
+    {
+        int maxId = 0;
+
+        for (int i = 0; i < adminList->getSize(); i++) {
+            int actual = extractAdminID(adminList->get(i).id);
+            if (actual > maxId)
+                maxId = actual;
+        }
+
+        return maxId;
+    }
+
+    int nextAdminId = 1;
+
     // Sincronizar Ids
     void syncNextGeneratedIds() {
         Passenger::syncNextPassengerId(maxPassengerIdNumber() + 1);
         Driver::syncNextDriverId(maxDriverIdNumber() + 1);
+        nextAdminId = maxAdminIdNumber() + 1;
     }
 
     // corregir ids pasajeros cargados
@@ -175,6 +208,50 @@ private:
         return changed;
     }
 
+    // corregir ids admins cargados
+    bool sanitizeLoadedAdmins()
+    {
+        bool changed = false;
+        vector<string> usedIds;
+        vector<string> usedUsernames;
+
+        LinkedList<FileManager::AdminPreview>* limpia = new LinkedList<FileManager::AdminPreview>();
+        int nextId = maxAdminIdNumber() + 1;
+
+        for (int i = 0; i < adminList->getSize(); i++) {
+            FileManager::AdminPreview admin = adminList->get(i);
+
+            bool duplicateUsername = containsString(usedUsernames, admin.username);
+            bool duplicateId = containsString(usedIds, admin.id);
+            bool invalidId = extractAdminID(admin.id) <= 0;
+
+            if (duplicateUsername) {
+                changed = true;
+                continue;
+            }
+
+            if (invalidId || duplicateId) {
+                admin.id = fileManager->generarIdAdmin(nextId);
+                nextId++;
+                changed = true;
+            }
+
+            usedIds.push_back(admin.id);
+            usedUsernames.push_back(admin.username);
+            limpia->pushBack(admin);
+        }
+
+        if (changed) {
+            delete adminList;
+            adminList = limpia;
+        }
+        else {
+            delete limpia;
+        }
+
+        return changed;
+    }
+
     // Reasigna IDs secuencialmente sin huecos (PAS-0001, 0002, 0003...)
     // Debe llamarse DESPUES de sortPassengersById()
     bool compactPassengerIds() {
@@ -220,11 +297,34 @@ private:
         return changed;
     }
 
+    bool compactAdminIds()
+    {
+        bool changed = false;
+
+        for (int i = 0; i < adminList->getSize(); i++) {
+            FileManager::AdminPreview admin = adminList->get(i);
+
+            string expectedId = fileManager->generarIdAdmin(i + 1);
+
+            if (admin.id != expectedId) {
+                admin.id = expectedId;
+
+                adminList->remove(i);
+                adminList->insert(i, admin);
+
+                changed = true;
+            }
+        }
+
+        return changed;
+    }
 public:
     // construye todo solo de pasejero y drivers
     // al iniciar, carga desde archivos, limpia datos repetidos y reordena ids
     AuthManager() {
         fileManager->generarAdminsTXT();
+        reloadAdmins();
+
         vector<FileManager::AdminPreview> adminsCargados = fileManager->leerAdminsTXT();
         for (int i = 0; i < (int)adminsCargados.size(); i++) {
             adminList->pushBack(adminsCargados[i]);
@@ -291,6 +391,14 @@ public:
         fileManager->guardarPasswordsTXT();
     }
 
+    // saveAdmins: ordena y guarda la lista de conductores en txt
+    void saveAdmins()
+    {
+        sortAdminsById();
+        vector<FileManager::AdminPreview> admins = exportAdminVector();
+        fileManager->guardarAdminsTXT(admins);
+    }
+
     // saveAll: persiste pasajeros y conductores juntos
     void saveAll() // guardar ambos pasajero y conductor
     {
@@ -343,10 +451,22 @@ public:
 
     void reloadAdmins()
     {
-        adminList->clear();
-        vector<FileManager::AdminPreview> cargados = fileManager->leerAdminsTXT();
-        for (int i = 0; i < (int)cargados.size(); i++)
-            adminList->pushBack(cargados[i]);
+       
+            adminList->clear();
+
+            vector<FileManager::AdminPreview> cargados = fileManager->leerAdminsTXT();
+
+            for (int i = 0; i < (int)cargados.size(); i++)
+                adminList->pushBack(cargados[i]);
+
+            bool a = sanitizeLoadedAdmins();
+
+            sortAdminsById();
+
+            bool b = compactAdminIds();
+
+            if (a || b)
+                saveAdmins();
     }
 
     // FUNCION QUE PASA LA ESTRCUTURA PARA QUE GUARDE DE PASAJERO Y DRIVER SUS CONTRAS
@@ -375,7 +495,16 @@ public:
         return drivers;
     }
 
+    vector<FileManager::AdminPreview> exportAdminVector()
+    {
+        vector<FileManager::AdminPreview> admins;
 
+        for (int i = 0; i < adminList->getSize(); i++) {
+            admins.push_back(adminList->get(i));
+        }
+
+        return admins;
+    }
 
 
 
@@ -535,19 +664,16 @@ public:
     bool adminExists(string id) { return indexOfAdmin(id) != -1; }
 
     // Valida credenciales
-    bool loginAdminValid(string id, string username, string password) {
-        int i = indexOfAdmin(id);
+    bool loginAdminValid(string username, string password)
+    {
+        int i = nameOfAdmin(username);
 
-        if (i == -1) {
+        if (i == -1)
             return false;
-        }
 
         FileManager::AdminPreview admin = adminList->get(i);
 
-        if (admin.username == username && admin.password == password) {
-            return true; // Credenciales correctas
-        }
-        return false;
+        return admin.password == password;
     }
 
     // getters
@@ -724,6 +850,37 @@ public:
 
         driverList->clear();
         for (int i = 0; i < n; i++) driverList->pushBack(arr[i]);
+        delete[] arr;
+    }
+
+    // sortAdminsById: ordena admins por su numero interno de id
+    void sortAdminsById() {
+        int n = adminList->getSize();
+        if (n <= 1) return;
+
+        // Copiamos a arreglo auxiliar
+        FileManager::AdminPreview* arr = new FileManager::AdminPreview[n];
+        
+        for (int i = 0; i < n; i++) 
+            arr[i] = adminList->get(i);
+
+        // Insertion Sort: inserta cada elemento en su posición correcta
+        for (int i = 1; i < n; i++) {
+            FileManager::AdminPreview key = arr[i];
+            int keyId = extractAdminID(key.id);
+            int j = i - 1;
+            while (j >= 0 && extractAdminID(arr[j].id) > keyId) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+
+        adminList->clear();
+
+        for (int i = 0; i < n; i++)
+            adminList->pushBack(arr[i]);
+
         delete[] arr;
     }
 };

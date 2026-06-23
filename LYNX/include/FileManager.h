@@ -80,6 +80,16 @@ private:
         destino[i] = '\0';
     }
 
+    bool contieneString(const vector<string>& lista, const string& valor)
+    {
+        for (int i = 0; i < (int)lista.size(); i++) {
+            if (lista[i] == valor)
+                return true;
+        }
+
+        return false;
+    }
+
 public:
     struct PasswordPreview {    // variables que van hacer ingresadas por users son strings
         string tipo;
@@ -548,7 +558,7 @@ public:
     string generarIdAdmin(int contador) {
         std::ostringstream oss;
         // Rellena con '0' a la izquierda hasta tener un ancho de 2 caracteres numéricos
-        oss << "ADM-" << std::setfill('0') << std::setw(2) << contador;
+        oss << "ADM-" << std::setfill('0') << std::setw(3) << contador;
         return oss.str();
     }
 
@@ -556,8 +566,52 @@ public:
     {
         srand((unsigned int)time(nullptr));
 
-        string userNames[] = {"lynx", "control", "root", "sistema", "panel", "master"};
-        string passwords[] = { "verde", "ruta", "clave", "taxi", "seguro", "admin" };
+		string userNames[] = {
+			"Pedro", "Lynx", "Control", "Root", "Sistema", "Panel", "Master",
+	        "Carlos", "Diego", "Mateo", "Lucas", "Mario", "Andres", "Felipe",
+	        "Ricardo", "Fernando", "Eduardo", "Gabriel", "Daniel", "Miguel",
+	        "Alejandro", "Rodrigo", "Javier", "Sergio", "Ivan", "Cristian",
+	        "Marcos", "Adrian", "Hugo", "Pablo", "Victor", "Raul", "Antonio",
+	        "Manuel", "Jorge", "Oscar", "Ramiro", "Esteban", "Tomas", "Nicolas",
+	        "Bruno", "Leonardo", "Maximiliano", "Joaquin", "Emilio", "Renato",
+	        "Salvador", "Octavio", "Gonzalo", "Agustin", "Facundo",
+	        "Messi", "Neymar", "Ronaldinho", "Pele", "Mbappe", "Haaland",
+	        "Modric", "Benzema", "Kante", "Pirlo", "Xavi", "Iniesta", "Kaka",
+	        "Zidane", "Ronaldo", "Maradona", "Suarez", "Cavani", "Falcao",
+	        "Lewandowski", "Salah", "Kroos", "Busquets", "Casillas", "Puyol",
+	        "Bono", "Bonucci", "Chiellini", "Buffon", "Totti", "Baggio",
+	        "Bowie", "Lennon", "Elvis", "Prince", "Madonna", "Beyonce",
+	        "Adele", "Eminem", "Drake", "Rihanna", "Shakira", "Maluma",
+	        "Bizarrap", "Residente", "Ricky", "Manu", "Vicente", "Santiago",
+	        "Emiliano", "Benjamin", "Cristobal", "Maximo", "Ignacio",
+	        "Rafael", "Leandro", "Mauricio", "Jeremias", "Patricio",
+	        "Aaron", "Brayan", "Cesar", "Damian"
+		};
+
+        string passwords[] = {
+            "verde", "ruta", "clave", "taxi", "seguro", "admin",
+            "123456", "password", "qwerty", "abc123", "letmein", "welcome",
+            "Pass2024", "Lynx_2024", "Taxi123", "Ruta_55", "verde99", "Clave#1",
+            "admin123", "Seguro_2025", "P@ssw0rd", "Master_99", "Control123",
+            "Sistema!23", "Panel_2024", "lynx_admin", "Driver2024", "rideOn99",
+            "Camino_45", "Viaje#2024", "rapido123", "Conductor_1", "Pasajero99",
+            "azul_55", "rojo2024", "Naranja#7", "negro_123", "blanco99",
+            "estrella1", "luna_2024", "sol123!", "monte_77", "rio2024",
+            "Lince_99", "gato_2024", "perro123", "leon_55", "tigre2024",
+            "Ciudad99", "Calle_45", "Avenida1", "Plaza2024", "Centro_99",
+            "miClave1", "superSecreta", "noLoSabras", "diasFelices", "vamosYa2024",
+            "12345", "55555", "99999", "00000_lynx", "777lucky",
+            "Roberto23", "Marisol_99", "Camila2024", "Andrea_55", "Vanesa99",
+            "QWE123!", "asdf2024", "zxcv_99", "poiu123", "lkjh2024",
+            "tunel_negro", "puente55", "estacion2024", "parada_99", "destino1",
+            "Token_2024", "Hash#123", "Sesion99", "Acceso_2024", "Cuenta55",
+            "GHI789", "JKL456_", "MNO321", "PQR654!", "STU987",
+            "viento99", "tormenta2024", "lluvia_55", "nube123", "trueno2024",
+            "fuego_77", "hielo99", "tierra2024", "agua_123", "aire55",
+            "matrix99", "phoenix2024", "dragon_55", "fenix123", "kraken2024",
+            "Bahia_99", "Costa2024", "Valle_55", "Sierra99", "Bosque2024",
+            "Codigo_1", "Llave99!", "Puerta2024", "Candado_55", "Cerradura1"
+        };
 
         // Calculamos la cantidad real de elementos en los arreglos
         int numUserNames = sizeof(userNames) / sizeof(userNames[0]);
@@ -565,22 +619,44 @@ public:
 
         std::vector<AdminPreview> listaDeAdmins;
 
-        listaDeAdmins.push_back({"ADM-01","Yeremy","admin777"});
-        listaDeAdmins.push_back({ "ADM-02","Salvador","hola123" });
-        listaDeAdmins.push_back({ "ADM-03","Melissa","hola123" });
+        vector<string> usernamesUsados;
+        vector<string> passwordsUsados;
 
-        int idContador = 4;
+        listaDeAdmins.push_back({ "ADM-03","Melissa","hola9" });
+        usernamesUsados.push_back("Melissa");
+        passwordsUsados.push_back("hola9");
 
-        for (int i = 0; i < 29; i++) {
+        listaDeAdmins.push_back({ "ADM-01", "Yeremy", "admin777" });
+        usernamesUsados.push_back("Yeremy");
+        passwordsUsados.push_back("admin777");
+
+        listaDeAdmins.push_back({ "ADM-02", "Salvador", "hola123" });
+        usernamesUsados.push_back("Salvador");
+        passwordsUsados.push_back("hola123");
+
+        int idContador = 4; // pa que no agarre nuestros passwords y users
+
+        for (int i = 0; i < 111; i++) {
             // generar el ID secuencial 
             string id = generarIdAdmin(idContador);
+            string username;
 
             // usar la variable con el tamaño del arreglo para el rand()
-            string username = userNames[rand() % numUserNames] + to_string(rand() % 900 + 100);
-            string password = passwords[rand() % numPasswords] + to_string(rand() % 9000 + 1000);
+            do {
+                username = userNames[rand() % numUserNames];
+            } while (contieneString(usernamesUsados, username));
+
+            string password;
+            do {
+                password = passwords[rand() % numPasswords];
+            } while (contieneString(passwordsUsados, password));
 
             // enviar los 3 parametros requeridos
             listaDeAdmins.push_back({ id, username, password });
+
+            // actualizar vectores usados
+            usernamesUsados.push_back(username);
+            passwordsUsados.push_back(password);
 
             // Aumentar el contador para la siguiente iteración
             idContador++;

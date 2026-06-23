@@ -119,6 +119,7 @@
   <ItemGroup>
     <ClInclude Include="include\FileManager.h" />
     <ClInclude Include="include\DoublyLinkedList.h" />
+    <ClInclude Include="include\Heap.h" />
     <ClInclude Include="include\LinkedList.h" />
     <ClInclude Include="include\Node.h" />
     <ClInclude Include="include\Queue.h" />

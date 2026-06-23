@@ -26,8 +26,8 @@ namespace LYNX {
 			ConfigureForm();
 		}
 
-        // falta password
-		AdminMenuForm(AuthManager* auth, TripManager* trips)
+       
+		AdminMenuForm(AuthManager* auth, TripManager* trips, String^ adminId, String^ adminUsername)
 		{
 			this->authManager = auth;
 			this->tripManager = trips;

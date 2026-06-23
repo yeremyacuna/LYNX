@@ -375,7 +375,9 @@ namespace LYNX {
 
 			String^ loggedPassengerDni = "";
 			String^ loggedDriverDni = "";
-			String^ loggedAdminDni = "";
+			
+			String^ loggedAdminId = "";
+			String^ loggedAdminUsername = "";
 
 			String^ dnis;
 			String^ names;
@@ -668,19 +670,17 @@ namespace LYNX {
 				// Converitr con marshal as al tipo de dato que quiero segun un String^
 				std::string username = msclr::interop::marshal_as<std::string>(userText);
 				std::string password = msclr::interop::marshal_as<std::string>(passwordText);
-				std::string idAdm = msclr::interop::marshal_as<std::string>(authManager);
 				
 				// Validar que el usuario exista con el auth managern login user valid
-				if (!authManager->loginAdminValid(idAdm,username, password)) {
+				if (!authManager->loginAdminValid(username, password)) {
 					MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
 					this->tbContrasena->Clear();
 					return;
 				}
 
-				
 				// Validar si los datos coinciden con un pasajero existente
-				Admin adminn = authManager->getFileManager::ByDni(dni);
-				if (adminn.getDni() == "" || adminn.getName() != name) {
+				FileManager::AdminPreview admin = authManager->getAdminUsername(username);
+				if (admin.id == "") {
 					MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
 					this->tbContrasena->Clear();
 					return;
@@ -690,7 +690,9 @@ namespace LYNX {
 				users = userText;
 				passwords = passwordText;
 
-				loggedAdminID = "";
+				loggedAdminId = gcnew String(admin.id.c_str());
+				loggedAdminUsername = userText;
+
 				adminScreen = true;
 
 				FormsStatus::SaveWindow(this);
