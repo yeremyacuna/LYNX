@@ -341,6 +341,14 @@ public:
             saveAll();
     }
 
+    void reloadAdmins()
+    {
+        adminList->clear();
+        vector<FileManager::AdminPreview> cargados = fileManager->leerAdminsTXT();
+        for (int i = 0; i < (int)cargados.size(); i++)
+            adminList->pushBack(cargados[i]);
+    }
+
     // FUNCION QUE PASA LA ESTRCUTURA PARA QUE GUARDE DE PASAJERO Y DRIVER SUS CONTRAS
     // readPasswordsBinary: lee el archivo binario y devuelve una vista amigable
     vector<FileManager::PasswordPreview> readPasswordsBinary() {
