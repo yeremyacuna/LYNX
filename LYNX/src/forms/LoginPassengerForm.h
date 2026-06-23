@@ -647,6 +647,7 @@ namespace LYNX {
 				// Guardar los txt box como Strings^
 				String^ userText = this->tbNombre->Text->Trim();
 				String^ passwordText = this->tbContrasena->Text;
+				String^ idAdmin = nullptr;
 
 				// Verificar que los espacios no esten vacios
 				if (userText->Length == 0 || passwordText->Length == 0) {
@@ -661,34 +662,35 @@ namespace LYNX {
 				}
 
 				// Recargar desde archivo para tener recargados actualmente (FUNDAMENTAL FOREVER) =====================================================================================
-				// authManager->reloadDrivers();
+				authManager->reloadAdmins();
 
 
 				// Converitr con marshal as al tipo de dato que quiero segun un String^
-				std::string dni = msclr::interop::marshal_as<std::string>(userText);
+				std::string username = msclr::interop::marshal_as<std::string>(userText);
 				std::string password = msclr::interop::marshal_as<std::string>(passwordText);
-
-				/*
+				std::string idAdm = msclr::interop::marshal_as<std::string>(authManager);
+				
 				// Validar que el usuario exista con el auth managern login user valid
-				if (!authManager->loginDriverValid(dni, password)) {
+				if (!authManager->loginAdminValid(idAdm,username, password)) {
 					MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
 					this->tbContrasena->Clear();
 					return;
 				}
 
+				
 				// Validar si los datos coinciden con un pasajero existente
-				Driver driver = authManager->getDriverByDni(dni);
-				if (driver.getDni() == "" || driver.getName() != name) {
+				Admin adminn = authManager->getFileManager::ByDni(dni);
+				if (adminn.getDni() == "" || adminn.getName() != name) {
 					MessageBox::Show("Datos incorrectos", "Iniciar Sesion", MessageBoxButtons::OK);
 					this->tbContrasena->Clear();
 					return;
-				}*/
+				}
 
 				// variables de recuerdo e informacion para la prox pantalla (check)
 				users = userText;
 				passwords = passwordText;
 
-				loggedAdminDni = "";
+				loggedAdminID = "";
 				adminScreen = true;
 
 				FormsStatus::SaveWindow(this);
