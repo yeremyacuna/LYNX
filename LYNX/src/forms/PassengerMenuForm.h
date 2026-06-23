@@ -1148,14 +1148,14 @@ namespace LYNX {
 				this->lblNoTrip->Visible = false;
 			}
 
-				//Gemini me ayudo con esto JAJAJJA, es para lo que es el layout del historial
-				this->flowLayoutPnlHistorialDeViajes->Controls->Clear();
+			// Vacia el contenedor de bloques del historial
+			this->flowLayoutPnlHistorialDeViajes->Controls->Clear();
 
-			// Extraemos el vector con el historial del pasajero mediante la pila sin destruirla
+			// Se genera el vector de todos los viajes para conseguir los del usuario
 			std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
 
 			// Filtramos e insertamos los viajes en el panel
-			for (size_t i = 0; i < historial.size(); i++) {
+			for (int i = 0; i < historial.size(); i++) {
 				// Solo mostramos en el historial los viajes que le pertenecen al DNI del pasajero logueado
 				if (historial[i].getPassengerDni() == msclr::interop::marshal_as<std::string>(a)) {
 					AgregarBloqueHistorial(historial[i]);
@@ -1526,12 +1526,15 @@ namespace LYNX {
 			switch (originalType) {
 			case 1:
 				this->lblTypeTripText->Text = "Economico";
+				this->lblTypeTripText->ForeColor = System::Drawing::Color::LightGreen;
 				break;
 			case 2:
 				this->lblTypeTripText->Text = "Standard";
+				this->lblTypeTripText->ForeColor = System::Drawing::Color::LightSteelBlue;
 				break;
 			case 3:
 				this->lblTypeTripText->Text = "Premium";
+				this->lblTypeTripText->ForeColor = System::Drawing::Color::Goldenrod;
 				break;
 			}
 			this->lblPrice->Visible = true;
@@ -1540,6 +1543,21 @@ namespace LYNX {
 			this->lblTypeTripText->Visible = true;
 			this->ActualTripTitle->Visible = true;
 
+			String^ a = this->dni;
+
+			// Vacia el contenedor de bloques del historial
+			this->flowLayoutPnlHistorialDeViajes->Controls->Clear();
+
+			// Se genera el vector de todos los viajes para conseguir los del usuario
+			std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
+
+			// Filtramos e insertamos los viajes en el panel
+			for (int i = 0; i < historial.size(); i++) {
+				// Solo mostramos en el historial los viajes que le pertenecen al DNI del pasajero logueado
+				if (historial[i].getPassengerDni() == msclr::interop::marshal_as<std::string>(a)) {
+					AgregarBloqueHistorial(historial[i]);
+				}
+			}
 		}
 
 

@@ -607,11 +607,11 @@ namespace LYNX {
 			this->queueTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
 			this->queueTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->queueTitle->Location = System::Drawing::Point(22, 20);
+			this->queueTitle->Location = System::Drawing::Point(3, 7);
 			this->queueTitle->Name = L"queueTitle";
 			this->queueTitle->Size = System::Drawing::Size(220, 28);
 			this->queueTitle->TabIndex = 0;
-			this->queueTitle->Text = L"Cola de solicitudes";
+			this->queueTitle->Text = L"Ganancias";
 			// 
 			// vehiclePanel
 			// 
