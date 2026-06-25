@@ -11,7 +11,7 @@ PAS-0010|Miguel Torres|91827370|migue99|3.7|2|69.1
 PAS-0011|Ana Torres|49281736|ana123|4.2|0|0
 PAS-0012|Kevin Soto|10284756|kevins|2.7|1|64.7
 PAS-0013|Kevin Gomez|91827372|keving|2.9|1|74.8
-PAS-0014|Andrea Flores|10284758|andreaf|2.9|0|0
+PAS-0014|Andrea Flores|10284758|andreaf|2.9|2|160.2
 PAS-0015|Bruno Salas|56473821|brunox|3.6|2|284.7
 PAS-0016|Camila Torres|56492024|camit|3.5|1|42.2
 PAS-0017|Fernando Vega|56492022|fervega|3.5|3|115.7

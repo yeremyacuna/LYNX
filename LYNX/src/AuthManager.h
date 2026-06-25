@@ -372,6 +372,21 @@ public:
     int getTotalUsers() { return passengerList->getSize(); }
     int getTotalDrivers() { return driverList->getSize(); }
 
+    LinkedList<Driver>* copyDriverList()
+    {
+        LinkedList<Driver>* original = driverList;
+
+        LinkedList<Driver>* nueva = new LinkedList<Driver>();
+
+        for (int i = 0; i < original->getSize(); i++)
+        {
+            Driver d = original->get(i);
+            nueva->pushBack(d);
+        }
+
+        return nueva;
+    }
+
     //  FUNCIONES DE GUARDADO
     // savePassengers: ordena y guarda la lista de pasajeros en txt
     void savePassengers() {
@@ -715,7 +730,7 @@ public:
 
     // LAMBDA 3: usa filter() de LinkedList para obtener solo conductores disponibles
     LinkedList<Driver>* getConductoresDisponibles() {
-        return driverList->filter([](Driver d) { return d.getIsAvailable(); });
+        return driverList->filter([](Driver d) { return d.getIsAvailable(); }); 
     }
 
     /* LAMBDA 4: encola un viaje solo si el pasajero existe, con Queue::enqueueIf

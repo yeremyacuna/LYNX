@@ -21,8 +21,8 @@ int main()
     {
         //EJECUTAR APP CONSOLA:
 
-     Menu menu = Menu();
-     menu.LYNXMenu();
+        ConsoleMenu menu;
+        menu.LYNXConsoleMenu();
 
     }
     else if (opcion == 2)

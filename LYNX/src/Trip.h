@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
@@ -94,18 +95,22 @@ public:
     }
 
     // toString: convierte el viaje en una linea facil de mostrar en listas
-    string toString() {
+    string toString() const {
+
+        std::ostringstream precio;
+        precio << std::fixed << std::setprecision(2) << price;
+
         return tripId + " | " + origin + " -> " + destination +
-            " | S/ " + to_string(price) +
-            " | " + status +
-            " | Conductor: " + driverName +
+            " | S/ " + precio.str() +
+            " | " + status + "|\n"
+            "Conductor: " + driverName +
             " | Fecha: " + date;
     }
 
     // LAMBDA 1
     /* Devuelve una etiqueta del estado del viaje
     Se usa en el historial para que el pasajero vea si su viaje fue completado, cancelado, etc*/
-    string getStatusLabel() {
+    string getStatusLabel() const {
         auto etiqueta = [](string est) -> string {
             if (est == "completado") return "[OK] " + est;
             if (est == "cancelado")  return "[XX] " + est;
@@ -119,7 +124,7 @@ public:
     /* Verifica si el viaje esta completado
     Se usa en el historial para filtrar y sumar solo
     los viajes que realmente se realizaron.*/
-    bool estaCompletado() {
+    bool estaCompletado() const {
         auto verificar = [](string est) -> bool {
             return est == "completado";
             };
@@ -159,4 +164,15 @@ public:
 
     // getCodigo: devuelve el id del viaje como codigo de referencia
     string getCodigo() { return tripId; }
+
+
 };
+
+inline bool operator==(const Trip& a, const Trip& b) {
+    return a.getTripId() == b.getTripId();
+}
+
+inline std::ostream& operator<<(std::ostream& os, const Trip& t) {
+    os << t.toString();
+    return os;
+}

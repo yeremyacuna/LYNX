@@ -281,24 +281,6 @@ public:
         cout << " -> nullptr ]\n";
     }
 
-    void printInfo() {
-        cout << "size=" << size;
-        if (!isEmpty())
-            cout << " | head=" << head->data << " | tail=" << tail->data;
-        cout << "\n";
-    }
-
-    void printReverse() {
-        DNode<T>* current = tail;
-        while (current != nullptr) {
-            cout << current->data;
-            current = current->prev;
-        }
-    }
-
-
-
-
 
 
 

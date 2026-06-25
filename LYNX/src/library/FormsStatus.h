@@ -1,4 +1,14 @@
 #pragma once
+#include <string>
+#include <sstream>
+#include <iomanip>
+#include <msclr/marshal_cppstd.h>
+
+using namespace System;
+using namespace System::Drawing;       
+using namespace System::Windows::Forms; 
+using std::string;
+using std::fixed;
 
 namespace LYNX {
     public ref class FormsStatus {
@@ -44,6 +54,35 @@ namespace LYNX {
                 form->Location = normalLocation;
                 isWithoutF11 = true;
             }
+        }
+
+        template<typename T>
+        inline static System::String^ ToManaged(const T& value)
+        {
+            std::ostringstream ss;
+            ss << value;
+            return gcnew System::String(ss.str().c_str());
+        }
+
+        template<typename T>
+        inline static System::String^ ToManaged(const T& value, int decimals)
+        {
+            std::ostringstream ss;
+
+            if (decimals >= 0)
+            {
+                ss << std::fixed << std::setprecision(decimals);
+            }
+
+            ss << value;
+
+            return gcnew System::String(ss.str().c_str());
+        }
+
+        inline static string ToNormalString(String^ text)
+        {
+            if (text == nullptr) return "";
+            return msclr::interop::marshal_as<std::string>(text);
         }
     };
 }
