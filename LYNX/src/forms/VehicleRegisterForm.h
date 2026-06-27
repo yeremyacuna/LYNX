@@ -362,9 +362,11 @@ namespace LYNX {
 		// LOGICA y PUBLIC
 		#pragma endregion
 		public:
+			//Variables para ir al Login o al Register
 			bool switchToLogin = false;
 			bool switchToRegister = false;
 
+			//Campos del Register
 			String^ name;
 			String^ pass;
 			String^ dni;
@@ -477,22 +479,36 @@ namespace LYNX {
 			   this->tbPlate->Text = "";
 			   this->tbColour->Text = "";
 
+		//Vaciar los campos
+		this->tbBrand->Text = "";
+		this->tbYear->Text = "";
+		this->tbModel->Text = "";
+		this->tbPlate->Text = "";
+		this->tbColour->Text = "";
+		
 
+		// Hacer validacion del anio si es un numero o es mayor al 2000 o menor al actual ( 2026 )
+		if (year<2000 || year >2026) {
+			MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
+			return;
+		}
 			   // Hacer validacion del anio si es un numero o es mayor al 2000
 			   if (year < 2000 || year >2026) {
 				   MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
 				   return;
 			   }
 
-			   vehicle.setPlate(plate);
-			   vehicle.setBrand(brand);
-			   vehicle.setModel(model);
-			   vehicle.setColor(colour);
-			   vehicle.setYear(year);
+		//guarda los valores en el objeto vehiculo
+		vehicle.setPlate(plate);
+		vehicle.setBrand(brand);
+		vehicle.setModel(model);
+		vehicle.setColor(colour);
+		vehicle.setYear(year);
 
-			   String^ n = name;
-			   String^ d = dni;
-			   String^ p = pass;
+		//obtiene los campos del register para guardarlos
+		String^ n = name;
+		String^ d = dni;
+		String^ p = pass;
 
 
 			   // Validar si el DNI ya se encuentra registrado con dni nombre y contraseña pass en la funcion de authmanager

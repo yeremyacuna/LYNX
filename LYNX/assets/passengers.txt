@@ -109,7 +109,7 @@ PAS-0108|Fernando Diaz|90817273|ferdiaz|3.7|0|0
 PAS-0109|Pepe Marmol|77111111|pepemarm|5|2|247.025
 PAS-0110|Remers Gonza|12345678|remersalbums|5|0|0
 PAS-0111|Vinicius JR|00001111|vini|5|0|0
-PAS-0112|Salvadorcito Rivera|71149147|globyy|5|17|1694.5
+PAS-0112|Salvadorcito Rivera|71149147|globyy|5|19|2346.35
 PAS-0113|Michael Olise|89456421|bayern11|5|1|364747
 PAS-0114|Lamine Tamal|45465486|barzzza123|1.3|99|145.54
 PAS-0115|Angela Perez|83746601|angep|4.6|2|265.2
