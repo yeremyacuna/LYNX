@@ -484,7 +484,7 @@ namespace LYNX {
 			this->lblNombreProyecto->Name = L"lblNombreProyecto";
 			this->lblNombreProyecto->AutoSize = true;
 			this->lblNombreProyecto->TabIndex = 0;
-			this->lblNombreProyecto->Text = L"LYNX  |  Sistema de gestion de transporte";
+			this->lblNombreProyecto->Text = L"LYNX  |  Sistema de gestión de transporte";
 
 			// 
 			// lblInfoProyecto
@@ -495,8 +495,8 @@ namespace LYNX {
 			this->lblInfoProyecto->Name = L"lblInfoProyecto";
 			this->lblInfoProyecto->AutoSize = true;
 			this->lblInfoProyecto->TabIndex = 1;
-			this->lblInfoProyecto->Text = L"LYNX  |  Sistema de optimizaci�n de rutas y asignaci�n de conductores  |  Presion"
-				L"a F11 para pantalla completa";
+			this->lblInfoProyecto->Text = L"LYNX  |  Sistema de optimización de rutas y asignación de conductores  |  Presiona"
+				L" F11 para pantalla completa";
 
 			// 
 			// timer1
