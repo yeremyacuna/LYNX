@@ -12,8 +12,7 @@ template <typename T>
 class HashTable
 {
 private:
-
-    // 1 nodo de la cadena: el DNI, el valor, y un puntero al siguiente
+    //nodo de la cadena
     struct HashNode {
         string clave;
         T valor;

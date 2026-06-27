@@ -606,7 +606,7 @@ public:
         passengerList->remove(i);
         passengerList->insert(i, p);
         savePassengers();
-        hashPasajeros.insertar(dni, p);  // actualizamos la tabla hash
+        hashPasajeros.insertar(dni, p);  // actualizamos tabla hash
     }
 
     // cambia nombre y contra de un pasajero ya registrado
@@ -619,7 +619,7 @@ public:
         passengerList->remove(i);
         passengerList->insert(i, p);
         savePassengers();
-        hashPasajeros.insertar(dni, p);  // actualizamos la tabla hash
+        hashPasajeros.insertar(dni, p);  // actualizamos tabla hash
     }
 
     // Actualiza el rating
@@ -710,7 +710,7 @@ public:
         driverList->remove(i);
         driverList->insert(i, d);
         saveDrivers();
-        hashConductores.insertar(dni, d);  // actualizar en la tabla hash
+        hashConductores.insertar(dni, d);  // actualizamos tabla hash
     }
 
     // devuelve el primer conductor libre encontrado
