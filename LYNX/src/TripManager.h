@@ -251,6 +251,42 @@ public:
         return activeTrips.countIf([](Trip t) { return t.getStatus() == "en_curso"; });
     }
 
+    // Cuenta cuántos viajes del historial están completados
+    int contarViajesCompletados() {
+        int n = 0;
+        Trip* arr = historyToArray(n);
+
+        if (!arr) 
+            return 0;
+
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (arr[i].getStatus() == "completado") 
+                count++;
+        }
+
+        delete[] arr;
+        return count;
+    }
+
+    // Cuenta cuántos viajes del historial están cancelados
+    int contarViajesCancelados() {
+        int n = 0;
+        Trip* arr = historyToArray(n);
+
+        if (!arr) 
+            return 0;
+
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (arr[i].getStatus() == "cancelado") 
+                count++;
+        }
+
+        delete[] arr;
+        return count;
+    }
+
     // LAMBDA 4: muestra la cola de espera con posicion con Queue::forEach
     // Se usa en listarViajes() del AdministratorMenu para mostrar la cola sin sacar elementos
     void viewWaitingDetailed() {
@@ -309,6 +345,22 @@ public:
         Trip* arr = historyToArray(n);
         if (!arr) return 0.0f;
         float total = sumarGananciaRec(arr, 0, n);
+        delete[] arr;
+        return total;
+    }
+
+    // Suma el precio total de TODOS los viajes completados (sin comisión, monto bruto)
+    float getTotalIngresosCompletados() {
+        int n = 0;
+        Trip* arr = historyToArray(n);
+        if (!arr) return 0.0f;
+
+        float total = 0.0f;
+        for (int i = 0; i < n; i++) {
+            if (arr[i].getStatus() == "completado") {
+                total += arr[i].getPrice();
+            }
+        }
         delete[] arr;
         return total;
     }

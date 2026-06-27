@@ -15,12 +15,10 @@ TRP-10185|Trujillo|Tacna|105.3|1|en_curso|Carlos Mendoza||19283749|01/05/2026
 TRP-10058|Huancayo|Iquitos|104.3|1|en_curso|Javier Luna||56492021|10/05/2026
 TRP-10116|Huaraz|Chiclayo|100.8|1|en_curso|Maria Quispe||56492020|28/04/2026
 TRP-10162|Ferreñafe|Nazca|99.4|2|en_curso|Luis Castillo||37482913|01/05/2026
-TRP-10073|Lima|Cerro de Pasco|97.5|1|en_curso|Sofia Delgado||10284758|05/05/2026
 TRP-10131|Huánuco|Moyobamba|77.1|1|en_curso|Erick Huaman||56473821|01/05/2026
 TRP-10121|Callao|Ate Vitarte|75|3|en_curso|Sebastian Mora||47291038|07/05/2026
 TRP-10111|San Miguel|Independencia|74.5|3|en_curso|Erick Huaman||10284757|08/05/2026
 TRP-10180|Arequipa|Cajamarca|69.1|1|en_curso|Carlos Rojas||10284762|20/04/2026
-TRP-10164|Cercado de Lima|Surquillo|62.7|3|en_curso|Ana Torres||10284758|07/05/2026
 TRP-10195|CC Jockey|Plaza Mayor de Lima|58.4|3|en_curso|Hector Ruiz||19283759|10/04/2026
 TRP-10097|Villa María del Triunfo|San Borja|56.9|3|en_curso|Luis Soto||56492027|20/04/2026
 TRP-10043|Huancayo|Jaén|53|1|en_curso|Fernanda Salas||56492028|25/03/2026
@@ -55,9 +53,9 @@ TRP-10222|Madrid|Santiago Bernabeu|1976.5|3|en_curso|Lucia Ramos|10284765|894564
 TRP-10225|Felicilandia|Sayonara|148.2|1|en_curso|Carlos Rivera|10284767|71234567|17/06/2026
 TRP-10226|Huancayo|Belice|3838.8|2|en_curso|Ricardo Nunez|37482911|90817268|18/06/2026
 TRP-10227|a|b|8184|2|en_curso|Camilo Perez|37482914|77111111|18/06/2026
-TRP-10229|comida|china|373|3|en_curso|Diego Flores|56473829|71149147|22/06/2026
-TRP-10228|lima|peruvian|139.8|1|completado|PEPE EL|74474747|71149147|22/06/2026
-TRP-10223|Aurora|Marbella|512.052|1|completado|Carna Lito|77879789|71149147|17/06/2026
+TRP-10228|asdads|asdasd|258.6|1|en_curso|PEPE EL|74474747|10284758|24/06/2026
+TRP-10164|Cercado de Lima|Surquillo|62.7|3|completado|Ana Torres||10284758|07/05/2026
+TRP-10073|Lima|Cerro de Pasco|97.5|1|completado|Sofia Delgado||10284758|05/05/2026
 TRP-10082|Huánuco|Cerro de Pasco|79.3|1|completado|Pedro Castillo||90817268|05/05/2026
 TRP-10221|Munich|Madrid|364747|3|completado|Carlos Rivera|10284767|89456421|14/06/2026
 TRP-10218|Surco|San Borja|21|1|completado|Ricardo Nunez|37482911|71149147|07/06/2026
@@ -122,13 +120,13 @@ TRP-10070|Puerto Maldonado|Huaraz|135.5|2|completado|Cristiano Ronaldo||83746599
 TRP-10071|Abancay|Huánuco|43.2|1|completado|Luis Castillo||83746600|07/05/2026
 TRP-10072|Plaza Mayor de Lima|Real Plaza Salaverry|9.6|1|cancelado|Javier Luna||10284763|10/04/2026
 TRP-10074|Callao|Jockey Plaza|60.5|3|cancelado|Cristiano JR||37482913|10/04/2026
-TRP-10075|Huancayo|Chiclayo|428.9|3|completado|Camila Rios||91827367|05/04/2026
+TRP-10075|Huancayo|Chiclayo|428.9|3|pendiente|Camila Rios||91827367|05/04/2026
 TRP-10076|Carabayllo|Real Plaza Salaverry|13.2|1|completado|Luis Herrera||56492025|10/05/2026
 TRP-10077|Surquillo|Clínica Ricardo Palma|20.5|1|completado|Victor Salazar||91827369|01/05/2026
 TRP-10079|Trujillo|Ayacucho|110.5|1|completado|Javier Luna||47291038|20/04/2026
 TRP-10080|San Juan de Lurigancho|Villa El Salvador|29.6|2|completado|Sofia Vega||83746592|03/05/2026
 TRP-10081|Pucallpa|Cusco|356.7|3|completado|Lucia Ramos||56492021|10/04/2026
-TRP-10083|Ayacucho|Moquegua|207.9|2|completado|Jhon Castillo||10284767|03/05/2026
+TRP-10083|Ayacucho|Moquegua|207.9|2|pendiente|Jhon Castillo||10284767|03/05/2026
 TRP-10084|CC Jockey|San Juan de Miraflores|42.2|3|completado|Rosa Condori||56492024|10/04/2026
 TRP-10086|Lince|Santa Anita|43.3|3|completado|Miguel Angel||56492022|10/05/2026
 TRP-10087|Surco|UNMSM|23.8|2|cancelado|Ana Lucero|||01/04/2026

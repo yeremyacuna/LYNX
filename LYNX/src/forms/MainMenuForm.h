@@ -43,11 +43,6 @@ namespace LYNX {
 			formvr = gcnew VehicleRegisterForm(authManager, tripManager);
 
 
-
-			this->adminId = adminId;
-			this->adminUsername = adminUsername;
-
-
 			// CENTRAR TODO
 			this->CenterToScreen();
 
@@ -93,8 +88,6 @@ namespace LYNX {
 		AdminMenuForm^ formadminmenu = nullptr;
 		VehicleRegisterForm^ formvr = nullptr;
 
-		String^ adminId;
-		String^ adminUsername;
 
 		int currentLoginStyle = 1;
 		int currentRegisterStyle = 1;
@@ -502,7 +495,7 @@ namespace LYNX {
 			this->lblInfoProyecto->Name = L"lblInfoProyecto";
 			this->lblInfoProyecto->AutoSize = true;
 			this->lblInfoProyecto->TabIndex = 1;
-			this->lblInfoProyecto->Text = L"LYNX  |  Sistema de optimización de rutas y asignación de conductores  |  Presion"
+			this->lblInfoProyecto->Text = L"LYNX  |  Sistema de optimizaciï¿½n de rutas y asignaciï¿½n de conductores  |  Presion"
 				L"a F11 para pantalla completa";
 
 			// 

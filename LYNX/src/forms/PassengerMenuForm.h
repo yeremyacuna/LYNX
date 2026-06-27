@@ -1510,7 +1510,9 @@ namespace LYNX {
 			while ((activeT = buscarViajeActivoDePasajero(*tripManager, msclr::interop::marshal_as<std::string>(dnii))).getTripId() != "") {
 				tripManager->finishTrip(activeT.getTripId(), *authManager);
 			}
+
 			tripManager->createTrip(msclr::interop::marshal_as<std::string>(o), msclr::interop::marshal_as<std::string>(d), originalType, distance, msclr::interop::marshal_as<std::string>(dn), msclr::interop::marshal_as<std::string>(dd), msclr::interop::marshal_as<std::string>(dnii), fechaActual());
+
 			if (!msclr::interop::marshal_as<std::string>(dd).empty()) {
 				tripManager->assignDriver(msclr::interop::marshal_as<std::string>(dd), *authManager);
 				guardarDatos(*fileManager, *authManager, *tripManager);
@@ -1661,7 +1663,7 @@ namespace LYNX {
 			lblPrecioItem->Size = System::Drawing::Size(150, 25);
 			lblPrecioItem->Location = System::Drawing::Point(1150, 16); // Posicion lateral derecha
 			lblPrecioItem->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
-			lblPrecioItem->Text = L"S/." + trip.getPrice().ToString("F2"); // Muestra con dos decimales de moneda
+			lblPrecioItem->Text = System::String::Format(L"S/.{0:F2}", trip.getPrice()); // Muestra con dos decimales de moneda
 
 			// 5. Armar la jerarquia de los controles
 			itemPanel->Controls->Add(Cuadradito);
