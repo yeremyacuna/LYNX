@@ -3,6 +3,7 @@
 #include "../library/FormsStatus.h"
 #include "../AuthManager.h"    
 #include "../TripManager.h" 
+#include "../../include/AdvancedOrders.h"
 #include <msclr/marshal_cppstd.h> 
 
 class AuthManager;
@@ -119,14 +120,12 @@ namespace LYNX {
     private: System::Windows::Forms::Label^ lblInvisible6;
     private: System::Windows::Forms::Label^ lblInvisible5;
     private: System::Windows::Forms::Label^ lblEstIngresosFact;
-private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
-private: System::Windows::Forms::Button^ btnMinimo;
-private: System::Windows::Forms::Button^ btnMaximo;
-private: System::Windows::Forms::Button^ btnBuscarDeListado;
-
-private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
-
-
+    private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
+    private: System::Windows::Forms::Button^ btnMinimo;
+    private: System::Windows::Forms::Button^ btnMaximo;
+    private: System::Windows::Forms::Button^ btnBuscarDeListado;
+    private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
+private: System::Windows::Forms::Button^ btnOrden3;
 
     private: System::ComponentModel::Container^ components;
 
@@ -148,8 +147,8 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             this->lblResultadoInfo = (gcnew System::Windows::Forms::RichTextBox());
             this->lblResultadoTit = (gcnew System::Windows::Forms::Label());
             this->pnlListados = (gcnew System::Windows::Forms::Panel());
+            this->btnOrden3 = (gcnew System::Windows::Forms::Button());
             this->btnBuscarDeListado = (gcnew System::Windows::Forms::Button());
-            this->txtIDViajeBuscar = (gcnew System::Windows::Forms::TextBox());
             this->btnMinimo = (gcnew System::Windows::Forms::Button());
             this->btnMaximo = (gcnew System::Windows::Forms::Button());
             this->lblTitListados = (gcnew System::Windows::Forms::Label());
@@ -160,6 +159,7 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             this->btnOrden1 = (gcnew System::Windows::Forms::Button());
             this->btnOrden2 = (gcnew System::Windows::Forms::Button());
             this->rtbListado = (gcnew System::Windows::Forms::RichTextBox());
+            this->txtIDViajeBuscar = (gcnew System::Windows::Forms::TextBox());
             this->lblInvisible1 = (gcnew System::Windows::Forms::Label());
             this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
             this->pictureBoxIcon = (gcnew System::Windows::Forms::PictureBox());
@@ -401,8 +401,8 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
                 | System::Windows::Forms::AnchorStyles::Left)
                 | System::Windows::Forms::AnchorStyles::Right));
             this->pnlListados->BackColor = System::Drawing::Color::White;
+            this->pnlListados->Controls->Add(this->btnOrden3);
             this->pnlListados->Controls->Add(this->btnBuscarDeListado);
-            this->pnlListados->Controls->Add(this->txtIDViajeBuscar);
             this->pnlListados->Controls->Add(this->btnMinimo);
             this->pnlListados->Controls->Add(this->btnMaximo);
             this->pnlListados->Controls->Add(this->lblTitListados);
@@ -413,10 +413,29 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             this->pnlListados->Controls->Add(this->btnOrden1);
             this->pnlListados->Controls->Add(this->btnOrden2);
             this->pnlListados->Controls->Add(this->rtbListado);
+            this->pnlListados->Controls->Add(this->txtIDViajeBuscar);
             this->pnlListados->Location = System::Drawing::Point(609, 208);
             this->pnlListados->Name = L"pnlListados";
             this->pnlListados->Size = System::Drawing::Size(871, 456);
             this->pnlListados->TabIndex = 6;
+            // 
+            // btnOrden3
+            // 
+            this->btnOrden3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+                static_cast<System::Int32>(static_cast<System::Byte>(34)));
+            this->btnOrden3->Cursor = System::Windows::Forms::Cursors::Hand;
+            this->btnOrden3->FlatAppearance->BorderColor = System::Drawing::Color::White;
+            this->btnOrden3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+            this->btnOrden3->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
+            this->btnOrden3->ForeColor = System::Drawing::Color::White;
+            this->btnOrden3->Location = System::Drawing::Point(289, 92);
+            this->btnOrden3->Name = L"btnOrden3";
+            this->btnOrden3->Size = System::Drawing::Size(75, 26);
+            this->btnOrden3->TabIndex = 10;
+            this->btnOrden3->Text = L"Ganancias";
+            this->btnOrden3->UseVisualStyleBackColor = false;
+            this->btnOrden3->Visible = false;
+            this->btnOrden3->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnOrden3_Click);
             // 
             // btnBuscarDeListado
             // 
@@ -437,24 +456,6 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             this->btnBuscarDeListado->Visible = false;
             this->btnBuscarDeListado->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnBuscarDeListado_Click);
             // 
-            // txtIDViajeBuscar
-            // 
-            this->txtIDViajeBuscar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(241)),
-                static_cast<System::Int32>(static_cast<System::Byte>(245)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
-            this->txtIDViajeBuscar->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-            this->txtIDViajeBuscar->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10));
-            this->txtIDViajeBuscar->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-                static_cast<System::Int32>(static_cast<System::Byte>(239)));
-            this->txtIDViajeBuscar->Location = System::Drawing::Point(215, 93);
-            this->txtIDViajeBuscar->Name = L"txtIDViajeBuscar";
-            this->txtIDViajeBuscar->Size = System::Drawing::Size(234, 24);
-            this->txtIDViajeBuscar->TabIndex = 6;
-            this->txtIDViajeBuscar->Text = L"Ingresa N de ID de viaje...";
-            this->txtIDViajeBuscar->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-            this->txtIDViajeBuscar->Visible = false;
-            this->txtIDViajeBuscar->Enter += gcnew System::EventHandler(this, &AdminMenuForm::txtIDViajeBuscar_Enter);
-            this->txtIDViajeBuscar->Leave += gcnew System::EventHandler(this, &AdminMenuForm::txtIDViajeBuscar_Leave);
-            // 
             // btnMinimo
             // 
             this->btnMinimo->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
@@ -464,7 +465,7 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             this->btnMinimo->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
             this->btnMinimo->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
             this->btnMinimo->ForeColor = System::Drawing::Color::White;
-            this->btnMinimo->Location = System::Drawing::Point(421, 92);
+            this->btnMinimo->Location = System::Drawing::Point(514, 92);
             this->btnMinimo->Name = L"btnMinimo";
             this->btnMinimo->Size = System::Drawing::Size(112, 26);
             this->btnMinimo->TabIndex = 9;
@@ -482,7 +483,7 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             this->btnMaximo->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
             this->btnMaximo->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
             this->btnMaximo->ForeColor = System::Drawing::Color::White;
-            this->btnMaximo->Location = System::Drawing::Point(299, 92);
+            this->btnMaximo->Location = System::Drawing::Point(392, 92);
             this->btnMaximo->Name = L"btnMaximo";
             this->btnMaximo->Size = System::Drawing::Size(112, 26);
             this->btnMaximo->TabIndex = 8;
@@ -584,7 +585,7 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             this->btnOrden1->Name = L"btnOrden1";
             this->btnOrden1->Size = System::Drawing::Size(75, 26);
             this->btnOrden1->TabIndex = 5;
-            this->btnOrden1->Text = L"ID";
+            this->btnOrden1->Text = L"Viajes";
             this->btnOrden1->UseVisualStyleBackColor = false;
             this->btnOrden1->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnOrden1_Click);
             // 
@@ -623,6 +624,24 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             this->rtbListado->Size = System::Drawing::Size(837, 313);
             this->rtbListado->TabIndex = 7;
             this->rtbListado->Text = L"";
+            // 
+            // txtIDViajeBuscar
+            // 
+            this->txtIDViajeBuscar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(241)),
+                static_cast<System::Int32>(static_cast<System::Byte>(245)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+            this->txtIDViajeBuscar->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+            this->txtIDViajeBuscar->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10));
+            this->txtIDViajeBuscar->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
+                static_cast<System::Int32>(static_cast<System::Byte>(239)));
+            this->txtIDViajeBuscar->Location = System::Drawing::Point(215, 93);
+            this->txtIDViajeBuscar->Name = L"txtIDViajeBuscar";
+            this->txtIDViajeBuscar->Size = System::Drawing::Size(234, 24);
+            this->txtIDViajeBuscar->TabIndex = 6;
+            this->txtIDViajeBuscar->Text = L"Ingresa N de ID de viaje...";
+            this->txtIDViajeBuscar->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+            this->txtIDViajeBuscar->Visible = false;
+            this->txtIDViajeBuscar->Enter += gcnew System::EventHandler(this, &AdminMenuForm::txtIDViajeBuscar_Enter);
+            this->txtIDViajeBuscar->Leave += gcnew System::EventHandler(this, &AdminMenuForm::txtIDViajeBuscar_Leave);
             // 
             // lblInvisible1
             // 
@@ -1555,6 +1574,7 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
 
                 auto copia = authManager->copyDriverList();
 
+                // Shell Sort
                 AuthManager::sortDriversByRating(copia);
 
                 for (int i = 0; i < copia->getSize(); i++)
@@ -1587,9 +1607,10 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
         //  BOTONES DE LISTADO
         // 
     private:
-        // Lista Pasajeros: ordenar por ID o Gasto
+        // Lista Pasajeros: ordenar por Viajes(1) o Gasto (2)
         System::Void btnListPasajeros_Click(System::Object^ sender, System::EventArgs^ e)
         {
+            // order 1 el de viajes y order 2 el de gastos
             txtIDViajeBuscar->Visible = false;
             btnBuscarDeListado->Visible = false;
             btnMaximo->Visible = false;
@@ -1611,38 +1632,59 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             btnListViajes->ForeColor = System::Drawing::Color::FromArgb(57, 107, 239);
             btnListViajes->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
 
-            btnOrden1->Text = L"ID";
+            btnOrden1->Text = L"Viajes";
             btnOrden2->Text = L"Gasto";
             btnOrden2->Visible = true;
+            btnOrden3->Visible = false;
 
-            // Cargar lista
-            rtbListado->Text = L"==============LISTA DE PASAJEROS==============.";
+            // Cargar lista (sin ordenamiento especial, orden normalito de la lista)
+            MostrarPasajeros(nullptr);
 
+        }
+
+        void MostrarPasajeros(String^ criterio)
+        {
             if (authManager == nullptr) return;
+
+            rtbListado->Text = L"==============LISTA DE PASAJEROS==============";
 
             if (authManager->getUserList()->isEmpty()) {
                 rtbListado->Text = L"Sin pasajeros registrados.\n";
                 return;
             }
 
-            String^ texto = L"";
+            // Copia para no alterar la lista original del AuthManager
+            LinkedList<Passenger>* copia = authManager->copyPassengerList();
 
-            for (int i = 0; i < authManager->getPassengerList()->getSize(); i++) {
-                Passenger p = authManager->getPassengerList()->get(i);
-
-                texto += L"[" + (i + 1).ToString() + L"] " + FormsStatus::ToManaged(p.getPassengerId()) +
-                    L" | " + FormsStatus::ToManaged(p.getName()) + 
-                    L" | DNI: " + FormsStatus::ToManaged(p.getDni()) +
-                    L" | Rating: " + FormsStatus::ToManaged(p.getRating(),1) + 
-                    L" | Viajes: " + FormsStatus::ToManaged(p.getTotalTrips()) +
-                    L" | Gasto: S/ " + FormsStatus::ToManaged(p.getTotalSpent(),2) + L"\n";
+            if (criterio == L"Viajes") {
+                AdvancedOrders<Passenger>::timSortPassengersByTrips(copia); 
+            }
+            else if (criterio == L"Gasto") {
+                AdvancedOrders<Passenger>::quickSortPassengersBySpent(copia);
             }
 
-            rtbListado->Text = texto;
+            String^ texto = L"";
 
+            for (int i = 0; i < copia->getSize(); i++) {
+                Passenger p = copia->get(i);
+
+                texto += L"[" + (i + 1).ToString() + L"] " + FormsStatus::ToManaged(p.getPassengerId()) +
+                    L" | " + FormsStatus::ToManaged(p.getName()) +
+                    L" | DNI: " + FormsStatus::ToManaged(p.getDni()) +
+                    L" | Rating: " + FormsStatus::ToManaged(p.getRating(), 1) +
+                    L" | Viajes: " + FormsStatus::ToManaged(p.getTotalTrips()) +
+                    L" | Gasto: S/ " + FormsStatus::ToManaged(p.getTotalSpent(), 2) + L"\n";
+            }
+
+            delete copia;
+
+            rtbListado->Text = texto;
         }
 
-        // Lista Conductores: ordenar por ID o Rating
+        // Lista Conductores: ordenar por Viajes o Rating o GANANCIAS
+        // Para ordenar por Rating(heapsort),
+            // por Viajes (Counting Sort) o por Ganancias (Shell Sort) 
+            // 1: viajes --- 2: rating --- 3: ganancias
         System::Void btnListConductores_Click(System::Object^ sender, System::EventArgs^ e)
         {
             txtIDViajeBuscar->Visible = false;
@@ -1666,33 +1708,56 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             btnListViajes->ForeColor = System::Drawing::Color::FromArgb(57, 107, 239);
             btnListViajes->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
 
-            btnOrden1->Text = L"ID";
+            btnOrden1->Text = L"Viajes";
             btnOrden2->Text = L"Rating";
             btnOrden2->Visible = true;
+            btnOrden3->Text = L"Ganancias";
+            btnOrden3->Visible = true;
 
-            // Cargar lista
-            rtbListado->Text = L"==============LISTA DE CONDUCTORES==============";
+            // Cargar lista (orden normalito)
+            MostrarConductores(nullptr);
+        }
 
+        // imprime la lista de conductores en rtbListado
+        // criterio == nullptr (orden normalito)
+        void MostrarConductores(String^ criterio)
+        {
             if (authManager == nullptr) return;
+
+            rtbListado->Text = L"==============LISTA DE CONDUCTORES==============";
 
             if (authManager->getDriverList()->isEmpty()) {
                 rtbListado->Text = L"Sin conductores registrados.\n";
                 return;
             }
 
+            // Copia para no alterar la lista original del AuthManager
+            LinkedList<Driver>* copia = authManager->copyDriverList();
+
+            if (criterio == L"Viajes") {
+                AdvancedOrders<Driver>::countingSortDriversByTrips(copia);
+            }
+            else if (criterio == L"Ganancias") {
+                AdvancedOrders<Driver>::shellSortDriverssByEarnings(copia);
+            }
+
+            // criterio == "Rating" y poner heap (lo inclui directo ) ======================================================================================================
+
             String^ texto = L"";
 
-            for (int i = 0; i < authManager->getDriverList()->getSize(); i++) {
-                Driver d = authManager->getDriverList()->get(i);
+            for (int i = 0; i < copia->getSize(); i++) {
+                Driver d = copia->get(i);
 
-                texto += L"["+ (i + 1).ToString() + "]" + FormsStatus::ToManaged(d.getDriverId()) +
-                    L"| " + FormsStatus::ToManaged(d.getName()) +
-                    L" | DNI: " + FormsStatus::ToManaged(d.getDni()) +
-                    L" |Rating: " + FormsStatus::ToManaged(d.getRating(), 1) +
-                    L"| Disponible: " + FormsStatus::ToManaged(d.getIsAvailable() ? "Si" : "No") +
-                    L" |Viajes: " + FormsStatus::ToManaged(d.getTotalTrips()) +
-                    L"| Ganancias: S/" + FormsStatus::ToManaged(d.getTotalEarnings(), 2) + L"\n";
+                texto += L"[" + (i + 1).ToString() + L"] " + FormsStatus::ToManaged(d.getDriverId()) +
+                    L"|"+ FormsStatus::ToManaged(d.getName()) +
+                    L"| DNI:" + FormsStatus::ToManaged(d.getDni()) +
+                    L" |Rating:" + FormsStatus::ToManaged(d.getRating(), 1) +
+                    L"|Disponible: " + FormsStatus::ToManaged(d.getIsAvailable() ? "Si" : "No") +
+                    L"|Viajes: " + FormsStatus::ToManaged(d.getTotalTrips()) +
+                    L"|Ganancias: S/" + FormsStatus::ToManaged(d.getTotalEarnings(), 2) + L"\n";
             }
+
+            delete copia;
 
             rtbListado->Text = texto;
         }
@@ -1720,10 +1785,11 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             btnListConductores->BackColor = System::Drawing::Color::FromArgb(245, 247, 252);
             btnListConductores->ForeColor = System::Drawing::Color::FromArgb(39, 50, 120);
             btnListConductores->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
-
-            btnOrden1->Text = L"Precio";
-            btnOrden2->Visible = false;   // INVISIBLEE viajes solo tiene un criterio
             
+            btnOrden1->Text = L"Precio";
+            btnOrden2->Visible = false;
+            btnOrden3->Visible = false;
+
             if (txtIDViajeBuscar->Text == L"") {
                 txtIDViajeBuscar->Text = L"Ingresa N de ID de viaje...";
                 txtIDViajeBuscar->ForeColor = System::Drawing::Color::Gray;
@@ -1733,11 +1799,9 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             //1
             string codigo = FormsStatus::ToNormalString(txtIDViajeBuscar->Text);
 
-            // ... tu lógica de búsqueda ...
-
-            // 2. LIMPIAR EL CAMPO después de buscar
+            // LIMPIAR EL CAMPO 
             txtIDViajeBuscar->Text = L"";
-            // 3. Forzar el evento Leave para que vuelva a aparecer el placeholder
+            // Forzar el evento Leave
             txtIDViajeBuscar_Leave(sender, e);
             
 
@@ -1768,6 +1832,9 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
         }
 
         // Ordenar por criterio 1
+            // listaActiva==0 ------> por Viajes pasajero (Tim Sort)
+            // listaActiva==1 ------> por Viajes conductor (Counting Sort)
+            // listaActiva==2 ------> por precio de viaje (HEAP SORT)
         System::Void btnOrden1_Click(System::Object^ sender, System::EventArgs^ e)
         {
             txtIDViajeBuscar->Visible = false;
@@ -1775,14 +1842,11 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             btnMaximo->Visible = false;
             btnMinimo->Visible = false;
 
-            // listaActiva==0 ------> por ID pasajero
-            // listaActiva==1 ------> por ID conductor
-            // listaActiva==2 ------> por precio de viaje
+            if (authManager == nullptr) return;
              
-            if (listaActiva == 0)// FALTA
+            if (listaActiva == 0)
             {
-                authManager->sortUsersBySpent();
-                btnListPasajeros_Click(sender, e);
+                MostrarPasajeros(L"Viajes");
 
                 btnMaximo->BackColor = System::Drawing::Color::FromArgb(36, 181, 109);
                 btnMinimo->BackColor = System::Drawing::Color::FromArgb(36, 181, 109);
@@ -1790,10 +1854,9 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
                 btnMaximo->Visible = false;
                 btnMinimo->Visible = false;
             }
-            else if (listaActiva == 1) // FALTA
+            else if (listaActiva == 1) 
             {
-                authManager->sortDriversByRatingHeapSort();
-                btnListConductores_Click(sender, e);
+                MostrarConductores(L"Viajes");
 
                 btnMaximo->BackColor = System::Drawing::Color::FromArgb(18, 92, 255);
                 btnMinimo->BackColor = System::Drawing::Color::FromArgb(18, 92, 255);
@@ -1869,6 +1932,8 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
         }
 
         // Ordenar por criterio 2
+        // listaActiva==0 -> Pasajeros por Gasto (Quick Sort)
+        // listaActiva==1 -> Conductores por Rating (Heap Sort)
         System::Void btnOrden2_Click(System::Object^ sender, System::EventArgs^ e)
         {
             txtIDViajeBuscar->Visible = false;
@@ -1878,8 +1943,7 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
 
             if (listaActiva == 0)
             {
-                authManager->sortUsersBySpent();
-                btnListPasajeros_Click(sender, e);
+                MostrarPasajeros(L"Gasto");
 
                 btnMaximo->BackColor = System::Drawing::Color::FromArgb(36, 181, 109);
                 btnMinimo->BackColor = System::Drawing::Color::FromArgb(36, 181, 109);
@@ -1900,6 +1964,16 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             }
         }
 
+        // Ordenar por criterio 3 (solo driver)
+        System::Void btnOrden3_Click(System::Object^ sender, System::EventArgs^ e)
+        {
+            btnMaximo->Visible = false;
+            btnMinimo->Visible = false;
+
+            if (listaActiva == 1) {
+                MostrarConductores(L"Ganancias");
+            }
+        }
         // Maximo click
         System::Void btnMaximo_Click(System::Object^ sender, System::EventArgs^ e) {
             if (authManager == nullptr) return;
@@ -2015,17 +2089,6 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
 
             LoadAdminData();
         }
-
-
-
-
-
-
-
-
-        
-
-
 
 
 };
