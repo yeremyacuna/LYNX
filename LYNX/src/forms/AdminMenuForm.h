@@ -18,25 +18,25 @@ namespace LYNX {
     using namespace System::Data;
     using namespace System::Drawing;
 
-	public ref class AdminMenuForm : public System::Windows::Forms::Form
-	{
-	public:
-		AdminMenuForm(void)
-		{
-			InitializeComponent();
-			ConfigureForm();
-		}
+    public ref class AdminMenuForm : public System::Windows::Forms::Form
+    {
+    public:
+        AdminMenuForm(void)
+        {
+            InitializeComponent();
+            ConfigureForm();
+        }
 
-       
-		AdminMenuForm(AuthManager* auth, TripManager* trips, String^ adminId, String^ adminUsername)
-		{
-			this->authManager = auth;
-			this->tripManager = trips;
+
+        AdminMenuForm(AuthManager* auth, TripManager* trips, String^ adminId, String^ adminUsername)
+        {
+            this->authManager = auth;
+            this->tripManager = trips;
             this->adminId = adminId;
             this->adminUsername = adminUsername;
-			InitializeComponent();
-			ConfigureForm();
-		}
+            InitializeComponent();
+            ConfigureForm();
+        }
 
     protected:
         ~AdminMenuForm()
@@ -45,13 +45,13 @@ namespace LYNX {
         }
 
         // OBJETOS
-	private:
-		AuthManager* authManager = nullptr;
-		TripManager* tripManager = nullptr;
+    private:
+        AuthManager* authManager = nullptr;
+        TripManager* tripManager = nullptr;
 
         String^ adminId = "";
         String^ adminUsername = "";
-		
+
 
         // COMPONENTES
            // Cuadros de conteo
@@ -79,6 +79,7 @@ namespace LYNX {
     private: System::Windows::Forms::Label^ lblOrdenarPor;
     private: System::Windows::Forms::Button^ btnOrden1;
     private: System::Windows::Forms::Button^ btnOrden2;
+    private: System::Windows::Forms::Button^ btnOrden3;
     private: System::Windows::Forms::RichTextBox^ rtbListado;
 
            // Panel passwords en binario
@@ -120,14 +121,14 @@ namespace LYNX {
     private: System::Windows::Forms::Label^ lblInvisible6;
     private: System::Windows::Forms::Label^ lblInvisible5;
     private: System::Windows::Forms::Label^ lblEstIngresosFact;
-private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
+    private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
 
 
     private: System::ComponentModel::Container^ components;
 
-        // WINDOWS INITIALIZE
+           // WINDOWS INITIALIZE
     private:
-    #pragma region Windows Form Designer generated code
+#pragma region Windows Form Designer generated code
         void InitializeComponent(void)
         {
             this->pnlTarjetaViajes = (gcnew System::Windows::Forms::Panel());
@@ -150,6 +151,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             this->lblOrdenarPor = (gcnew System::Windows::Forms::Label());
             this->btnOrden1 = (gcnew System::Windows::Forms::Button());
             this->btnOrden2 = (gcnew System::Windows::Forms::Button());
+            this->btnOrden3 = (gcnew System::Windows::Forms::Button());
             this->rtbListado = (gcnew System::Windows::Forms::RichTextBox());
             this->lblInvisible1 = (gcnew System::Windows::Forms::Label());
             this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
@@ -397,6 +399,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             this->pnlListados->Controls->Add(this->lblOrdenarPor);
             this->pnlListados->Controls->Add(this->btnOrden1);
             this->pnlListados->Controls->Add(this->btnOrden2);
+            this->pnlListados->Controls->Add(this->btnOrden3);
             this->pnlListados->Controls->Add(this->rtbListado);
             this->pnlListados->Location = System::Drawing::Point(609, 208);
             this->pnlListados->Name = L"pnlListados";
@@ -495,7 +498,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             this->btnOrden1->Name = L"btnOrden1";
             this->btnOrden1->Size = System::Drawing::Size(75, 26);
             this->btnOrden1->TabIndex = 5;
-            this->btnOrden1->Text = L"ID";
+            this->btnOrden1->Text = L"Gasto";
             this->btnOrden1->UseVisualStyleBackColor = false;
             this->btnOrden1->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnOrden1_Click);
             // 
@@ -512,9 +515,27 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             this->btnOrden2->Name = L"btnOrden2";
             this->btnOrden2->Size = System::Drawing::Size(75, 26);
             this->btnOrden2->TabIndex = 6;
-            this->btnOrden2->Text = L"Gasto";
+            this->btnOrden2->Text = L"Viajes";
             this->btnOrden2->UseVisualStyleBackColor = false;
             this->btnOrden2->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnOrden2_Click);
+            // 
+            // btnOrden3
+            // 
+            this->btnOrden3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+                static_cast<System::Int32>(static_cast<System::Byte>(34)));
+            this->btnOrden3->Cursor = System::Windows::Forms::Cursors::Hand;
+            this->btnOrden3->FlatAppearance->BorderColor = System::Drawing::Color::White;
+            this->btnOrden3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+            this->btnOrden3->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
+            this->btnOrden3->ForeColor = System::Drawing::Color::White;
+            this->btnOrden3->Location = System::Drawing::Point(290, 92);
+            this->btnOrden3->Name = L"btnOrden3";
+            this->btnOrden3->Size = System::Drawing::Size(75, 26);
+            this->btnOrden3->TabIndex = 27;
+            this->btnOrden3->Text = L"Ganancias";
+            this->btnOrden3->Visible = false;
+            this->btnOrden3->UseVisualStyleBackColor = false;
+            this->btnOrden3->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnOrden3_Click);
             // 
             // rtbListado
             // 
@@ -1112,157 +1133,145 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
 
 
         // LOGICA y PUBLIC
-        #pragma endregion
-        public:
+#pragma endregion
+    public:
 
- 
-	    private:
+
+    private:
         //
         // Configuracion global de form
         //
-			void ConfigureForm()
-			{
+        void ConfigureForm()
+        {
 
-                this->CenterToScreen();
-                this->KeyPreview = true;
-                this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-                this->MaximizeBox = false;
+            this->CenterToScreen();
+            this->KeyPreview = true;
+            this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+            this->MaximizeBox = false;
 
-                try { this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico"); }
-                catch (...) {}
-			}
+            try { this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico"); }
+            catch (...) {}
+        }
 
 
-		    System::Void previewButton_Click(System::Object^ sender, System::EventArgs^ e)
-		    {
-			    System::Windows::Forms::MessageBox::Show(
-				    L"Panel administrativo funcionando correctamente.",
-				    L"LYNX"
-			    );
-		    }
+        System::Void previewButton_Click(System::Object^ sender, System::EventArgs^ e)
+        {
+            System::Windows::Forms::MessageBox::Show(
+                L"Panel administrativo funcionando correctamente.",
+                L"LYNX"
+            );
+        }
 
         // 
         //  ESTADO INTERNO
         //
-            bool buscandoPasajero = true;   // tab activo en busqueda
-            int  listaActiva = 0;      // 0=Pasajeros, 1=Conductores, 2=Viajes
+        bool buscandoPasajero = true;   // tab activo en busqueda
+        int  listaActiva = 0;      // 0=Pasajeros, 1=Conductores, 2=Viajes
 
-            System::Drawing::Size normalSize;
-            System::Drawing::Point normalLocation;
-            System::Windows::Forms::FormWindowState normalState;
+        System::Drawing::Size normalSize;
+        System::Drawing::Point normalLocation;
+        System::Windows::Forms::FormWindowState normalState;
 
         // 
         //  LOAD
         // 
-            System::Void AdminMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
-            {
-                normalSize = this->Size;
-                normalLocation = this->Location;
-                normalState = this->WindowState;
+        System::Void AdminMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
+        {
+            normalSize = this->Size;
+            normalLocation = this->Location;
+            normalState = this->WindowState;
 
-                // Cargar imagen de la barra LYNX
-                try {
-                    this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-                    this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
-                    this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-                }
-                catch (...) {}
-
-                // Cargar datos del CONDUCTOR desde authManager
-                //LoadConductorData();
-
-                FormsStatus::SaveWindow(this);
-                if (FormsStatus::isFullscreen) FormsStatus::ApplyWindow(this);
-
-                LoadAdminData();
-                // btnListPasajeros_Click(nullptr, nullptr);
+            // Cargar imagen de la barra LYNX
+            try {
+                this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+                this->pictureBoxIcon->Image = System::Drawing::Image::FromFile("resources/LYNX_image.png");
+                this->pictureBoxIcon->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
             }
+            catch (...) {}
 
-            
-            void LoadAdminData()
-            {
-                // if no existe
-                if (authManager == nullptr || tripManager == nullptr) 
-                    return;
+            // Cargar datos del CONDUCTOR desde authManager
+            //LoadConductorData();
 
-                //actualizar table layout panel de contadores
-                lblNumPasajeros->Text = System::Convert::ToString(authManager->getTotalUsers());
-                lblNumConductores->Text = System::Convert::ToString(authManager->getTotalDrivers());
-                int totalViajes =
-                    tripManager->getTotalWaiting() +
-                    tripManager->getTotalActiveTrips() +
-                    tripManager->getTotalHistoryTrips();
-                lblNumViajes->Text = System::Convert::ToString(totalViajes);
+            FormsStatus::SaveWindow(this);
+            if (FormsStatus::isFullscreen) FormsStatus::ApplyWindow(this);
 
-                // izquierda de estadisticas
-                lblEstPasajerosReg->Text =
-                    L"Pasajeros registrados: " + System::Convert::ToString(authManager->getTotalUsers());
+            LoadAdminData();
+            // btnListPasajeros_Click(nullptr, nullptr);
+        }
 
-                lblEstConductoresReg->Text =
-                    L"Conductores registrados: " + System::Convert::ToString(authManager->getTotalDrivers());
 
-                lblEstConductoresDisp->Text =
-                    L"Conductores disponibles: " + System::Convert::ToString(authManager->contarConductoresDisponibles(0));
+        void LoadAdminData()
+        {
+            // if no existe
+            if (authManager == nullptr || tripManager == nullptr)
+                return;
 
-                lblEstMontoCola->Text =
-                    System::String::Format(L"Monto total en cola: S/ {0:F2}", tripManager->calcTotalEnCola());
+            //actualizar table layout panel de contadores
+            lblNumPasajeros->Text = System::Convert::ToString(authManager->getTotalUsers());
+            lblNumConductores->Text = System::Convert::ToString(authManager->getTotalDrivers());
+            int totalViajes =
+                tripManager->getTotalWaiting() +
+                tripManager->getTotalActiveTrips() +
+                tripManager->getTotalHistoryTrips();
+            lblNumViajes->Text = System::Convert::ToString(totalViajes);
 
-                lblEstCola->Text =
-                    tripManager->getTotalWaiting() == 0
-                    ? L"Cola: sin viajes en espera"
-                    : L"Cola: " + System::Convert::ToString(tripManager->getTotalWaiting()) + L" viaje(s) esperando conductor";
+            // izquierda de estadisticas
+            lblEstPasajerosReg->Text =
+                L"Pasajeros registrados: " + System::Convert::ToString(authManager->getTotalUsers());
 
-                // derecha de estadisticas
-                lblEstViajesCompletados->Text =
-                    L"Viajes completados: " + System::Convert::ToString(tripManager->contarViajesCompletados());
+            lblEstConductoresReg->Text =
+                L"Conductores registrados: " + System::Convert::ToString(authManager->getTotalDrivers());
 
-                lblEstViajesCurso->Text =
-                    L"Viajes en curso: " + System::Convert::ToString(tripManager->contarViajesEnCurso());
+            lblEstConductoresDisp->Text =
+                L"Conductores disponibles: " + System::Convert::ToString(authManager->contarConductoresDisponibles(0));
 
-                lblEstViajesCancelados->Text =
-                    L"Viajes cancelados: " + System::Convert::ToString(tripManager->contarViajesCancelados());
+            lblEstMontoCola->Text =
+                System::String::Format(L"Monto total en cola: S/ {0:F2}", tripManager->calcTotalEnCola());
 
-                lblEstViajesHistorial->Text =
-                    L"Viajes en historial: " + System::Convert::ToString(tripManager->getTotalHistoryTrips());
+            lblEstCola->Text =
+                tripManager->getTotalWaiting() == 0
+                ? L"Cola: sin viajes en espera"
+                : L"Cola: " + System::Convert::ToString(tripManager->getTotalWaiting()) + L" viaje(s) esperando conductor";
 
-                lblEstIngresosFact->Text =
-                    System::String::Format(L"Ingresos Facturados: S/ {0:F2}", tripManager->getTotalIngresosCompletados());
+            // derecha de estadisticas
+            lblEstViajesCompletados->Text =
+                L"Viajes completados: " + System::Convert::ToString(tripManager->contarViajesCompletados());
 
-                lblEstGanancias->Text =
-                    System::String::Format(L"Ganancia plataforma: S/ {0:F2}", tripManager->getTotalPlatformEarnings());
+            lblEstViajesCurso->Text =
+                L"Viajes en curso: " + System::Convert::ToString(tripManager->contarViajesEnCurso());
 
-            }
+            lblEstViajesCancelados->Text =
+                L"Viajes cancelados: " + System::Convert::ToString(tripManager->contarViajesCancelados());
+
+            lblEstViajesHistorial->Text =
+                L"Viajes en historial: " + System::Convert::ToString(tripManager->getTotalHistoryTrips());
+
+            lblEstIngresosFact->Text =
+                System::String::Format(L"Ingresos Facturados: S/ {0:F2}", tripManager->getTotalIngresosCompletados());
+
+            lblEstGanancias->Text =
+                System::String::Format(L"Ganancia plataforma: S/ {0:F2}", tripManager->getTotalPlatformEarnings());
+
+        }
 
         // 
         //  FULLSCREEN: F11, ESC sale si esta en fullscreen
         // 
-            System::Void AdminMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+        System::Void AdminMenuForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+        {
+            if (e->KeyCode == System::Windows::Forms::Keys::F11)
             {
-                if (e->KeyCode == System::Windows::Forms::Keys::F11)
+                if (!FormsStatus::isFullscreen)
                 {
-                    if (!FormsStatus::isFullscreen)
-                    {
-                        normalSize = this->Size;
-                        normalLocation = this->Location;
-                        normalState = this->WindowState;
-                        FormsStatus::SaveWindow(this);
-                        this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-                        this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-                        FormsStatus::isFullscreen = true;
-                    }
-                    else
-                    {
-                        this->WindowState = System::Windows::Forms::FormWindowState::Normal;
-                        this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-                        this->Size = FormsStatus::normalSize;
-                        this->Location = FormsStatus::normalLocation;
-                        FormsStatus::isFullscreen = false;
-                        this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
-                    }
+                    normalSize = this->Size;
+                    normalLocation = this->Location;
+                    normalState = this->WindowState;
+                    FormsStatus::SaveWindow(this);
+                    this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+                    this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+                    FormsStatus::isFullscreen = true;
                 }
-
-                // ESC sale del fullscreen
-                if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
+                else
                 {
                     this->WindowState = System::Windows::Forms::FormWindowState::Normal;
                     this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -1272,6 +1281,18 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
                     this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
                 }
             }
+
+            // ESC sale del fullscreen
+            if (e->KeyCode == System::Windows::Forms::Keys::Escape && FormsStatus::isFullscreen)
+            {
+                this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+                this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+                this->Size = FormsStatus::normalSize;
+                this->Location = FormsStatus::normalLocation;
+                FormsStatus::isFullscreen = false;
+                this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
+            }
+        }
 
         //
         // Click functions
@@ -1405,7 +1426,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
                 }
 
                 Passenger p = authManager->getUserByDni(FormsStatus::ToNormalString(dniText));
-                
+
                 if (p.getDni() == "") {
                     lblResultadoTit->Text = L"Sin resultado";
                     lblResultadoInfo->Text = L"No se encontro pasajero con DNI: " + dniText;
@@ -1421,15 +1442,15 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
                 lblResultadoTit->ForeColor = System::Drawing::Color::FromArgb(6, 98, 70);
                 lblResultadoInfo->BackColor = System::Drawing::Color::FromArgb(245, 250, 246);
 
-                String^ texto = 
+                String^ texto =
                     L"ID: " + FormsStatus::ToManaged(p.getPassengerId()) + L"\n" +
                     L"Nombre: " + FormsStatus::ToManaged(p.getName()) + L"\n" +
                     L"DNI: " + FormsStatus::ToManaged(p.getDni()) + L"\n" +
-                    L"Rating: "+ FormsStatus::ToManaged(p.getRating(),1) + L"\n" +
+                    L"Rating: " + FormsStatus::ToManaged(p.getRating(), 1) + L"\n" +
                     L"Viajes: " + FormsStatus::ToManaged(p.getTotalTrips()) + L"\n" +
                     System::String::Format(L"Gasto total: S/ {0:F2}", p.getTotalSpent());
 
-               if (ultimo.getTripId() != "") {
+                if (ultimo.getTripId() != "") {
                     texto += L"\nUltimo viaje: " + FormsStatus::ToManaged(ultimo.toString());
                 }
                 else {
@@ -1438,7 +1459,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
 
                 lblResultadoTit->Text = L"Pasajero encontrado";
                 lblResultadoInfo->Text = texto;
-                
+
             }
             else {
 
@@ -1449,9 +1470,9 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
                 lblResultadoTit->ForeColor = System::Drawing::Color::FromArgb(18, 92, 255);
                 lblResultadoInfo->BackColor = System::Drawing::Color::FromArgb(217, 228, 255);
 
+                // Por ahora se reusa el Shell Sort por rating luego sera heap sort
+                authManager->sortDriversByRating();
                 auto copia = authManager->copyDriverList();
-
-                AdvancedOrders<Driver>::sortDriversByRating(copia);
 
                 for (int i = 0; i < copia->getSize(); i++)
                 {
@@ -1463,7 +1484,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
                             FormsStatus::ToManaged(d.getDriverId()) + L" | " +
                             FormsStatus::ToManaged(d.getName()) + L" | DNI: " +
                             FormsStatus::ToManaged(d.getDni()) + L" | Rating: " +
-                            FormsStatus::ToManaged(d.getRating(),1) + L"\n";
+                            FormsStatus::ToManaged(d.getRating(), 1) + L"\n";
 
                         contador++;
                     }
@@ -1483,7 +1504,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
         //  BOTONES DE LISTADO
         // 
     private:
-        // Lista Pasajeros: ordenar por ID o Gasto
+        // ordenar por Gasto o por Viajes
         System::Void btnListPasajeros_Click(System::Object^ sender, System::EventArgs^ e)
         {
             listaActiva = 0;
@@ -1502,13 +1523,17 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             btnListViajes->ForeColor = System::Drawing::Color::FromArgb(57, 107, 239);
             btnListViajes->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
 
-            btnOrden1->Text = L"ID";
-            btnOrden2->Text = L"Gasto";
+            btnOrden1->Text = L"Gasto";
+            btnOrden2->Text = L"Viajes";
             btnOrden2->Visible = true;
+            btnOrden3->Visible = false;
 
-            // Cargar lista
-            rtbListado->Text = L"==============LISTA DE PASAJEROS==============.";
+            // Cargar lista (sin ordenamiento especial, orden normalito de la lista)
+            MostrarPasajeros(nullptr);
+        }
 
+        void MostrarPasajeros(String^ criterio)
+        {
             if (authManager == nullptr) return;
 
             if (authManager->getUserList()->isEmpty()) {
@@ -1516,24 +1541,36 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
                 return;
             }
 
-            String^ texto = L"";
+            // Copia para no alterar la lista original del AuthManager
+            LinkedList<Passenger>* copia = authManager->copyPassengerList();
 
-            for (int i = 0; i < authManager->getPassengerList()->getSize(); i++) {
-                Passenger p = authManager->getPassengerList()->get(i);
-
-                texto += L"[" + (i + 1).ToString() + L"] " + FormsStatus::ToManaged(p.getPassengerId()) +
-                    L" | " + FormsStatus::ToManaged(p.getName()) + 
-                    L" | DNI: " + FormsStatus::ToManaged(p.getDni()) +
-                    L" | Rating: " + FormsStatus::ToManaged(p.getRating(),1) + 
-                    L" | Viajes: " + FormsStatus::ToManaged(p.getTotalTrips()) +
-                    L" | Gasto: S/ " + FormsStatus::ToManaged(p.getTotalSpent(),2) + L"\n";
+            if (criterio == L"Gasto") {
+                AdvancedOrders<Passenger>::quickSortPassengersBySpent(copia);
+            }
+            else if (criterio == L"Viajes") {
+                AdvancedOrders<Passenger>::timSortPassengersByTrips(copia);
             }
 
-            rtbListado->Text = texto;
+            String^ texto = L"";
 
+            for (int i = 0; i < copia->getSize(); i++) {
+                Passenger p = copia->get(i);
+
+                texto += L"[" + (i + 1).ToString() + L"] " + FormsStatus::ToManaged(p.getPassengerId()) +
+                    L" | " + FormsStatus::ToManaged(p.getName()) +
+                    L" | DNI: " + FormsStatus::ToManaged(p.getDni()) +
+                    L" | Rating: " + FormsStatus::ToManaged(p.getRating(), 1) +
+                    L" | Viajes: " + FormsStatus::ToManaged(p.getTotalTrips()) +
+                    L" | Gasto: S/ " + FormsStatus::ToManaged(p.getTotalSpent(), 2) + L"\n";
+            }
+
+            delete copia;
+
+            rtbListado->Text = texto;
         }
 
-        // Lista Conductores: ordenar por ID o Rating
+        // Para ordenar por Rating (heapsort),
+        // por Viajes (Counting Sort) o por Ganancias (Shell Sort)
         System::Void btnListConductores_Click(System::Object^ sender, System::EventArgs^ e)
         {
             listaActiva = 1;
@@ -1552,13 +1589,21 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             btnListViajes->ForeColor = System::Drawing::Color::FromArgb(57, 107, 239);
             btnListViajes->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
 
-            btnOrden1->Text = L"ID";
+            // "Rating" queda pendiente de conectar con Heap Sort
+            btnOrden1->Text = L"Viajes";
             btnOrden2->Text = L"Rating";
             btnOrden2->Visible = true;
+            btnOrden3->Text = L"Ganancias";
+            btnOrden3->Visible = true;
 
-            // Cargar lista
-            rtbListado->Text = L"==============LISTA DE CONDUCTORES==============";
+            // Cargar lista (orden normalito)
+            MostrarConductores(nullptr);
+        }
 
+        // imprime la lista de conductores en rtbListado
+        // criterio == nullptr (orden normalito)
+        void MostrarConductores(String^ criterio)
+        {
             if (authManager == nullptr) return;
 
             if (authManager->getDriverList()->isEmpty()) {
@@ -1566,24 +1611,37 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
                 return;
             }
 
+            // Copia para no alterar la lista original del AuthManager
+            LinkedList<Driver>* copia = authManager->copyDriverList();
+
+            if (criterio == L"Viajes") {
+                AdvancedOrders<Driver>::countingSortDriversByTrips(copia);
+            }
+            else if (criterio == L"Ganancias") {
+                AdvancedOrders<Driver>::shellSortDriversByEarnings(copia);
+            }
+            // criterio == "Rating" y poner heap
+
             String^ texto = L"";
 
-            for (int i = 0; i < authManager->getDriverList()->getSize(); i++) {
-                Driver d = authManager->getDriverList()->get(i);
+            for (int i = 0; i < copia->getSize(); i++) {
+                Driver d = copia->get(i);
 
-                texto += L"["+ (i + 1).ToString() + "]" + FormsStatus::ToManaged(d.getDriverId()) +
-                    L"| " + FormsStatus::ToManaged(d.getName()) +
+                texto += L"[" + (i + 1).ToString() + L"] " + FormsStatus::ToManaged(d.getDriverId()) +
+                    L" | " + FormsStatus::ToManaged(d.getName()) +
                     L" | DNI: " + FormsStatus::ToManaged(d.getDni()) +
-                    L" |Rating: " + FormsStatus::ToManaged(d.getRating(), 1) +
-                    L"| Disponible: " + FormsStatus::ToManaged(d.getIsAvailable() ? "Si" : "No") +
-                    L" |Viajes: " + FormsStatus::ToManaged(d.getTotalTrips()) +
-                    L"| Ganancias: S/" + FormsStatus::ToManaged(d.getTotalEarnings(), 2) + L"\n";
+                    L" | Rating: " + FormsStatus::ToManaged(d.getRating(), 1) +
+                    L" | Disponible: " + FormsStatus::ToManaged(d.getIsAvailable() ? "Si" : "No") +
+                    L" | Viajes: " + FormsStatus::ToManaged(d.getTotalTrips()) +
+                    L" | Ganancias: S/ " + FormsStatus::ToManaged(d.getTotalEarnings(), 2) + L"\n";
             }
+
+            delete copia;
 
             rtbListado->Text = texto;
         }
 
-        // Lista Viajes: ordenar por Precio
+        // ordenar por Precio (Merge Sort)
         System::Void btnListViajes_Click(System::Object^ sender, System::EventArgs^ e)
         {
             listaActiva = 2;
@@ -1603,26 +1661,93 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             btnListConductores->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
 
             btnOrden1->Text = L"Precio";
-            btnOrden2->Visible = false;   // INVISIBLEE viajes solo tiene un criterio
+            btnOrden2->Visible = false;
+            btnOrden3->Visible = false;
 
-            rtbListado->Text = L"Aqui se listaran todos los viajes del historial y activos.";
+            MostrarViajes(false);
+        }
+
+        // imprime los viajes en cola y activos en rtbListado
+        // ordenarPorPrecio == true -> Merge Sort por precio de mayor a menor
+        void MostrarViajes(bool ordenarPorPrecio)
+        {
+            if (tripManager == nullptr) {
+                rtbListado->Text = L"No hay datos de viajes disponibles.";
+                return;
+            }
+
+            int n = tripManager->getTotalActiveTrips();
+
+            if (n == 0) {
+                rtbListado->Text = L"Sin viajes activos.";
+                return;
+            }
+
+            // Construimos un arreglo a partir de los viajes activos
+            DoublyLinkedList<Trip>& activos = tripManager->getActiveTrips();
+            Trip* arr = new Trip[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = activos.get(i);
+            }
+
+            if (ordenarPorPrecio) {
+                AdvancedOrders<Trip>::mergeSortTripsByPrice(arr, n);
+            }
+
+            String^ texto = L"";
+
+            for (int i = 0; i < n; i++) {
+                texto += L"[" + (i + 1).ToString() + L"] " + FormsStatus::ToManaged(arr[i].getTripId()) +
+                    L" | " + FormsStatus::ToManaged(arr[i].getOrigin()) +
+                    L"  ->  " + FormsStatus::ToManaged(arr[i].getDestination()) +
+                    L" | S/ " + FormsStatus::ToManaged(arr[i].getPrice(), 2) +
+                    L" | " + FormsStatus::ToManaged(arr[i].getStatus()) +
+                    L" | DNI pas: " + FormsStatus::ToManaged(arr[i].getPassengerDni()) + L"\n";
+            }
+
+            delete[] arr;
+
+            rtbListado->Text = texto;
         }
 
         // Ordenar por criterio 1
+        // listaActiva==0 -> Pasajeros por Gasto (Quick Sort)
+        // listaActiva==1 -> Conductores por Viajes (Counting Sort)
+        // listaActiva==2 -> Viajes por Precio (Merge Sort)
         System::Void btnOrden1_Click(System::Object^ sender, System::EventArgs^ e)
         {
-            // listaActiva==0 ------> por ID pasajero
-            // listaActiva==1 ------> por ID conductor
-            // listaActiva==2 ------> por precio de viaje
-            rtbListado->Text = L"Ordenamiento por " + btnOrden1->Text + L" aplicado.";
+            if (listaActiva == 0) {
+                MostrarPasajeros(L"Gasto");
+            }
+            else if (listaActiva == 1) {
+                MostrarConductores(L"Viajes");
+            }
+            else if (listaActiva == 2) {
+                MostrarViajes(true);
+            }
         }
 
         // Ordenar por criterio 2
+        // listaActiva==0 -> Pasajeros por Viajes (Tim Sort)
+        // listaActiva==1 -> Conductores por Rating (PENDIENTE: Heap Sort)
         System::Void btnOrden2_Click(System::Object^ sender, System::EventArgs^ e)
         {
-            // listaActiva==0 -----> por gasto total pasajero
-            // listaActiva==1 -----> por rating conductor
-            rtbListado->Text = L"Ordenamiento por " + btnOrden2->Text + L" aplicado.";
+            if (listaActiva == 0) {
+                MostrarPasajeros(L"Viajes");
+            }
+            else if (listaActiva == 1) {
+                // aqui heap
+                rtbListado->Text = L"Ordenamiento por Rating: pendiente (Heap Sort).";
+            }
+        }
+
+        // Ordenar por criterio 3 (solo Conductores)
+        // listaActiva==1 -> Conductores por Ganancias (Shell Sort)
+        System::Void btnOrden3_Click(System::Object^ sender, System::EventArgs^ e)
+        {
+            if (listaActiva == 1) {
+                MostrarConductores(L"Ganancias");
+            }
         }
 
         // 
@@ -1630,7 +1755,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
         // 
         System::Void btnCargarPasswords_Click(System::Object^ sender, System::EventArgs^ e)
         {
-            if (authManager == nullptr) 
+            if (authManager == nullptr)
                 return;
 
             // Generar el binario con los datos actuales
@@ -1641,7 +1766,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
 
             String^ texto = "";
             for (int i = 0; i < (int)previews.size(); i++) {
-                
+
                 std::string linea = previews[i].tipo + " | "
                     + previews[i].id + " | "
                     + previews[i].dni + " | "
@@ -1668,5 +1793,5 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
 
 
 
-};
+    };
 }
