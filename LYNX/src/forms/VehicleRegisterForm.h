@@ -425,7 +425,7 @@ namespace LYNX {
 				}
 			}
 
-		// ?
+		// funcion que verifica si un string es un numero (true: no es un numero / false: es un numero) (ejm: "5234" = true / "a321s" = false)
 		   bool isNaNString(const std::string& str) {
 			   std::istringstream iss(str);
 			   double num;
@@ -473,30 +473,21 @@ namespace LYNX {
 			   std::string colour = msclr::interop::marshal_as<std::string>(colourText);
 			   int year = std::stoi(msclr::interop::marshal_as<std::string>(yearText));
 
-			   this->tbBrand->Text = "";
-			   this->tbYear->Text = "";
-			   this->tbModel->Text = "";
-			   this->tbPlate->Text = "";
-			   this->tbColour->Text = "";
+			 
 
-		//Vaciar los campos
-		this->tbBrand->Text = "";
-		this->tbYear->Text = "";
-		this->tbModel->Text = "";
-		this->tbPlate->Text = "";
-		this->tbColour->Text = "";
+				//Vaciar los campos
+				this->tbBrand->Text = "";
+				this->tbYear->Text = "";
+				this->tbModel->Text = "";
+				this->tbPlate->Text = "";
+				this->tbColour->Text = "";
 		
 
-		// Hacer validacion del anio si es un numero o es mayor al 2000 o menor al actual ( 2026 )
-		if (year<2000 || year >2026) {
-			MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
-			return;
-		}
-			   // Hacer validacion del anio si es un numero o es mayor al 2000
-			   if (year < 2000 || year >2026) {
-				   MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
-				   return;
-			   }
+				// Hacer validacion del anio si es un numero o es mayor al 2000 o menor al actual ( 2026 )
+				if (year<2000 || year >2026) {
+					MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
+					return;
+				}
 
 		//guarda los valores en el objeto vehiculo
 		vehicle.setPlate(plate);

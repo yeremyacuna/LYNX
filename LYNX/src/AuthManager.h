@@ -785,6 +785,23 @@ public:
         hashConductores.insertar(dni, d);  // actualizamos
     }
 
+    // updatePassengerData: cambia nombre y contra de un pasajero ya registrado
+    void updateDriverData(string dni,string b, string c, string p, string m, int y) {
+        int i = indexOfDriver(dni);
+        if (i == -1) return;
+        Driver d = driverList->get(i);
+        Vehicle v;
+        v.setBrand(b);
+        v.setYear(y);
+        v.setPlate(p);
+        v.setColor(c);
+        v.setModel(m);
+        d.setVehicle(v);
+        driverList->remove(i);
+        driverList->insert(i, d);
+        saveDrivers();
+    }
+
     // Actualiza el rating
     void updateDriverRating(string dni, float nuevaCalif) {
         int i = indexOfDriver(dni);

@@ -573,6 +573,8 @@ namespace LYNX {
 				names = nameText;
 				passwords = passwordText;
 
+				
+
 				loggedPassengerDni = dniText;
 				passengerScreen = true; 
 				FormsStatus::SaveWindow(this);

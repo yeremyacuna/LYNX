@@ -133,6 +133,21 @@ public:
         return t;
     }
 
+    Trip createTrip2(string origin, string destination, int tipo, float km,
+        string driverName, string driverDni, string passengerDni, string date) {
+        Trip t(generateId(), origin, destination, 0.0f, driverName, driverDni, passengerDni, date);
+        t.setTipe(tipo);
+        t.setPrice(t.calcPrice(tipo, km));
+        t.setStatus("completado");
+        if (driverName.empty()) {
+            t.setDriverName("Por asignar");
+            t.setDriverDni("");
+        }
+        waitingQueue.enqueue(t);
+        cout << "   [EXITOSO] Viaje " << t.getTripId() << " creado | S/ " << t.getPrice() << "\n";
+        return t;
+    }
+
     // assignDriver: toma el primer viaje pendiente y lo pasa a activos
     // tambien marca al conductor como ocupado dentro del AuthManager
     bool assignDriver(string driverDni, AuthManager& auth) {

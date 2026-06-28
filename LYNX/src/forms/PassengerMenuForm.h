@@ -1041,6 +1041,7 @@ namespace LYNX {
 			this->lblTrips->Visible = true;
 			this->lblRating->Visible = true;
 			this->btnUpdate->Visible = true;
+			this->btnUpdate->Enabled = true;
 
 			this->lblUpdateProfile->Visible = false;
 			this->lblNewName->Visible = false;
@@ -1050,6 +1051,7 @@ namespace LYNX {
 			this->lblPastPassword->Visible = false;
 			this->tbPastPassword->Visible = false;
 			this->btnConfirm->Visible = false;
+			this->btnConfirm->Enabled = false;
 		}
 
 		// Muestra el panel de edicion y oculta el de perfil
@@ -1065,6 +1067,7 @@ namespace LYNX {
 			this->lblTrips->Visible = false;
 			this->lblRating->Visible = false;
 			this->btnUpdate->Visible = false;
+			this->btnUpdate->Enabled = false;
 
 			this->lblUpdateProfile->Visible = true;
 			this->lblNewName->Visible = true;
@@ -1074,6 +1077,7 @@ namespace LYNX {
 			this->lblPastPassword->Visible = true;
 			this->tbPastPassword->Visible = true;
 			this->btnConfirm->Visible = true;
+			this->btnConfirm->Enabled = true;
 		}
 
 		// Buscar viaje activo de un pasajero
@@ -1095,6 +1099,7 @@ namespace LYNX {
 			normalSize = this->Size;
 			normalLocation = this->Location;
 			normalState = this->WindowState;
+			this->btnConfirm->Enabled = false;
 
 			// Cargar imagen de la barra LYNX
 			try {
@@ -1234,6 +1239,12 @@ namespace LYNX {
 		int type = 0;
 		int originalType = 0;
 		float distance = 0;
+
+		bool isNaNString(const std::string& str) {
+			std::istringstream iss(str);
+			double num;
+			return !(iss >> num && iss.eof());
+		}
 	private:
 
 		//buscar viaje
@@ -1243,8 +1254,16 @@ namespace LYNX {
 
 			//si esta vacio retorna (podria ponerse una alerta)
 			if (this->tbDistance->Text == "" || this->tbDestination->Text == "" || this->tbOrigin->Text == "" || type == 0) {
+				MessageBox::Show("Por favor llene todos los campos", "Solicitar Viaje", MessageBoxButtons::OK);
 				return;
 			}
+
+
+			if (isNaNString(msclr::interop::marshal_as<std::string>(this->tbDistance->Text->Trim()))) {
+				MessageBox::Show("La distancia debe ser un numero", "Solicitar Viaje", MessageBoxButtons::OK);
+				return;
+			}
+
 			//Busca al mejor conductor
 			distance = std::stof(msclr::interop::marshal_as<std::string>(this->tbDistance->Text->Trim()));
 

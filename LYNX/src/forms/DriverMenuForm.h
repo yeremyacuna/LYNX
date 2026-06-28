@@ -67,9 +67,9 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ profileTitle;
 	private: System::Windows::Forms::Label^ profileName;
 	private: System::Windows::Forms::Label^ profileInfo;
-	private: System::Windows::Forms::Panel^ metric1;
-	private: System::Windows::Forms::Label^ metric1Value;
-	private: System::Windows::Forms::Label^ metric1Text;
+
+
+
 	private: System::Windows::Forms::Panel^ metric2;
 	private: System::Windows::Forms::Label^ metric2Value;
 	private: System::Windows::Forms::Label^ metric2Text;
@@ -78,40 +78,46 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ lastTripTitle;
 	private: System::Windows::Forms::Label^ lastTripText;
 	private: System::Windows::Forms::Panel^ queuePanel;
-	private: System::Windows::Forms::Label^ queueTitle;
-	private: System::Windows::Forms::Panel^ queueItem1;
-	private: System::Windows::Forms::Panel^ q1Dot;
-	private: System::Windows::Forms::Label^ q1Title;
-	private: System::Windows::Forms::Label^ q1Text;
-	private: System::Windows::Forms::Panel^ queueItem2;
-	private: System::Windows::Forms::Panel^ q2Dot;
-	private: System::Windows::Forms::Label^ q2Title;
-	private: System::Windows::Forms::Label^ q2Text;
-	private: System::Windows::Forms::Panel^ queueItem3;
-	private: System::Windows::Forms::Panel^ q3Dot;
-	private: System::Windows::Forms::Label^ q3Title;
-	private: System::Windows::Forms::Label^ q3Text;
-	private: System::Windows::Forms::Button^ acceptButton;
-	private: System::Windows::Forms::Button^ finishButton;
+	private: System::Windows::Forms::Label^ gainsTitle;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	private: System::Windows::Forms::Panel^ vehiclePanel;
 	private: System::Windows::Forms::Label^ vehicleTitle;
 	private: System::Windows::Forms::Label^ vehicleName;
 	private: System::Windows::Forms::Label^ vehicleText;
-	private: System::Windows::Forms::Panel^ maintenancePanel;
-	private: System::Windows::Forms::Label^ maintenanceTitle;
-	private: System::Windows::Forms::Label^ maintenanceText;
-	private: System::Windows::Forms::Button^ updateVehicleButton;
+
+
+
+
+
 	private: System::Windows::Forms::Panel^ manualPanel;
 	private: System::Windows::Forms::Label^ manualTitle;
 	private: System::Windows::Forms::Label^ manualStartLabel;
-	private: System::Windows::Forms::TextBox^ manualStartBox;
+	private: System::Windows::Forms::TextBox^ tbOrigin;
+
 	private: System::Windows::Forms::Label^ manualEndLabel;
-	private: System::Windows::Forms::TextBox^ manualEndBox;
+	private: System::Windows::Forms::TextBox^ tbDestination;
+
 	private: System::Windows::Forms::Label^ manualTypeLabel;
-	private: System::Windows::Forms::ComboBox^ manualTypeCombo;
+
 	private: System::Windows::Forms::Label^ manualKmLabel;
-	private: System::Windows::Forms::TextBox^ manualKmBox;
-	private: System::Windows::Forms::Button^ registerButton;
+	private: System::Windows::Forms::TextBox^ tbDistance;
+	private: System::Windows::Forms::Button^ btnRegister;
+
+
 	private: System::Windows::Forms::Panel^ historyPanel;
 	private: System::Windows::Forms::Label^ historyTitle;
 	private: System::Windows::Forms::ListView^ historyListView;
@@ -122,6 +128,55 @@ namespace LYNX {
 	private: System::Windows::Forms::PictureBox^ pictureBoxIcon;
 	private: System::Windows::Forms::Label^ lblLYNX;
 	private: System::Windows::Forms::Panel^ pnlTopBar;
+private: System::Windows::Forms::Button^ btnPremium;
+private: System::Windows::Forms::Button^ btnStandard;
+private: System::Windows::Forms::Button^ btnEconomic;
+private: System::Windows::Forms::Label^ lblGains;
+private: System::Windows::Forms::Label^ lblTrips;
+private: System::Windows::Forms::Label^ lblNetGainsNumber;
+
+private: System::Windows::Forms::Label^ lblGainsNumber;
+private: System::Windows::Forms::Label^ lblComisionNumber;
+
+
+
+private: System::Windows::Forms::Label^ lblTripsNumber;
+private: System::Windows::Forms::Label^ lblComision;
+private: System::Windows::Forms::Label^ lblNetGains;
+private: System::Windows::Forms::Panel^ panel4;
+private: System::Windows::Forms::Panel^ panel3;
+private: System::Windows::Forms::Panel^ panel2;
+private: System::Windows::Forms::Panel^ panel1;
+private: System::Windows::Forms::Button^ btnLeft;
+private: System::Windows::Forms::Button^ btnRight;
+private: System::Windows::Forms::Label^ lbltipes;
+
+private: System::Windows::Forms::Label^ lblOtoD;
+private: System::Windows::Forms::Label^ lblprice;
+private: System::Windows::Forms::Button^ btnUpdate;
+private: System::Windows::Forms::TextBox^ tbYear;
+
+private: System::Windows::Forms::TextBox^ tbColour;
+
+private: System::Windows::Forms::TextBox^ tbModel;
+private: System::Windows::Forms::TextBox^ tbBrand;
+
+
+private: System::Windows::Forms::TextBox^ tbPlate;
+private: System::Windows::Forms::Label^ lblPlate;
+private: System::Windows::Forms::Label^ lblYear;
+
+
+
+
+private: System::Windows::Forms::Label^ lblColour;
+
+private: System::Windows::Forms::Label^ lblBrand;
+
+private: System::Windows::Forms::Label^ lblModel;
+
+
+
 	private:  System::ComponentModel::Container^ components;
 
 		// WINDOWS INITIALIZE
@@ -142,48 +197,57 @@ namespace LYNX {
 			this->metric2 = (gcnew System::Windows::Forms::Panel());
 			this->metric2Text = (gcnew System::Windows::Forms::Label());
 			this->metric2Value = (gcnew System::Windows::Forms::Label());
-			this->metric1 = (gcnew System::Windows::Forms::Panel());
-			this->metric1Text = (gcnew System::Windows::Forms::Label());
-			this->metric1Value = (gcnew System::Windows::Forms::Label());
 			this->profileInfo = (gcnew System::Windows::Forms::Label());
 			this->profileName = (gcnew System::Windows::Forms::Label());
 			this->profileTitle = (gcnew System::Windows::Forms::Label());
 			this->queuePanel = (gcnew System::Windows::Forms::Panel());
-			this->finishButton = (gcnew System::Windows::Forms::Button());
-			this->acceptButton = (gcnew System::Windows::Forms::Button());
-			this->queueItem3 = (gcnew System::Windows::Forms::Panel());
-			this->q3Text = (gcnew System::Windows::Forms::Label());
-			this->q3Title = (gcnew System::Windows::Forms::Label());
-			this->q3Dot = (gcnew System::Windows::Forms::Panel());
-			this->queueItem2 = (gcnew System::Windows::Forms::Panel());
-			this->q2Text = (gcnew System::Windows::Forms::Label());
-			this->q2Title = (gcnew System::Windows::Forms::Label());
-			this->q2Dot = (gcnew System::Windows::Forms::Panel());
-			this->queueItem1 = (gcnew System::Windows::Forms::Panel());
-			this->q1Text = (gcnew System::Windows::Forms::Label());
-			this->q1Title = (gcnew System::Windows::Forms::Label());
-			this->q1Dot = (gcnew System::Windows::Forms::Panel());
-			this->queueTitle = (gcnew System::Windows::Forms::Label());
+			this->panel4 = (gcnew System::Windows::Forms::Panel());
+			this->lblTrips = (gcnew System::Windows::Forms::Label());
+			this->lblTripsNumber = (gcnew System::Windows::Forms::Label());
+			this->panel3 = (gcnew System::Windows::Forms::Panel());
+			this->lblGainsNumber = (gcnew System::Windows::Forms::Label());
+			this->lblGains = (gcnew System::Windows::Forms::Label());
+			this->panel2 = (gcnew System::Windows::Forms::Panel());
+			this->lblNetGains = (gcnew System::Windows::Forms::Label());
+			this->lblNetGainsNumber = (gcnew System::Windows::Forms::Label());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->lblComision = (gcnew System::Windows::Forms::Label());
+			this->lblComisionNumber = (gcnew System::Windows::Forms::Label());
+			this->gainsTitle = (gcnew System::Windows::Forms::Label());
 			this->vehiclePanel = (gcnew System::Windows::Forms::Panel());
-			this->updateVehicleButton = (gcnew System::Windows::Forms::Button());
-			this->maintenancePanel = (gcnew System::Windows::Forms::Panel());
-			this->maintenanceText = (gcnew System::Windows::Forms::Label());
-			this->maintenanceTitle = (gcnew System::Windows::Forms::Label());
+			this->lblYear = (gcnew System::Windows::Forms::Label());
+			this->lblColour = (gcnew System::Windows::Forms::Label());
+			this->lblBrand = (gcnew System::Windows::Forms::Label());
+			this->lblModel = (gcnew System::Windows::Forms::Label());
+			this->lblPlate = (gcnew System::Windows::Forms::Label());
+			this->tbYear = (gcnew System::Windows::Forms::TextBox());
+			this->tbColour = (gcnew System::Windows::Forms::TextBox());
+			this->tbModel = (gcnew System::Windows::Forms::TextBox());
+			this->tbBrand = (gcnew System::Windows::Forms::TextBox());
+			this->tbPlate = (gcnew System::Windows::Forms::TextBox());
+			this->btnUpdate = (gcnew System::Windows::Forms::Button());
 			this->vehicleText = (gcnew System::Windows::Forms::Label());
 			this->vehicleName = (gcnew System::Windows::Forms::Label());
 			this->vehicleTitle = (gcnew System::Windows::Forms::Label());
 			this->manualPanel = (gcnew System::Windows::Forms::Panel());
-			this->registerButton = (gcnew System::Windows::Forms::Button());
-			this->manualKmBox = (gcnew System::Windows::Forms::TextBox());
+			this->btnPremium = (gcnew System::Windows::Forms::Button());
+			this->btnStandard = (gcnew System::Windows::Forms::Button());
+			this->btnEconomic = (gcnew System::Windows::Forms::Button());
+			this->btnRegister = (gcnew System::Windows::Forms::Button());
+			this->tbDistance = (gcnew System::Windows::Forms::TextBox());
 			this->manualKmLabel = (gcnew System::Windows::Forms::Label());
-			this->manualTypeCombo = (gcnew System::Windows::Forms::ComboBox());
 			this->manualTypeLabel = (gcnew System::Windows::Forms::Label());
-			this->manualEndBox = (gcnew System::Windows::Forms::TextBox());
+			this->tbDestination = (gcnew System::Windows::Forms::TextBox());
 			this->manualEndLabel = (gcnew System::Windows::Forms::Label());
-			this->manualStartBox = (gcnew System::Windows::Forms::TextBox());
+			this->tbOrigin = (gcnew System::Windows::Forms::TextBox());
 			this->manualStartLabel = (gcnew System::Windows::Forms::Label());
 			this->manualTitle = (gcnew System::Windows::Forms::Label());
 			this->historyPanel = (gcnew System::Windows::Forms::Panel());
+			this->lblprice = (gcnew System::Windows::Forms::Label());
+			this->lbltipes = (gcnew System::Windows::Forms::Label());
+			this->lblOtoD = (gcnew System::Windows::Forms::Label());
+			this->btnRight = (gcnew System::Windows::Forms::Button());
+			this->btnLeft = (gcnew System::Windows::Forms::Button());
 			this->historyListView = (gcnew System::Windows::Forms::ListView());
 			this->historyTitle = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
@@ -197,13 +261,12 @@ namespace LYNX {
 			this->profilePanel->SuspendLayout();
 			this->lastTripPanel->SuspendLayout();
 			this->metric2->SuspendLayout();
-			this->metric1->SuspendLayout();
 			this->queuePanel->SuspendLayout();
-			this->queueItem3->SuspendLayout();
-			this->queueItem2->SuspendLayout();
-			this->queueItem1->SuspendLayout();
+			this->panel4->SuspendLayout();
+			this->panel3->SuspendLayout();
+			this->panel2->SuspendLayout();
+			this->panel1->SuspendLayout();
 			this->vehiclePanel->SuspendLayout();
-			this->maintenancePanel->SuspendLayout();
 			this->manualPanel->SuspendLayout();
 			this->historyPanel->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
@@ -272,16 +335,15 @@ namespace LYNX {
 			this->topTitle->ForeColor = System::Drawing::Color::White;
 			this->topTitle->Location = System::Drawing::Point(25, 24);
 			this->topTitle->Name = L"topTitle";
-			this->topTitle->Size = System::Drawing::Size(360, 38);
+			this->topTitle->Size = System::Drawing::Size(517, 38);
 			this->topTitle->TabIndex = 0;
-			this->topTitle->Text = L"Centro de control del driver";
+			this->topTitle->Text = L"Centro de control ";
 			// 
 			// profilePanel
 			// 
 			this->profilePanel->BackColor = System::Drawing::Color::White;
 			this->profilePanel->Controls->Add(this->lastTripPanel);
 			this->profilePanel->Controls->Add(this->metric2);
-			this->profilePanel->Controls->Add(this->metric1);
 			this->profilePanel->Controls->Add(this->profileInfo);
 			this->profilePanel->Controls->Add(this->profileName);
 			this->profilePanel->Controls->Add(this->profileTitle);
@@ -304,14 +366,15 @@ namespace LYNX {
 			// 
 			// lastTripText
 			// 
-			this->lastTripText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->lastTripText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->lastTripText->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
 				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->lastTripText->Location = System::Drawing::Point(34, 28);
+			this->lastTripText->Location = System::Drawing::Point(34, 26);
 			this->lastTripText->Name = L"lastTripText";
-			this->lastTripText->Size = System::Drawing::Size(280, 18);
+			this->lastTripText->Size = System::Drawing::Size(345, 24);
 			this->lastTripText->TabIndex = 2;
-			this->lastTripText->Text = L"Lima -> Callao | S/ 31.0";
+			this->lastTripText->Text = L"-";
+			this->lastTripText->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// lastTripTitle
 			// 
@@ -326,8 +389,7 @@ namespace LYNX {
 			// 
 			// lastTripDot
 			// 
-			this->lastTripDot->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
-				static_cast<System::Int32>(static_cast<System::Byte>(109)));
+			this->lastTripDot->BackColor = System::Drawing::Color::Black;
 			this->lastTripDot->Location = System::Drawing::Point(14, 22);
 			this->lastTripDot->Name = L"lastTripDot";
 			this->lastTripDot->Size = System::Drawing::Size(10, 10);
@@ -339,9 +401,9 @@ namespace LYNX {
 				static_cast<System::Int32>(static_cast<System::Byte>(241)));
 			this->metric2->Controls->Add(this->metric2Text);
 			this->metric2->Controls->Add(this->metric2Value);
-			this->metric2->Location = System::Drawing::Point(224, 162);
+			this->metric2->Location = System::Drawing::Point(25, 162);
 			this->metric2->Name = L"metric2";
-			this->metric2->Size = System::Drawing::Size(180, 70);
+			this->metric2->Size = System::Drawing::Size(379, 70);
 			this->metric2->TabIndex = 4;
 			// 
 			// metric2Text
@@ -349,55 +411,24 @@ namespace LYNX {
 			this->metric2Text->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->metric2Text->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
 				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->metric2Text->Location = System::Drawing::Point(14, 42);
+			this->metric2Text->Location = System::Drawing::Point(8, 29);
 			this->metric2Text->Name = L"metric2Text";
-			this->metric2Text->Size = System::Drawing::Size(90, 18);
+			this->metric2Text->Size = System::Drawing::Size(51, 18);
 			this->metric2Text->TabIndex = 1;
 			this->metric2Text->Text = L"rating";
 			// 
 			// metric2Value
 			// 
-			this->metric2Value->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
+			this->metric2Value->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 26, System::Drawing::FontStyle::Bold));
 			this->metric2Value->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->metric2Value->Location = System::Drawing::Point(14, 12);
+			this->metric2Value->ImageAlign = System::Drawing::ContentAlignment::MiddleRight;
+			this->metric2Value->Location = System::Drawing::Point(51, 10);
 			this->metric2Value->Name = L"metric2Value";
-			this->metric2Value->Size = System::Drawing::Size(120, 26);
+			this->metric2Value->Size = System::Drawing::Size(325, 52);
 			this->metric2Value->TabIndex = 0;
 			this->metric2Value->Text = L"1.2";
-			// 
-			// metric1
-			// 
-			this->metric1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
-				static_cast<System::Int32>(static_cast<System::Byte>(241)));
-			this->metric1->Controls->Add(this->metric1Text);
-			this->metric1->Controls->Add(this->metric1Value);
-			this->metric1->Location = System::Drawing::Point(22, 162);
-			this->metric1->Name = L"metric1";
-			this->metric1->Size = System::Drawing::Size(180, 70);
-			this->metric1->TabIndex = 3;
-			// 
-			// metric1Text
-			// 
-			this->metric1Text->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->metric1Text->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
-				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->metric1Text->Location = System::Drawing::Point(14, 42);
-			this->metric1Text->Name = L"metric1Text";
-			this->metric1Text->Size = System::Drawing::Size(100, 18);
-			this->metric1Text->TabIndex = 1;
-			this->metric1Text->Text = L"ganado hoy";
-			// 
-			// metric1Value
-			// 
-			this->metric1Value->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
-			this->metric1Value->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
-				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->metric1Value->Location = System::Drawing::Point(14, 12);
-			this->metric1Value->Name = L"metric1Value";
-			this->metric1Value->Size = System::Drawing::Size(120, 26);
-			this->metric1Value->TabIndex = 0;
-			this->metric1Value->Text = L"S/ 0.00";
+			this->metric2Value->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			// 
 			// profileInfo
 			// 
@@ -435,189 +466,169 @@ namespace LYNX {
 			// queuePanel
 			// 
 			this->queuePanel->BackColor = System::Drawing::Color::White;
-			this->queuePanel->Controls->Add(this->finishButton);
-			this->queuePanel->Controls->Add(this->acceptButton);
-			this->queuePanel->Controls->Add(this->queueItem3);
-			this->queuePanel->Controls->Add(this->queueItem2);
-			this->queuePanel->Controls->Add(this->queueItem1);
-			this->queuePanel->Controls->Add(this->queueTitle);
+			this->queuePanel->Controls->Add(this->panel4);
+			this->queuePanel->Controls->Add(this->panel3);
+			this->queuePanel->Controls->Add(this->panel2);
+			this->queuePanel->Controls->Add(this->panel1);
+			this->queuePanel->Controls->Add(this->gainsTitle);
 			this->queuePanel->Location = System::Drawing::Point(486, 224);
 			this->queuePanel->Name = L"queuePanel";
 			this->queuePanel->Size = System::Drawing::Size(560, 342);
 			this->queuePanel->TabIndex = 2;
 			// 
-			// finishButton
+			// panel4
 			// 
-			this->finishButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
-				static_cast<System::Int32>(static_cast<System::Byte>(38)));
-			this->finishButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->finishButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->finishButton->ForeColor = System::Drawing::Color::White;
-			this->finishButton->Location = System::Drawing::Point(206, 296);
-			this->finishButton->Name = L"finishButton";
-			this->finishButton->Size = System::Drawing::Size(170, 34);
-			this->finishButton->TabIndex = 5;
-			this->finishButton->Text = L"Finalizar viaje";
-			this->finishButton->UseVisualStyleBackColor = false;
+			this->panel4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(39)), static_cast<System::Int32>(static_cast<System::Byte>(50)),
+				static_cast<System::Int32>(static_cast<System::Byte>(120)));
+			this->panel4->Controls->Add(this->lblTrips);
+			this->panel4->Controls->Add(this->lblTripsNumber);
+			this->panel4->Location = System::Drawing::Point(38, 34);
+			this->panel4->Name = L"panel4";
+			this->panel4->Size = System::Drawing::Size(242, 134);
+			this->panel4->TabIndex = 18;
 			// 
-			// acceptButton
+			// lblTrips
 			// 
-			this->acceptButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
+			this->lblTrips->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblTrips->ForeColor = System::Drawing::Color::White;
+			this->lblTrips->Location = System::Drawing::Point(7, 9);
+			this->lblTrips->Name = L"lblTrips";
+			this->lblTrips->Size = System::Drawing::Size(130, 22);
+			this->lblTrips->TabIndex = 13;
+			this->lblTrips->Text = L"Viajes";
+			// 
+			// lblTripsNumber
+			// 
+			this->lblTripsNumber->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 24, System::Drawing::FontStyle::Bold));
+			this->lblTripsNumber->ForeColor = System::Drawing::Color::White;
+			this->lblTripsNumber->Location = System::Drawing::Point(13, 32);
+			this->lblTripsNumber->Name = L"lblTripsNumber";
+			this->lblTripsNumber->Size = System::Drawing::Size(177, 36);
+			this->lblTripsNumber->TabIndex = 6;
+			this->lblTripsNumber->Text = L"0";
+			// 
+			// panel3
+			// 
+			this->panel3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
 				static_cast<System::Int32>(static_cast<System::Byte>(239)));
-			this->acceptButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->acceptButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->acceptButton->ForeColor = System::Drawing::Color::White;
-			this->acceptButton->Location = System::Drawing::Point(22, 296);
-			this->acceptButton->Name = L"acceptButton";
-			this->acceptButton->Size = System::Drawing::Size(170, 34);
-			this->acceptButton->TabIndex = 4;
-			this->acceptButton->Text = L"Aceptar solicitud";
-			this->acceptButton->UseVisualStyleBackColor = false;
+			this->panel3->Controls->Add(this->lblGainsNumber);
+			this->panel3->Controls->Add(this->lblGains);
+			this->panel3->Location = System::Drawing::Point(286, 34);
+			this->panel3->Name = L"panel3";
+			this->panel3->Size = System::Drawing::Size(242, 134);
+			this->panel3->TabIndex = 17;
 			// 
-			// queueItem3
+			// lblGainsNumber
 			// 
-			this->queueItem3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
-				static_cast<System::Int32>(static_cast<System::Byte>(241)));
-			this->queueItem3->Controls->Add(this->q3Text);
-			this->queueItem3->Controls->Add(this->q3Title);
-			this->queueItem3->Controls->Add(this->q3Dot);
-			this->queueItem3->Location = System::Drawing::Point(22, 216);
-			this->queueItem3->Name = L"queueItem3";
-			this->queueItem3->Size = System::Drawing::Size(512, 58);
-			this->queueItem3->TabIndex = 3;
-			// 
-			// q3Text
-			// 
-			this->q3Text->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->q3Text->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
-				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->q3Text->Location = System::Drawing::Point(34, 28);
-			this->q3Text->Name = L"q3Text";
-			this->q3Text->Size = System::Drawing::Size(340, 18);
-			this->q3Text->TabIndex = 2;
-			this->q3Text->Text = L"-";
-			// 
-			// q3Title
-			// 
-			this->q3Title->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->q3Title->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
-				static_cast<System::Int32>(static_cast<System::Byte>(36)));
-			this->q3Title->Location = System::Drawing::Point(34, 8);
-			this->q3Title->Name = L"q3Title";
-			this->q3Title->Size = System::Drawing::Size(160, 18);
-			this->q3Title->TabIndex = 1;
-			this->q3Title->Text = L"Viaje economico";
-			// 
-			// q3Dot
-			// 
-			this->q3Dot->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(239)));
-			this->q3Dot->Location = System::Drawing::Point(14, 22);
-			this->q3Dot->Name = L"q3Dot";
-			this->q3Dot->Size = System::Drawing::Size(10, 10);
-			this->q3Dot->TabIndex = 0;
-			// 
-			// queueItem2
-			// 
-			this->queueItem2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
-				static_cast<System::Int32>(static_cast<System::Byte>(241)));
-			this->queueItem2->Controls->Add(this->q2Text);
-			this->queueItem2->Controls->Add(this->q2Title);
-			this->queueItem2->Controls->Add(this->q2Dot);
-			this->queueItem2->Location = System::Drawing::Point(22, 142);
-			this->queueItem2->Name = L"queueItem2";
-			this->queueItem2->Size = System::Drawing::Size(512, 58);
-			this->queueItem2->TabIndex = 2;
-			// 
-			// q2Text
-			// 
-			this->q2Text->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->q2Text->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
-				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->q2Text->Location = System::Drawing::Point(34, 28);
-			this->q2Text->Name = L"q2Text";
-			this->q2Text->Size = System::Drawing::Size(340, 18);
-			this->q2Text->TabIndex = 2;
-			this->q2Text->Text = L"-";
-			// 
-			// q2Title
-			// 
-			this->q2Title->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->q2Title->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
-				static_cast<System::Int32>(static_cast<System::Byte>(36)));
-			this->q2Title->Location = System::Drawing::Point(34, 8);
-			this->q2Title->Name = L"q2Title";
-			this->q2Title->Size = System::Drawing::Size(160, 18);
-			this->q2Title->TabIndex = 1;
-			this->q2Title->Text = L"Viaje estandar";
-			// 
-			// q2Dot
-			// 
-			this->q2Dot->BackColor = System::Drawing::Color::Red;
-			this->q2Dot->Location = System::Drawing::Point(14, 22);
-			this->q2Dot->Name = L"q2Dot";
-			this->q2Dot->Size = System::Drawing::Size(10, 10);
-			this->q2Dot->TabIndex = 0;
-			// 
-			// queueItem1
-			// 
-			this->queueItem1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
-				static_cast<System::Int32>(static_cast<System::Byte>(241)));
-			this->queueItem1->Controls->Add(this->q1Text);
-			this->queueItem1->Controls->Add(this->q1Title);
-			this->queueItem1->Controls->Add(this->q1Dot);
-			this->queueItem1->Location = System::Drawing::Point(22, 66);
-			this->queueItem1->Name = L"queueItem1";
-			this->queueItem1->Size = System::Drawing::Size(512, 58);
-			this->queueItem1->TabIndex = 1;
-			// 
-			// q1Text
-			// 
-			this->q1Text->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->q1Text->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
-				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->q1Text->Location = System::Drawing::Point(34, 28);
-			this->q1Text->Name = L"q1Text";
-			this->q1Text->Size = System::Drawing::Size(340, 18);
-			this->q1Text->TabIndex = 2;
-			this->q1Text->Text = L"-";
-			// 
-			// q1Title
-			// 
-			this->q1Title->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->q1Title->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
-				static_cast<System::Int32>(static_cast<System::Byte>(36)));
-			this->q1Title->Location = System::Drawing::Point(34, 8);
-			this->q1Title->Name = L"q1Title";
-			this->q1Title->Size = System::Drawing::Size(160, 18);
-			this->q1Title->TabIndex = 1;
-			this->q1Title->Text = L"Viaje premium";
-			// 
-			// q1Dot
-			// 
-			this->q1Dot->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
-				static_cast<System::Int32>(static_cast<System::Byte>(0)));
-			this->q1Dot->Location = System::Drawing::Point(14, 22);
-			this->q1Dot->Name = L"q1Dot";
-			this->q1Dot->Size = System::Drawing::Size(10, 10);
-			this->q1Dot->TabIndex = 0;
-			// 
-			// queueTitle
-			// 
-			this->queueTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
-			this->queueTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+			this->lblGainsNumber->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 24, System::Drawing::FontStyle::Bold));
+			this->lblGainsNumber->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->queueTitle->Location = System::Drawing::Point(3, 7);
-			this->queueTitle->Name = L"queueTitle";
-			this->queueTitle->Size = System::Drawing::Size(220, 28);
-			this->queueTitle->TabIndex = 0;
-			this->queueTitle->Text = L"Ganancias";
+			this->lblGainsNumber->Location = System::Drawing::Point(9, 31);
+			this->lblGainsNumber->Name = L"lblGainsNumber";
+			this->lblGainsNumber->Size = System::Drawing::Size(219, 36);
+			this->lblGainsNumber->TabIndex = 8;
+			this->lblGainsNumber->Text = L"S/0";
+			// 
+			// lblGains
+			// 
+			this->lblGains->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblGains->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblGains->Location = System::Drawing::Point(3, 9);
+			this->lblGains->Name = L"lblGains";
+			this->lblGains->Size = System::Drawing::Size(130, 22);
+			this->lblGains->TabIndex = 14;
+			this->lblGains->Text = L"Ganancia bruta";
+			// 
+			// panel2
+			// 
+			this->panel2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(39)), static_cast<System::Int32>(static_cast<System::Byte>(50)),
+				static_cast<System::Int32>(static_cast<System::Byte>(120)));
+			this->panel2->Controls->Add(this->lblNetGains);
+			this->panel2->Controls->Add(this->lblNetGainsNumber);
+			this->panel2->Location = System::Drawing::Point(286, 178);
+			this->panel2->Name = L"panel2";
+			this->panel2->Size = System::Drawing::Size(242, 145);
+			this->panel2->TabIndex = 16;
+			// 
+			// lblNetGains
+			// 
+			this->lblNetGains->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblNetGains->ForeColor = System::Drawing::Color::White;
+			this->lblNetGains->Location = System::Drawing::Point(3, 6);
+			this->lblNetGains->Name = L"lblNetGains";
+			this->lblNetGains->Size = System::Drawing::Size(130, 22);
+			this->lblNetGains->TabIndex = 16;
+			this->lblNetGains->Text = L"Ganancia neta";
+			// 
+			// lblNetGainsNumber
+			// 
+			this->lblNetGainsNumber->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 24, System::Drawing::FontStyle::Bold));
+			this->lblNetGainsNumber->ForeColor = System::Drawing::Color::White;
+			this->lblNetGainsNumber->Location = System::Drawing::Point(9, 32);
+			this->lblNetGainsNumber->Name = L"lblNetGainsNumber";
+			this->lblNetGainsNumber->Size = System::Drawing::Size(242, 36);
+			this->lblNetGainsNumber->TabIndex = 9;
+			this->lblNetGainsNumber->Text = L"S/0";
+			// 
+			// panel1
+			// 
+			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
+				static_cast<System::Int32>(static_cast<System::Byte>(239)));
+			this->panel1->Controls->Add(this->lblComision);
+			this->panel1->Controls->Add(this->lblComisionNumber);
+			this->panel1->Location = System::Drawing::Point(38, 178);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(242, 145);
+			this->panel1->TabIndex = 5;
+			// 
+			// lblComision
+			// 
+			this->lblComision->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblComision->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblComision->Location = System::Drawing::Point(7, 6);
+			this->lblComision->Name = L"lblComision";
+			this->lblComision->Size = System::Drawing::Size(130, 22);
+			this->lblComision->TabIndex = 15;
+			this->lblComision->Text = L"Comision (20%)";
+			// 
+			// lblComisionNumber
+			// 
+			this->lblComisionNumber->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 24, System::Drawing::FontStyle::Bold));
+			this->lblComisionNumber->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)),
+				static_cast<System::Int32>(static_cast<System::Byte>(27)), static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->lblComisionNumber->Location = System::Drawing::Point(3, 32);
+			this->lblComisionNumber->Name = L"lblComisionNumber";
+			this->lblComisionNumber->Size = System::Drawing::Size(208, 36);
+			this->lblComisionNumber->TabIndex = 7;
+			this->lblComisionNumber->Text = L"S/0";
+			// 
+			// gainsTitle
+			// 
+			this->gainsTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
+			this->gainsTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->gainsTitle->Location = System::Drawing::Point(3, 7);
+			this->gainsTitle->Name = L"gainsTitle";
+			this->gainsTitle->Size = System::Drawing::Size(220, 28);
+			this->gainsTitle->TabIndex = 0;
+			this->gainsTitle->Text = L"Ganancias";
 			// 
 			// vehiclePanel
 			// 
 			this->vehiclePanel->BackColor = System::Drawing::Color::White;
-			this->vehiclePanel->Controls->Add(this->updateVehicleButton);
-			this->vehiclePanel->Controls->Add(this->maintenancePanel);
+			this->vehiclePanel->Controls->Add(this->lblYear);
+			this->vehiclePanel->Controls->Add(this->lblColour);
+			this->vehiclePanel->Controls->Add(this->lblBrand);
+			this->vehiclePanel->Controls->Add(this->lblModel);
+			this->vehiclePanel->Controls->Add(this->lblPlate);
+			this->vehiclePanel->Controls->Add(this->tbYear);
+			this->vehiclePanel->Controls->Add(this->tbColour);
+			this->vehiclePanel->Controls->Add(this->tbModel);
+			this->vehiclePanel->Controls->Add(this->tbBrand);
+			this->vehiclePanel->Controls->Add(this->tbPlate);
+			this->vehiclePanel->Controls->Add(this->btnUpdate);
 			this->vehiclePanel->Controls->Add(this->vehicleText);
 			this->vehiclePanel->Controls->Add(this->vehicleName);
 			this->vehiclePanel->Controls->Add(this->vehicleTitle);
@@ -626,59 +637,130 @@ namespace LYNX {
 			this->vehiclePanel->Size = System::Drawing::Size(372, 342);
 			this->vehiclePanel->TabIndex = 3;
 			// 
-			// updateVehicleButton
+			// lblYear
 			// 
-			this->updateVehicleButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)),
-				static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(239)));
-			this->updateVehicleButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->updateVehicleButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->updateVehicleButton->ForeColor = System::Drawing::Color::White;
-			this->updateVehicleButton->Location = System::Drawing::Point(22, 264);
-			this->updateVehicleButton->Name = L"updateVehicleButton";
-			this->updateVehicleButton->Size = System::Drawing::Size(170, 34);
-			this->updateVehicleButton->TabIndex = 4;
-			this->updateVehicleButton->Text = L"Actualizar vehiculo";
-			this->updateVehicleButton->UseVisualStyleBackColor = false;
+			this->lblYear->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblYear->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblYear->Location = System::Drawing::Point(202, 178);
+			this->lblYear->Name = L"lblYear";
+			this->lblYear->Size = System::Drawing::Size(130, 22);
+			this->lblYear->TabIndex = 18;
+			this->lblYear->Text = L"Anio";
+			this->lblYear->Visible = false;
 			// 
-			// maintenancePanel
+			// lblColour
 			// 
-			this->maintenancePanel->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
-				static_cast<System::Int32>(static_cast<System::Byte>(246)), static_cast<System::Int32>(static_cast<System::Byte>(241)));
-			this->maintenancePanel->Controls->Add(this->maintenanceText);
-			this->maintenancePanel->Controls->Add(this->maintenanceTitle);
-			this->maintenancePanel->Location = System::Drawing::Point(22, 172);
-			this->maintenancePanel->Name = L"maintenancePanel";
-			this->maintenancePanel->Size = System::Drawing::Size(326, 70);
-			this->maintenancePanel->TabIndex = 3;
+			this->lblColour->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblColour->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblColour->Location = System::Drawing::Point(26, 178);
+			this->lblColour->Name = L"lblColour";
+			this->lblColour->Size = System::Drawing::Size(130, 22);
+			this->lblColour->TabIndex = 19;
+			this->lblColour->Text = L"Color";
+			this->lblColour->Visible = false;
 			// 
-			// maintenanceText
+			// lblBrand
 			// 
-			this->maintenanceText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->maintenanceText->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
-				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->maintenanceText->Location = System::Drawing::Point(16, 38);
-			this->maintenanceText->Name = L"maintenanceText";
-			this->maintenanceText->Size = System::Drawing::Size(220, 18);
-			this->maintenanceText->TabIndex = 1;
-			this->maintenanceText->Text = L"-----";
+			this->lblBrand->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblBrand->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblBrand->Location = System::Drawing::Point(26, 131);
+			this->lblBrand->Name = L"lblBrand";
+			this->lblBrand->Size = System::Drawing::Size(130, 22);
+			this->lblBrand->TabIndex = 19;
+			this->lblBrand->Text = L"Marca";
+			this->lblBrand->Visible = false;
 			// 
-			// maintenanceTitle
+			// lblModel
 			// 
-			this->maintenanceTitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->maintenanceTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
-				static_cast<System::Int32>(static_cast<System::Byte>(36)));
-			this->maintenanceTitle->Location = System::Drawing::Point(16, 14);
-			this->maintenanceTitle->Name = L"maintenanceTitle";
-			this->maintenanceTitle->Size = System::Drawing::Size(200, 18);
-			this->maintenanceTitle->TabIndex = 0;
-			this->maintenanceTitle->Text = L"-----";
+			this->lblModel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblModel->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblModel->Location = System::Drawing::Point(26, 82);
+			this->lblModel->Name = L"lblModel";
+			this->lblModel->Size = System::Drawing::Size(130, 22);
+			this->lblModel->TabIndex = 18;
+			this->lblModel->Text = L"Modelo";
+			this->lblModel->Visible = false;
+			// 
+			// lblPlate
+			// 
+			this->lblPlate->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblPlate->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblPlate->Location = System::Drawing::Point(26, 34);
+			this->lblPlate->Name = L"lblPlate";
+			this->lblPlate->Size = System::Drawing::Size(130, 22);
+			this->lblPlate->TabIndex = 13;
+			this->lblPlate->Text = L"Placa";
+			this->lblPlate->Visible = false;
+			// 
+			// tbYear
+			// 
+			this->tbYear->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbYear->Location = System::Drawing::Point(201, 200);
+			this->tbYear->Name = L"tbYear";
+			this->tbYear->Size = System::Drawing::Size(143, 27);
+			this->tbYear->TabIndex = 17;
+			this->tbYear->Visible = false;
+			// 
+			// tbColour
+			// 
+			this->tbColour->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbColour->Location = System::Drawing::Point(27, 200);
+			this->tbColour->Name = L"tbColour";
+			this->tbColour->Size = System::Drawing::Size(149, 27);
+			this->tbColour->TabIndex = 16;
+			this->tbColour->Visible = false;
+			// 
+			// tbModel
+			// 
+			this->tbModel->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbModel->Location = System::Drawing::Point(27, 104);
+			this->tbModel->Name = L"tbModel";
+			this->tbModel->Size = System::Drawing::Size(317, 27);
+			this->tbModel->TabIndex = 15;
+			this->tbModel->Visible = false;
+			// 
+			// tbBrand
+			// 
+			this->tbBrand->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbBrand->Location = System::Drawing::Point(27, 150);
+			this->tbBrand->Name = L"tbBrand";
+			this->tbBrand->Size = System::Drawing::Size(317, 27);
+			this->tbBrand->TabIndex = 14;
+			this->tbBrand->Visible = false;
+			// 
+			// tbPlate
+			// 
+			this->tbPlate->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbPlate->Location = System::Drawing::Point(27, 55);
+			this->tbPlate->Name = L"tbPlate";
+			this->tbPlate->Size = System::Drawing::Size(317, 27);
+			this->tbPlate->TabIndex = 13;
+			// 
+			// btnUpdate
+			// 
+			this->btnUpdate->BackColor = System::Drawing::Color::Black;
+			this->btnUpdate->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnUpdate->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
+			this->btnUpdate->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnUpdate->Location = System::Drawing::Point(111, 270);
+			this->btnUpdate->Name = L"btnUpdate";
+			this->btnUpdate->Size = System::Drawing::Size(154, 44);
+			this->btnUpdate->TabIndex = 9;
+			this->btnUpdate->Text = L"Actualizar datos";
+			this->btnUpdate->UseVisualStyleBackColor = false;
+			this->btnUpdate->Click += gcnew System::EventHandler(this, &DriverMenuForm::btnUpdate_Click_1);
 			// 
 			// vehicleText
 			// 
-			this->vehicleText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->vehicleText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 15));
 			this->vehicleText->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
 				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->vehicleText->Location = System::Drawing::Point(22, 108);
+			this->vehicleText->Location = System::Drawing::Point(22, 126);
 			this->vehicleText->Name = L"vehicleText";
 			this->vehicleText->Size = System::Drawing::Size(280, 42);
 			this->vehicleText->TabIndex = 2;
@@ -689,7 +771,7 @@ namespace LYNX {
 			this->vehicleName->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
 			this->vehicleName->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->vehicleName->Location = System::Drawing::Point(22, 66);
+			this->vehicleName->Location = System::Drawing::Point(21, 87);
 			this->vehicleName->Name = L"vehicleName";
 			this->vehicleName->Size = System::Drawing::Size(260, 34);
 			this->vehicleName->TabIndex = 1;
@@ -700,7 +782,7 @@ namespace LYNX {
 			this->vehicleTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
 			this->vehicleTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->vehicleTitle->Location = System::Drawing::Point(22, 20);
+			this->vehicleTitle->Location = System::Drawing::Point(13, 7);
 			this->vehicleTitle->Name = L"vehicleTitle";
 			this->vehicleTitle->Size = System::Drawing::Size(180, 28);
 			this->vehicleTitle->TabIndex = 0;
@@ -709,14 +791,16 @@ namespace LYNX {
 			// manualPanel
 			// 
 			this->manualPanel->BackColor = System::Drawing::Color::White;
-			this->manualPanel->Controls->Add(this->registerButton);
-			this->manualPanel->Controls->Add(this->manualKmBox);
+			this->manualPanel->Controls->Add(this->btnPremium);
+			this->manualPanel->Controls->Add(this->btnStandard);
+			this->manualPanel->Controls->Add(this->btnEconomic);
+			this->manualPanel->Controls->Add(this->btnRegister);
+			this->manualPanel->Controls->Add(this->tbDistance);
 			this->manualPanel->Controls->Add(this->manualKmLabel);
-			this->manualPanel->Controls->Add(this->manualTypeCombo);
 			this->manualPanel->Controls->Add(this->manualTypeLabel);
-			this->manualPanel->Controls->Add(this->manualEndBox);
+			this->manualPanel->Controls->Add(this->tbDestination);
 			this->manualPanel->Controls->Add(this->manualEndLabel);
-			this->manualPanel->Controls->Add(this->manualStartBox);
+			this->manualPanel->Controls->Add(this->tbOrigin);
 			this->manualPanel->Controls->Add(this->manualStartLabel);
 			this->manualPanel->Controls->Add(this->manualTitle);
 			this->manualPanel->Location = System::Drawing::Point(28, 598);
@@ -724,53 +808,82 @@ namespace LYNX {
 			this->manualPanel->Size = System::Drawing::Size(728, 264);
 			this->manualPanel->TabIndex = 4;
 			// 
-			// registerButton
+			// btnPremium
 			// 
-			this->registerButton->BackColor = System::Drawing::Color::YellowGreen;
-			this->registerButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->registerButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->registerButton->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)), static_cast<System::Int32>(static_cast<System::Byte>(25)),
-				static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->registerButton->Location = System::Drawing::Point(458, 174);
-			this->registerButton->Name = L"registerButton";
-			this->registerButton->Size = System::Drawing::Size(178, 34);
-			this->registerButton->TabIndex = 9;
-			this->registerButton->Text = L"Registrar";
-			this->registerButton->UseVisualStyleBackColor = false;
+			this->btnPremium->BackColor = System::Drawing::Color::White;
+			this->btnPremium->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnPremium->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
+			this->btnPremium->Location = System::Drawing::Point(191, 178);
+			this->btnPremium->Name = L"btnPremium";
+			this->btnPremium->Size = System::Drawing::Size(75, 33);
+			this->btnPremium->TabIndex = 12;
+			this->btnPremium->Text = L"Premium";
+			this->btnPremium->UseVisualStyleBackColor = false;
+			this->btnPremium->Click += gcnew System::EventHandler(this, &DriverMenuForm::btnPremium_Click);
 			// 
-			// manualKmBox
+			// btnStandard
 			// 
-			this->manualKmBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(249)), static_cast<System::Int32>(static_cast<System::Byte>(250)),
-				static_cast<System::Int32>(static_cast<System::Byte>(247)));
-			this->manualKmBox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->manualKmBox->Location = System::Drawing::Point(262, 182);
-			this->manualKmBox->Name = L"manualKmBox";
-			this->manualKmBox->Size = System::Drawing::Size(118, 20);
-			this->manualKmBox->TabIndex = 8;
-			this->manualKmBox->Text = L"12";
+			this->btnStandard->BackColor = System::Drawing::Color::White;
+			this->btnStandard->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnStandard->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
+			this->btnStandard->Location = System::Drawing::Point(110, 178);
+			this->btnStandard->Name = L"btnStandard";
+			this->btnStandard->Size = System::Drawing::Size(75, 33);
+			this->btnStandard->TabIndex = 11;
+			this->btnStandard->Text = L"Standard";
+			this->btnStandard->UseVisualStyleBackColor = false;
+			this->btnStandard->Click += gcnew System::EventHandler(this, &DriverMenuForm::btnStandard_Click);
+			// 
+			// btnEconomic
+			// 
+			this->btnEconomic->BackColor = System::Drawing::Color::White;
+			this->btnEconomic->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnEconomic->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
+			this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->btnEconomic->Location = System::Drawing::Point(29, 177);
+			this->btnEconomic->Name = L"btnEconomic";
+			this->btnEconomic->Size = System::Drawing::Size(75, 33);
+			this->btnEconomic->TabIndex = 10;
+			this->btnEconomic->Text = L"Economico";
+			this->btnEconomic->UseVisualStyleBackColor = false;
+			this->btnEconomic->Click += gcnew System::EventHandler(this, &DriverMenuForm::btnEconomic_Click);
+			// 
+			// btnRegister
+			// 
+			this->btnRegister->BackColor = System::Drawing::Color::Black;
+			this->btnRegister->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnRegister->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
+			this->btnRegister->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnRegister->Location = System::Drawing::Point(516, 167);
+			this->btnRegister->Name = L"btnRegister";
+			this->btnRegister->Size = System::Drawing::Size(154, 44);
+			this->btnRegister->TabIndex = 9;
+			this->btnRegister->Text = L"Registrar";
+			this->btnRegister->UseVisualStyleBackColor = false;
+			this->btnRegister->Click += gcnew System::EventHandler(this, &DriverMenuForm::btnRegister_Click);
+			this->btnRegister->Leave += gcnew System::EventHandler(this, &DriverMenuForm::btnRegister_Leave);
+			this->btnRegister->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &DriverMenuForm::btnRegister_MouseDown);
+			this->btnRegister->MouseLeave += gcnew System::EventHandler(this, &DriverMenuForm::btnRegister_MouseLeave);
+			this->btnRegister->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &DriverMenuForm::btnRegister_MouseMove);
+			// 
+			// tbDistance
+			// 
+			this->tbDistance->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbDistance->Location = System::Drawing::Point(349, 178);
+			this->tbDistance->Name = L"tbDistance";
+			this->tbDistance->Size = System::Drawing::Size(97, 27);
+			this->tbDistance->TabIndex = 8;
 			// 
 			// manualKmLabel
 			// 
 			this->manualKmLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
 			this->manualKmLabel->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(38)));
-			this->manualKmLabel->Location = System::Drawing::Point(262, 156);
+			this->manualKmLabel->Location = System::Drawing::Point(346, 156);
 			this->manualKmLabel->Name = L"manualKmLabel";
 			this->manualKmLabel->Size = System::Drawing::Size(130, 22);
 			this->manualKmLabel->TabIndex = 7;
 			this->manualKmLabel->Text = L"Kilometros";
-			// 
-			// manualTypeCombo
-			// 
-			this->manualTypeCombo->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(249)), static_cast<System::Int32>(static_cast<System::Byte>(250)),
-				static_cast<System::Int32>(static_cast<System::Byte>(247)));
-			this->manualTypeCombo->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->manualTypeCombo->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->manualTypeCombo->FormattingEnabled = true;
-			this->manualTypeCombo->Location = System::Drawing::Point(24, 182);
-			this->manualTypeCombo->Name = L"manualTypeCombo";
-			this->manualTypeCombo->Size = System::Drawing::Size(210, 21);
-			this->manualTypeCombo->TabIndex = 6;
 			// 
 			// manualTypeLabel
 			// 
@@ -783,16 +896,13 @@ namespace LYNX {
 			this->manualTypeLabel->TabIndex = 5;
 			this->manualTypeLabel->Text = L"Tipo";
 			// 
-			// manualEndBox
+			// tbDestination
 			// 
-			this->manualEndBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(249)), static_cast<System::Int32>(static_cast<System::Byte>(250)),
-				static_cast<System::Int32>(static_cast<System::Byte>(247)));
-			this->manualEndBox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->manualEndBox->Location = System::Drawing::Point(346, 102);
-			this->manualEndBox->Name = L"manualEndBox";
-			this->manualEndBox->Size = System::Drawing::Size(290, 20);
-			this->manualEndBox->TabIndex = 4;
-			this->manualEndBox->Text = L"Cuzco";
+			this->tbDestination->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbDestination->Location = System::Drawing::Point(349, 101);
+			this->tbDestination->Name = L"tbDestination";
+			this->tbDestination->Size = System::Drawing::Size(237, 27);
+			this->tbDestination->TabIndex = 4;
 			// 
 			// manualEndLabel
 			// 
@@ -805,16 +915,13 @@ namespace LYNX {
 			this->manualEndLabel->TabIndex = 3;
 			this->manualEndLabel->Text = L"Destino";
 			// 
-			// manualStartBox
+			// tbOrigin
 			// 
-			this->manualStartBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(249)), static_cast<System::Int32>(static_cast<System::Byte>(250)),
-				static_cast<System::Int32>(static_cast<System::Byte>(247)));
-			this->manualStartBox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->manualStartBox->Location = System::Drawing::Point(24, 102);
-			this->manualStartBox->Name = L"manualStartBox";
-			this->manualStartBox->Size = System::Drawing::Size(290, 20);
-			this->manualStartBox->TabIndex = 2;
-			this->manualStartBox->Text = L"Madrid";
+			this->tbOrigin->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbOrigin->Location = System::Drawing::Point(25, 101);
+			this->tbOrigin->Name = L"tbOrigin";
+			this->tbOrigin->Size = System::Drawing::Size(221, 27);
+			this->tbOrigin->TabIndex = 2;
 			// 
 			// manualStartLabel
 			// 
@@ -836,17 +943,83 @@ namespace LYNX {
 			this->manualTitle->Name = L"manualTitle";
 			this->manualTitle->Size = System::Drawing::Size(260, 28);
 			this->manualTitle->TabIndex = 0;
-			this->manualTitle->Text = L"Registrar viaje manual";
+			this->manualTitle->Text = L"Registrar viaje";
 			// 
 			// historyPanel
 			// 
 			this->historyPanel->BackColor = System::Drawing::Color::White;
+			this->historyPanel->Controls->Add(this->lblprice);
+			this->historyPanel->Controls->Add(this->lbltipes);
+			this->historyPanel->Controls->Add(this->lblOtoD);
+			this->historyPanel->Controls->Add(this->btnRight);
+			this->historyPanel->Controls->Add(this->btnLeft);
 			this->historyPanel->Controls->Add(this->historyListView);
 			this->historyPanel->Controls->Add(this->historyTitle);
 			this->historyPanel->Location = System::Drawing::Point(788, 598);
 			this->historyPanel->Name = L"historyPanel";
 			this->historyPanel->Size = System::Drawing::Size(662, 264);
 			this->historyPanel->TabIndex = 5;
+			// 
+			// lblprice
+			// 
+			this->lblprice->BackColor = System::Drawing::Color::Transparent;
+			this->lblprice->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 25, System::Drawing::FontStyle::Bold));
+			this->lblprice->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->lblprice->Location = System::Drawing::Point(36, 137);
+			this->lblprice->Name = L"lblprice";
+			this->lblprice->Size = System::Drawing::Size(238, 68);
+			this->lblprice->TabIndex = 7;
+			this->lblprice->Text = L"S/ 0";
+			this->lblprice->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// lbltipes
+			// 
+			this->lbltipes->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->lbltipes->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
+			this->lbltipes->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->lbltipes->Location = System::Drawing::Point(384, 156);
+			this->lbltipes->Name = L"lbltipes";
+			this->lbltipes->Size = System::Drawing::Size(238, 34);
+			this->lbltipes->TabIndex = 6;
+			this->lbltipes->Text = L"-";
+			this->lbltipes->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// lblOtoD
+			// 
+			this->lblOtoD->BackColor = System::Drawing::Color::Transparent;
+			this->lblOtoD->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
+			this->lblOtoD->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->lblOtoD->Location = System::Drawing::Point(36, 76);
+			this->lblOtoD->Name = L"lblOtoD";
+			this->lblOtoD->Size = System::Drawing::Size(586, 34);
+			this->lblOtoD->TabIndex = 5;
+			this->lblOtoD->Text = L"-";
+			this->lblOtoD->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// btnRight
+			// 
+			this->btnRight->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
+			this->btnRight->Location = System::Drawing::Point(636, 137);
+			this->btnRight->Name = L"btnRight";
+			this->btnRight->Size = System::Drawing::Size(24, 23);
+			this->btnRight->TabIndex = 3;
+			this->btnRight->Text = L">";
+			this->btnRight->UseVisualStyleBackColor = false;
+			this->btnRight->Click += gcnew System::EventHandler(this, &DriverMenuForm::btnRight_Click);
+			// 
+			// btnLeft
+			// 
+			this->btnLeft->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
+			this->btnLeft->Location = System::Drawing::Point(1, 137);
+			this->btnLeft->Name = L"btnLeft";
+			this->btnLeft->Size = System::Drawing::Size(24, 23);
+			this->btnLeft->TabIndex = 2;
+			this->btnLeft->Text = L"<";
+			this->btnLeft->UseVisualStyleBackColor = false;
+			this->btnLeft->Click += gcnew System::EventHandler(this, &DriverMenuForm::btnLeft_Click);
 			// 
 			// historyListView
 			// 
@@ -989,13 +1162,13 @@ namespace LYNX {
 			this->profilePanel->ResumeLayout(false);
 			this->lastTripPanel->ResumeLayout(false);
 			this->metric2->ResumeLayout(false);
-			this->metric1->ResumeLayout(false);
 			this->queuePanel->ResumeLayout(false);
-			this->queueItem3->ResumeLayout(false);
-			this->queueItem2->ResumeLayout(false);
-			this->queueItem1->ResumeLayout(false);
+			this->panel4->ResumeLayout(false);
+			this->panel3->ResumeLayout(false);
+			this->panel2->ResumeLayout(false);
+			this->panel1->ResumeLayout(false);
 			this->vehiclePanel->ResumeLayout(false);
-			this->maintenancePanel->ResumeLayout(false);
+			this->vehiclePanel->PerformLayout();
 			this->manualPanel->ResumeLayout(false);
 			this->manualPanel->PerformLayout();
 			this->historyPanel->ResumeLayout(false);
@@ -1006,7 +1179,7 @@ namespace LYNX {
 		}
 
 	#pragma endregion
-		// DATOS PUBLICOS DEL PASAJERO LOGUEADO
+		// DATOS PUBLICOS DEL CONDUCTOR LOGUEADO
 		public:
 			String^ dni = "";
 			String^ name = "";
@@ -1019,6 +1192,8 @@ namespace LYNX {
 
 
 		private:
+
+			
 		//
 		// Configuracion global de form
 		//
@@ -1036,6 +1211,7 @@ namespace LYNX {
 		//
 		// Load Form
 		//
+			// Cuando cargue el formulario
 			System::Void DriverMenuForm_Load(System::Object^ sender, System::EventArgs^ e)
 			{
 				normalSize = this->Size;
@@ -1048,11 +1224,12 @@ namespace LYNX {
 				String^ driverDni = loggedDriverDni;
 				std::string dniStr = msclr::interop::marshal_as<std::string>(driverDni);
 
+
 				Driver d = authManager->getDriverByDni(dniStr);
-				String^ n= gcnew System::String(d.getName().c_str());
+				String^ n = gcnew System::String(d.getName().c_str());
 				String^ id = gcnew System::String(d.getDriverId().c_str());
 				float profit = d.getNetEarnings();
-				float rating=d.getRating();
+				float rating = d.getRating();
 				String^ model = gcnew System::String(d.getVehicle().getModel().c_str());
 				String^ brand = gcnew System::String(d.getVehicle().getBrand().c_str());
 				String^ plate = gcnew System::String(d.getVehicle().getPlate().c_str());
@@ -1061,11 +1238,65 @@ namespace LYNX {
 
 				this->profileName->Text = n;
 				this->profileInfo->Text = "Driver ID: " + id + " | Lima metropolitana";
-				this->metric1Value->Text = "S/ " + profit;
-				this->metric2Value->Text =""+ rating;
+				this->metric2Value->Text = "" + rating;
 				this->vehicleName->Text = brand;
 				this->vehicleText->Text = "Placa" + plate + " | " + model + " | " + colour + " | " + year;
 
+				Driver current = authManager->getDriverByDni(dniStr);
+
+
+				this->lblTripsNumber->Text = "" + current.getTotalTrips();
+				this->lblGainsNumber->Text = "" + current.getTotalEarnings();
+				this->lblComisionNumber->Text = "" + current.getTotalEarnings() * 0.20f;
+				this->lblNetGainsNumber->Text = "" + current.getNetEarnings();
+
+				// Consigue todos los viajes del conductors
+				std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
+				String^ dnii = dni;
+				std::vector<Trip> historialDriver;
+
+				for (int i = 0; i < historial.size(); i++) {
+					// Solo mostramos en el historial los viajes que le pertenecen al DNI del pasajero logueado
+					if (historial[i].getDriverDni() == msclr::interop::marshal_as<std::string>(dnii)) {
+						historialDriver.push_back(historial[i]);
+					}
+				}
+
+				if (!historialDriver.empty()) {
+					String^ ori = gcnew System::String((historialDriver[0].getOrigin()).c_str());
+					String^ desti = gcnew System::String((historialDriver[0].getDestination()).c_str());
+
+					this->lastTripText->Text = "" + ori + " -> " + desti + " | S/ " + historialDriver[0].getPrice();
+					switch (historialDriver[0].getTipe()) {
+					case 1:
+						this->lastTripDot->BackColor = System::Drawing::Color::LightGreen;
+						break;
+					case 2:
+						this->lastTripDot->BackColor = System::Drawing::Color::LightSteelBlue;
+						break;
+					case 3:
+						this->lastTripDot->BackColor = System::Drawing::Color::Goldenrod;
+						break;
+					}
+
+					this->lblOtoD->Text = ori + " --- " + desti;
+					this->lblprice->Text = "S/ " + historialDriver[index].getPrice();
+
+					switch (historialDriver[index].getTipe()) {
+					case 1:
+						this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
+						this->lbltipes->Text = "ECONOMICO";
+						break;
+					case 2:
+						this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
+						this->lbltipes->Text = "STANDARD";
+						break;
+					case 3:
+						this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
+						this->lbltipes->Text = "PREMIUM";
+						break;
+					}
+				}
 
 				try {
 					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
@@ -1151,5 +1382,549 @@ namespace LYNX {
 
 
 
+private: System::Void btnPremium_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->btnPremium->BackColor = System::Drawing::Color::Black;
+	this->btnPremium->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+	this->btnStandard->BackColor = System::Drawing::Color::White;
+	this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+	this->btnEconomic->BackColor = System::Drawing::Color::White;
+	this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+	type = 3;
+}
+	   String^ origin;
+	   String^ destination;
+	   String^ driverName;
+	   String^ driverDni;
+	   int type = 0;
+	   bool update = false;
+	   int originalType = 0;
+	   float distance = 0;
+
+	   bool isNaNString(const std::string& str) {
+		   std::istringstream iss(str);
+		   double num;
+		   return !(iss >> num && iss.eof());
+	   }
+	   string generarTripId(TripManager& tripMgr)
+	   {
+		   return tripMgr.previewNextTripId();
+	   }
+	   string fechaActual()
+	   {
+		   std::time_t now = std::time(nullptr);
+		   std::tm localTime{};
+		   localtime_s(&localTime, &now);
+		   char buffer[16];
+		   std::strftime(buffer, sizeof(buffer), "%d/%m/%Y", &localTime);
+		   return buffer;
+	   }
+	   vector<Trip> exportarWaitingTrips(TripManager& tripMgr)
+	   {
+		   vector<Trip> lista;
+		   auto waitingQueue = tripMgr.getWaitingQueue();
+
+		   while (!waitingQueue.isEmpty()) {
+			   Trip t = waitingQueue.getFront();
+			   lista.push_back(t);
+			   waitingQueue.dequeue();
+		   }
+		   return lista;
+	   }
+
+	   // exportarActiveTrips: pasa los viajes activos de la lista doble a vector
+	   vector<Trip> exportarActiveTrips(TripManager& tripMgr)
+	   {
+		   vector<Trip> lista;
+		   for (int i = 0; i < tripMgr.getActiveTrips().getSize(); i++) {
+			   lista.push_back(tripMgr.getActiveTrips().get(i));
+		   }
+		   return lista;
+	   }
+
+	   // exportarHistoryTrips: extrae el historial de la pila sin perder el contenido original
+	   vector<Trip> exportarHistoryTrips(TripManager& tripMgr)
+	   {
+		   
+		   vector<Trip> lista;
+		   ::Stack<Trip>& history = tripMgr.getHistory();
+		   ::Stack<Trip> temp;
+		   /*
+		   while (!history.isEmpty()) {
+			   Trip t = history.peek();
+			   lista.push_back(t);
+			   temp.push(t);
+			   history.pop();
+		   }*/
+		   while (!history.isEmpty()) {
+			   // Usar const& evita una copia intermedia destructiva en esta línea
+			   const Trip& t = history.peek();
+			   lista.push_back(t);
+			   temp.push(t);
+			   history.pop();
+		   }
+		   while (!temp.isEmpty()) {
+			   history.push(temp.peek());
+			   temp.pop();
+		   }
+		   
+		   return lista;
+	
+	   }
+
+	   vector<Trip> exportarTodosLosTrips(TripManager& tripMgr)
+	   {
+		   vector<Trip> total = exportarWaitingTrips(tripMgr);
+		   vector<Trip> activos = exportarActiveTrips(tripMgr);
+		   vector<Trip> historial = exportarHistoryTrips(tripMgr);
+		   total.insert(total.end(), activos.begin(), activos.end());
+		   total.insert(total.end(), historial.begin(), historial.end());
+		   return total;
+	   }
+
+	   void guardarDatos(FileManager& fileManager, AuthManager& authMgr, TripManager& tripMgr)
+	   {
+		   authMgr.saveAll();
+		   fileManager.guardarTripsTXT(exportarTodosLosTrips(tripMgr));
+	   }
+
+private: System::Void btnStandard_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->btnStandard->BackColor = System::Drawing::Color::Black;
+	this->btnStandard->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+	this->btnEconomic->BackColor = System::Drawing::Color::White;
+	this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+	this->btnPremium->BackColor = System::Drawing::Color::White;
+	this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+	type = 2;
+}
+private: System::Void btnEconomic_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->btnEconomic->BackColor = System::Drawing::Color::Black;
+	this->btnEconomic->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+	this->btnStandard->BackColor = System::Drawing::Color::White;
+	this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+	this->btnPremium->BackColor = System::Drawing::Color::White;
+	this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+	type = 1;
+}
+private: System::Void btnRegister_Click(System::Object^ sender, System::EventArgs^ e) {
+	String^ o = this->tbOrigin->Text->Trim();
+	String^ d = this->tbDestination->Text->Trim();
+
+	
+
+	//si esta vacio retorna y muestra una alerta
+	if (this->tbDistance->Text == "" || this->tbDestination->Text == "" || this->tbOrigin->Text == "" || type == 0) {
+		MessageBox::Show("Por favor llene todos los campos", "Solicitar Viaje", MessageBoxButtons::OK);
+		return;
+	}
+
+	// Verifica si la distancia es contiene alguna letra o caracter que no sea numero
+	if (isNaNString(msclr::interop::marshal_as<std::string>(this->tbDistance->Text->Trim()))) {
+		MessageBox::Show("La distancia debe ser un numero", "Solicitar Viaje", MessageBoxButtons::OK);
+		return;
+	}
+	originalType = type;
+	type = 0;
+	distance = std::stof(msclr::interop::marshal_as<std::string>(this->tbDistance->Text->Trim()));
+
+	String^ dnii = dni;
+	Driver current = authManager->getDriverByDni(msclr::interop::marshal_as<std::string>(dnii));
+	
+	Trip nuevo;
+	nuevo.setTripId(generarTripId(*tripManager));
+	nuevo.setOrigin(msclr::interop::marshal_as<std::string>(o)); 
+	nuevo.setDestination(msclr::interop::marshal_as<std::string>(d));
+	nuevo.setTipe(originalType); nuevo.setPassengerDni("");
+	nuevo.setDriverName(current.getName()); 
+	nuevo.setDriverDni(msclr::interop::marshal_as<std::string>(dnii)); 
+	nuevo.setDate(fechaActual());
+	nuevo.setPrice(nuevo.calcPrice(originalType, distance)); 
+	nuevo.setStatus("completado");
+	
+	String^ n = name;
+
+	//tripManager->createTrip2(msclr::interop::marshal_as<std::string>(o), msclr::interop::marshal_as<std::string>(d), originalType, distance, msclr::interop::marshal_as<std::string>(n), msclr::interop::marshal_as<std::string>(dnii), "", fechaActual());
+
+	
+	authManager->driverAcceptRide(msclr::interop::marshal_as<std::string>(dnii), nuevo.getPrice());
+	authManager->driverFinishRide(msclr::interop::marshal_as<std::string>(dnii));
+	tripManager->getHistory().push(nuevo);
+	
+	
+	guardarDatos(*fileManager, *authManager, *tripManager);
+	
+	current = authManager->getDriverByDni(msclr::interop::marshal_as<std::string>(dnii));
+	//limpia el apartado de solicitar viaje
+	this->tbOrigin->Text = "";
+	this->tbDestination->Text = "";
+	this->tbDistance->Text = "";
+
+	
+	//Todos los botones a su color predeterminado
+	this->btnStandard->BackColor = System::Drawing::Color::White;
+	this->btnStandard->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+	this->btnEconomic->BackColor = System::Drawing::Color::White;
+	this->btnEconomic->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+	this->btnPremium->BackColor = System::Drawing::Color::White;
+	this->btnPremium->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+
+
+
+
+	this->lblTripsNumber->Text = "" + current.getTotalTrips();
+	this->lblGainsNumber->Text = "" + current.getTotalEarnings();
+	this->lblComisionNumber->Text = "" + current.getTotalEarnings() * 0.20f;
+	this->lblNetGainsNumber->Text = "" + current.getNetEarnings();
+
+	try {
+
+		std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
+
+
+		std::vector<Trip> historialDriver;
+
+
+		for (int i = 0; i < historial.size(); i++) {
+
+			if (historial[i].getDriverDni() == msclr::interop::marshal_as<std::string>(dnii)) {
+				historialDriver.push_back(historial[i]);
+			}
+		}
+		if (!historialDriver.empty()) {
+			int ultimoIdx = historialDriver.size() - 1;
+
+			String^ ori = gcnew System::String((historialDriver[0].getOrigin()).c_str());
+			String^ desti = gcnew System::String((historialDriver[0].getDestination()).c_str());
+
+			this->lastTripText->Text = "" + ori + " -> " + desti + " | S/ " + historialDriver[0].getPrice() + " " + historialDriver[0].getTipe();
+
+			switch (historialDriver[0].getTipe()) {
+			case 1: this->lastTripDot->BackColor = System::Drawing::Color::LightGreen; break;
+			case 2: this->lastTripDot->BackColor = System::Drawing::Color::LightSteelBlue; break;
+			case 3: this->lastTripDot->BackColor = System::Drawing::Color::Goldenrod; break;
+			}
+
+			this->lblOtoD->Text = ori + " --- " + desti;
+			this->lblprice->Text = "S/ " + historialDriver[0].getPrice();
+
+			switch (historialDriver[0].getTipe()) {
+			case 1:
+				this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
+				this->lbltipes->Text = "ECONOMICO";
+				break;
+			case 2:
+				this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
+				this->lbltipes->Text = "STANDARD";
+				break;
+			case 3:
+				this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
+				this->lbltipes->Text = "PREMIUM";
+				break;
+			}
+		}
+		else {
+			// En caso de que el historial por alguna razón se quede vacío, limpias las etiquetas
+			this->lastTripText->Text = "No hay viajes registrados";
+			this->lblOtoD->Text = "-";
+			this->lblprice->Text = "S/ 0.00";
+			this->lbltipes->Text = "NINGUNO";
+		}
+	}
+	catch (...) {}
+	
+}
+private: System::Void btnRegister_Leave(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void btnRegister_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+}
+private: System::Void btnRegister_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+}
+private: System::Void btnRegister_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
+}
+	   int index = 0;
+private: System::Void btnLeft_Click(System::Object^ sender, System::EventArgs^ e) {
+	std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
+	std::vector<Trip> historialDriver;
+	String^ dnii = dni;
+
+
+	for (int i = 0; i < historial.size(); i++) {
+		// Solo mostramos en el historial los viajes que le pertenecen al DNI del pasajero logueado
+		if (historial[i].getDriverDni() == msclr::interop::marshal_as<std::string>(dnii)) {
+			historialDriver.push_back(historial[i]);
+		}
+	}
+
+	if (!historialDriver.empty()) {
+		if (index > 0) {
+			index--;
+		}
+		String^ ori = gcnew System::String((historialDriver[index].getOrigin()).c_str());
+		String^ desti = gcnew System::String((historialDriver[index].getDestination()).c_str());
+		this->lblOtoD->Text = ori + " --- " + desti;
+		this->lblprice->Text = "S/ " + historialDriver[index].getPrice();
+
+		switch (historialDriver[index].getTipe()) {
+		case 1:
+			this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
+			this->lbltipes->Text = "ECONOMICO";
+			break;
+		case 2:
+			this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
+			this->lbltipes->Text = "STANDARD";
+			break;
+		case 3:
+			this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
+			this->lbltipes->Text = "PREMIUM";
+			break;
+		}
+	}
+}
+private: System::Void btnRight_Click(System::Object^ sender, System::EventArgs^ e) {
+	std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
+	std::vector<Trip> historialDriver;
+	String^ dnii = dni;
+
+
+	for (int i = 0; i < historial.size(); i++) {
+		// Solo mostramos en el historial los viajes que le pertenecen al DNI del pasajero logueado
+		if (historial[i].getDriverDni() == msclr::interop::marshal_as<std::string>(dnii)) {
+			historialDriver.push_back(historial[i]);
+		}
+	}
+
+	if (!historialDriver.empty()) {
+		if (index < historialDriver.size() - 1) {
+			index++;
+		}
+		String^ ori = gcnew System::String((historialDriver[index].getOrigin()).c_str());
+		String^ desti = gcnew System::String((historialDriver[index].getDestination()).c_str());
+		this->lblOtoD->Text = ori + " --- " + desti;
+		this->lblprice->Text = "S/ " + historialDriver[index].getPrice();
+
+		switch (historialDriver[index].getTipe()) {
+		case 1:
+			this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
+			this->lbltipes->Text = "ECONOMICO";
+			break;
+		case 2:
+			this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
+			this->lbltipes->Text = "STANDARD";
+			break;
+		case 3:
+			this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
+			this->lbltipes->Text = "PREMIUM";
+			break;
+		}
+	}
+}
+private: System::Void btnUpdateVehicle_Click(System::Object^ sender, System::EventArgs^ e) {
+	
+
+}
+	   
+private: System::Void btnUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!update) {
+		this->lblBrand->Visible = true;
+		this->lblPlate->Visible = true;
+		this->lblColour->Visible = true;
+		this->lblYear->Visible = true;
+		this->lblModel->Visible = true;
+
+		this->tbBrand->Visible = true;
+		this->tbPlate->Visible = true;
+		this->tbColour->Visible = true;
+		this->tbYear->Visible = true;
+		this->tbModel->Visible = true;
+
+		this->vehicleText->Visible = false;
+		update = true;
+	}
+
+	if (update) {
+		// Guardar los txt box como Strings^
+		String^ plateText = this->tbPlate->Text->Trim();
+		String^ brandText = this->tbBrand->Text->Trim();
+		String^ modelText = this->tbModel->Text;
+		String^ colourText = this->tbColour->Text;
+		String^ yearText = this->tbYear->Text;
+		// ===============================================================================================
+		// ===============================================================================================
+		// ===============================================================================================
+		// ===============================================================================================
+
+
+		// Verificar que los espacios no esten vacios
+		if (plateText->Length == 0 || brandText->Length == 0 || modelText->Length == 0 || colourText->Length == 0 || yearText->Length == 0) {
+			MessageBox::Show("Por favor llene todos los campos", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		//Verificar si se pudo o no acceder al gestionador de archivos
+		if (authManager == nullptr) {
+			MessageBox::Show("No se pudo acceder al gestor de usuarios", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		if (isNaNString(msclr::interop::marshal_as<std::string>(yearText))) {
+			MessageBox::Show("Anio invalido. Debe ser un numero entero", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		// Converitr con marshal as al tipo de dato que quiero segun un String^
+		std::string plate = msclr::interop::marshal_as<std::string>(plateText);
+		std::string brand = msclr::interop::marshal_as<std::string>(brandText);
+		std::string model = msclr::interop::marshal_as<std::string>(modelText);
+		std::string colour = msclr::interop::marshal_as<std::string>(colourText);
+		int year = std::stoi(msclr::interop::marshal_as<std::string>(yearText));
+
+
+		//Vaciar los campos
+		this->tbBrand->Text = "";
+		this->tbYear->Text = "";
+		this->tbModel->Text = "";
+		this->tbPlate->Text = "";
+		this->tbColour->Text = "";
+
+
+		// Hacer validacion del anio si es un numero o es mayor al 2000 o menor al actual ( 2026 )
+		if (year < 2000 || year >2026) {
+			MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+
+
+		String^ dn = dni;
+		authManager->updateDriverData(msclr::interop::marshal_as<std::string>(dn), brand, colour, plate, model, year);
+
+		Driver d = authManager->getDriverByDni(msclr::interop::marshal_as<std::string>(dn));
+		String^ models = gcnew System::String(d.getVehicle().getModel().c_str());
+		String^ brands = gcnew System::String(d.getVehicle().getBrand().c_str());
+		String^ plates = gcnew System::String(d.getVehicle().getPlate().c_str());
+		String^ colours = gcnew System::String(d.getVehicle().getColor().c_str());
+		int years = d.getVehicle().getYear();
+
+		this->vehicleName->Text = brands;
+		this->vehicleText->Text = "Placa" + plates + " | " + models + " | " + colours + " | " + years;
+
+		this->lblBrand->Visible = false;
+		this->lblPlate->Visible = false;
+		this->lblColour->Visible = false;
+		this->lblYear->Visible = false;
+		this->lblModel->Visible = false;
+
+		this->tbBrand->Visible = false;
+		this->tbPlate->Visible = false;
+		this->tbColour->Visible = false;
+		this->tbYear->Visible = false;
+		this->tbModel->Visible = false;
+
+		this->vehicleText->Visible = true;
+		update = false;
+	}
+
+	
+}
+private: System::Void btnUpdate_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	if (!update) {
+		this->lblBrand->Visible = true;
+		this->lblPlate->Visible = true;
+		this->lblColour->Visible = true;
+		this->lblYear->Visible = true;
+		this->lblModel->Visible = true;
+
+		this->tbBrand->Visible = true;
+		this->tbPlate->Visible = true;
+		this->tbColour->Visible = true;
+		this->tbYear->Visible = true;
+		this->tbModel->Visible = true;
+
+		this->vehicleText->Visible = false;
+		update = true;
+	}
+
+	if (update) {
+		// Guardar los txt box como Strings^
+		String^ plateText = this->tbPlate->Text->Trim();
+		String^ brandText = this->tbBrand->Text->Trim();
+		String^ modelText = this->tbModel->Text;
+		String^ colourText = this->tbColour->Text;
+		String^ yearText = this->tbYear->Text;
+		// ===============================================================================================
+		// ===============================================================================================
+		// ===============================================================================================
+		// ===============================================================================================
+
+
+		// Verificar que los espacios no esten vacios
+		if (plateText->Length == 0 || brandText->Length == 0 || modelText->Length == 0 || colourText->Length == 0 || yearText->Length == 0) {
+			MessageBox::Show("Por favor llene todos los campos", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		//Verificar si se pudo o no acceder al gestionador de archivos
+		if (authManager == nullptr) {
+			MessageBox::Show("No se pudo acceder al gestor de usuarios", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		if (isNaNString(msclr::interop::marshal_as<std::string>(yearText))) {
+			MessageBox::Show("Anio invalido. Debe ser un numero entero", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		// Converitr con marshal as al tipo de dato que quiero segun un String^
+		std::string plate = msclr::interop::marshal_as<std::string>(plateText);
+		std::string brand = msclr::interop::marshal_as<std::string>(brandText);
+		std::string model = msclr::interop::marshal_as<std::string>(modelText);
+		std::string colour = msclr::interop::marshal_as<std::string>(colourText);
+		int year = std::stoi(msclr::interop::marshal_as<std::string>(yearText));
+
+
+		//Vaciar los campos
+		this->tbBrand->Text = "";
+		this->tbYear->Text = "";
+		this->tbModel->Text = "";
+		this->tbPlate->Text = "";
+		this->tbColour->Text = "";
+
+
+		// Hacer validacion del anio si es un numero o es mayor al 2000 o menor al actual ( 2026 )
+		if (year < 2000 || year >2026) {
+			MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+
+
+		String^ dn = dni;
+		authManager->updateDriverData(msclr::interop::marshal_as<std::string>(dn), brand, colour, plate, model, year);
+
+		Driver d = authManager->getDriverByDni(msclr::interop::marshal_as<std::string>(dn));
+		String^ models = gcnew System::String(d.getVehicle().getModel().c_str());
+		String^ brands = gcnew System::String(d.getVehicle().getBrand().c_str());
+		String^ plates = gcnew System::String(d.getVehicle().getPlate().c_str());
+		String^ colours = gcnew System::String(d.getVehicle().getColor().c_str());
+		int years = d.getVehicle().getYear();
+
+		this->vehicleName->Text = brands;
+		this->vehicleText->Text = "Placa" + plates + " | " + models + " | " + colours + " | " + years;
+
+		this->lblBrand->Visible = false;
+		this->lblPlate->Visible = false;
+		this->lblColour->Visible = false;
+		this->lblYear->Visible = false;
+		this->lblModel->Visible = false;
+
+		this->tbBrand->Visible = false;
+		this->tbPlate->Visible = false;
+		this->tbColour->Visible = false;
+		this->tbYear->Visible = false;
+		this->tbModel->Visible = false;
+
+		this->vehicleText->Visible = true;
+		update = false;
+	}
+}
 };
 }
