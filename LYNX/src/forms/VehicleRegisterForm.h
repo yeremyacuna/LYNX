@@ -425,7 +425,7 @@ namespace LYNX {
 				}
 			}
 
-		// ?
+		// funcion que verifica si un string es un numero (true: no es un numero / false: es un numero) (ejm: "5234" = true / "a321s" = false)
 		   bool isNaNString(const std::string& str) {
 			   std::istringstream iss(str);
 			   double num;

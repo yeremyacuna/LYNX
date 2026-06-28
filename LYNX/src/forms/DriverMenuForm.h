@@ -78,19 +78,20 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ lastTripTitle;
 	private: System::Windows::Forms::Label^ lastTripText;
 	private: System::Windows::Forms::Panel^ queuePanel;
-	private: System::Windows::Forms::Label^ queueTitle;
-	private: System::Windows::Forms::Panel^ queueItem1;
-	private: System::Windows::Forms::Panel^ q1Dot;
-	private: System::Windows::Forms::Label^ q1Title;
-	private: System::Windows::Forms::Label^ q1Text;
-	private: System::Windows::Forms::Panel^ queueItem2;
-	private: System::Windows::Forms::Panel^ q2Dot;
-	private: System::Windows::Forms::Label^ q2Title;
-	private: System::Windows::Forms::Label^ q2Text;
-	private: System::Windows::Forms::Panel^ queueItem3;
-	private: System::Windows::Forms::Panel^ q3Dot;
-	private: System::Windows::Forms::Label^ q3Title;
-	private: System::Windows::Forms::Label^ q3Text;
+	private: System::Windows::Forms::Label^ gainsTitle;
+
+
+
+
+
+
+
+
+
+
+
+
+
 	private: System::Windows::Forms::Button^ acceptButton;
 	private: System::Windows::Forms::Button^ finishButton;
 	private: System::Windows::Forms::Panel^ vehiclePanel;
@@ -151,19 +152,7 @@ namespace LYNX {
 			this->queuePanel = (gcnew System::Windows::Forms::Panel());
 			this->finishButton = (gcnew System::Windows::Forms::Button());
 			this->acceptButton = (gcnew System::Windows::Forms::Button());
-			this->queueItem3 = (gcnew System::Windows::Forms::Panel());
-			this->q3Text = (gcnew System::Windows::Forms::Label());
-			this->q3Title = (gcnew System::Windows::Forms::Label());
-			this->q3Dot = (gcnew System::Windows::Forms::Panel());
-			this->queueItem2 = (gcnew System::Windows::Forms::Panel());
-			this->q2Text = (gcnew System::Windows::Forms::Label());
-			this->q2Title = (gcnew System::Windows::Forms::Label());
-			this->q2Dot = (gcnew System::Windows::Forms::Panel());
-			this->queueItem1 = (gcnew System::Windows::Forms::Panel());
-			this->q1Text = (gcnew System::Windows::Forms::Label());
-			this->q1Title = (gcnew System::Windows::Forms::Label());
-			this->q1Dot = (gcnew System::Windows::Forms::Panel());
-			this->queueTitle = (gcnew System::Windows::Forms::Label());
+			this->gainsTitle = (gcnew System::Windows::Forms::Label());
 			this->vehiclePanel = (gcnew System::Windows::Forms::Panel());
 			this->updateVehicleButton = (gcnew System::Windows::Forms::Button());
 			this->maintenancePanel = (gcnew System::Windows::Forms::Panel());
@@ -199,9 +188,6 @@ namespace LYNX {
 			this->metric2->SuspendLayout();
 			this->metric1->SuspendLayout();
 			this->queuePanel->SuspendLayout();
-			this->queueItem3->SuspendLayout();
-			this->queueItem2->SuspendLayout();
-			this->queueItem1->SuspendLayout();
 			this->vehiclePanel->SuspendLayout();
 			this->maintenancePanel->SuspendLayout();
 			this->manualPanel->SuspendLayout();
@@ -437,10 +423,7 @@ namespace LYNX {
 			this->queuePanel->BackColor = System::Drawing::Color::White;
 			this->queuePanel->Controls->Add(this->finishButton);
 			this->queuePanel->Controls->Add(this->acceptButton);
-			this->queuePanel->Controls->Add(this->queueItem3);
-			this->queuePanel->Controls->Add(this->queueItem2);
-			this->queuePanel->Controls->Add(this->queueItem1);
-			this->queuePanel->Controls->Add(this->queueTitle);
+			this->queuePanel->Controls->Add(this->gainsTitle);
 			this->queuePanel->Location = System::Drawing::Point(486, 224);
 			this->queuePanel->Name = L"queuePanel";
 			this->queuePanel->Size = System::Drawing::Size(560, 342);
@@ -474,144 +457,16 @@ namespace LYNX {
 			this->acceptButton->Text = L"Aceptar solicitud";
 			this->acceptButton->UseVisualStyleBackColor = false;
 			// 
-			// queueItem3
+			// gainsTitle
 			// 
-			this->queueItem3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
-				static_cast<System::Int32>(static_cast<System::Byte>(241)));
-			this->queueItem3->Controls->Add(this->q3Text);
-			this->queueItem3->Controls->Add(this->q3Title);
-			this->queueItem3->Controls->Add(this->q3Dot);
-			this->queueItem3->Location = System::Drawing::Point(22, 216);
-			this->queueItem3->Name = L"queueItem3";
-			this->queueItem3->Size = System::Drawing::Size(512, 58);
-			this->queueItem3->TabIndex = 3;
-			// 
-			// q3Text
-			// 
-			this->q3Text->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->q3Text->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
-				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->q3Text->Location = System::Drawing::Point(34, 28);
-			this->q3Text->Name = L"q3Text";
-			this->q3Text->Size = System::Drawing::Size(340, 18);
-			this->q3Text->TabIndex = 2;
-			this->q3Text->Text = L"-";
-			// 
-			// q3Title
-			// 
-			this->q3Title->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->q3Title->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
-				static_cast<System::Int32>(static_cast<System::Byte>(36)));
-			this->q3Title->Location = System::Drawing::Point(34, 8);
-			this->q3Title->Name = L"q3Title";
-			this->q3Title->Size = System::Drawing::Size(160, 18);
-			this->q3Title->TabIndex = 1;
-			this->q3Title->Text = L"Viaje economico";
-			// 
-			// q3Dot
-			// 
-			this->q3Dot->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(239)));
-			this->q3Dot->Location = System::Drawing::Point(14, 22);
-			this->q3Dot->Name = L"q3Dot";
-			this->q3Dot->Size = System::Drawing::Size(10, 10);
-			this->q3Dot->TabIndex = 0;
-			// 
-			// queueItem2
-			// 
-			this->queueItem2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
-				static_cast<System::Int32>(static_cast<System::Byte>(241)));
-			this->queueItem2->Controls->Add(this->q2Text);
-			this->queueItem2->Controls->Add(this->q2Title);
-			this->queueItem2->Controls->Add(this->q2Dot);
-			this->queueItem2->Location = System::Drawing::Point(22, 142);
-			this->queueItem2->Name = L"queueItem2";
-			this->queueItem2->Size = System::Drawing::Size(512, 58);
-			this->queueItem2->TabIndex = 2;
-			// 
-			// q2Text
-			// 
-			this->q2Text->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->q2Text->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
-				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->q2Text->Location = System::Drawing::Point(34, 28);
-			this->q2Text->Name = L"q2Text";
-			this->q2Text->Size = System::Drawing::Size(340, 18);
-			this->q2Text->TabIndex = 2;
-			this->q2Text->Text = L"-";
-			// 
-			// q2Title
-			// 
-			this->q2Title->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->q2Title->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
-				static_cast<System::Int32>(static_cast<System::Byte>(36)));
-			this->q2Title->Location = System::Drawing::Point(34, 8);
-			this->q2Title->Name = L"q2Title";
-			this->q2Title->Size = System::Drawing::Size(160, 18);
-			this->q2Title->TabIndex = 1;
-			this->q2Title->Text = L"Viaje estandar";
-			// 
-			// q2Dot
-			// 
-			this->q2Dot->BackColor = System::Drawing::Color::Red;
-			this->q2Dot->Location = System::Drawing::Point(14, 22);
-			this->q2Dot->Name = L"q2Dot";
-			this->q2Dot->Size = System::Drawing::Size(10, 10);
-			this->q2Dot->TabIndex = 0;
-			// 
-			// queueItem1
-			// 
-			this->queueItem1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
-				static_cast<System::Int32>(static_cast<System::Byte>(241)));
-			this->queueItem1->Controls->Add(this->q1Text);
-			this->queueItem1->Controls->Add(this->q1Title);
-			this->queueItem1->Controls->Add(this->q1Dot);
-			this->queueItem1->Location = System::Drawing::Point(22, 66);
-			this->queueItem1->Name = L"queueItem1";
-			this->queueItem1->Size = System::Drawing::Size(512, 58);
-			this->queueItem1->TabIndex = 1;
-			// 
-			// q1Text
-			// 
-			this->q1Text->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->q1Text->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
-				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->q1Text->Location = System::Drawing::Point(34, 28);
-			this->q1Text->Name = L"q1Text";
-			this->q1Text->Size = System::Drawing::Size(340, 18);
-			this->q1Text->TabIndex = 2;
-			this->q1Text->Text = L"-";
-			// 
-			// q1Title
-			// 
-			this->q1Title->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->q1Title->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
-				static_cast<System::Int32>(static_cast<System::Byte>(36)));
-			this->q1Title->Location = System::Drawing::Point(34, 8);
-			this->q1Title->Name = L"q1Title";
-			this->q1Title->Size = System::Drawing::Size(160, 18);
-			this->q1Title->TabIndex = 1;
-			this->q1Title->Text = L"Viaje premium";
-			// 
-			// q1Dot
-			// 
-			this->q1Dot->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
-				static_cast<System::Int32>(static_cast<System::Byte>(0)));
-			this->q1Dot->Location = System::Drawing::Point(14, 22);
-			this->q1Dot->Name = L"q1Dot";
-			this->q1Dot->Size = System::Drawing::Size(10, 10);
-			this->q1Dot->TabIndex = 0;
-			// 
-			// queueTitle
-			// 
-			this->queueTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
-			this->queueTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+			this->gainsTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
+			this->gainsTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->queueTitle->Location = System::Drawing::Point(3, 7);
-			this->queueTitle->Name = L"queueTitle";
-			this->queueTitle->Size = System::Drawing::Size(220, 28);
-			this->queueTitle->TabIndex = 0;
-			this->queueTitle->Text = L"Ganancias";
+			this->gainsTitle->Location = System::Drawing::Point(3, 7);
+			this->gainsTitle->Name = L"gainsTitle";
+			this->gainsTitle->Size = System::Drawing::Size(220, 28);
+			this->gainsTitle->TabIndex = 0;
+			this->gainsTitle->Text = L"Ganancias";
 			// 
 			// vehiclePanel
 			// 
@@ -991,9 +846,6 @@ namespace LYNX {
 			this->metric2->ResumeLayout(false);
 			this->metric1->ResumeLayout(false);
 			this->queuePanel->ResumeLayout(false);
-			this->queueItem3->ResumeLayout(false);
-			this->queueItem2->ResumeLayout(false);
-			this->queueItem1->ResumeLayout(false);
 			this->vehiclePanel->ResumeLayout(false);
 			this->maintenancePanel->ResumeLayout(false);
 			this->manualPanel->ResumeLayout(false);
