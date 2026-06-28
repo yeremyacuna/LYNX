@@ -121,6 +121,8 @@ namespace LYNX {
     private: System::Windows::Forms::Label^ lblInvisible5;
     private: System::Windows::Forms::Label^ lblEstIngresosFact;
 private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
+private: System::Windows::Forms::Button^ btnMinimo;
+private: System::Windows::Forms::Button^ btnMaximo;
 
 
     private: System::ComponentModel::Container^ components;
@@ -143,6 +145,8 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             this->lblResultadoInfo = (gcnew System::Windows::Forms::RichTextBox());
             this->lblResultadoTit = (gcnew System::Windows::Forms::Label());
             this->pnlListados = (gcnew System::Windows::Forms::Panel());
+            this->btnMinimo = (gcnew System::Windows::Forms::Button());
+            this->btnMaximo = (gcnew System::Windows::Forms::Button());
             this->lblTitListados = (gcnew System::Windows::Forms::Label());
             this->btnListPasajeros = (gcnew System::Windows::Forms::Button());
             this->btnListConductores = (gcnew System::Windows::Forms::Button());
@@ -361,7 +365,8 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             this->lblResultadoInfo->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)),
                 static_cast<System::Int32>(static_cast<System::Byte>(250)), static_cast<System::Int32>(static_cast<System::Byte>(246)));
             this->lblResultadoInfo->BorderStyle = System::Windows::Forms::BorderStyle::None;
-            this->lblResultadoInfo->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9.3F));
+            this->lblResultadoInfo->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(0)));
             this->lblResultadoInfo->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
                 static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->lblResultadoInfo->Location = System::Drawing::Point(11, 34);
@@ -375,12 +380,13 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             // lblResultadoTit
             // 
             this->lblResultadoTit->AutoSize = true;
-            this->lblResultadoTit->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
+            this->lblResultadoTit->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(0)));
             this->lblResultadoTit->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(6)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
                 static_cast<System::Int32>(static_cast<System::Byte>(70)));
             this->lblResultadoTit->Location = System::Drawing::Point(8, 8);
             this->lblResultadoTit->Name = L"lblResultadoTit";
-            this->lblResultadoTit->Size = System::Drawing::Size(59, 13);
+            this->lblResultadoTit->Size = System::Drawing::Size(68, 16);
             this->lblResultadoTit->TabIndex = 0;
             this->lblResultadoTit->Text = L"Resultado:";
             // 
@@ -390,6 +396,8 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
                 | System::Windows::Forms::AnchorStyles::Left)
                 | System::Windows::Forms::AnchorStyles::Right));
             this->pnlListados->BackColor = System::Drawing::Color::White;
+            this->pnlListados->Controls->Add(this->btnMinimo);
+            this->pnlListados->Controls->Add(this->btnMaximo);
             this->pnlListados->Controls->Add(this->lblTitListados);
             this->pnlListados->Controls->Add(this->btnListPasajeros);
             this->pnlListados->Controls->Add(this->btnListConductores);
@@ -402,6 +410,42 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             this->pnlListados->Name = L"pnlListados";
             this->pnlListados->Size = System::Drawing::Size(871, 456);
             this->pnlListados->TabIndex = 6;
+            // 
+            // btnMinimo
+            // 
+            this->btnMinimo->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
+                static_cast<System::Int32>(static_cast<System::Byte>(109)));
+            this->btnMinimo->Cursor = System::Windows::Forms::Cursors::Hand;
+            this->btnMinimo->FlatAppearance->BorderColor = System::Drawing::Color::White;
+            this->btnMinimo->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+            this->btnMinimo->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
+            this->btnMinimo->ForeColor = System::Drawing::Color::White;
+            this->btnMinimo->Location = System::Drawing::Point(421, 92);
+            this->btnMinimo->Name = L"btnMinimo";
+            this->btnMinimo->Size = System::Drawing::Size(112, 26);
+            this->btnMinimo->TabIndex = 9;
+            this->btnMinimo->Text = L"Minimo";
+            this->btnMinimo->UseVisualStyleBackColor = false;
+            this->btnMinimo->Visible = false;
+            this->btnMinimo->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnMinimo_Click);
+            // 
+            // btnMaximo
+            // 
+            this->btnMaximo->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
+                static_cast<System::Int32>(static_cast<System::Byte>(109)));
+            this->btnMaximo->Cursor = System::Windows::Forms::Cursors::Hand;
+            this->btnMaximo->FlatAppearance->BorderColor = System::Drawing::Color::White;
+            this->btnMaximo->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+            this->btnMaximo->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 8, System::Drawing::FontStyle::Bold));
+            this->btnMaximo->ForeColor = System::Drawing::Color::White;
+            this->btnMaximo->Location = System::Drawing::Point(299, 92);
+            this->btnMaximo->Name = L"btnMaximo";
+            this->btnMaximo->Size = System::Drawing::Size(112, 26);
+            this->btnMaximo->TabIndex = 8;
+            this->btnMaximo->Text = L"Maximo";
+            this->btnMaximo->UseVisualStyleBackColor = false;
+            this->btnMaximo->Visible = false;
+            this->btnMaximo->Click += gcnew System::EventHandler(this, &AdminMenuForm::btnMaximo_Click);
             // 
             // lblTitListados
             // 
@@ -473,12 +517,13 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             // lblOrdenarPor
             // 
             this->lblOrdenarPor->AutoSize = true;
-            this->lblOrdenarPor->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9));
+            this->lblOrdenarPor->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(0)));
             this->lblOrdenarPor->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(80)), static_cast<System::Int32>(static_cast<System::Byte>(80)),
                 static_cast<System::Int32>(static_cast<System::Byte>(80)));
             this->lblOrdenarPor->Location = System::Drawing::Point(15, 96);
             this->lblOrdenarPor->Name = L"lblOrdenarPor";
-            this->lblOrdenarPor->Size = System::Drawing::Size(74, 14);
+            this->lblOrdenarPor->Size = System::Drawing::Size(80, 16);
             this->lblOrdenarPor->TabIndex = 4;
             this->lblOrdenarPor->Text = L"Ordenar por:";
             // 
@@ -688,7 +733,8 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             this->rtbPasswords->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(250)),
                 static_cast<System::Int32>(static_cast<System::Byte>(249)));
             this->rtbPasswords->BorderStyle = System::Windows::Forms::BorderStyle::None;
-            this->rtbPasswords->Font = (gcnew System::Drawing::Font(L"Consolas", 9.3F));
+            this->rtbPasswords->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(0)));
             this->rtbPasswords->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
                 static_cast<System::Int32>(static_cast<System::Byte>(31)));
             this->rtbPasswords->Location = System::Drawing::Point(15, 52);
@@ -1277,7 +1323,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
         // Click functions
         // 
             // pictureLYNXClick
-        System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e) {
+            System::Void pictureBoxIcon_Click(System::Object^ sender, System::EventArgs^ e) {
             if (FormsStatus::mainMenu != nullptr && !FormsStatus::mainMenu->IsDisposed)
             {
                 FormsStatus::SaveWindow(this);
@@ -1451,7 +1497,7 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
 
                 auto copia = authManager->copyDriverList();
 
-                AdvancedOrders<Driver>::sortDriversByRating(copia);
+                AuthManager::sortDriversByRating(copia);
 
                 for (int i = 0; i < copia->getSize(); i++)
                 {
@@ -1486,6 +1532,9 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
         // Lista Pasajeros: ordenar por ID o Gasto
         System::Void btnListPasajeros_Click(System::Object^ sender, System::EventArgs^ e)
         {
+            btnMaximo->Visible = false;
+            btnMinimo->Visible = false;
+
             listaActiva = 0;
 
             // Activar pasajero (verde)
@@ -1536,6 +1585,9 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
         // Lista Conductores: ordenar por ID o Rating
         System::Void btnListConductores_Click(System::Object^ sender, System::EventArgs^ e)
         {
+            btnMaximo->Visible = false;
+            btnMinimo->Visible = false;
+
             listaActiva = 1;
 
             // Activar conductor (azul oscuro)
@@ -1586,6 +1638,9 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
         // Lista Viajes: ordenar por Precio
         System::Void btnListViajes_Click(System::Object^ sender, System::EventArgs^ e)
         {
+            btnMaximo->Visible = false;
+            btnMinimo->Visible = false;
+
             listaActiva = 2;
 
             // Activar viajes (azul admin)
@@ -1611,6 +1666,10 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
         // Ordenar por criterio 1
         System::Void btnOrden1_Click(System::Object^ sender, System::EventArgs^ e)
         {
+
+            btnMaximo->Visible = false;
+            btnMinimo->Visible = false;
+
             // listaActiva==0 ------> por ID pasajero
             // listaActiva==1 ------> por ID conductor
             // listaActiva==2 ------> por precio de viaje
@@ -1620,9 +1679,92 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
         // Ordenar por criterio 2
         System::Void btnOrden2_Click(System::Object^ sender, System::EventArgs^ e)
         {
-            // listaActiva==0 -----> por gasto total pasajero
-            // listaActiva==1 -----> por rating conductor
-            rtbListado->Text = L"Ordenamiento por " + btnOrden2->Text + L" aplicado.";
+            if (authManager == nullptr) return;
+
+            if (listaActiva == 0)
+            {
+                authManager->sortUsersBySpent();
+                btnListPasajeros_Click(sender, e);
+
+                btnMaximo->BackColor = System::Drawing::Color::FromArgb(36, 181, 109);
+                btnMinimo->BackColor = System::Drawing::Color::FromArgb(36, 181, 109);
+
+                btnMaximo->Visible = true;
+                btnMinimo->Visible = true;
+            }
+            else if (listaActiva == 1)
+            {
+                authManager->sortDriversByRatingHeapSort();
+                btnListConductores_Click(sender, e);
+
+                btnMaximo->BackColor = System::Drawing::Color::FromArgb(18, 92, 255);
+                btnMinimo->BackColor = System::Drawing::Color::FromArgb(18, 92, 255);
+
+                btnMaximo->Visible = true;
+                btnMinimo->Visible = true;
+            }
+        }
+
+        // Maximo click
+        System::Void btnMaximo_Click(System::Object^ sender, System::EventArgs^ e) {
+            if (authManager == nullptr) return;
+
+            if (listaActiva == 0)
+            {
+                Passenger p = authManager->getPassengerMaxTotalSpentHeap();
+
+                rtbListado->Text =
+                    L"\tPASAJERO CON MAYOR RATING\n\n" +
+                    FormsStatus::ToManaged(p.getPassengerId()) + 
+                    L" | " + FormsStatus::ToManaged(p.getName()) + 
+                    L" | DNI: " + FormsStatus::ToManaged(p.getDni()) +
+                    L" | Rating: " + FormsStatus::ToManaged(p.getRating(), 1) +
+                    L" | Viajes: " + FormsStatus::ToManaged(p.getTotalTrips()) +
+                    L" | Gasto: S/ " + FormsStatus::ToManaged(p.getTotalSpent(), 2) + L"\n";
+            }
+
+            if (listaActiva == 1)
+            {
+                Driver d = authManager->getDriverMaxRatingHeap();
+
+                rtbListado->Text =
+                    L"CONDUCTOR CON MAYOR RATING\n\n" +
+                    FormsStatus::ToManaged(d.getDriverId()) + L" | " +
+                    FormsStatus::ToManaged(d.getName()) + L" | DNI: " +
+                    FormsStatus::ToManaged(d.getDni()) + L" | Rating: " +
+                    FormsStatus::ToManaged(d.getRating(), 1);
+            }
+        }
+
+        // Minimo click
+        System::Void btnMinimo_Click(System::Object^ sender, System::EventArgs^ e) {
+            if (authManager == nullptr) return;
+
+            if (listaActiva == 0)
+            {
+                Passenger p = authManager->getPassengerMinTotalSpentHeap();
+
+                rtbListado->Text =
+                    L"\tPASAJERO CON MENOR RATING\n\n" +
+                    FormsStatus::ToManaged(p.getPassengerId()) +
+                    L" | " + FormsStatus::ToManaged(p.getName()) +
+                    L" | DNI: " + FormsStatus::ToManaged(p.getDni()) +
+                    L" | Rating: " + FormsStatus::ToManaged(p.getRating(), 1) +
+                    L" | Viajes: " + FormsStatus::ToManaged(p.getTotalTrips()) +
+                    L" | Gasto: S/ " + FormsStatus::ToManaged(p.getTotalSpent(), 2) + L"\n";
+            }
+
+            if (listaActiva == 1)
+            {
+                Driver d = authManager->getDriverMinRatingHeap();
+
+                rtbListado->Text =
+                    L"CONDUCTOR CON MENOR RATING\n\n" +
+                    FormsStatus::ToManaged(d.getDriverId()) + L" | " +
+                    FormsStatus::ToManaged(d.getName()) + L" | DNI: " +
+                    FormsStatus::ToManaged(d.getDni()) + L" | Rating: " +
+                    FormsStatus::ToManaged(d.getRating(), 1);
+            }
         }
 
         // 
@@ -1639,18 +1781,36 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
             // Leer el binario y construir el texto a mostrar
             auto previews = authManager->readPasswordsBinary();
 
-            String^ texto = "";
+            rtbPasswords->Clear();
+
             for (int i = 0; i < (int)previews.size(); i++) {
-                
-                std::string linea = previews[i].tipo + " | "
+                if (previews[i].tipo == "Passenger")
+                {
+                    rtbPasswords->SelectionColor = System::Drawing::Color::FromArgb(36, 181, 109);
+                    previews[i].tipo = "Pasajero";
+                }
+                else if (previews[i].tipo == "Driver")
+                {
+                    rtbPasswords->SelectionColor = System::Drawing::Color::FromArgb(18, 92, 255);
+                    previews[i].tipo = "Conductor";
+                }
+
+                // SOLO el tipo para que se pinte con el color elegido
+                rtbPasswords->AppendText(gcnew String(previews[i].tipo.c_str()));
+
+                rtbPasswords->SelectionColor = System::Drawing::Color::Black;
+
+                std::string linea = " | "
                     + previews[i].id + " | "
                     + previews[i].dni + " | "
-                    + previews[i].password;
-                texto += gcnew String(linea.c_str()) + "\n";
+                    + previews[i].password + "\n";
 
+                rtbPasswords->AppendText(gcnew String(linea.c_str()));
             }
 
-            rtbPasswords->Text = texto->Length > 0 ? texto : L"No hay passwords registrados.";
+            if (previews.size() == 0) {
+                rtbPasswords->Text = L"No hay passwords registrados.";
+            }
         }
 
         //
@@ -1667,6 +1827,8 @@ private: System::Windows::Forms::RichTextBox^ lblResultadoInfo;
 
 
 
+
+        
 
 };
 }

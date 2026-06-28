@@ -296,4 +296,24 @@ public:
         return buscar(head, criterio);
     }
 
+    // toArray — exporta el contenido a un array nuevo en heap
+    // el caller es responsable de hacer delete[] después de usarlo
+    T* toArray() const {
+        T* arr = new T[size];
+        Node<T>* current = head;
+        int i = 0;
+        while (current != nullptr) {
+            arr[i++] = current->data;
+            current = current->next;
+        }
+        return arr;
+    }
+
+    // fromArray — reconstruye la lista completa a partir de un array
+    void fromArray(T* arr, int n) {
+        clear();
+        for (int i = 0; i < n; i++)
+            pushBack(arr[i]);
+    }
+
 };

@@ -5,6 +5,8 @@
 #include "../include/LinkedList.h"
 #include "../include/Queue.h"
 #include "../include/FileManager.h"
+#include "../include/Heap.h"
+#include "../include/AdvancedOrders.h"
 #include "Passenger.h"
 #include "Driver.h"
 #include "Trip.h"
@@ -38,7 +40,7 @@ private:
     // Busca la posicion de un admin por ID
     int indexOfAdmin(string id)
     {
-        for ( int i = 0; i < adminList->getSize(); i++)
+        for (int i = 0; i < adminList->getSize(); i++)
             if (adminList->get(i).id == id)
                 return i;
         return -1;
@@ -444,10 +446,10 @@ public:
         bool b = compactPassengerIds();
         syncNextGeneratedIds();
 
-        if (a || b) 
+        if (a || b)
             saveAll();
     }
-    
+
     void reloadDrivers()
     {
         driverList->clear();
@@ -466,22 +468,22 @@ public:
 
     void reloadAdmins()
     {
-       
-            adminList->clear();
 
-            vector<FileManager::AdminPreview> cargados = fileManager->leerAdminsTXT();
+        adminList->clear();
 
-            for (int i = 0; i < (int)cargados.size(); i++)
-                adminList->pushBack(cargados[i]);
+        vector<FileManager::AdminPreview> cargados = fileManager->leerAdminsTXT();
 
-            bool a = sanitizeLoadedAdmins();
+        for (int i = 0; i < (int)cargados.size(); i++)
+            adminList->pushBack(cargados[i]);
 
-            sortAdminsById();
+        bool a = sanitizeLoadedAdmins();
 
-            bool b = compactAdminIds();
+        sortAdminsById();
 
-            if (a || b)
-                saveAdmins();
+        bool b = compactAdminIds();
+
+        if (a || b)
+            saveAdmins();
     }
 
     // FUNCION QUE PASA LA ESTRCUTURA PARA QUE GUARDE DE PASAJERO Y DRIVER SUS CONTRAS
@@ -523,6 +525,13 @@ public:
 
 
 
+
+
+
+
+
+
+
     // PASAJEROS
     // userExists: verifica si ya existe un pasajero con ese DNI
     bool userExists(string dni) { return indexOfUser(dni) != -1; }
@@ -548,9 +557,9 @@ public:
     // Valida credenciales
     bool loginUserValid(string dni, string password) {
         int i = indexOfUser(dni);
-        if (i == -1) 
+        if (i == -1)
             return false;
-        return 
+        return
             passengerList->get(i).login(dni, password);
     }
 
@@ -594,6 +603,77 @@ public:
         passengerList->insert(i, p);
         savePassengers();
     }
+
+    // obtener el max rating de passenger con maxheap
+    Passenger getPassengerMaxTotalSpentHeap()
+    {
+        int n = passengerList->getSize();
+
+        if (n == 0)
+            return Passenger();
+
+        Passenger* arr = passengerList->toArray();
+
+        auto compare = [](const Passenger& a, const Passenger& b)
+            {
+                if (a.getTotalSpent() != b.getTotalSpent())
+                    return a.getTotalSpent() > b.getTotalSpent();
+
+                return a.getTotalTrips() > b.getTotalTrips();
+            };
+
+        Heap<Passenger, decltype(compare)>
+            heap(n, compare);
+
+        heap.buildHeap(arr, n);
+
+        Passenger best = heap.peek();
+
+        delete[] arr;
+
+        return best;
+    }
+
+    // obtener el minimo rating de passenger con minheap
+    Passenger getPassengerMinTotalSpentHeap()
+    {
+        int n = passengerList->getSize();
+
+        if (n == 0)
+            return Passenger();
+
+        Passenger* arr = passengerList->toArray();
+
+        auto compare = [](const Passenger& a, const Passenger& b)
+            {
+                if (a.getTotalSpent() != b.getTotalSpent())
+                    return a.getTotalSpent() < b.getTotalSpent();
+
+                return a.getTotalTrips() < b.getTotalTrips();
+            };
+
+        Heap<Passenger, decltype(compare)>
+            heap(n, compare);
+
+        heap.buildHeap(arr, n);
+
+        Passenger best = heap.peek();
+
+        delete[] arr;
+
+        return best;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     // CONDUCTORES
     // driverExists: verifica si ya existe un conductor con ese DNI
@@ -674,6 +754,146 @@ public:
                 return driverList->get(i).getDni();
         return "";
     }
+
+    // ordenamientoSHELL por rating: mayor a menor rating
+    static void sortDriversByRating(LinkedList<Driver>* list)
+    {
+        int n = list->getSize();
+
+        if (n <= 1)
+            return;
+
+        Driver* arr = list->toArray();
+
+        AdvancedOrders<Driver>::shellSort(arr,n,
+            [](const Driver& a, const Driver& b)
+            {
+                return a.getRating() < b.getRating();
+            }
+        );
+
+        list->fromArray(arr, n);
+
+        delete[] arr;
+    }
+
+    /*
+    // Pasar la driverList a Heap
+    void sortDriversByRatingHeap()
+    {
+        int n = driverList->getSize();
+        if (n <= 1) 
+            return;
+
+        // el lambda compare
+        auto compararRating = [](const Driver& a, const Driver& b) -> bool {
+            return a.getRating() > b.getRating();
+            };
+
+        // Como le pasamos al template un tipo que no tiene nombre ? Usando decltype().Esta palabra clave significa "declare type"
+        Heap<Driver, decltype(compararRating)> 
+            heap(n, compararRating);
+
+        for (int i = 0; i < n; i++) {
+            heap.push(driverList->get(i));
+        }
+
+        driverList->clear();
+
+        while (!heap.isEmpty()) {
+            driverList->pushBack(heap.peek());
+            heap.pop();
+        }
+    }
+    */
+
+    // ordenamiento por heap de rating drivers
+    void sortDriversByRatingHeapSort()
+    {
+        int n = driverList->getSize();
+
+        if (n <= 1)
+            return;
+
+        Driver* arr = driverList->toArray();
+
+        AdvancedOrders<Driver>::heapSort(arr, n,[](const Driver& a, const Driver& b) 
+            {
+                if (a.getRating() != b.getRating())
+                    return a.getRating() > b.getRating();
+
+                return a.getTotalTrips() > b.getTotalTrips();
+            }
+        );
+
+        driverList->fromArray(arr, n);
+        delete[] arr;
+    }
+
+    // obtener el max rating de driver con maxheap
+    Driver getDriverMaxRatingHeap()
+    {
+        int n = driverList->getSize();
+
+        if (n == 0)
+            return Driver();
+
+        Driver* arr = driverList->toArray();
+
+        auto compare =[](const Driver& a, const Driver& b)
+            {
+                if (a.getRating() != b.getRating())
+                    return a.getRating() > b.getRating();
+
+                return a.getTotalTrips() > b.getTotalTrips();
+            };
+
+        Heap<Driver, decltype(compare)> 
+            heap(n, compare);
+
+        heap.buildHeap(arr, n);
+
+        Driver best = heap.peek();
+
+        delete[] arr;
+
+        return best;
+    }
+
+    // obtener el minimo rating de driver con minheap
+    Driver getDriverMinRatingHeap()
+    {
+        int n = driverList->getSize();
+
+        if (n == 0)
+            return Driver();
+
+        Driver* arr = driverList->toArray();
+
+        auto compare = [](const Driver& a, const Driver& b)
+            {
+                if (a.getRating() != b.getRating())
+                    return a.getRating() < b.getRating();
+
+                return a.getTotalTrips() < b.getTotalTrips();
+            };
+
+        Heap<Driver, decltype(compare)>
+            heap(n, compare);
+
+        heap.buildHeap(arr, n);
+
+        Driver best = heap.peek();
+
+        delete[] arr;
+
+        return best;
+    }
+
+
+
+
+
 
     // ADMINS
     bool adminExists(string id) { return indexOfAdmin(id) != -1; }
