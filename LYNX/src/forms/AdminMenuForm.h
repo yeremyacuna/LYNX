@@ -1729,7 +1729,7 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
                 txtIDViajeBuscar->ForeColor = System::Drawing::Color::Gray;
             }
 
-            /*
+            
             //1
             string codigo = FormsStatus::ToNormalString(txtIDViajeBuscar->Text);
 
@@ -1739,7 +1739,7 @@ private: System::Windows::Forms::TextBox^ txtIDViajeBuscar;
             txtIDViajeBuscar->Text = L"";
             // 3. Forzar el evento Leave para que vuelva a aparecer el placeholder
             txtIDViajeBuscar_Leave(sender, e);
-            */
+            
 
             vector<Trip> viajes = tripManager->exportAllTrips();
 

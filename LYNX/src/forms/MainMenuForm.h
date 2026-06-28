@@ -56,9 +56,9 @@ namespace LYNX {
 			{
 				this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
 			}
-			catch (...)
+			catch (System::Exception^ ex)
 			{
-				// empty	
+				System::Windows::Forms::MessageBox::Show(ex->Message);
 			}
 		}
 
@@ -910,6 +910,9 @@ namespace LYNX {
 		//
 		System::Void MainMenuForm_Resize(System::Object^ sender, System::EventArgs^ e)
 		{
+			if (this->WindowState == System::Windows::Forms::FormWindowState::Minimized)
+				return;
+
 			int formW = this->ClientSize.Width;
 			int formH = this->ClientSize.Height;
 
@@ -962,8 +965,6 @@ namespace LYNX {
 			this->lblDescAdmin->Size = System::Drawing::Size(cardW - 48, 76);
 			this->btnIngresarAdmin->Size = System::Drawing::Size(cardW - 48, 44);
 
-			// Barra inferior: fijada abajo
-			this->pnlBarraInferior->Location = System::Drawing::Point(0, formH - pnlBarraInferior->Height);
 		}
 	};
 }

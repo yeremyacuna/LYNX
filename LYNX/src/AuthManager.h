@@ -36,6 +36,7 @@ private:
         }
     }
 
+    // se llama despues de reloadDrivers() o cuando la lista cambia de golpe
     void reconstruirHashConductores() {
         hashConductores.limpiar();
         for (int i = 0; i < driverList->getSize(); i++) {
@@ -381,7 +382,7 @@ public:
             saveAll();
         }
 
-        // Construimos la TABLA HASH desde las listas ya limpiecitas y ordenadas
+        // reconstruimos hash despues de recargar la lista
         reconstruirHashPasajeros();
         reconstruirHashConductores();
     }
@@ -403,6 +404,8 @@ public:
     int getTotalUsers() { return passengerList->getSize(); }
     int getTotalDrivers() { return driverList->getSize(); }
 
+
+    // crearme una copia de conductores list
     LinkedList<Driver>* copyDriverList()
     {
         LinkedList<Driver>* original = driverList;
@@ -416,6 +419,15 @@ public:
         }
 
         return nueva;
+    }
+
+    // crearme una copia de passenger list
+    LinkedList<Passenger>* copyPassengerList() 
+    {
+        LinkedList<Passenger>* copia = new LinkedList<Passenger>();
+        for (int i = 0; i < passengerList->getSize(); i++)
+            copia->pushBack(passengerList->get(i));
+        return copia;
     }
 
     //  FUNCIONES DE GUARDADO
@@ -571,12 +583,12 @@ public:
     // PASAJEROS
     
     /*
-    // userExists: verifica si ya existe un pasajero con ese DNI
+    // userExists (old): verifica si ya existe un pasajero con ese DNI
     bool userExists(string dni) { return indexOfUser(dni) != -1; }
     */
 
-    // verifica si ya existe un pasajero con ese DNI
-    bool userExists(string dni) { return hashPasajeros.contiene(dni); }//hash O(1)
+    // usa la tabla hash para buscar en O(1) en vez de recorrer la lista
+    bool userExists(string dni) { return hashPasajeros.contiene(dni); } //hash O(1)
 
     // evita que el mismo DNI aparezca como pasajero y conductor a la vez
     bool dniExistsAnyRole(string dni) { return userExists(dni) || driverExists(dni); }
@@ -631,7 +643,7 @@ public:
         passengerList->remove(i);
         passengerList->insert(i, p);
         savePassengers();
-        hashPasajeros.insertar(dni, p);  // actualizamos tabla hash
+        hashPasajeros.insertar(dni, p);  // actualizar en la tabla hash
     }
 
     // cambia nombre y contra de un pasajero ya registrado
@@ -644,7 +656,7 @@ public:
         passengerList->remove(i);
         passengerList->insert(i, p);
         savePassengers();
-        hashPasajeros.insertar(dni, p);  // actualizamos tabla hash
+        hashPasajeros.insertar(dni, p);  // actualizar en la tabla hash
     }
 
     // Actualiza el rating
@@ -782,7 +794,7 @@ public:
         driverList->remove(i);
         driverList->insert(i, d);
         saveDrivers();
-        hashConductores.insertar(dni, d);
+        hashConductores.insertar(dni, d); // actualizar en la tabla hash
     }
 
     // marca viaje aceptado y suma viajes/ganancias del conductor
@@ -794,7 +806,7 @@ public:
         driverList->remove(i);
         driverList->insert(i, d);
         saveDrivers();
-        hashConductores.insertar(dni, d);
+        hashConductores.insertar(dni, d); // actualizar en la tabla hash
     }
 
     // regresa al conductor a estado disponible
