@@ -4,9 +4,6 @@
 #include "../AuthManager.h"
 #include "../TripManager.h"
 #include <msclr/marshal_cppstd.h>
-#include <iomanip>
-#include <sstream>
-#include <ctime>
 
 class AuthManager;
 class TripManager;
@@ -101,10 +98,10 @@ namespace LYNX {
 	private: System::Windows::Forms::Label^ vehicleTitle;
 	private: System::Windows::Forms::Label^ vehicleName;
 	private: System::Windows::Forms::Label^ vehicleText;
-	private: System::Windows::Forms::Panel^ maintenancePanel;
-	private: System::Windows::Forms::Label^ maintenanceTitle;
-	private: System::Windows::Forms::Label^ maintenanceText;
-	private: System::Windows::Forms::Button^ btnUpdateVehicle;
+
+
+
+
 
 	private: System::Windows::Forms::Panel^ manualPanel;
 	private: System::Windows::Forms::Label^ manualTitle;
@@ -156,6 +153,29 @@ private: System::Windows::Forms::Label^ lbltipes;
 
 private: System::Windows::Forms::Label^ lblOtoD;
 private: System::Windows::Forms::Label^ lblprice;
+private: System::Windows::Forms::Button^ btnUpdate;
+private: System::Windows::Forms::TextBox^ tbYear;
+
+private: System::Windows::Forms::TextBox^ tbColour;
+
+private: System::Windows::Forms::TextBox^ tbModel;
+private: System::Windows::Forms::TextBox^ tbBrand;
+
+
+private: System::Windows::Forms::TextBox^ tbPlate;
+private: System::Windows::Forms::Label^ lblPlate;
+private: System::Windows::Forms::Label^ lblYear;
+
+
+
+
+private: System::Windows::Forms::Label^ lblColour;
+
+private: System::Windows::Forms::Label^ lblBrand;
+
+private: System::Windows::Forms::Label^ lblModel;
+
+
 
 	private:  System::ComponentModel::Container^ components;
 
@@ -195,10 +215,17 @@ private: System::Windows::Forms::Label^ lblprice;
 			this->lblComisionNumber = (gcnew System::Windows::Forms::Label());
 			this->gainsTitle = (gcnew System::Windows::Forms::Label());
 			this->vehiclePanel = (gcnew System::Windows::Forms::Panel());
-			this->btnUpdateVehicle = (gcnew System::Windows::Forms::Button());
-			this->maintenancePanel = (gcnew System::Windows::Forms::Panel());
-			this->maintenanceText = (gcnew System::Windows::Forms::Label());
-			this->maintenanceTitle = (gcnew System::Windows::Forms::Label());
+			this->lblYear = (gcnew System::Windows::Forms::Label());
+			this->lblColour = (gcnew System::Windows::Forms::Label());
+			this->lblBrand = (gcnew System::Windows::Forms::Label());
+			this->lblModel = (gcnew System::Windows::Forms::Label());
+			this->lblPlate = (gcnew System::Windows::Forms::Label());
+			this->tbYear = (gcnew System::Windows::Forms::TextBox());
+			this->tbColour = (gcnew System::Windows::Forms::TextBox());
+			this->tbModel = (gcnew System::Windows::Forms::TextBox());
+			this->tbBrand = (gcnew System::Windows::Forms::TextBox());
+			this->tbPlate = (gcnew System::Windows::Forms::TextBox());
+			this->btnUpdate = (gcnew System::Windows::Forms::Button());
 			this->vehicleText = (gcnew System::Windows::Forms::Label());
 			this->vehicleName = (gcnew System::Windows::Forms::Label());
 			this->vehicleTitle = (gcnew System::Windows::Forms::Label());
@@ -240,7 +267,6 @@ private: System::Windows::Forms::Label^ lblprice;
 			this->panel2->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->vehiclePanel->SuspendLayout();
-			this->maintenancePanel->SuspendLayout();
 			this->manualPanel->SuspendLayout();
 			this->historyPanel->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
@@ -347,7 +373,7 @@ private: System::Windows::Forms::Label^ lblprice;
 			this->lastTripText->Name = L"lastTripText";
 			this->lastTripText->Size = System::Drawing::Size(345, 24);
 			this->lastTripText->TabIndex = 2;
-			this->lastTripText->Text = L"Lima -> Callao | S/ 31.0";
+			this->lastTripText->Text = L"-";
 			this->lastTripText->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// lastTripTitle
@@ -363,8 +389,7 @@ private: System::Windows::Forms::Label^ lblprice;
 			// 
 			// lastTripDot
 			// 
-			this->lastTripDot->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
-				static_cast<System::Int32>(static_cast<System::Byte>(109)));
+			this->lastTripDot->BackColor = System::Drawing::Color::Black;
 			this->lastTripDot->Location = System::Drawing::Point(14, 22);
 			this->lastTripDot->Name = L"lastTripDot";
 			this->lastTripDot->Size = System::Drawing::Size(10, 10);
@@ -593,8 +618,17 @@ private: System::Windows::Forms::Label^ lblprice;
 			// vehiclePanel
 			// 
 			this->vehiclePanel->BackColor = System::Drawing::Color::White;
-			this->vehiclePanel->Controls->Add(this->btnUpdateVehicle);
-			this->vehiclePanel->Controls->Add(this->maintenancePanel);
+			this->vehiclePanel->Controls->Add(this->lblYear);
+			this->vehiclePanel->Controls->Add(this->lblColour);
+			this->vehiclePanel->Controls->Add(this->lblBrand);
+			this->vehiclePanel->Controls->Add(this->lblModel);
+			this->vehiclePanel->Controls->Add(this->lblPlate);
+			this->vehiclePanel->Controls->Add(this->tbYear);
+			this->vehiclePanel->Controls->Add(this->tbColour);
+			this->vehiclePanel->Controls->Add(this->tbModel);
+			this->vehiclePanel->Controls->Add(this->tbBrand);
+			this->vehiclePanel->Controls->Add(this->tbPlate);
+			this->vehiclePanel->Controls->Add(this->btnUpdate);
 			this->vehiclePanel->Controls->Add(this->vehicleText);
 			this->vehiclePanel->Controls->Add(this->vehicleName);
 			this->vehiclePanel->Controls->Add(this->vehicleTitle);
@@ -603,60 +637,130 @@ private: System::Windows::Forms::Label^ lblprice;
 			this->vehiclePanel->Size = System::Drawing::Size(372, 342);
 			this->vehiclePanel->TabIndex = 3;
 			// 
-			// btnUpdateVehicle
+			// lblYear
 			// 
-			this->btnUpdateVehicle->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(239)));
-			this->btnUpdateVehicle->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnUpdateVehicle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->btnUpdateVehicle->ForeColor = System::Drawing::Color::White;
-			this->btnUpdateVehicle->Location = System::Drawing::Point(22, 264);
-			this->btnUpdateVehicle->Name = L"btnUpdateVehicle";
-			this->btnUpdateVehicle->Size = System::Drawing::Size(170, 34);
-			this->btnUpdateVehicle->TabIndex = 4;
-			this->btnUpdateVehicle->Text = L"Actualizar vehiculo";
-			this->btnUpdateVehicle->UseVisualStyleBackColor = false;
-			this->btnUpdateVehicle->Click += gcnew System::EventHandler(this, &DriverMenuForm::btnUpdateVehicle_Click);
+			this->lblYear->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblYear->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblYear->Location = System::Drawing::Point(202, 178);
+			this->lblYear->Name = L"lblYear";
+			this->lblYear->Size = System::Drawing::Size(130, 22);
+			this->lblYear->TabIndex = 18;
+			this->lblYear->Text = L"Anio";
+			this->lblYear->Visible = false;
 			// 
-			// maintenancePanel
+			// lblColour
 			// 
-			this->maintenancePanel->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
-				static_cast<System::Int32>(static_cast<System::Byte>(246)), static_cast<System::Int32>(static_cast<System::Byte>(241)));
-			this->maintenancePanel->Controls->Add(this->maintenanceText);
-			this->maintenancePanel->Controls->Add(this->maintenanceTitle);
-			this->maintenancePanel->Location = System::Drawing::Point(22, 172);
-			this->maintenancePanel->Name = L"maintenancePanel";
-			this->maintenancePanel->Size = System::Drawing::Size(326, 70);
-			this->maintenancePanel->TabIndex = 3;
+			this->lblColour->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblColour->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblColour->Location = System::Drawing::Point(26, 178);
+			this->lblColour->Name = L"lblColour";
+			this->lblColour->Size = System::Drawing::Size(130, 22);
+			this->lblColour->TabIndex = 19;
+			this->lblColour->Text = L"Color";
+			this->lblColour->Visible = false;
 			// 
-			// maintenanceText
+			// lblBrand
 			// 
-			this->maintenanceText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->maintenanceText->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
-				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->maintenanceText->Location = System::Drawing::Point(16, 38);
-			this->maintenanceText->Name = L"maintenanceText";
-			this->maintenanceText->Size = System::Drawing::Size(220, 18);
-			this->maintenanceText->TabIndex = 1;
-			this->maintenanceText->Text = L"-----";
+			this->lblBrand->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblBrand->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblBrand->Location = System::Drawing::Point(26, 131);
+			this->lblBrand->Name = L"lblBrand";
+			this->lblBrand->Size = System::Drawing::Size(130, 22);
+			this->lblBrand->TabIndex = 19;
+			this->lblBrand->Text = L"Marca";
+			this->lblBrand->Visible = false;
 			// 
-			// maintenanceTitle
+			// lblModel
 			// 
-			this->maintenanceTitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->maintenanceTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
-				static_cast<System::Int32>(static_cast<System::Byte>(36)));
-			this->maintenanceTitle->Location = System::Drawing::Point(16, 14);
-			this->maintenanceTitle->Name = L"maintenanceTitle";
-			this->maintenanceTitle->Size = System::Drawing::Size(200, 18);
-			this->maintenanceTitle->TabIndex = 0;
-			this->maintenanceTitle->Text = L"-----";
+			this->lblModel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblModel->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblModel->Location = System::Drawing::Point(26, 82);
+			this->lblModel->Name = L"lblModel";
+			this->lblModel->Size = System::Drawing::Size(130, 22);
+			this->lblModel->TabIndex = 18;
+			this->lblModel->Text = L"Modelo";
+			this->lblModel->Visible = false;
+			// 
+			// lblPlate
+			// 
+			this->lblPlate->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblPlate->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(38)));
+			this->lblPlate->Location = System::Drawing::Point(26, 34);
+			this->lblPlate->Name = L"lblPlate";
+			this->lblPlate->Size = System::Drawing::Size(130, 22);
+			this->lblPlate->TabIndex = 13;
+			this->lblPlate->Text = L"Placa";
+			this->lblPlate->Visible = false;
+			// 
+			// tbYear
+			// 
+			this->tbYear->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbYear->Location = System::Drawing::Point(201, 200);
+			this->tbYear->Name = L"tbYear";
+			this->tbYear->Size = System::Drawing::Size(143, 27);
+			this->tbYear->TabIndex = 17;
+			this->tbYear->Visible = false;
+			// 
+			// tbColour
+			// 
+			this->tbColour->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbColour->Location = System::Drawing::Point(27, 200);
+			this->tbColour->Name = L"tbColour";
+			this->tbColour->Size = System::Drawing::Size(149, 27);
+			this->tbColour->TabIndex = 16;
+			this->tbColour->Visible = false;
+			// 
+			// tbModel
+			// 
+			this->tbModel->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbModel->Location = System::Drawing::Point(27, 104);
+			this->tbModel->Name = L"tbModel";
+			this->tbModel->Size = System::Drawing::Size(317, 27);
+			this->tbModel->TabIndex = 15;
+			this->tbModel->Visible = false;
+			// 
+			// tbBrand
+			// 
+			this->tbBrand->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbBrand->Location = System::Drawing::Point(27, 150);
+			this->tbBrand->Name = L"tbBrand";
+			this->tbBrand->Size = System::Drawing::Size(317, 27);
+			this->tbBrand->TabIndex = 14;
+			this->tbBrand->Visible = false;
+			// 
+			// tbPlate
+			// 
+			this->tbPlate->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 12));
+			this->tbPlate->Location = System::Drawing::Point(27, 55);
+			this->tbPlate->Name = L"tbPlate";
+			this->tbPlate->Size = System::Drawing::Size(317, 27);
+			this->tbPlate->TabIndex = 13;
+			// 
+			// btnUpdate
+			// 
+			this->btnUpdate->BackColor = System::Drawing::Color::Black;
+			this->btnUpdate->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnUpdate->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
+			this->btnUpdate->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnUpdate->Location = System::Drawing::Point(111, 270);
+			this->btnUpdate->Name = L"btnUpdate";
+			this->btnUpdate->Size = System::Drawing::Size(154, 44);
+			this->btnUpdate->TabIndex = 9;
+			this->btnUpdate->Text = L"Actualizar datos";
+			this->btnUpdate->UseVisualStyleBackColor = false;
+			this->btnUpdate->Click += gcnew System::EventHandler(this, &DriverMenuForm::btnUpdate_Click_1);
 			// 
 			// vehicleText
 			// 
-			this->vehicleText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->vehicleText->Font = (gcnew System::Drawing::Font(L"Segoe UI", 15));
 			this->vehicleText->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
 				static_cast<System::Int32>(static_cast<System::Byte>(110)));
-			this->vehicleText->Location = System::Drawing::Point(22, 108);
+			this->vehicleText->Location = System::Drawing::Point(22, 126);
 			this->vehicleText->Name = L"vehicleText";
 			this->vehicleText->Size = System::Drawing::Size(280, 42);
 			this->vehicleText->TabIndex = 2;
@@ -667,7 +771,7 @@ private: System::Windows::Forms::Label^ lblprice;
 			this->vehicleName->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
 			this->vehicleName->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->vehicleName->Location = System::Drawing::Point(22, 66);
+			this->vehicleName->Location = System::Drawing::Point(21, 87);
 			this->vehicleName->Name = L"vehicleName";
 			this->vehicleName->Size = System::Drawing::Size(260, 34);
 			this->vehicleName->TabIndex = 1;
@@ -678,7 +782,7 @@ private: System::Windows::Forms::Label^ lblprice;
 			this->vehicleTitle->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 18, System::Drawing::FontStyle::Bold));
 			this->vehicleTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(31)));
-			this->vehicleTitle->Location = System::Drawing::Point(22, 20);
+			this->vehicleTitle->Location = System::Drawing::Point(13, 7);
 			this->vehicleTitle->Name = L"vehicleTitle";
 			this->vehicleTitle->Size = System::Drawing::Size(180, 28);
 			this->vehicleTitle->TabIndex = 0;
@@ -879,7 +983,7 @@ private: System::Windows::Forms::Label^ lblprice;
 			this->lbltipes->Name = L"lbltipes";
 			this->lbltipes->Size = System::Drawing::Size(238, 34);
 			this->lbltipes->TabIndex = 6;
-			this->lbltipes->Text = L"predaresu";
+			this->lbltipes->Text = L"-";
 			this->lbltipes->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// lblOtoD
@@ -892,7 +996,7 @@ private: System::Windows::Forms::Label^ lblprice;
 			this->lblOtoD->Name = L"lblOtoD";
 			this->lblOtoD->Size = System::Drawing::Size(586, 34);
 			this->lblOtoD->TabIndex = 5;
-			this->lblOtoD->Text = L"0 --- 0";
+			this->lblOtoD->Text = L"-";
 			this->lblOtoD->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// btnRight
@@ -1064,7 +1168,7 @@ private: System::Windows::Forms::Label^ lblprice;
 			this->panel2->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
 			this->vehiclePanel->ResumeLayout(false);
-			this->maintenancePanel->ResumeLayout(false);
+			this->vehiclePanel->PerformLayout();
 			this->manualPanel->ResumeLayout(false);
 			this->manualPanel->PerformLayout();
 			this->historyPanel->ResumeLayout(false);
@@ -1088,116 +1192,6 @@ private: System::Windows::Forms::Label^ lblprice;
 
 
 		private:
-
-			String^ toManagedString(const std::string& value)
-			{
-				return gcnew System::String(value.c_str());
-			}
-
-			String^ formatNumber(int value)
-			{
-				return toManagedString(std::to_string(value));
-			}
-
-			String^ formatNumber(float value)
-			{
-				std::ostringstream oss;
-				oss << std::fixed << std::setprecision(2) << value;
-				return toManagedString(oss.str());
-			}
-
-			String^ formatCurrency(float value)
-			{
-				return System::String::Concat(L"S/ ", formatNumber(value));
-			}
-
-			String^ tripTypeText(int type)
-			{
-				switch (type) {
-				case 1: return L"ECONOMICO";
-				case 2: return L"STANDARD";
-				case 3: return L"PREMIUM";
-				default: return L"NINGUNO";
-				}
-			}
-
-			void paintTripType(int type)
-			{
-				switch (type) {
-				case 1:
-					this->lastTripDot->BackColor = System::Drawing::Color::LightGreen;
-					this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
-					break;
-				case 2:
-					this->lastTripDot->BackColor = System::Drawing::Color::LightSteelBlue;
-					this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
-					break;
-				case 3:
-					this->lastTripDot->BackColor = System::Drawing::Color::Goldenrod;
-					this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
-					break;
-				default:
-					this->lastTripDot->BackColor = System::Drawing::Color::DarkGray;
-					this->lbltipes->BackColor = System::Drawing::SystemColors::Control;
-					break;
-				}
-			}
-
-			std::vector<Trip> getDriverHistory(const std::string& driverDni)
-			{
-				std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
-				std::vector<Trip> historialDriver;
-
-				for (int i = 0; i < historial.size(); i++) {
-					if (historial[i].getDriverDni() == driverDni) {
-						historialDriver.push_back(historial[i]);
-					}
-				}
-
-				return historialDriver;
-			}
-
-			void updateDriverStats(const Driver& current)
-			{
-				this->lblTripsNumber->Text = formatNumber(current.getTotalTrips());
-				this->lblGainsNumber->Text = formatCurrency(current.getTotalEarnings());
-				this->lblComisionNumber->Text = formatCurrency(current.getTotalEarnings() * 0.20f);
-				this->lblNetGainsNumber->Text = formatCurrency(current.getNetEarnings());
-			}
-
-			void showNoTrips()
-			{
-				this->lastTripText->Text = L"No hay viajes registrados";
-				this->lblOtoD->Text = L"-";
-				this->lblprice->Text = L"S/ 0.00";
-				this->lbltipes->Text = L"NINGUNO";
-				paintTripType(0);
-			}
-
-			void showTripAtIndex(const std::vector<Trip>& historialDriver, int requestedIndex)
-			{
-				if (historialDriver.empty()) {
-					index = 0;
-					showNoTrips();
-					return;
-				}
-
-				if (requestedIndex < 0) requestedIndex = 0;
-				if (requestedIndex >= historialDriver.size()) requestedIndex = historialDriver.size() - 1;
-				index = requestedIndex;
-
-				const Trip& trip = historialDriver[index];
-				String^ ori = toManagedString(trip.getOrigin());
-				String^ desti = toManagedString(trip.getDestination());
-				String^ price = formatCurrency(trip.getPrice());
-				String^ typeText = tripTypeText(trip.getTipe());
-
-				this->lastTripText->Text = System::String::Concat(gcnew array<System::String^>{ ori, L" -> ", desti, L" | ", price, L" ", typeText });
-				this->lblOtoD->Text = System::String::Concat(ori, L" --- ", desti);
-				this->lblprice->Text = price;
-				this->lbltipes->Text = typeText;
-				paintTripType(trip.getTipe());
-			}
 
 			
 		//
@@ -1232,10 +1226,10 @@ private: System::Windows::Forms::Label^ lblprice;
 
 
 				Driver d = authManager->getDriverByDni(dniStr);
-				String^ n= gcnew System::String(d.getName().c_str());
+				String^ n = gcnew System::String(d.getName().c_str());
 				String^ id = gcnew System::String(d.getDriverId().c_str());
 				float profit = d.getNetEarnings();
-				float rating=d.getRating();
+				float rating = d.getRating();
 				String^ model = gcnew System::String(d.getVehicle().getModel().c_str());
 				String^ brand = gcnew System::String(d.getVehicle().getBrand().c_str());
 				String^ plate = gcnew System::String(d.getVehicle().getPlate().c_str());
@@ -1243,15 +1237,66 @@ private: System::Windows::Forms::Label^ lblprice;
 				int year = d.getVehicle().getYear();
 
 				this->profileName->Text = n;
-				this->profileInfo->Text = System::String::Concat(L"Driver ID: ", id, L" | Lima metropolitana");
-				this->metric2Value->Text = formatNumber(rating);
+				this->profileInfo->Text = "Driver ID: " + id + " | Lima metropolitana";
+				this->metric2Value->Text = "" + rating;
 				this->vehicleName->Text = brand;
-				this->vehicleText->Text = System::String::Concat(gcnew array<System::String^>{ L"Placa ", plate, L" | ", model, L" | ", colour, L" | ", formatNumber(year) });
+				this->vehicleText->Text = "Placa" + plate + " | " + model + " | " + colour + " | " + year;
 
 				Driver current = authManager->getDriverByDni(dniStr);
-				
-				updateDriverStats(current);
-				showTripAtIndex(getDriverHistory(dniStr), 0);
+
+
+				this->lblTripsNumber->Text = "" + current.getTotalTrips();
+				this->lblGainsNumber->Text = "" + current.getTotalEarnings();
+				this->lblComisionNumber->Text = "" + current.getTotalEarnings() * 0.20f;
+				this->lblNetGainsNumber->Text = "" + current.getNetEarnings();
+
+				// Consigue todos los viajes del conductors
+				std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
+				String^ dnii = dni;
+				std::vector<Trip> historialDriver;
+
+				for (int i = 0; i < historial.size(); i++) {
+					// Solo mostramos en el historial los viajes que le pertenecen al DNI del pasajero logueado
+					if (historial[i].getDriverDni() == msclr::interop::marshal_as<std::string>(dnii)) {
+						historialDriver.push_back(historial[i]);
+					}
+				}
+
+				if (!historialDriver.empty()) {
+					String^ ori = gcnew System::String((historialDriver[0].getOrigin()).c_str());
+					String^ desti = gcnew System::String((historialDriver[0].getDestination()).c_str());
+
+					this->lastTripText->Text = "" + ori + " -> " + desti + " | S/ " + historialDriver[0].getPrice();
+					switch (historialDriver[0].getTipe()) {
+					case 1:
+						this->lastTripDot->BackColor = System::Drawing::Color::LightGreen;
+						break;
+					case 2:
+						this->lastTripDot->BackColor = System::Drawing::Color::LightSteelBlue;
+						break;
+					case 3:
+						this->lastTripDot->BackColor = System::Drawing::Color::Goldenrod;
+						break;
+					}
+
+					this->lblOtoD->Text = ori + " --- " + desti;
+					this->lblprice->Text = "S/ " + historialDriver[index].getPrice();
+
+					switch (historialDriver[index].getTipe()) {
+					case 1:
+						this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
+						this->lbltipes->Text = "ECONOMICO";
+						break;
+					case 2:
+						this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
+						this->lbltipes->Text = "STANDARD";
+						break;
+					case 3:
+						this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
+						this->lbltipes->Text = "PREMIUM";
+						break;
+					}
+				}
 
 				try {
 					this->Icon = gcnew System::Drawing::Icon("./resources/LYNX_image.ico");
@@ -1351,6 +1396,7 @@ private: System::Void btnPremium_Click(System::Object^ sender, System::EventArgs
 	   String^ driverName;
 	   String^ driverDni;
 	   int type = 0;
+	   bool update = false;
 	   int originalType = 0;
 	   float distance = 0;
 
@@ -1372,20 +1418,6 @@ private: System::Void btnPremium_Click(System::Object^ sender, System::EventArgs
 		   std::strftime(buffer, sizeof(buffer), "%d/%m/%Y", &localTime);
 		   return buffer;
 	   }
-	   void guardarDatos(FileManager& fileManager, AuthManager& authMgr, TripManager& tripMgr)
-	   {
-		   authMgr.saveAll();
-		   fileManager.guardarTripsTXT(exportarTodosLosTrips(tripMgr));
-	   }
-	   vector<Trip> exportarTodosLosTrips(TripManager& tripMgr)
-	   {
-		   vector<Trip> total = exportarWaitingTrips(tripMgr);
-		   vector<Trip> activos = exportarActiveTrips(tripMgr);
-		   vector<Trip> historial = exportarHistoryTrips(tripMgr);
-		   total.insert(total.end(), activos.begin(), activos.end());
-		   total.insert(total.end(), historial.begin(), historial.end());
-		   return total;
-	   }
 	   vector<Trip> exportarWaitingTrips(TripManager& tripMgr)
 	   {
 		   vector<Trip> lista;
@@ -1398,6 +1430,8 @@ private: System::Void btnPremium_Click(System::Object^ sender, System::EventArgs
 		   }
 		   return lista;
 	   }
+
+	   // exportarActiveTrips: pasa los viajes activos de la lista doble a vector
 	   vector<Trip> exportarActiveTrips(TripManager& tripMgr)
 	   {
 		   vector<Trip> lista;
@@ -1406,13 +1440,24 @@ private: System::Void btnPremium_Click(System::Object^ sender, System::EventArgs
 		   }
 		   return lista;
 	   }
+
+	   // exportarHistoryTrips: extrae el historial de la pila sin perder el contenido original
 	   vector<Trip> exportarHistoryTrips(TripManager& tripMgr)
 	   {
+		   
 		   vector<Trip> lista;
 		   ::Stack<Trip>& history = tripMgr.getHistory();
 		   ::Stack<Trip> temp;
+		   /*
 		   while (!history.isEmpty()) {
 			   Trip t = history.peek();
+			   lista.push_back(t);
+			   temp.push(t);
+			   history.pop();
+		   }*/
+		   while (!history.isEmpty()) {
+			   // Usar const& evita una copia intermedia destructiva en esta línea
+			   const Trip& t = history.peek();
 			   lista.push_back(t);
 			   temp.push(t);
 			   history.pop();
@@ -1421,7 +1466,25 @@ private: System::Void btnPremium_Click(System::Object^ sender, System::EventArgs
 			   history.push(temp.peek());
 			   temp.pop();
 		   }
+		   
 		   return lista;
+	
+	   }
+
+	   vector<Trip> exportarTodosLosTrips(TripManager& tripMgr)
+	   {
+		   vector<Trip> total = exportarWaitingTrips(tripMgr);
+		   vector<Trip> activos = exportarActiveTrips(tripMgr);
+		   vector<Trip> historial = exportarHistoryTrips(tripMgr);
+		   total.insert(total.end(), activos.begin(), activos.end());
+		   total.insert(total.end(), historial.begin(), historial.end());
+		   return total;
+	   }
+
+	   void guardarDatos(FileManager& fileManager, AuthManager& authMgr, TripManager& tripMgr)
+	   {
+		   authMgr.saveAll();
+		   fileManager.guardarTripsTXT(exportarTodosLosTrips(tripMgr));
 	   }
 
 private: System::Void btnStandard_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1443,8 +1506,8 @@ private: System::Void btnEconomic_Click(System::Object^ sender, System::EventArg
 	type = 1;
 }
 private: System::Void btnRegister_Click(System::Object^ sender, System::EventArgs^ e) {
-	origin = this->tbOrigin->Text->Trim();
-	destination = this->tbDestination->Text->Trim();
+	String^ o = this->tbOrigin->Text->Trim();
+	String^ d = this->tbDestination->Text->Trim();
 
 	
 
@@ -1463,26 +1526,33 @@ private: System::Void btnRegister_Click(System::Object^ sender, System::EventArg
 	type = 0;
 	distance = std::stof(msclr::interop::marshal_as<std::string>(this->tbDistance->Text->Trim()));
 
-	String^ dnii = loggedDriverDni;
-	String^ o = origin;
-	String^ d = destination;
-
-	string dniii = msclr::interop::marshal_as<std::string>(dnii);
-	Driver current = authManager->getDriverByDni(dniii);
+	String^ dnii = dni;
+	Driver current = authManager->getDriverByDni(msclr::interop::marshal_as<std::string>(dnii));
+	
 	Trip nuevo;
 	nuevo.setTripId(generarTripId(*tripManager));
-	nuevo.setOrigin(msclr::interop::marshal_as<std::string>(o)); nuevo.setDestination(msclr::interop::marshal_as<std::string>(d));
+	nuevo.setOrigin(msclr::interop::marshal_as<std::string>(o)); 
+	nuevo.setDestination(msclr::interop::marshal_as<std::string>(d));
 	nuevo.setTipe(originalType); nuevo.setPassengerDni("");
-	nuevo.setDriverName(current.getName()); nuevo.setDriverDni(msclr::interop::marshal_as<std::string>(dnii)); nuevo.setDate(fechaActual());
-	nuevo.setPrice(nuevo.calcPrice(originalType, distance)); nuevo.setStatus("completado");
+	nuevo.setDriverName(current.getName()); 
+	nuevo.setDriverDni(msclr::interop::marshal_as<std::string>(dnii)); 
+	nuevo.setDate(fechaActual());
+	nuevo.setPrice(nuevo.calcPrice(originalType, distance)); 
+	nuevo.setStatus("completado");
+	
+	String^ n = name;
 
-	authManager->driverAcceptRide(dniii, nuevo.getPrice());
-	authManager->driverFinishRide(dniii);
+	//tripManager->createTrip2(msclr::interop::marshal_as<std::string>(o), msclr::interop::marshal_as<std::string>(d), originalType, distance, msclr::interop::marshal_as<std::string>(n), msclr::interop::marshal_as<std::string>(dnii), "", fechaActual());
+
+	
+	authManager->driverAcceptRide(msclr::interop::marshal_as<std::string>(dnii), nuevo.getPrice());
+	authManager->driverFinishRide(msclr::interop::marshal_as<std::string>(dnii));
 	tripManager->getHistory().push(nuevo);
+	
+	
 	guardarDatos(*fileManager, *authManager, *tripManager);
 	
-	
-	current = authManager->getDriverByDni(dniii);
+	current = authManager->getDriverByDni(msclr::interop::marshal_as<std::string>(dnii));
 	//limpia el apartado de solicitar viaje
 	this->tbOrigin->Text = "";
 	this->tbDestination->Text = "";
@@ -1500,60 +1570,67 @@ private: System::Void btnRegister_Click(System::Object^ sender, System::EventArg
 
 
 
-	updateDriverStats(current);
+	this->lblTripsNumber->Text = "" + current.getTotalTrips();
+	this->lblGainsNumber->Text = "" + current.getTotalEarnings();
+	this->lblComisionNumber->Text = "" + current.getTotalEarnings() * 0.20f;
+	this->lblNetGainsNumber->Text = "" + current.getNetEarnings();
+
+	try {
+
+		std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
 
 
-	std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
+		std::vector<Trip> historialDriver;
 
 
-	std::vector<Trip> historialDriver;
+		for (int i = 0; i < historial.size(); i++) {
+
+			if (historial[i].getDriverDni() == msclr::interop::marshal_as<std::string>(dnii)) {
+				historialDriver.push_back(historial[i]);
+			}
+		}
+		if (!historialDriver.empty()) {
+			int ultimoIdx = historialDriver.size() - 1;
+
+			String^ ori = gcnew System::String((historialDriver[0].getOrigin()).c_str());
+			String^ desti = gcnew System::String((historialDriver[0].getDestination()).c_str());
+
+			this->lastTripText->Text = "" + ori + " -> " + desti + " | S/ " + historialDriver[0].getPrice() + " " + historialDriver[0].getTipe();
+
+			switch (historialDriver[0].getTipe()) {
+			case 1: this->lastTripDot->BackColor = System::Drawing::Color::LightGreen; break;
+			case 2: this->lastTripDot->BackColor = System::Drawing::Color::LightSteelBlue; break;
+			case 3: this->lastTripDot->BackColor = System::Drawing::Color::Goldenrod; break;
+			}
+
+			this->lblOtoD->Text = ori + " --- " + desti;
+			this->lblprice->Text = "S/ " + historialDriver[0].getPrice();
+
+			switch (historialDriver[0].getTipe()) {
+			case 1:
+				this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
+				this->lbltipes->Text = "ECONOMICO";
+				break;
+			case 2:
+				this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
+				this->lbltipes->Text = "STANDARD";
+				break;
+			case 3:
+				this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
+				this->lbltipes->Text = "PREMIUM";
+				break;
+			}
+		}
+		else {
+			// En caso de que el historial por alguna razón se quede vacío, limpias las etiquetas
+			this->lastTripText->Text = "No hay viajes registrados";
+			this->lblOtoD->Text = "-";
+			this->lblprice->Text = "S/ 0.00";
+			this->lbltipes->Text = "NINGUNO";
+		}
+	}
+	catch (...) {}
 	
-
-	for (int i = 0; i < historial.size(); i++) {
-		
-		if (historial[i].getDriverDni() == msclr::interop::marshal_as<std::string>(dnii)) {
-			historialDriver.push_back(historial[i]);
-		}
-	}
-	if (!historialDriver.empty()) {
-		int ultimoIdx = historialDriver.size() - 1;
-
-		String^ ori = gcnew System::String((historialDriver[0].getOrigin()).c_str());
-		String^ desti = gcnew System::String((historialDriver[0].getDestination()).c_str());
-
-		this->lastTripText->Text = System::String::Concat(gcnew array<System::String^>{ ori, L" -> ", desti, L" | ", formatCurrency(historialDriver[0].getPrice()), L" ", tripTypeText(historialDriver[0].getTipe()) });
-
-		switch (historialDriver[0].getTipe()) {
-		case 1: this->lastTripDot->BackColor = System::Drawing::Color::LightGreen; break;
-		case 2: this->lastTripDot->BackColor = System::Drawing::Color::LightSteelBlue; break;
-		case 3: this->lastTripDot->BackColor = System::Drawing::Color::Goldenrod; break;
-		}
-
-		this->lblOtoD->Text = System::String::Concat(ori, L" --- ", desti);
-		this->lblprice->Text = formatCurrency(historialDriver[0].getPrice());
-
-		switch (historialDriver[0].getTipe()) {
-		case 1: 
-			this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
-			this->lbltipes->Text = "ECONOMICO";
-			break;
-		case 2:
-			this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
-			this->lbltipes->Text = "STANDARD";
-			break;
-		case 3:
-			this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
-			this->lbltipes->Text = "PREMIUM";
-			break;
-		}
-	}
-	else {
-		// En caso de que el historial por alguna razón se quede vacío, limpias las etiquetas
-		this->lastTripText->Text = "No hay viajes registrados";
-		this->lblOtoD->Text = "-";
-		this->lblprice->Text = "S/ 0.00";
-		this->lbltipes->Text = "NINGUNO";
-	}
 }
 private: System::Void btnRegister_Leave(System::Object^ sender, System::EventArgs^ e) {
 }
@@ -1567,7 +1644,8 @@ private: System::Void btnRegister_MouseLeave(System::Object^ sender, System::Eve
 private: System::Void btnLeft_Click(System::Object^ sender, System::EventArgs^ e) {
 	std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
 	std::vector<Trip> historialDriver;
-	String^ dnii = loggedDriverDni;
+	String^ dnii = dni;
+
 
 	for (int i = 0; i < historial.size(); i++) {
 		// Solo mostramos en el historial los viajes que le pertenecen al DNI del pasajero logueado
@@ -1575,38 +1653,37 @@ private: System::Void btnLeft_Click(System::Object^ sender, System::EventArgs^ e
 			historialDriver.push_back(historial[i]);
 		}
 	}
-	if (index > 0) {
-		index--;
-	}
-	if (historialDriver.empty()) {
-		showNoTrips();
-		return;
-	}
-	String^ ori = gcnew System::String((historialDriver[index].getOrigin()).c_str());
-	String^ desti = gcnew System::String((historialDriver[index].getDestination()).c_str());
-	this->lblOtoD->Text = System::String::Concat(ori, L" --- ", desti);
-	this->lblprice->Text = formatCurrency(historialDriver[index].getPrice());
 
-	switch (historialDriver[index].getTipe()) {
-	case 1:
-		this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
-		this->lbltipes->Text = "ECONOMICO";
-		break;
-	case 2:
-		this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
-		this->lbltipes->Text = "STANDARD";
-		break;
-	case 3:
-		this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
-		this->lbltipes->Text = "PREMIUM";
-		break;
-	}
+	if (!historialDriver.empty()) {
+		if (index > 0) {
+			index--;
+		}
+		String^ ori = gcnew System::String((historialDriver[index].getOrigin()).c_str());
+		String^ desti = gcnew System::String((historialDriver[index].getDestination()).c_str());
+		this->lblOtoD->Text = ori + " --- " + desti;
+		this->lblprice->Text = "S/ " + historialDriver[index].getPrice();
 
+		switch (historialDriver[index].getTipe()) {
+		case 1:
+			this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
+			this->lbltipes->Text = "ECONOMICO";
+			break;
+		case 2:
+			this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
+			this->lbltipes->Text = "STANDARD";
+			break;
+		case 3:
+			this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
+			this->lbltipes->Text = "PREMIUM";
+			break;
+		}
+	}
 }
 private: System::Void btnRight_Click(System::Object^ sender, System::EventArgs^ e) {
 	std::vector<Trip> historial = exportarHistoryTrips(*tripManager);
 	std::vector<Trip> historialDriver;
-	String^ dnii = loggedDriverDni;
+	String^ dnii = dni;
+
 
 	for (int i = 0; i < historial.size(); i++) {
 		// Solo mostramos en el historial los viajes que le pertenecen al DNI del pasajero logueado
@@ -1614,36 +1691,240 @@ private: System::Void btnRight_Click(System::Object^ sender, System::EventArgs^ 
 			historialDriver.push_back(historial[i]);
 		}
 	}
-	if (historialDriver.empty()) {
-		showNoTrips();
-		return;
-	}
-	if (index < historialDriver.size() - 1) {
-		index++;
-	}
-	String^ ori = gcnew System::String((historialDriver[index].getOrigin()).c_str());
-	String^ desti = gcnew System::String((historialDriver[index].getDestination()).c_str());
-	this->lblOtoD->Text = System::String::Concat(ori, L" --- ", desti);
-	this->lblprice->Text = formatCurrency(historialDriver[index].getPrice());
 
-	switch (historialDriver[index].getTipe()) {
-	case 1:
-		this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
-		this->lbltipes->Text = "ECONOMICO";
-		break;
-	case 2:
-		this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
-		this->lbltipes->Text = "STANDARD";
-		break;
-	case 3:
-		this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
-		this->lbltipes->Text = "PREMIUM";
-		break;
+	if (!historialDriver.empty()) {
+		if (index < historialDriver.size() - 1) {
+			index++;
+		}
+		String^ ori = gcnew System::String((historialDriver[index].getOrigin()).c_str());
+		String^ desti = gcnew System::String((historialDriver[index].getDestination()).c_str());
+		this->lblOtoD->Text = ori + " --- " + desti;
+		this->lblprice->Text = "S/ " + historialDriver[index].getPrice();
+
+		switch (historialDriver[index].getTipe()) {
+		case 1:
+			this->lbltipes->BackColor = System::Drawing::Color::LightGreen;
+			this->lbltipes->Text = "ECONOMICO";
+			break;
+		case 2:
+			this->lbltipes->BackColor = System::Drawing::Color::LightSteelBlue;
+			this->lbltipes->Text = "STANDARD";
+			break;
+		case 3:
+			this->lbltipes->BackColor = System::Drawing::Color::Goldenrod;
+			this->lbltipes->Text = "PREMIUM";
+			break;
+		}
 	}
 }
 private: System::Void btnUpdateVehicle_Click(System::Object^ sender, System::EventArgs^ e) {
 	
 
+}
+	   
+private: System::Void btnUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!update) {
+		this->lblBrand->Visible = true;
+		this->lblPlate->Visible = true;
+		this->lblColour->Visible = true;
+		this->lblYear->Visible = true;
+		this->lblModel->Visible = true;
+
+		this->tbBrand->Visible = true;
+		this->tbPlate->Visible = true;
+		this->tbColour->Visible = true;
+		this->tbYear->Visible = true;
+		this->tbModel->Visible = true;
+
+		this->vehicleText->Visible = false;
+		update = true;
+	}
+
+	if (update) {
+		// Guardar los txt box como Strings^
+		String^ plateText = this->tbPlate->Text->Trim();
+		String^ brandText = this->tbBrand->Text->Trim();
+		String^ modelText = this->tbModel->Text;
+		String^ colourText = this->tbColour->Text;
+		String^ yearText = this->tbYear->Text;
+		// ===============================================================================================
+		// ===============================================================================================
+		// ===============================================================================================
+		// ===============================================================================================
+
+
+		// Verificar que los espacios no esten vacios
+		if (plateText->Length == 0 || brandText->Length == 0 || modelText->Length == 0 || colourText->Length == 0 || yearText->Length == 0) {
+			MessageBox::Show("Por favor llene todos los campos", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		//Verificar si se pudo o no acceder al gestionador de archivos
+		if (authManager == nullptr) {
+			MessageBox::Show("No se pudo acceder al gestor de usuarios", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		if (isNaNString(msclr::interop::marshal_as<std::string>(yearText))) {
+			MessageBox::Show("Anio invalido. Debe ser un numero entero", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		// Converitr con marshal as al tipo de dato que quiero segun un String^
+		std::string plate = msclr::interop::marshal_as<std::string>(plateText);
+		std::string brand = msclr::interop::marshal_as<std::string>(brandText);
+		std::string model = msclr::interop::marshal_as<std::string>(modelText);
+		std::string colour = msclr::interop::marshal_as<std::string>(colourText);
+		int year = std::stoi(msclr::interop::marshal_as<std::string>(yearText));
+
+
+		//Vaciar los campos
+		this->tbBrand->Text = "";
+		this->tbYear->Text = "";
+		this->tbModel->Text = "";
+		this->tbPlate->Text = "";
+		this->tbColour->Text = "";
+
+
+		// Hacer validacion del anio si es un numero o es mayor al 2000 o menor al actual ( 2026 )
+		if (year < 2000 || year >2026) {
+			MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+
+
+		String^ dn = dni;
+		authManager->updateDriverData(msclr::interop::marshal_as<std::string>(dn), brand, colour, plate, model, year);
+
+		Driver d = authManager->getDriverByDni(msclr::interop::marshal_as<std::string>(dn));
+		String^ models = gcnew System::String(d.getVehicle().getModel().c_str());
+		String^ brands = gcnew System::String(d.getVehicle().getBrand().c_str());
+		String^ plates = gcnew System::String(d.getVehicle().getPlate().c_str());
+		String^ colours = gcnew System::String(d.getVehicle().getColor().c_str());
+		int years = d.getVehicle().getYear();
+
+		this->vehicleName->Text = brands;
+		this->vehicleText->Text = "Placa" + plates + " | " + models + " | " + colours + " | " + years;
+
+		this->lblBrand->Visible = false;
+		this->lblPlate->Visible = false;
+		this->lblColour->Visible = false;
+		this->lblYear->Visible = false;
+		this->lblModel->Visible = false;
+
+		this->tbBrand->Visible = false;
+		this->tbPlate->Visible = false;
+		this->tbColour->Visible = false;
+		this->tbYear->Visible = false;
+		this->tbModel->Visible = false;
+
+		this->vehicleText->Visible = true;
+		update = false;
+	}
+
+	
+}
+private: System::Void btnUpdate_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	if (!update) {
+		this->lblBrand->Visible = true;
+		this->lblPlate->Visible = true;
+		this->lblColour->Visible = true;
+		this->lblYear->Visible = true;
+		this->lblModel->Visible = true;
+
+		this->tbBrand->Visible = true;
+		this->tbPlate->Visible = true;
+		this->tbColour->Visible = true;
+		this->tbYear->Visible = true;
+		this->tbModel->Visible = true;
+
+		this->vehicleText->Visible = false;
+		update = true;
+	}
+
+	if (update) {
+		// Guardar los txt box como Strings^
+		String^ plateText = this->tbPlate->Text->Trim();
+		String^ brandText = this->tbBrand->Text->Trim();
+		String^ modelText = this->tbModel->Text;
+		String^ colourText = this->tbColour->Text;
+		String^ yearText = this->tbYear->Text;
+		// ===============================================================================================
+		// ===============================================================================================
+		// ===============================================================================================
+		// ===============================================================================================
+
+
+		// Verificar que los espacios no esten vacios
+		if (plateText->Length == 0 || brandText->Length == 0 || modelText->Length == 0 || colourText->Length == 0 || yearText->Length == 0) {
+			MessageBox::Show("Por favor llene todos los campos", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		//Verificar si se pudo o no acceder al gestionador de archivos
+		if (authManager == nullptr) {
+			MessageBox::Show("No se pudo acceder al gestor de usuarios", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		if (isNaNString(msclr::interop::marshal_as<std::string>(yearText))) {
+			MessageBox::Show("Anio invalido. Debe ser un numero entero", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+		// Converitr con marshal as al tipo de dato que quiero segun un String^
+		std::string plate = msclr::interop::marshal_as<std::string>(plateText);
+		std::string brand = msclr::interop::marshal_as<std::string>(brandText);
+		std::string model = msclr::interop::marshal_as<std::string>(modelText);
+		std::string colour = msclr::interop::marshal_as<std::string>(colourText);
+		int year = std::stoi(msclr::interop::marshal_as<std::string>(yearText));
+
+
+		//Vaciar los campos
+		this->tbBrand->Text = "";
+		this->tbYear->Text = "";
+		this->tbModel->Text = "";
+		this->tbPlate->Text = "";
+		this->tbColour->Text = "";
+
+
+		// Hacer validacion del anio si es un numero o es mayor al 2000 o menor al actual ( 2026 )
+		if (year < 2000 || year >2026) {
+			MessageBox::Show("Anio invalido. El anio del vehiculo debe ser despues del 2000 y antes del anio actual", "Registro", MessageBoxButtons::OK);
+			return;
+		}
+
+
+
+		String^ dn = dni;
+		authManager->updateDriverData(msclr::interop::marshal_as<std::string>(dn), brand, colour, plate, model, year);
+
+		Driver d = authManager->getDriverByDni(msclr::interop::marshal_as<std::string>(dn));
+		String^ models = gcnew System::String(d.getVehicle().getModel().c_str());
+		String^ brands = gcnew System::String(d.getVehicle().getBrand().c_str());
+		String^ plates = gcnew System::String(d.getVehicle().getPlate().c_str());
+		String^ colours = gcnew System::String(d.getVehicle().getColor().c_str());
+		int years = d.getVehicle().getYear();
+
+		this->vehicleName->Text = brands;
+		this->vehicleText->Text = "Placa" + plates + " | " + models + " | " + colours + " | " + years;
+
+		this->lblBrand->Visible = false;
+		this->lblPlate->Visible = false;
+		this->lblColour->Visible = false;
+		this->lblYear->Visible = false;
+		this->lblModel->Visible = false;
+
+		this->tbBrand->Visible = false;
+		this->tbPlate->Visible = false;
+		this->tbColour->Visible = false;
+		this->tbYear->Visible = false;
+		this->tbModel->Visible = false;
+
+		this->vehicleText->Visible = true;
+		update = false;
+	}
 }
 };
 }
