@@ -1243,7 +1243,6 @@ namespace LYNX {
 		bool isNaNString(const std::string& str) {
 			std::istringstream iss(str);
 			double num;
-			// Check if a double can be read AND if it consumes the entire string
 			return !(iss >> num && iss.eof());
 		}
 	private:
