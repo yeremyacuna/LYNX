@@ -622,17 +622,17 @@ public:
         vector<string> usernamesUsados;
         vector<string> passwordsUsados;
 
-        listaDeAdmins.push_back({ "ADM-03","Melissa","hola9" });
+        listaDeAdmins.push_back({ "ADM-03","Melissa","heichahi" });
         usernamesUsados.push_back("Melissa");
-        passwordsUsados.push_back("hola9");
+        passwordsUsados.push_back("heichahi");
 
         listaDeAdmins.push_back({ "ADM-01", "Yeremy", "admin777" });
         usernamesUsados.push_back("Yeremy");
         passwordsUsados.push_back("admin777");
 
-        listaDeAdmins.push_back({ "ADM-02", "Salvador", "hola123" });
+        listaDeAdmins.push_back({ "ADM-02", "Salvador", "tyranitar" });
         usernamesUsados.push_back("Salvador");
-        passwordsUsados.push_back("hola123");
+        passwordsUsados.push_back("tyranitar");
 
         int idContador = 4; // pa que no agarre nuestros passwords y users
 

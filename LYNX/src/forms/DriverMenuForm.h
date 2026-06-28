@@ -1377,7 +1377,8 @@ private: System::Windows::Forms::Label^ lblModel;
 		//
 		System::Void DriverMenuForm_Activated(System::Object^ sender, System::EventArgs^ e)
 		{
-			// RefreshDriverPanel();
+			if (authManager != nullptr)
+				authManager->reloadDrivers();
 		}
 
 
@@ -1484,7 +1485,7 @@ private: System::Void btnPremium_Click(System::Object^ sender, System::EventArgs
 	   void guardarDatos(FileManager& fileManager, AuthManager& authMgr, TripManager& tripMgr)
 	   {
 		   authMgr.saveAll();
-		   fileManager.guardarTripsTXT(exportarTodosLosTrips(tripMgr));
+		   fileManager.guardarTripsTXT(tripMgr.exportAllTrips());
 	   }
 
 private: System::Void btnStandard_Click(System::Object^ sender, System::EventArgs^ e) {

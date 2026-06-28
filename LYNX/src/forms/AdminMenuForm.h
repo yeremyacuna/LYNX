@@ -1805,7 +1805,7 @@ private: System::Windows::Forms::Button^ btnOrden3;
             txtIDViajeBuscar_Leave(sender, e);
             
 
-            vector<Trip> viajes = tripManager->exportAllTrips();
+            vector<Trip> viajes = tripManager->getAllTripsSortedById();
 
             if (viajes.size() == 0) {
                 rtbListado->Text = L"Sin viajes registrados.";
