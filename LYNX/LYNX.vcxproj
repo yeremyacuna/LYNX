@@ -110,6 +110,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -120,6 +121,7 @@
     <ClInclude Include="include\AdvancedOrders.h" />
     <ClInclude Include="include\FileManager.h" />
     <ClInclude Include="include\DoublyLinkedList.h" />
+    <ClInclude Include="include\HashTable.h" />
     <ClInclude Include="include\Heap.h" />
     <ClInclude Include="include\LinkedList.h" />
     <ClInclude Include="include\Node.h" />

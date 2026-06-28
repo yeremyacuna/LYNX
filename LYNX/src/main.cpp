@@ -11,10 +11,10 @@ using std::cout;
 int main()
 {
     // Debo cambiar linker Console to variado
-
+    SetConsoleOutputCP(CP_UTF8);
     std::cout << "1. Consola\n";
     std::cout << "2. Windows Forms\n";
-    std::cout << "Opcion: ";
+    std::cout << "Opción: ";
     int opcion; std::cin >> opcion;
 
     if (opcion == 1)

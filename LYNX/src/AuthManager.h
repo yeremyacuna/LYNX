@@ -4,6 +4,7 @@
 #include <vector>
 #include "../include/LinkedList.h"
 #include "../include/Queue.h"
+#include "../include/HashTable.h"
 #include "../include/FileManager.h"
 #include "../include/Heap.h"
 #include "../include/AdvancedOrders.h"
@@ -13,13 +14,35 @@
 
 using std::vector; using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
-//  Guarda y gestiona las listas de pasajeros y conductores.
 class AuthManager {
 private:
     LinkedList<Passenger>* passengerList = new LinkedList<Passenger>();
     LinkedList<Driver>* driverList = new LinkedList<Driver>();
     FileManager* fileManager = new FileManager();
     LinkedList<FileManager::AdminPreview>* adminList = new LinkedList<FileManager::AdminPreview>();
+
+    // HashTable para buscar pasajeros por DNI en O(1) promedio
+    // trabajan en paralelo con las listas enlazadas, no las reemplazan
+    HashTable<Passenger> hashPasajeros;
+    HashTable<Driver>    hashConductores;
+
+    // esta func vacia y rellena la tabla hash desde la lista enlazada
+    // se llama despues de reloadPassengers() o cuando la lista cambia de golpe
+    void reconstruirHashPasajeros() {
+        hashPasajeros.limpiar();
+        for (int i = 0; i < passengerList->getSize(); i++) {
+            Passenger p = passengerList->get(i);
+            hashPasajeros.insertar(p.getDni(), p);
+        }
+    }
+
+    void reconstruirHashConductores() {
+        hashConductores.limpiar();
+        for (int i = 0; i < driverList->getSize(); i++) {
+            Driver d = driverList->get(i);
+            hashConductores.insertar(d.getDni(), d);
+        }
+    }
 
     // Busca la posicion de un pasajero por DNI
     int indexOfUser(string dni) {
@@ -320,8 +343,9 @@ private:
 
         return changed;
     }
+
 public:
-    // construye todo solo de pasejero y drivers
+    // construimos todo solo de pasajero y drivers
     // al iniciar, carga desde archivos, limpia datos repetidos y reordena ids
     AuthManager() {
         fileManager->generarAdminsTXT();
@@ -356,17 +380,22 @@ public:
         if (driversChanged || passengersChanged || driversCompacted || passengersCompacted) {
             saveAll();
         }
+
+        // Construimos la TABLA HASH desde las listas ya limpiecitas y ordenadas
+        reconstruirHashPasajeros();
+        reconstruirHashConductores();
     }
 
-    // ~AuthManager: libera las estructuras dinamicas principales del modulo
+    // libera las estructuras dinamicas principales del modulo
     ~AuthManager() {
         delete passengerList;
         delete driverList;
         delete fileManager;
         delete adminList;
+        // los HASH se destruyen solos al salir
     }
 
-    // getters: exponen las listas y contadores globales de usuarios y conductores
+    // exponen las listas y contadores globales de usuarios y conductores
     LinkedList<Passenger>*& getPassengerList() { return passengerList; }
     LinkedList<Passenger>*& getUserList() { return passengerList; }
     LinkedList<Driver>*& getDriverList() { return driverList; }
@@ -390,7 +419,8 @@ public:
     }
 
     //  FUNCIONES DE GUARDADO
-    // savePassengers: ordena y guarda la lista de pasajeros en txt
+
+    // ordena y guarda la lista de pasajeros en txt
     void savePassengers() {
         sortPassengersById();
         vector<Passenger> pasajeros = exportPassengerVector();
@@ -399,7 +429,7 @@ public:
         fileManager->guardarPasswordsTXT();
     }
 
-    // saveDrivers: ordena y guarda la lista de conductores en txt
+    // ordena y guarda la lista de conductores en txt
     void saveDrivers() {
         sortDriversById();
         vector<Driver> drivers = exportDriverVector();
@@ -408,7 +438,7 @@ public:
         fileManager->guardarPasswordsTXT();
     }
 
-    // saveAdmins: ordena y guarda la lista de conductores en txt
+    // ordena y guarda la lista de conductores en txt
     void saveAdmins()
     {
         sortAdminsById();
@@ -416,7 +446,7 @@ public:
         fileManager->guardarAdminsTXT(admins);
     }
 
-    // saveAll: persiste pasajeros y conductores juntos
+    // persiste pasajeros y conductores juntos
     void saveAll() // guardar ambos pasajero y conductor
     {
         sortPassengersById();
@@ -429,12 +459,12 @@ public:
         fileManager->guardarPasswordsTXT();
     }
 
-    // savePasswordsBinary: genera el archivo binario de passwords para consulta admin
+    // genera el archivo binario de passwords para consulta admin
     bool savePasswordsBinary() {
         return fileManager->guardarPasswordsBIN(exportPassengerVector(), exportDriverVector());
     }
 
-    // reloadPassengers: vuelve a leer el archivo TXT y reemplaza la lista en memoria
+    // vuelve a leer el archivo TXT y reemplaza la lista en memoria
     void reloadPassengers() {
         passengerList->clear();
         vector<Passenger> cargados = fileManager->leerPassengersTXT();
@@ -448,6 +478,9 @@ public:
 
         if (a || b)
             saveAll();
+
+        // reconstruimos hash despues de recargar la lista
+        reconstruirHashPasajeros();
     }
 
     void reloadDrivers()
@@ -464,6 +497,9 @@ public:
 
         if (a || b)
             saveAll();
+
+        // reconstruimos hash despues de recargar la lista
+        reconstruirHashConductores();
     }
 
     void reloadAdmins()
@@ -533,44 +569,60 @@ public:
 
 
     // PASAJEROS
+    
+    /*
     // userExists: verifica si ya existe un pasajero con ese DNI
     bool userExists(string dni) { return indexOfUser(dni) != -1; }
+    */
 
-    // dniExistsAnyRole: evita que el mismo DNI aparezca como pasajero y conductor a la vez
+    // verifica si ya existe un pasajero con ese DNI
+    bool userExists(string dni) { return hashPasajeros.contiene(dni); }//hash O(1)
+
+    // evita que el mismo DNI aparezca como pasajero y conductor a la vez
     bool dniExistsAnyRole(string dni) { return userExists(dni) || driverExists(dni); }
 
     // Registra pasajero nuevo si el DNI no existe
+    // TABLA HASH para que futuras busquedas sean O(1)
     bool registerPassenger(string name, string dni, string password) {
         if (dniExistsAnyRole(dni)) { cout << "  [!] DNI ya registrado.\n"; return false; }
-        passengerList->pushBack(Passenger(name, dni, password));
+        Passenger nuevo(name, dni, password);
+        passengerList->pushBack(nuevo);
         sortPassengersById();
         syncNextGeneratedIds();
         savePassengers();
+        hashPasajeros.insertar(dni, nuevo);  // agregar a la tabla hash
         return true;
     }
 
-    // registerUser: alias simple para registrar pasajero desde otros modulos
+    // alias simple para registrar pasajero desde otros modulos
     bool registerUser(string name, string dni, string password) {
         return registerPassenger(name, dni, password);
     }
 
     // Valida credenciales
+    // HASH para encontrar al pasajero
     bool loginUserValid(string dni, string password) {
+        Passenger p;
+        if (!hashPasajeros.buscar(dni, p)) return false;
+        return p.login(dni, password);
+        
+        /*
         int i = indexOfUser(dni);
         if (i == -1)
             return false;
         return
             passengerList->get(i).login(dni, password);
+        */
     }
 
-    // getUserByDni: busca y devuelve el pasajero correspondiente o uno vacio si no existe
+    // busca y devuelve el pasajero correspondiente o uno vacio si no existe
     Passenger getUserByDni(string dni) {
-        int i = indexOfUser(dni);
-        if (i == -1) return Passenger();
-        return passengerList->get(i);
+        Passenger p;
+        if (hashPasajeros.buscar(dni, p)) return p;
+        return Passenger();
     }
 
-    // Registra un viaje al pasajero y lo actualiza en la lista
+    // Registra un viaje al pasajero y lo actualiza en la lista y en la tabla hash
     void addTripToUser(string dni, float precio) {
         int i = indexOfUser(dni);
         if (i == -1) return;
@@ -579,9 +631,10 @@ public:
         passengerList->remove(i);
         passengerList->insert(i, p);
         savePassengers();
+        hashPasajeros.insertar(dni, p);  // actualizamos tabla hash
     }
 
-    // updatePassengerData: cambia nombre y contra de un pasajero ya registrado
+    // cambia nombre y contra de un pasajero ya registrado
     void updatePassengerData(string dni, string newName, string newPass) {
         int i = indexOfUser(dni);
         if (i == -1) return;
@@ -591,6 +644,7 @@ public:
         passengerList->remove(i);
         passengerList->insert(i, p);
         savePassengers();
+        hashPasajeros.insertar(dni, p);  // actualizamos tabla hash
     }
 
     // Actualiza el rating
@@ -602,6 +656,7 @@ public:
         passengerList->remove(i);
         passengerList->insert(i, p);
         savePassengers();
+        hashPasajeros.insertar(dni, p);  // actualizamos tabla hash
     }
 
     // obtener el max rating de passenger con maxheap
@@ -676,34 +731,37 @@ public:
 
 
     // CONDUCTORES
-    // driverExists: verifica si ya existe un conductor con ese DNI
-    bool driverExists(string dni) { return indexOfDriver(dni) != -1; }
+
+    // verifica si ya existe un conductor con ese DNI
+    bool driverExists(string dni) { return hashConductores.contiene(dni); }
 
     // Registra conductor nuevo con su vehiculo
     bool registerDriver(string name, string dni, string password, Vehicle vehicle) {
         if (dniExistsAnyRole(dni)) { cout << "  [!] DNI ya registrado.\n"; return false; }
-        driverList->pushBack(Driver(name, dni, password, vehicle));
+        Driver nuevo(name, dni, password, vehicle);
+        driverList->pushBack(nuevo);
         sortDriversById();
         syncNextGeneratedIds();
         saveDrivers();
+        hashConductores.insertar(dni, nuevo);  // agregamos a la tabla hash
         return true;
     }
 
     // Valida credenciales
     bool loginDriverValid(string dni, string password) {
-        int i = indexOfDriver(dni);
-        if (i == -1) return false;
-        return driverList->get(i).login(dni, password);
+        Driver d;
+        if (!hashConductores.buscar(dni, d)) return false;//hash
+        return d.login(dni, password);
     }
 
-    // getDriverByDni: busca y devuelve el conductor correspondiente o uno vacio si no existe
+    // busca y devuelve el conductor correspondiente o uno vacio si no existe
     Driver getDriverByDni(string dni) {
-        int i = indexOfDriver(dni);
-        if (i == -1) return Driver();
-        return driverList->get(i);
+        Driver d;
+        if (hashConductores.buscar(dni, d)) return d;//hash
+        return Driver();
     }
 
-    // setDriverAvailability: fuerza el estado libre/ocupado del conductor
+    // fuerza el estado libre/ocupado del conductor
     void setDriverAvailability(string dni, bool disponible) {
         int i = indexOfDriver(dni);
         if (i == -1) return;
@@ -712,6 +770,7 @@ public:
         driverList->remove(i);
         driverList->insert(i, d);
         saveDrivers();
+        hashConductores.insertar(dni, d);  // actualizamos
     }
 
     // Actualiza el rating
@@ -723,9 +782,10 @@ public:
         driverList->remove(i);
         driverList->insert(i, d);
         saveDrivers();
+        hashConductores.insertar(dni, d);
     }
 
-    // driverAcceptRide: marca viaje aceptado y suma viajes/ganancias del conductor
+    // marca viaje aceptado y suma viajes/ganancias del conductor
     void driverAcceptRide(string dni, float precio) {
         int i = indexOfDriver(dni);
         if (i == -1) return;
@@ -734,9 +794,10 @@ public:
         driverList->remove(i);
         driverList->insert(i, d);
         saveDrivers();
+        hashConductores.insertar(dni, d);
     }
 
-    // driverFinishRide: regresa al conductor a estado disponible
+    // regresa al conductor a estado disponible
     void driverFinishRide(string dni) {
         int i = indexOfDriver(dni);
         if (i == -1) return;
@@ -745,9 +806,10 @@ public:
         driverList->remove(i);
         driverList->insert(i, d);
         saveDrivers();
+        hashConductores.insertar(dni, d);  // actualizamos tabla hash
     }
 
-    // findAvailableDriver: devuelve el primer conductor libre encontrado
+    // devuelve el primer conductor libre encontrado
     string findAvailableDriver() {
         for (int i = 0; i < driverList->getSize(); i++)
             if (driverList->get(i).getIsAvailable())
@@ -915,7 +977,7 @@ public:
     FileManager::AdminPreview getAdminID(string id)
     {
         int i = indexOfAdmin(id);
-        if (i == -1) 
+        if (i == -1)
             return FileManager::AdminPreview();
 
         return adminList->get(i);
@@ -974,11 +1036,6 @@ public:
         return resto;
     }
 
-
-
-
-
-
     // sortDriversByRating: ordena conductores de mayor a menor rating usando Shell Sort
     void sortDriversByRating() {
         int n = driverList->getSize();
@@ -1005,7 +1062,7 @@ public:
         delete[] arr;
     }
 
-    // sortUsersBySpent: ordena pasajeros de mayor a menor gasto total
+    // ordena pasajeros de mayor a menor gasto total
     void sortUsersBySpent() {
         int n = passengerList->getSize();
         if (n <= 1) return;
@@ -1031,7 +1088,7 @@ public:
         delete[] arr;
     }
 
-    // sortPassengersById: ordena pasajeros por su numero interno de id
+    // ordena pasajeros por su numero interno de id
     void sortPassengersById() {
         int n = passengerList->getSize();
         if (n <= 1) return;
@@ -1057,12 +1114,12 @@ public:
         delete[] arr;
     }
 
-    // sortUsersById: alias para ordenar pasajeros por id
+    // alias para ordenar pasajeros por id
     void sortUsersById() {
         sortPassengersById();
     }
 
-    // sortDriversById: ordena conductores por su numero interno de id
+    // ordena conductores por su numero interno de id
     void sortDriversById() {
         int n = driverList->getSize();
         if (n <= 1) return;
@@ -1088,15 +1145,15 @@ public:
         delete[] arr;
     }
 
-    // sortAdminsById: ordena admins por su numero interno de id
+    // ordena admins por su numero interno de id
     void sortAdminsById() {
         int n = adminList->getSize();
         if (n <= 1) return;
 
         // Copiamos a arreglo auxiliar
         FileManager::AdminPreview* arr = new FileManager::AdminPreview[n];
-        
-        for (int i = 0; i < n; i++) 
+
+        for (int i = 0; i < n; i++)
             arr[i] = adminList->get(i);
 
         // Insertion Sort: inserta cada elemento en su posición correcta
