@@ -69,8 +69,7 @@ private:
 
 public:
 
-    HashTable() : capacidad(CAPACIDAD_INICIAL), cantidad(0)
-    {
+    HashTable() : capacidad(CAPACIDAD_INICIAL), cantidad(0)  {
         tabla = new HashNode * [capacidad];
         for (int i = 0; i < capacidad; i++) tabla[i] = nullptr;
     }

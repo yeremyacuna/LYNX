@@ -7,7 +7,7 @@
 #include "../include/HashTable.h"
 #include "../include/FileManager.h"
 #include "../include/Heap.h"
-#include "../include/AdvancedOrders.h"
+#include "../include/AdvancedSorts.h"
 #include "Passenger.h"
 #include "Driver.h"
 #include "Trip.h"
@@ -827,7 +827,7 @@ public:
 
         Driver* arr = list->toArray();
 
-        AdvancedOrders<Driver>::shellSort(arr,n,
+        AdvancedSorts<Driver>::shellSort(arr,n,
             [](const Driver& a, const Driver& b)
             {
                 return a.getRating() < b.getRating();
@@ -879,7 +879,7 @@ public:
 
         Driver* arr = driverList->toArray();
 
-        AdvancedOrders<Driver>::heapSort(arr, n,[](const Driver& a, const Driver& b) 
+        AdvancedSorts<Driver>::heapSort(arr, n,[](const Driver& a, const Driver& b) 
             {
                 if (a.getRating() != b.getRating())
                     return a.getRating() > b.getRating();

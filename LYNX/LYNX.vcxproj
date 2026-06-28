@@ -118,7 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\AdvancedOrders.h" />
+    <ClInclude Include="include\AdvancedSorts.h" />
     <ClInclude Include="include\FileManager.h" />
     <ClInclude Include="include\DoublyLinkedList.h" />
     <ClInclude Include="include\HashTable.h" />
@@ -126,6 +126,7 @@
     <ClInclude Include="include\LinkedList.h" />
     <ClInclude Include="include\Node.h" />
     <ClInclude Include="include\Queue.h" />
+    <ClInclude Include="include\SearchAlgorithms.h" />
     <ClInclude Include="include\Stack.h" />
     <ClInclude Include="src\AdministratorMenu.h" />
     <ClInclude Include="src\AuthManager.h" />

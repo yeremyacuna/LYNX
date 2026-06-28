@@ -2,6 +2,8 @@
 #include "../include/Queue.h"
 #include "../include/DoublyLinkedList.h"
 #include "../include/Stack.h"
+#include "../include/AdvancedSorts.h"
+#include "../include/SearchAlgorithms.h"
 #include "Trip.h"
 #include "AuthManager.h"
 #include <iostream>
@@ -20,6 +22,21 @@ private:
     DoublyLinkedList<Trip> activeTrips;
     Stack<Trip> history;
     int tripCounter;
+
+    static bool tripIdLess(const Trip& a, const Trip& b)
+    {
+        return a.getTripId() < b.getTripId();
+    }
+
+    static bool tripPriceLess(const Trip& a, const Trip& b)
+    {
+        return a.getPrice() < b.getPrice();
+    }
+
+    static bool tripPriceGreater(const Trip& a, const Trip& b)
+    {
+        return a.getPrice() > b.getPrice();
+    }
 
     // extre los id de cada trip
     static int extractTripNumber(const string& tripId) {
@@ -365,6 +382,8 @@ public:
         return total;
     }
 
+
+
     // ordena viajes activos por precio de mayor a menor
     void sortActiveTripsByPrice() {
         int n = activeTrips.getSize();
@@ -395,4 +414,158 @@ public:
         for (int i = 0; i < n; i++) activeTrips.pushBack(arr[i]);
         delete[] arr;
     }
+
+
+
+
+
+    /*
+    void sortTripsByPriceHeapSort(vector<Trip>& tripVector) // Pasamos por referencia &
+    {
+        int n = (int)tripVector.size();
+
+        if (n <= 1)
+            return;
+
+        // usamos el vector directamente, no necesitamos toArray()
+        Trip* arr = tripVector.data();
+
+        //  HeapSort con comparador para el precio (Trip)
+        AdvancedSorts<Trip>::heapSort(arr, n, [](const Trip& a, const Trip& b)
+            {
+                // ordenar por PRECIO (mayor a menor)
+                return a.getPrice() > b.getPrice();
+            }
+        );
+
+    }
+
+    void sortTripsByIDHeapSort(vector<Trip>& tripVector) // Pasamos por referencia &
+    {
+        int n = (int)tripVector.size();
+
+        if (n <= 1)
+            return;
+
+        // usamos el vector directamente, no necesitamos toArray()
+        Trip* arr = tripVector.data();
+
+        //  HeapSort con comparador para el precio (Trip)
+        AdvancedSorts<Trip>::heapSort(arr, n, [](const Trip& a, const Trip& b)
+            {
+                // ordenar por PRECIO (mayor a menor)
+                return a.getTripId() > b.getTripId();
+            }
+        );
+
+    }
+
+
+    bool searchTripsByIDBinary(vector<Trip>& tripVector, string code)
+    {
+        int n = (int)tripVector.size();
+
+        if (n <= 1)
+            return;
+
+        Trip objetivo;
+        objetivo.setTripId(code);
+
+        // usamos el vector directamente, no necesitamos toArray()
+        Trip* arr = tripVector.data();
+
+        int pos = SearchAlgorithms<Trip>::binarySearchRecursive(arr, tripVector.size(), objetivo,
+            [](const Trip& a, const Trip& b) {
+                return a.getTripId() < b.getTripId();
+            }
+        );
+
+        return pos;
+    }
+
+    */
+
+
+
+
+
+    vector<Trip> getAllTripsSortedByPrice()
+    {
+        vector<Trip> trips = exportAllTrips();
+        int n = (int)trips.size();
+
+        if (n <= 1) 
+            return trips;
+
+        Trip* arr = trips.data();
+
+        AdvancedSorts<Trip>::heapSort(arr, n, tripPriceGreater);
+
+        return trips;
+    }
+
+    vector<Trip> getAllTripsSortedById()
+    {
+        vector<Trip> trips = exportAllTrips();
+        int n = (int)trips.size();
+
+        if (n <= 1) return trips;
+
+        Trip* arr = trips.data();
+
+        AdvancedSorts<Trip>::heapSort(arr, n, tripIdLess);
+
+        return trips;
+    }
+
+    Trip searchTripByIdBinary(string code)
+    {
+        vector<Trip> trips = getAllTripsSortedById();
+        int n = (int)trips.size();
+
+        if (n == 0) return Trip();
+
+        Trip objetivo;
+        objetivo.setTripId(code);
+
+        int pos = SearchAlgorithms<Trip>::binarySearchRecursive(
+            trips.data(),
+            n,
+            objetivo,
+            tripIdLess
+        );
+
+        if (pos == -1) return Trip();
+
+        return trips[pos];
+    }
+
+   
+
+    // exportar todos los viajes
+    vector<Trip> exportAllTrips()
+    {
+        vector<Trip> trips;
+
+        waitingQueue.forEach([&](Trip t){
+            trips.push_back(t);
+            });
+
+        for (int i = 0; i < activeTrips.getSize(); i++) {
+            trips.push_back(activeTrips.get(i));
+        }
+
+        int n = 0;
+        Trip* historial = historyToArray(n);
+
+        for (int i = 0; i < n; i++) {
+            trips.push_back(historial[i]);
+        }
+
+        delete[] historial;
+
+        return trips;
+    }
+
+
 };

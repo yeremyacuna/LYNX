@@ -1,13 +1,11 @@
 #pragma once
 #include <iostream>
-#include <functional> 
-#include "LinkedList.h"
-#include "../src/Driver.h"
+#include <functional>
 
 using std::cout; using std::cin; using std::function;
 
 template <typename T>
-class AdvancedOrders {
+class AdvancedSorts {
 private:
     // Funcion general para intercambiar mi swap
     static void swapTo(T& a, T& b) {
@@ -17,7 +15,7 @@ private:
     }
 
 private:
-    // ============ PRIVATE HELPERS / HEAP SORT ============
+    // ============ HELPERS / HEAP SORT ============
     // --- Heapify --- (Ascendente)
     static void heapify(T* arr, int size, int index) {
         // mas grande o padre

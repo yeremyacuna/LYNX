@@ -99,7 +99,13 @@
     <ClInclude Include="include\Heap.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\AdvancedOrders.h">
+    <ClInclude Include="include\AdvancedSorts.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HashTable.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SearchAlgorithms.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -141,17 +141,13 @@ namespace LYNX {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-
-			// Instanciar todos los controles
 			this->pnlTopBar = (gcnew System::Windows::Forms::Panel());
 			this->pictureBoxIcon = (gcnew System::Windows::Forms::PictureBox());
 			this->lblLYNX = (gcnew System::Windows::Forms::Label());
-			// pnlPresentacion reemplaza a pnlOpciones
 			this->pnlPresentacion = (gcnew System::Windows::Forms::Panel());
 			this->lblBienvenida = (gcnew System::Windows::Forms::Label());
 			this->lblDescripcion = (gcnew System::Windows::Forms::Label());
 			this->lblSubDesc = (gcnew System::Windows::Forms::Label());
-			// Tarjetas
 			this->pnlTarjetaPasajero = (gcnew System::Windows::Forms::Panel());
 			this->pnlDecoPasajero = (gcnew System::Windows::Forms::Panel());
 			this->lblTitPasajero = (gcnew System::Windows::Forms::Label());
@@ -167,12 +163,10 @@ namespace LYNX {
 			this->lblTitAdmin = (gcnew System::Windows::Forms::Label());
 			this->lblDescAdmin = (gcnew System::Windows::Forms::Label());
 			this->btnIngresarAdmin = (gcnew System::Windows::Forms::Button());
-
 			this->pnlBarraInferior = (gcnew System::Windows::Forms::Panel());
 			this->lblNombreProyecto = (gcnew System::Windows::Forms::Label());
 			this->lblInfoProyecto = (gcnew System::Windows::Forms::Label());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
-
 			this->pnlTopBar->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->BeginInit();
 			this->pnlPresentacion->SuspendLayout();
@@ -181,21 +175,20 @@ namespace LYNX {
 			this->pnlTarjetaAdmin->SuspendLayout();
 			this->pnlBarraInferior->SuspendLayout();
 			this->SuspendLayout();
-
 			// 
 			// pnlTopBar
 			// 
 			this->pnlTopBar->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->pnlTopBar->BackColor = System::Drawing::Color::FromArgb(6, 98, 70);
+			this->pnlTopBar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(6)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
+				static_cast<System::Int32>(static_cast<System::Byte>(70)));
 			this->pnlTopBar->Controls->Add(this->pictureBoxIcon);
 			this->pnlTopBar->Controls->Add(this->lblLYNX);
 			this->pnlTopBar->Location = System::Drawing::Point(0, 0);
 			this->pnlTopBar->Name = L"pnlTopBar";
 			this->pnlTopBar->Size = System::Drawing::Size(1480, 78);
 			this->pnlTopBar->TabIndex = 0;
-
 			// 
 			// pictureBoxIcon
 			// 
@@ -209,25 +202,25 @@ namespace LYNX {
 			this->pictureBoxIcon->TabIndex = 3;
 			this->pictureBoxIcon->TabStop = false;
 			this->pictureBoxIcon->Click += gcnew System::EventHandler(this, &MainMenuForm::pictureBoxIcon_Click);
-
 			// 
 			// lblLYNX
 			// 
 			this->lblLYNX->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 22, System::Drawing::FontStyle::Bold));
-			this->lblLYNX->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
+			this->lblLYNX->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
 			this->lblLYNX->Location = System::Drawing::Point(91, 18);
 			this->lblLYNX->Name = L"lblLYNX";
 			this->lblLYNX->Size = System::Drawing::Size(120, 40);
 			this->lblLYNX->TabIndex = 0;
 			this->lblLYNX->Text = L"LYNX";
-
 			// 
-			// pnlPresentacion-> reemplaza pnlOpciones
+			// pnlPresentacion
 			// 
 			this->pnlPresentacion->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->pnlPresentacion->BackColor = System::Drawing::Color::FromArgb(24, 28, 34);
+			this->pnlPresentacion->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+				static_cast<System::Int32>(static_cast<System::Byte>(34)));
 			this->pnlPresentacion->Controls->Add(this->lblBienvenida);
 			this->pnlPresentacion->Controls->Add(this->lblDescripcion);
 			this->pnlPresentacion->Controls->Add(this->lblSubDesc);
@@ -235,22 +228,22 @@ namespace LYNX {
 			this->pnlPresentacion->Name = L"pnlPresentacion";
 			this->pnlPresentacion->Size = System::Drawing::Size(1480, 380);
 			this->pnlPresentacion->TabIndex = 1;
-
 			// 
 			// lblBienvenida
 			// 
-			this->lblBienvenida->BackColor = System::Drawing::Color::FromArgb(39, 56, 43);
+			this->lblBienvenida->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(39)), static_cast<System::Int32>(static_cast<System::Byte>(56)),
+				static_cast<System::Int32>(static_cast<System::Byte>(43)));
 			this->lblBienvenida->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 10, System::Drawing::FontStyle::Bold));
-			this->lblBienvenida->ForeColor = System::Drawing::Color::FromArgb(194, 239, 113);
+			this->lblBienvenida->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(239)),
+				static_cast<System::Int32>(static_cast<System::Byte>(113)));
 			this->lblBienvenida->Location = System::Drawing::Point(50, 38);
 			this->lblBienvenida->Name = L"lblBienvenida";
 			this->lblBienvenida->Size = System::Drawing::Size(300, 32);
 			this->lblBienvenida->TabIndex = 0;
 			this->lblBienvenida->Text = L"  Bienvenido a LYNX  ";
 			this->lblBienvenida->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-
 			// 
-			// lblDescripcion-> reemplaza lblPnlOpciones
+			// lblDescripcion
 			// 
 			this->lblDescripcion->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 28, System::Drawing::FontStyle::Bold));
 			this->lblDescripcion->ForeColor = System::Drawing::Color::White;
@@ -259,19 +252,18 @@ namespace LYNX {
 			this->lblDescripcion->Size = System::Drawing::Size(1100, 156);
 			this->lblDescripcion->TabIndex = 1;
 			this->lblDescripcion->Text = L"Solo dinos donde.\nNosotros nos encargamos del resto.";
-
 			// 
-			// lblSubDesc -> reemplaza lblInfo
+			// lblSubDesc
 			// 
 			this->lblSubDesc->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12));
-			this->lblSubDesc->ForeColor = System::Drawing::Color::FromArgb(160, 175, 168);
+			this->lblSubDesc->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(160)), static_cast<System::Int32>(static_cast<System::Byte>(175)),
+				static_cast<System::Int32>(static_cast<System::Byte>(168)));
 			this->lblSubDesc->Location = System::Drawing::Point(52, 254);
 			this->lblSubDesc->Name = L"lblSubDesc";
 			this->lblSubDesc->Size = System::Drawing::Size(1100, 80);
 			this->lblSubDesc->TabIndex = 2;
 			this->lblSubDesc->Text = L"Selecciona tu perfil para comenzar. Puedes ingresar como pasajero, conductor o ad"
 				L"ministrador del sistema.";
-
 			// 
 			// pnlTarjetaPasajero
 			// 
@@ -284,47 +276,48 @@ namespace LYNX {
 			this->pnlTarjetaPasajero->Name = L"pnlTarjetaPasajero";
 			this->pnlTarjetaPasajero->Size = System::Drawing::Size(444, 290);
 			this->pnlTarjetaPasajero->TabIndex = 3;
-
 			// 
 			// pnlDecoPasajero
 			// 
-			this->pnlDecoPasajero->BackColor = System::Drawing::Color::FromArgb(33, 181, 109);
+			this->pnlDecoPasajero->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(181)),
+				static_cast<System::Int32>(static_cast<System::Byte>(109)));
 			this->pnlDecoPasajero->Location = System::Drawing::Point(24, 22);
 			this->pnlDecoPasajero->Name = L"pnlDecoPasajero";
 			this->pnlDecoPasajero->Size = System::Drawing::Size(396, 8);
 			this->pnlDecoPasajero->TabIndex = 0;
-
 			// 
 			// lblTitPasajero
 			// 
 			this->lblTitPasajero->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
-			this->lblTitPasajero->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
+			this->lblTitPasajero->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
 			this->lblTitPasajero->Location = System::Drawing::Point(24, 46);
 			this->lblTitPasajero->Name = L"lblTitPasajero";
 			this->lblTitPasajero->Size = System::Drawing::Size(396, 40);
 			this->lblTitPasajero->TabIndex = 1;
 			this->lblTitPasajero->Text = L"Pasajero";
-
 			// 
 			// lblDescPasajero
 			// 
 			this->lblDescPasajero->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
-			this->lblDescPasajero->ForeColor = System::Drawing::Color::FromArgb(96, 102, 110);
+			this->lblDescPasajero->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
+				static_cast<System::Int32>(static_cast<System::Byte>(110)));
 			this->lblDescPasajero->Location = System::Drawing::Point(24, 96);
 			this->lblDescPasajero->Name = L"lblDescPasajero";
 			this->lblDescPasajero->Size = System::Drawing::Size(396, 76);
 			this->lblDescPasajero->TabIndex = 2;
 			this->lblDescPasajero->Text = L"Solicita tu viaje, consulta tu historial y gestiona tu perfil personal.";
-
 			// 
 			// btnIngresarPasajero
 			// 
-			this->btnIngresarPasajero->BackColor = System::Drawing::Color::FromArgb(245, 247, 243);
-			this->btnIngresarPasajero->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(33, 181, 109);
-			this->btnIngresarPasajero->FlatAppearance->BorderSize = 1;
+			this->btnIngresarPasajero->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(247)), static_cast<System::Int32>(static_cast<System::Byte>(243)));
+			this->btnIngresarPasajero->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(181)), static_cast<System::Int32>(static_cast<System::Byte>(109)));
 			this->btnIngresarPasajero->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnIngresarPasajero->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
-			this->btnIngresarPasajero->ForeColor = System::Drawing::Color::FromArgb(31, 36, 42);
+			this->btnIngresarPasajero->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(36)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
 			this->btnIngresarPasajero->Location = System::Drawing::Point(24, 226);
 			this->btnIngresarPasajero->Name = L"btnIngresarPasajero";
 			this->btnIngresarPasajero->Size = System::Drawing::Size(396, 44);
@@ -334,7 +327,6 @@ namespace LYNX {
 			this->btnIngresarPasajero->Click += gcnew System::EventHandler(this, &MainMenuForm::OpenPassengerForm);
 			this->btnIngresarPasajero->MouseEnter += gcnew System::EventHandler(this, &MainMenuForm::btnPasajero_MouseEnter);
 			this->btnIngresarPasajero->MouseLeave += gcnew System::EventHandler(this, &MainMenuForm::btnPasajero_MouseLeave);
-
 			// 
 			// pnlTarjetaConductor
 			// 
@@ -347,47 +339,49 @@ namespace LYNX {
 			this->pnlTarjetaConductor->Name = L"pnlTarjetaConductor";
 			this->pnlTarjetaConductor->Size = System::Drawing::Size(444, 290);
 			this->pnlTarjetaConductor->TabIndex = 4;
-
 			// 
 			// pnlDecoConductor
 			// 
-			this->pnlDecoConductor->BackColor = System::Drawing::Color::FromArgb(39, 50, 120);
+			this->pnlDecoConductor->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(39)), static_cast<System::Int32>(static_cast<System::Byte>(50)),
+				static_cast<System::Int32>(static_cast<System::Byte>(120)));
 			this->pnlDecoConductor->Location = System::Drawing::Point(24, 22);
 			this->pnlDecoConductor->Name = L"pnlDecoConductor";
 			this->pnlDecoConductor->Size = System::Drawing::Size(396, 8);
 			this->pnlDecoConductor->TabIndex = 0;
-
 			// 
 			// lblTitConductor
 			// 
 			this->lblTitConductor->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
-			this->lblTitConductor->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
+			this->lblTitConductor->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
 			this->lblTitConductor->Location = System::Drawing::Point(24, 46);
 			this->lblTitConductor->Name = L"lblTitConductor";
 			this->lblTitConductor->Size = System::Drawing::Size(396, 40);
 			this->lblTitConductor->TabIndex = 1;
 			this->lblTitConductor->Text = L"Conductor";
-
 			// 
 			// lblDescConductor
 			// 
 			this->lblDescConductor->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
-			this->lblDescConductor->ForeColor = System::Drawing::Color::FromArgb(96, 102, 110);
+			this->lblDescConductor->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
+				static_cast<System::Int32>(static_cast<System::Byte>(110)));
 			this->lblDescConductor->Location = System::Drawing::Point(24, 96);
 			this->lblDescConductor->Name = L"lblDescConductor";
 			this->lblDescConductor->Size = System::Drawing::Size(396, 76);
 			this->lblDescConductor->TabIndex = 2;
-			this->lblDescConductor->Text = L"Revisa tus solicitudes y ganancias, gestiona tu disponibilidad y vehiculo, y ve tu historial.";
-
+			this->lblDescConductor->Text = L"Revisa tus solicitudes y ganancias, gestiona tu disponibilidad y vehiculo, y ve t"
+				L"u historial.";
 			// 
 			// btnIngresarConductor
 			// 
-			this->btnIngresarConductor->BackColor = System::Drawing::Color::FromArgb(245, 247, 253);
-			this->btnIngresarConductor->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(39, 50, 120);
-			this->btnIngresarConductor->FlatAppearance->BorderSize = 1;
+			this->btnIngresarConductor->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(247)), static_cast<System::Int32>(static_cast<System::Byte>(253)));
+			this->btnIngresarConductor->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(39)),
+				static_cast<System::Int32>(static_cast<System::Byte>(50)), static_cast<System::Int32>(static_cast<System::Byte>(120)));
 			this->btnIngresarConductor->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnIngresarConductor->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
-			this->btnIngresarConductor->ForeColor = System::Drawing::Color::FromArgb(31, 36, 42);
+			this->btnIngresarConductor->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(36)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
 			this->btnIngresarConductor->Location = System::Drawing::Point(24, 226);
 			this->btnIngresarConductor->Name = L"btnIngresarConductor";
 			this->btnIngresarConductor->Size = System::Drawing::Size(396, 44);
@@ -397,7 +391,6 @@ namespace LYNX {
 			this->btnIngresarConductor->Click += gcnew System::EventHandler(this, &MainMenuForm::OpenDriverForm);
 			this->btnIngresarConductor->MouseEnter += gcnew System::EventHandler(this, &MainMenuForm::btnConductor_MouseEnter);
 			this->btnIngresarConductor->MouseLeave += gcnew System::EventHandler(this, &MainMenuForm::btnConductor_MouseLeave);
-
 			// 
 			// pnlTarjetaAdmin
 			// 
@@ -410,47 +403,49 @@ namespace LYNX {
 			this->pnlTarjetaAdmin->Name = L"pnlTarjetaAdmin";
 			this->pnlTarjetaAdmin->Size = System::Drawing::Size(444, 290);
 			this->pnlTarjetaAdmin->TabIndex = 5;
-
 			// 
 			// pnlDecoAdmin
 			// 
-			this->pnlDecoAdmin->BackColor = System::Drawing::Color::FromArgb(57, 107, 239);
+			this->pnlDecoAdmin->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
+				static_cast<System::Int32>(static_cast<System::Byte>(239)));
 			this->pnlDecoAdmin->Location = System::Drawing::Point(24, 22);
 			this->pnlDecoAdmin->Name = L"pnlDecoAdmin";
 			this->pnlDecoAdmin->Size = System::Drawing::Size(396, 8);
 			this->pnlDecoAdmin->TabIndex = 0;
-
 			// 
 			// lblTitAdmin
 			// 
 			this->lblTitAdmin->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 20, System::Drawing::FontStyle::Bold));
-			this->lblTitAdmin->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
+			this->lblTitAdmin->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
 			this->lblTitAdmin->Location = System::Drawing::Point(24, 46);
 			this->lblTitAdmin->Name = L"lblTitAdmin";
 			this->lblTitAdmin->Size = System::Drawing::Size(396, 40);
 			this->lblTitAdmin->TabIndex = 1;
 			this->lblTitAdmin->Text = L"Administrador";
-
 			// 
 			// lblDescAdmin
 			// 
 			this->lblDescAdmin->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
-			this->lblDescAdmin->ForeColor = System::Drawing::Color::FromArgb(96, 102, 110);
+			this->lblDescAdmin->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(96)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
+				static_cast<System::Int32>(static_cast<System::Byte>(110)));
 			this->lblDescAdmin->Location = System::Drawing::Point(24, 96);
 			this->lblDescAdmin->Name = L"lblDescAdmin";
 			this->lblDescAdmin->Size = System::Drawing::Size(396, 76);
 			this->lblDescAdmin->TabIndex = 2;
-			this->lblDescAdmin->Text = L"Accede al panel de control: usuarios, viajes, estadisticas y el control general del sistema.";
-
+			this->lblDescAdmin->Text = L"Accede al panel de control: usuarios, viajes, estadisticas y el control general d"
+				L"el sistema.";
 			// 
 			// btnIngresarAdmin
 			// 
-			this->btnIngresarAdmin->BackColor = System::Drawing::Color::FromArgb(242, 245, 253);
-			this->btnIngresarAdmin->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(57, 107, 239);
-			this->btnIngresarAdmin->FlatAppearance->BorderSize = 1;
+			this->btnIngresarAdmin->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(242)),
+				static_cast<System::Int32>(static_cast<System::Byte>(245)), static_cast<System::Int32>(static_cast<System::Byte>(253)));
+			this->btnIngresarAdmin->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(57)),
+				static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(239)));
 			this->btnIngresarAdmin->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnIngresarAdmin->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
-			this->btnIngresarAdmin->ForeColor = System::Drawing::Color::FromArgb(31, 36, 42);
+			this->btnIngresarAdmin->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(36)),
+				static_cast<System::Int32>(static_cast<System::Byte>(42)));
 			this->btnIngresarAdmin->Location = System::Drawing::Point(24, 226);
 			this->btnIngresarAdmin->Name = L"btnIngresarAdmin";
 			this->btnIngresarAdmin->Size = System::Drawing::Size(396, 44);
@@ -460,7 +455,6 @@ namespace LYNX {
 			this->btnIngresarAdmin->Click += gcnew System::EventHandler(this, &MainMenuForm::OpenAdminForm);
 			this->btnIngresarAdmin->MouseEnter += gcnew System::EventHandler(this, &MainMenuForm::btnAdmin_MouseEnter);
 			this->btnIngresarAdmin->MouseLeave += gcnew System::EventHandler(this, &MainMenuForm::btnAdmin_MouseLeave);
-
 			// 
 			// pnlBarraInferior
 			// 
@@ -474,42 +468,43 @@ namespace LYNX {
 			this->pnlBarraInferior->Name = L"pnlBarraInferior";
 			this->pnlBarraInferior->Size = System::Drawing::Size(1480, 110);
 			this->pnlBarraInferior->TabIndex = 6;
-
 			// 
 			// lblNombreProyecto
 			// 
+			this->lblNombreProyecto->AutoSize = true;
 			this->lblNombreProyecto->Font = (gcnew System::Drawing::Font(L"Bahnschrift", 14, System::Drawing::FontStyle::Bold));
-			this->lblNombreProyecto->ForeColor = System::Drawing::Color::FromArgb(24, 27, 31);
+			this->lblNombreProyecto->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)),
+				static_cast<System::Int32>(static_cast<System::Byte>(27)), static_cast<System::Int32>(static_cast<System::Byte>(31)));
 			this->lblNombreProyecto->Location = System::Drawing::Point(32, 20);
 			this->lblNombreProyecto->Name = L"lblNombreProyecto";
-			this->lblNombreProyecto->AutoSize = true;
+			this->lblNombreProyecto->Size = System::Drawing::Size(359, 23);
 			this->lblNombreProyecto->TabIndex = 0;
-			this->lblNombreProyecto->Text = L"LYNX  |  Sistema de gestión de transporte";
-
+			this->lblNombreProyecto->Text = L"LYNX  |  Sistema de gestion de transporte";
 			// 
 			// lblInfoProyecto
 			// 
+			this->lblInfoProyecto->AutoSize = true;
 			this->lblInfoProyecto->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->lblInfoProyecto->ForeColor = System::Drawing::Color::FromArgb(120, 130, 125);
+			this->lblInfoProyecto->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(120)), static_cast<System::Int32>(static_cast<System::Byte>(130)),
+				static_cast<System::Int32>(static_cast<System::Byte>(125)));
 			this->lblInfoProyecto->Location = System::Drawing::Point(34, 56);
 			this->lblInfoProyecto->Name = L"lblInfoProyecto";
-			this->lblInfoProyecto->AutoSize = true;
+			this->lblInfoProyecto->Size = System::Drawing::Size(583, 15);
 			this->lblInfoProyecto->TabIndex = 1;
-			this->lblInfoProyecto->Text = L"LYNX  |  Sistema de optimización de rutas y asignación de conductores  |  Presiona"
-				L" F11 para pantalla completa";
-
+			this->lblInfoProyecto->Text = L"LYNX  |  Sistema de optimizacion de rutas y asignacion de conductores  |  Presion"
+				L"a F11 para pantalla completa";
 			// 
 			// timer1
 			// 
 			this->timer1->Enabled = true;
 			this->timer1->Tick += gcnew System::EventHandler(this, &MainMenuForm::timer1_Tick);
-
 			// 
 			// MainMenuForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(245, 247, 245);
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)), static_cast<System::Int32>(static_cast<System::Byte>(247)),
+				static_cast<System::Int32>(static_cast<System::Byte>(245)));
 			this->ClientSize = System::Drawing::Size(1480, 930);
 			this->Controls->Add(this->pnlTopBar);
 			this->Controls->Add(this->pnlPresentacion);
@@ -526,7 +521,6 @@ namespace LYNX {
 			this->Load += gcnew System::EventHandler(this, &MainMenuForm::MainMenuForm_Load);
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainMenuForm::MainMenuForm_KeyDown);
 			this->Resize += gcnew System::EventHandler(this, &MainMenuForm::MainMenuForm_Resize);
-
 			this->pnlTopBar->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxIcon))->EndInit();
 			this->pnlPresentacion->ResumeLayout(false);
@@ -536,6 +530,7 @@ namespace LYNX {
 			this->pnlBarraInferior->ResumeLayout(false);
 			this->pnlBarraInferior->PerformLayout();
 			this->ResumeLayout(false);
+
 		}
 
 		// LOGICA
