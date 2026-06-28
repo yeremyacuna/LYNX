@@ -96,6 +96,12 @@
     <ClInclude Include="src\forms\VehicleRegisterForm.h">
       <Filter>src\forms</Filter>
     </ClInclude>
+    <ClInclude Include="include\Heap.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AdvancedOrders.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">

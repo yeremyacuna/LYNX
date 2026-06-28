@@ -19,11 +19,11 @@ using System::ConsoleColor;
 
 using std::vector; using std::string; using std::cout; using std::cin; using std::getline; using std::endl; using std::to_string;
 
-class Menu
+class ConsoleMenu
 {
 public:
-    Menu();
-    ~Menu();
+    ConsoleMenu();
+    ~ConsoleMenu();
 
     void lynx();
     void navBar();
@@ -33,7 +33,7 @@ public:
     void navName(string name);
 
     void principal(int& opcion);
-    void passengerMenu(int& opcion);
+    void passengerConsoleMenu(int& opcion);
     void passengerLogin(string& DNI, string& name, string& password);
     void passengerSignIn(string& DNI, string& name, string& password);
     void passengerOptions(int& opcion, Passenger passenger);
@@ -41,7 +41,7 @@ public:
     void passengerConfirmTrip(int& opcion, string origen, string destino, int tipo, Trip trip, Passenger passenger);
     void passengerProfile(int& option, Passenger passenger);
 
-    void driverMenu(int& opcion);
+    void driverConsoleMenu(int& opcion);
     void driverLogin(string& DNI, string& name, string& password);
     void driverOptions(int& opcion, string name, string placa, bool estado, float rating, Driver driver);
     void driverRegisterTrip(string& partida, string& llegada, float& km, int& tipo, Driver driver);
@@ -52,7 +52,7 @@ public:
 
     void tripHistory(int& option, Trip trips[], int s, string title);
 
-    void LYNXMenu();
+    void LYNXConsoleMenu();
 
 private:
     void Seleccion(int keycode, int& inicio, int min, int max);
@@ -81,11 +81,11 @@ private:
     void showDriverSidebar(Driver driver);
 };
 
-Menu::Menu() {}
-Menu::~Menu() {}
+ConsoleMenu::ConsoleMenu() {}
+ConsoleMenu::~ConsoleMenu() {}
 
 // Seleccion: actualiza la opcion activa usando flechas del teclado
-void Menu::Seleccion(int keycode, int& inicio, int min, int max)
+void ConsoleMenu::Seleccion(int keycode, int& inicio, int min, int max)
 {
     switch (keycode) {
     case 72: if (inicio > min) inicio--; break;
@@ -95,7 +95,7 @@ void Menu::Seleccion(int keycode, int& inicio, int min, int max)
 
 // prepararDirectorioTrabajo: intenta ubicar la carpeta raiz donde existe assets
 // esto evita que falle la lectura de archivos si el exe se ejecuta desde otra ruta
-void Menu::prepararDirectorioTrabajo() {
+void ConsoleMenu::prepararDirectorioTrabajo() {
     namespace fs = std::filesystem;
 
     char exePath[MAX_PATH]{};
@@ -120,10 +120,10 @@ void Menu::prepararDirectorioTrabajo() {
 }
 
 // limpiarPantalla: limpia la consola para volver a dibujar la interfaz
-void Menu::limpiarPantalla() { std::system("cls"); }
+void ConsoleMenu::limpiarPantalla() { std::system("cls"); }
 
 // mostrarMensaje: muestra una pantalla corta de aviso y espera una tecla
-void Menu::mostrarMensaje(string titulo, string detalle)
+void ConsoleMenu::mostrarMensaje(string titulo, string detalle)
 {
     limpiarPantalla();
     lynx();
@@ -136,7 +136,7 @@ void Menu::mostrarMensaje(string titulo, string detalle)
 }
 
 // fechaActual: genera la fecha del sistema en formato dia/mes/anio
-string Menu::fechaActual()
+string ConsoleMenu::fechaActual()
 {
     std::time_t now = std::time(nullptr);
     std::tm localTime{};
@@ -147,14 +147,14 @@ string Menu::fechaActual()
 }
 
 // generarTripId: pide al TripManager cual seria el siguiente id disponible
-string Menu::generarTripId(TripManager& tripMgr)
+string ConsoleMenu::generarTripId(TripManager& tripMgr)
 {
     return tripMgr.previewNextTripId();
 }
 
 // buscarDniConductorPorNombre: sirve como respaldo para viajes antiguos
 // si un viaje viejo no guarda driverDni, se intenta encontrar por nombre
-string Menu::buscarDniConductorPorNombre(AuthManager& authMgr, const string& nombre)
+string ConsoleMenu::buscarDniConductorPorNombre(AuthManager& authMgr, const string& nombre)
 {
     for (int i = 0; i < authMgr.getDriverList()->getSize(); i++) {
         Driver d = authMgr.getDriverList()->get(i);
@@ -164,7 +164,7 @@ string Menu::buscarDniConductorPorNombre(AuthManager& authMgr, const string& nom
 }
 
 // exportarWaitingTrips: copia la cola de espera a un vector para poder guardarla o recorrerla facil
-vector<Trip> Menu::exportarWaitingTrips(TripManager& tripMgr)
+vector<Trip> ConsoleMenu::exportarWaitingTrips(TripManager& tripMgr)
 {
     vector<Trip> lista;
     tripMgr.getWaitingQueue().forEach([&](Trip t) {
@@ -174,7 +174,7 @@ vector<Trip> Menu::exportarWaitingTrips(TripManager& tripMgr)
 }
 
 // exportarActiveTrips: pasa los viajes activos de la lista doble a vector
-vector<Trip> Menu::exportarActiveTrips(TripManager& tripMgr)
+vector<Trip> ConsoleMenu::exportarActiveTrips(TripManager& tripMgr)
 {
     vector<Trip> lista;
     for (int i = 0; i < tripMgr.getActiveTrips().getSize(); i++) {
@@ -184,7 +184,7 @@ vector<Trip> Menu::exportarActiveTrips(TripManager& tripMgr)
 }
 
 // exportarHistoryTrips: extrae el historial de la pila sin perder el contenido original
-vector<Trip> Menu::exportarHistoryTrips(TripManager& tripMgr)
+vector<Trip> ConsoleMenu::exportarHistoryTrips(TripManager& tripMgr)
 {
     vector<Trip> lista;
     Stack<Trip>& history = tripMgr.getHistory();
@@ -204,7 +204,7 @@ vector<Trip> Menu::exportarHistoryTrips(TripManager& tripMgr)
 
 // exportarTodosLosTrips: junta pendientes, activos e historial en un solo vector
 // se usa sobre todo al momento de persistir todos los viajes en archivo
-vector<Trip> Menu::exportarTodosLosTrips(TripManager& tripMgr)
+vector<Trip> ConsoleMenu::exportarTodosLosTrips(TripManager& tripMgr)
 {
     vector<Trip> total = exportarWaitingTrips(tripMgr);
     vector<Trip> activos = exportarActiveTrips(tripMgr);
@@ -215,7 +215,7 @@ vector<Trip> Menu::exportarTodosLosTrips(TripManager& tripMgr)
 }
 
 // cargarDatos: reconstruye las estructuras en memoria leyendo lo guardado en archivo
-void Menu::cargarDatos(FileManager& fileManager, AuthManager& authMgr, TripManager& tripMgr)
+void ConsoleMenu::cargarDatos(FileManager& fileManager, AuthManager& authMgr, TripManager& tripMgr)
 {
     vector<Trip> tripsCargados = fileManager.leerTripsTXT();
     vector<Trip> historial;
@@ -232,14 +232,14 @@ void Menu::cargarDatos(FileManager& fileManager, AuthManager& authMgr, TripManag
 }
 
 // guardarDatos: persiste usuarios, conductores y viajes en disco
-void Menu::guardarDatos(FileManager& fileManager, AuthManager& authMgr, TripManager& tripMgr)
+void ConsoleMenu::guardarDatos(FileManager& fileManager, AuthManager& authMgr, TripManager& tripMgr)
 {
     authMgr.saveAll();
     fileManager.guardarTripsTXT(exportarTodosLosTrips(tripMgr));
 }
 
 // buscarViajeActivoDePasajero: revisa la lista de activos y devuelve el viaje del pasajero actual
-Trip Menu::buscarViajeActivoDePasajero(TripManager& tripMgr, const string& dni)
+Trip ConsoleMenu::buscarViajeActivoDePasajero(TripManager& tripMgr, const string& dni)
 {
     for (int i = 0; i < tripMgr.getActiveTrips().getSize(); i++) {
         Trip t = tripMgr.getActiveTrips().get(i);
@@ -250,7 +250,7 @@ Trip Menu::buscarViajeActivoDePasajero(TripManager& tripMgr, const string& dni)
 
 // buscarViajeActivoDeConductor: busca el viaje activo del conductor
 // primero intenta por driverDni y si no existe usa el nombre como respaldo
-Trip Menu::buscarViajeActivoDeConductor(TripManager& tripMgr, const Driver& driver)
+Trip ConsoleMenu::buscarViajeActivoDeConductor(TripManager& tripMgr, const Driver& driver)
 {
     for (int i = 0; i < tripMgr.getActiveTrips().getSize(); i++) {
         Trip t = tripMgr.getActiveTrips().get(i);
@@ -265,7 +265,7 @@ Trip Menu::buscarViajeActivoDeConductor(TripManager& tripMgr, const Driver& driv
 }
 
 // buscarViajePendienteDePasajero: revisa la cola de espera sin destruirla
-Trip Menu::buscarViajePendienteDePasajero(TripManager& tripMgr, const string& dni)
+Trip ConsoleMenu::buscarViajePendienteDePasajero(TripManager& tripMgr, const string& dni)
 {
     Trip encontrado;
     tripMgr.getWaitingQueue().forEach([&](Trip t) {
@@ -275,7 +275,7 @@ Trip Menu::buscarViajePendienteDePasajero(TripManager& tripMgr, const string& dn
 }
 
 // historialDePasajero: filtra del historial solo los viajes que pertenecen a un pasajero
-vector<Trip> Menu::historialDePasajero(TripManager& tripMgr, const string& dni)
+vector<Trip> ConsoleMenu::historialDePasajero(TripManager& tripMgr, const string& dni)
 {
     vector<Trip> lista;
     vector<Trip> historial = exportarHistoryTrips(tripMgr);
@@ -287,7 +287,7 @@ vector<Trip> Menu::historialDePasajero(TripManager& tripMgr, const string& dni)
 
 // historialDeConductor: filtra del historial solo los viajes de un conductor
 // otra vez se prioriza driverDni y se deja el nombre como respaldo
-vector<Trip> Menu::historialDeConductor(TripManager& tripMgr, const Driver& driver)
+vector<Trip> ConsoleMenu::historialDeConductor(TripManager& tripMgr, const Driver& driver)
 {
     vector<Trip> lista;
     vector<Trip> historial = exportarHistoryTrips(tripMgr);
@@ -303,7 +303,7 @@ vector<Trip> Menu::historialDeConductor(TripManager& tripMgr, const Driver& driv
 }
 
 // lynx: dibuja el logo ascii principal del sistema
-void Menu::lynx()
+void ConsoleMenu::lynx()
 {
     Console::ForegroundColor = ConsoleColor::Green;
     Console::SetCursorPosition(63, 5); std::cout << (char)219 << (char)219 << "     " << (char)219 << (char)219 << "    " << (char)219 << (char)219 << " " << (char)219 << (char)219 << (char)219 << "   " << (char)219 << (char)219 << " " << (char)219 << (char)219 << "   " << (char)219 << (char)219 << "\n";
@@ -315,7 +315,7 @@ void Menu::lynx()
 }
 
 // navBar: pinta la barra superior general sin resaltar ningun rol
-void Menu::navBar() {
+void ConsoleMenu::navBar() {
     Console::BackgroundColor = ConsoleColor::White;
     Console::SetCursorPosition(0, 0); std::cout << "                                                                                                                                                                ";
     Console::SetCursorPosition(0, 1); std::cout << "                                                                                                                                                                ";
@@ -330,7 +330,7 @@ void Menu::navBar() {
 }
 
 // navBarP: barra superior resaltando pasajero
-void Menu::navBarP() {
+void ConsoleMenu::navBarP() {
     Console::BackgroundColor = ConsoleColor::White;
     Console::SetCursorPosition(0, 0); std::cout << "                                                                                                                                                                ";
     Console::SetCursorPosition(0, 1); std::cout << "                                                                                                                                                                ";
@@ -347,7 +347,7 @@ void Menu::navBarP() {
 }
 
 // navBarC: barra superior resaltando conductor
-void Menu::navBarC() {
+void ConsoleMenu::navBarC() {
     Console::BackgroundColor = ConsoleColor::White;
     Console::SetCursorPosition(0, 0); std::cout << "                                                                                                                                                                ";
     Console::SetCursorPosition(0, 1); std::cout << "                                                                                                                                                                ";
@@ -364,7 +364,7 @@ void Menu::navBarC() {
 }
 
 // navBarA: barra superior resaltando administrador
-void Menu::navBarA() {
+void ConsoleMenu::navBarA() {
     Console::BackgroundColor = ConsoleColor::White;
     Console::SetCursorPosition(0, 0); std::cout << "                                                                                                                                                                ";
     Console::SetCursorPosition(0, 1); std::cout << "                                                                                                                                                                ";
@@ -380,7 +380,7 @@ void Menu::navBarA() {
 }
 
 // navName: muestra el nombre del usuario logueado en la barra superior
-void Menu::navName(string name) {
+void ConsoleMenu::navName(string name) {
     Console::BackgroundColor = ConsoleColor::White;
     Console::ForegroundColor = ConsoleColor::Black;
     Console::SetCursorPosition(140, 1); std::cout << name;
@@ -389,7 +389,7 @@ void Menu::navName(string name) {
 }
 
 // showPassengerSidebar: dibuja el panel lateral con el resumen del pasajero
-void Menu::showPassengerSidebar(Passenger passenger) {
+void ConsoleMenu::showPassengerSidebar(Passenger passenger) {
     int y = 7, dy = 9;
     Console::ForegroundColor = ConsoleColor::Gray;
     Console::SetCursorPosition(130, y++); cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219;
@@ -412,7 +412,7 @@ void Menu::showPassengerSidebar(Passenger passenger) {
 }
 
 // showDriverSidebar: dibuja el panel lateral con el resumen del conductor
-void Menu::showDriverSidebar(Driver driver) {
+void ConsoleMenu::showDriverSidebar(Driver driver) {
     int y = 7, dy = 9, x = 128;
     Console::ForegroundColor = ConsoleColor::Gray;
     Console::SetCursorPosition(x, y++); cout << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219 << (char)219;
@@ -434,7 +434,7 @@ void Menu::showDriverSidebar(Driver driver) {
 }
 
 // principal: menu inicial donde se elige pasajero, conductor o admin
-void Menu::principal(int& opcion)
+void ConsoleMenu::principal(int& opcion)
 {
     opcion = 1;
     while (true) {
@@ -466,8 +466,8 @@ void Menu::principal(int& opcion)
     }
 }
 
-// passengerMenu: sub menu de entrada para pasajero, login o registro
-void Menu::passengerMenu(int& opcion)
+// passengerConsoleMenu: sub menu de entrada para pasajero, login o registro
+void ConsoleMenu::passengerConsoleMenu(int& opcion)
 {
     opcion = 1;
     while (true) {
@@ -500,7 +500,7 @@ void Menu::passengerMenu(int& opcion)
 }
 
 // passengerLogin: recoge por consola los datos de acceso del pasajero
-void Menu::passengerLogin(string& DNI, string& name, string& password)
+void ConsoleMenu::passengerLogin(string& DNI, string& name, string& password)
 {
     limpiarPantalla(); lynx(); navBarP(); int y = 11;
     Console::SetCursorPosition(54 + 18, y++); cout << "Iniciar Sesion";
@@ -511,7 +511,7 @@ void Menu::passengerLogin(string& DNI, string& name, string& password)
 }
 
 // passengerSignIn: recoge por consola los datos de registro del pasajero
-void Menu::passengerSignIn(string& DNI, string& name, string& password)
+void ConsoleMenu::passengerSignIn(string& DNI, string& name, string& password)
 {
     limpiarPantalla(); lynx(); navBarP(); int y = 11;
     Console::SetCursorPosition(54 + 18, y++); cout << "Registro";
@@ -522,7 +522,7 @@ void Menu::passengerSignIn(string& DNI, string& name, string& password)
 }
 
 // passengerOptions: menu interno del pasajero despues de iniciar sesion
-void Menu::passengerOptions(int& opcion, Passenger passenger)
+void ConsoleMenu::passengerOptions(int& opcion, Passenger passenger)
 {
     opcion = 1;
     while (true) {
@@ -561,7 +561,7 @@ void Menu::passengerOptions(int& opcion, Passenger passenger)
 }
 
 // passengerSendTrip: pide origen, destino, tipo y distancia para solicitar un viaje
-void Menu::passengerSendTrip(string& origen, string& destino, int& tipo, float& km, Passenger passenger)
+void ConsoleMenu::passengerSendTrip(string& origen, string& destino, int& tipo, float& km, Passenger passenger)
 {
     limpiarPantalla(); lynx(); navBarP(); navName(passenger.getName());
     showPassengerSidebar(passenger);
@@ -588,7 +588,7 @@ void Menu::passengerSendTrip(string& origen, string& destino, int& tipo, float& 
 }
 
 // passengerConfirmTrip: muestra el resumen del viaje antes de confirmarlo
-void Menu::passengerConfirmTrip(int& opcion, string origen, string destino, int tipo, Trip trip, Passenger passenger)
+void ConsoleMenu::passengerConfirmTrip(int& opcion, string origen, string destino, int tipo, Trip trip, Passenger passenger)
 {
     opcion = 1;
     while (true) {
@@ -613,7 +613,7 @@ void Menu::passengerConfirmTrip(int& opcion, string origen, string destino, int 
 }
 
 // passengerProfile: menu de perfil para ver o actualizar datos del pasajero
-void Menu::passengerProfile(int& option, Passenger passenger)
+void ConsoleMenu::passengerProfile(int& option, Passenger passenger)
 {
     limpiarPantalla(); lynx(); navBarP(); navName(passenger.getName());
     showPassengerSidebar(passenger);
@@ -627,8 +627,8 @@ void Menu::passengerProfile(int& option, Passenger passenger)
     Console::SetCursorPosition(56 + 18, y - 1); cin >> option;
 }
 
-// driverMenu: sub menu de entrada para conductor
-void Menu::driverMenu(int& opcion)
+// driverConsoleMenu: sub menu de entrada para conductor
+void ConsoleMenu::driverConsoleMenu(int& opcion)
 {
     opcion = 1;
     while (true) {
@@ -657,7 +657,7 @@ void Menu::driverMenu(int& opcion)
 }
 
 // driverLogin: recoge por consola los datos de acceso del conductor
-void Menu::driverLogin(string& DNI, string& name, string& password)
+void ConsoleMenu::driverLogin(string& DNI, string& name, string& password)
 {
     limpiarPantalla(); lynx(); navBarC(); int y = 11;
     Console::SetCursorPosition(54 + 18, y++); cout << "Iniciar Sesion";
@@ -668,7 +668,7 @@ void Menu::driverLogin(string& DNI, string& name, string& password)
 }
 
 // driverOptions: menu interno del conductor despues de iniciar sesion
-void Menu::driverOptions(int& opcion, string name, string placa, bool estado, float rating, Driver driver)
+void ConsoleMenu::driverOptions(int& opcion, string name, string placa, bool estado, float rating, Driver driver)
 {
     opcion = 1;
     while (true) {
@@ -707,7 +707,7 @@ void Menu::driverOptions(int& opcion, string name, string placa, bool estado, fl
 }
 
 // driverRegisterTrip: permite al conductor registrar un viaje manual completado
-void Menu::driverRegisterTrip(string& partida, string& llegada, float& km, int& tipo, Driver driver)
+void ConsoleMenu::driverRegisterTrip(string& partida, string& llegada, float& km, int& tipo, Driver driver)
 {
     limpiarPantalla(); lynx(); navBarC(); navName(driver.getName());
     showDriverSidebar(driver);
@@ -732,7 +732,7 @@ void Menu::driverRegisterTrip(string& partida, string& llegada, float& km, int& 
 }
 
 // driverSingIn: recoge por consola los datos de registro del conductor
-void Menu::driverSingIn(string& DNI, string& name, string& password)
+void ConsoleMenu::driverSingIn(string& DNI, string& name, string& password)
 {
     limpiarPantalla(); lynx(); navBarC(); int y = 11;
     Console::SetCursorPosition(50 + 18, y++); cout << "Registro";
@@ -743,7 +743,7 @@ void Menu::driverSingIn(string& DNI, string& name, string& password)
 }
 
 // driverRegisterCar: pide los datos del vehiculo que se asociara al conductor
-void Menu::driverRegisterCar(string& placa, string& marca, string& modelo, string& color, int& ano, Driver driver)
+void ConsoleMenu::driverRegisterCar(string& placa, string& marca, string& modelo, string& color, int& ano, Driver driver)
 {
     limpiarPantalla(); lynx(); navBarC(); navName(driver.getName());
     showDriverSidebar(driver);
@@ -758,7 +758,7 @@ void Menu::driverRegisterCar(string& placa, string& marca, string& modelo, strin
 }
 
 // driverGains: muestra ganancias, viajes y resumen economico del conductor
-void Menu::driverGains(int& option, Driver driver)
+void ConsoleMenu::driverGains(int& option, Driver driver)
 {
     limpiarPantalla(); lynx(); navBarC(); navName(driver.getName());
     showDriverSidebar(driver);
@@ -774,7 +774,7 @@ void Menu::driverGains(int& option, Driver driver)
 }
 
 // driverProfile: muestra y permite revisar el perfil del conductor
-void Menu::driverProfile(int& option, Driver driver)
+void ConsoleMenu::driverProfile(int& option, Driver driver)
 {
     limpiarPantalla(); lynx(); navBarC(); navName(driver.getName());
     showDriverSidebar(driver);
@@ -787,7 +787,7 @@ void Menu::driverProfile(int& option, Driver driver)
 }
 
 // tripHistory: imprime un arreglo de viajes como historial paginado simple
-void Menu::tripHistory(int& option, Trip trips[], int s, string title)
+void ConsoleMenu::tripHistory(int& option, Trip trips[], int s, string title)
 {
     limpiarPantalla(); lynx(); int y = 11;
     Console::SetCursorPosition(52 + 18, y++); cout << "Lynx > " << title << " > Historial";
@@ -812,9 +812,9 @@ void Menu::tripHistory(int& option, Trip trips[], int s, string title)
 
 // LYNX: flujo principal de toda la aplicacion
 // aqui se cargan datos, se navega entre roles y se ejecutan las acciones del sistema
-void Menu::LYNXMenu()
+void ConsoleMenu::LYNXConsoleMenu()
 {
-    
+
 
     FileManager fileManager;
     AuthManager authMgr;
@@ -838,7 +838,7 @@ void Menu::LYNXMenu()
         switch (option) {
         case 1:
             do {
-                passengerMenu(option);
+                passengerConsoleMenu(option);
                 switch (option) {
                 case 1:
                 {
@@ -1036,7 +1036,7 @@ void Menu::LYNXMenu()
 
         case 2:
             do {
-                driverMenu(option);
+                driverConsoleMenu(option);
                 switch (option) {
                 case 1:
                 {
